@@ -270,7 +270,7 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT P.ID_PONTO, ID_USUARIO_ALUNO, ID_USUARIO_RESPONSAVEL, ");
+			sql.append("SELECT P.ID_PONTO, ID_USUARIO_ALUNO, ID_USUARIO_RESPONSAVEL, timestampdiff(minute,p.data_entrada,p.data_saida)  HORAS,");
 			sql.append("P.DATA_ENTRADA, P.HORA_ENTRADA, P.DATA_SAIDA, P.HORA_SAIDA, STATUS_PONTO ");
 			sql.append("FROM TB_PONTO P ");
 
@@ -290,6 +290,7 @@ public class PontoDAO {
 				ponto.setDataEntrada(resultSet.getTimestamp("DATA_ENTRADA"));
 				ponto.setDataSaida(resultSet.getTimestamp("DATA_SAIDA"));
 				ponto.setStatus(StatusPonto.valueOf(resultSet.getString("STATUS_PONTO")));
+				ponto.setHoraTotalDia(resultSet.getInt("HORAS"));
 				listaAlunos.add(ponto);
 			}
 		} catch (ClassNotFoundException | SQLException | PersistenciaException e) {

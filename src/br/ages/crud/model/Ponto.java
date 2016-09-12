@@ -12,6 +12,7 @@ public class Ponto implements Serializable {
 	private Usuario aluno;
 	private Usuario responsavel;
 	private StatusPonto status;
+	private int horaTotalDia;
 
 	public Ponto() {
 		// TODO Auto-generated constructor stub
@@ -78,6 +79,14 @@ public class Ponto implements Serializable {
 	@Override
 	public String toString() {
 		return "Ponto [idPonto=" + idPonto + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + ", aluno=" + aluno + ", responsavel=" + responsavel + ", status=" + status + "]";
+	}
+
+	public int getHoraTotalDia() {
+		return horaTotalDia;
+	}
+
+	public void setHoraTotalDia(int horaTotalDia) {
+		this.horaTotalDia = horaTotalDia;
 	}
 
 }

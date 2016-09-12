@@ -22,7 +22,7 @@
 							<th style="text-align: center;">Nome Aluno</th>
 							<th style="text-align: center;">Data Entrada</th>
 							<th style="text-align: center;">Data Saída</th>
-							<th style="text-align: center;">Responsável</th>
+							<th style="text-align: center;">Horas/dia</th>
 							<th style="text-align: center;">Status</th>
 							<th style="text-align: center;"></th>
 							<th style="text-align: center;"></th>
@@ -33,13 +33,14 @@
 						<%
 							ArrayList<Ponto> Pontos = (ArrayList<Ponto>) request.getAttribute("listaAlunos");
 							for (Ponto ponto : Pontos) {
+								String horasDia = ponto.getHoraTotalDia()/60 + ":" + ponto.getHoraTotalDia()%60;
 						%>
 
 						<tr class="coluna-sh">
 							<td align="center"><%=ponto.getAluno().getNome()%></td>
 							<td align="center"><%=Util.dateTimeToString(ponto.getDataEntrada())%></td>
 							<td align="center"><%=Util.dateTimeToString(ponto.getDataSaida())%></td>
-							<td align="center"><%=ponto.getResponsavel().getNome()%></td>
+							<td align="center"><%=horasDia%></td>
 							<td align="center"><%=ponto.getStatus().name()%></td>
 							<td align="center">
 								<form action="" method="post">
