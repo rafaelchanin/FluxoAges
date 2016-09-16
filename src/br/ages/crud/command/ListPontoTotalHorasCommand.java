@@ -19,6 +19,7 @@ public class ListPontoTotalHorasCommand implements Command {
 	private List<Usuario> usuarios;
 	private PontoBO pontoBO;
 	private ArrayList<ResumoPonto> listaPontos;
+	private ArrayList<ResumoPonto> listaPontosInvalidos;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException {
@@ -36,9 +37,14 @@ public class ListPontoTotalHorasCommand implements Command {
 			request.setAttribute("usuarios", usuarios);
 
 			listaPontos = pontoBO.listaPontoAlunos(idUsuario);
+			listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
+			
+			//pode ser retirado no futuro
 			request.setAttribute("listaPontos", listaPontos);
+			request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
+			
 			request.setAttribute("totalHorasAluno", pontoBO.calculatotalHorasAluno(listaPontos));
-
+			request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
 		} catch (NegocioException e) {
 			e.printStackTrace();
 			request.setAttribute("msgErro", e.getMessage());

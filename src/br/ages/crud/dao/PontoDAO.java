@@ -75,10 +75,78 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
+			sql.append("select u.nome, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
+			sql.append("FROM tb_ponto p, tb_usuario u ");
+			sql.append("where p.id_usuario_aluno = u.id_usuario ");
+			sql.append("and p.data_saida is not null ");
+						
+			PreparedStatement statement;
+			if (idUsuario == 0) {
+				// sql.append(" and p.id_usuario_aluno = ?; ");
+				statement = conexao.prepareStatement(sql.toString());
+				// statement.setInt(1, -1);
+			} else {
+				sql.append("and p.id_usuario_aluno = ? ");
+				statement = conexao.prepareStatement(sql.toString());
+				statement.setInt(1, idUsuario);
+			}
+
+			sql.append("group by  u.nome, p.status_ponto ");
+			sql.append("order by u.nome, reverse(status_ponto);");
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				String nome = resultSet.getString("u.nome");
+				ResumoPonto jaExiste = null;
+				int minutoTotal = resultSet.getInt("minutoTotal");
+				String status_ponto = resultSet.getString("p.status_ponto");
+				
+				for (ResumoPonto resumoPontoDoAluno : listaPontos) {
+					if (nome.equals(resumoPontoDoAluno.getNomeAluno())) {
+						jaExiste = resumoPontoDoAluno;
+						break;
+					}
+				}
+				
+				if(jaExiste == null){
+					ResumoPonto ponto = new ResumoPonto();
+					
+					if(status_ponto.equals("VALIDO")) ponto.setHoraTotalDiaValido(minutoTotal);
+					else ponto.setHoraTotalDiaInvalido(minutoTotal);
+						
+					ponto.setNomeAluno(nome);
+					ponto.setHoraTotalDia(ponto.getHoraTotalDiaInvalido() + ponto.getHoraTotalDiaValido());
+					listaPontos.add(ponto);
+				}
+				else{
+					
+					if(status_ponto.equals("VALIDO")) jaExiste.setHoraTotalDiaValido(minutoTotal); // 
+					else jaExiste.setHoraTotalDiaInvalido(minutoTotal);
+					jaExiste.setHoraTotalDia(jaExiste.getHoraTotalDiaInvalido() + jaExiste.getHoraTotalDiaValido());
+				}
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			conexao.close();
+		}
+
+		return listaPontos;
+	}
+	
+	public ArrayList<ResumoPonto> listaPontoInvalidoAlunos(int idUsuario) throws SQLException {
+		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
+		Connection conexao = null;
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
 			sql.append("select p.id_ponto, u.nome, p.data_entrada, timestampdiff(minute,p.data_entrada,p.data_saida)  horas ");
 			sql.append("FROM tb_ponto p, tb_usuario u ");
 			sql.append("where p.id_usuario_aluno = u.id_usuario ");
-			sql.append("and p.status_ponto ='" + StatusPonto.VALIDO + "'");
+			sql.append("and p.status_ponto ='" + StatusPonto.INVALIDO + "'");
 
 			PreparedStatement statement;
 			if (idUsuario == 0) {

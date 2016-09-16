@@ -14,51 +14,47 @@
 	<div class="panel-body">
 		<form id="formListAluno" method="post">
 		<div class="form-group row">
+		<div class='col-sm-6' id='dtInicial'>
+			<label for="sel1" class="form-label ages">Data Inicia:<span class="red">*</span></label> 
+			<input>
+		</div>
+		<div class='col-sm-6' id='dtFinall'>
+			<label for="sel1" class="form-label ages">Data Inicia:<span class="red">*</span></label> 
+			<input>
+		</div>
+		<button class="btn btn-primary"> Buscar </button>
 		<div class='col-sm-6' id='nomeAluno'>
 			<label for="sel1" class="form-label ages">Aluno:<span class="red">*</span></label> 
-			<select class="form-control" id="idAluno" name="idAluno" onchange="listar()" > 
-				<option value="0">Selecione um aluno</option>
-				<%
-					String totalHorasAluno = (String) request.getAttribute("totalHorasAluno");
-					List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("usuarios");
-					for (Usuario u : listaUsuarios) {
-				%>
-				<option value="<%=u.getIdUsuario()%>"<%=(u.getNome()).equals(request.getParameter("idAluno")) ? "selected" : "" %>><%=u.getNome()%></option>
-				<%
-					}
-				%>
-			</select>
 		</div>
 		</div>
 		</form>
 		<div class="table-responsive">
+		
 			<table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed">
 				<thead>
 					<tr>
-						<th style="text-align: center;">Total Horas</th>
-						<th style="text-align: center;"><%=totalHorasAluno %></th>
-					</tr>
-					<tr>
-						<th style="text-align: center;">ID</th>
 						<th style="text-align: center;">Nome</th>
-						<th style="text-align: center;">Data Entrada</th>
-						<th style="text-align: center;">Horas Dia</th>
+						<th style="text-align: center;">Total Horas Válidas</th>
+						<th style="text-align: center;">Total Horas Inválidas</th>
+						<th style="text-align: center;">Total Horas</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<%
-						ArrayList<ResumoPonto> listaPontos = (ArrayList<ResumoPonto>) request.getAttribute("listaPontos");
-						for (ResumoPonto ponto : listaPontos) {
+						List<ResumoPonto> listaResumoPonto = (List<ResumoPonto>) request.getAttribute("listaPontos");
+						for (ResumoPonto usuario : listaResumoPonto) {
+							String horasValidas;
+							String horasInvalidas = (String) request.getAttribute("totalHorasInvalidoAluno");
+							String horasTotais;
 					%>
 
 					<tr class="coluna-sh">
-						<td align="center" class="sh-id"><%=ponto.getIdPonto()%></td>
-						<td align="center"><%=ponto.getNomeAluno()%></td>
-						<td align="center"><%=ponto.getDataEtrada()%></td>
-						<td align="center"><%=ponto.getHoraTotalDia()%></td>
-					</tr>
-
+						<td align="center"><%=usuario.getNomeAluno()%></td>
+						<td align="center"><%=usuario.getHoraTotalDiaValido()%></td>
+						<td align="center"><%=usuario.getHoraTotalDiaInvalido()%></td>
+						<td align="center"><%=usuario.getHoraTotalDia()%></td>
+					</tr>					
 					<%
 						}
 					%>
