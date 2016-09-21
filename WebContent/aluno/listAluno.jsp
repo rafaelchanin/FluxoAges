@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.ages.crud.model.Ponto"%>
 <%@page import="br.ages.crud.util.Util"%>
+<%@page import="br.ages.crud.util.TimeConverter"%>
 <%@page import="br.ages.crud.model.Usuario"%>
 <%@page import="java.util.List"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
@@ -33,7 +34,7 @@
 						<%
 							ArrayList<Ponto> Pontos = (ArrayList<Ponto>) request.getAttribute("listaAlunos");
 							for (Ponto ponto : Pontos) {
-								String horasDia = ponto.getHoraTotalDia()/60 + ":" + ponto.getHoraTotalDia()%60;
+								String horasDia = TimeConverter.ConvertMinuteToHours(ponto.getHoraTotalDia());//ponto.getHoraTotalDia()/60 + ":" + ponto.getHoraTotalDia()%60;
 						%>
 
 						<tr class="coluna-sh">

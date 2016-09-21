@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.ages.crud.model.ResumoPonto"%>
 <%@page import="br.ages.crud.model.Usuario"%>
+<%@page import="br.ages.crud.util.TimeConverter"%>
 <%@page import="java.util.List"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
@@ -44,16 +45,16 @@
 					<%
 						List<ResumoPonto> listaResumoPonto = (List<ResumoPonto>) request.getAttribute("listaPontos");
 						for (ResumoPonto usuario : listaResumoPonto) {
-							String horasValidas;
-							String horasInvalidas = (String) request.getAttribute("totalHorasInvalidoAluno");
-							String horasTotais;
+							String horasValidas = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDiaValido());
+							String horasInvalidas = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDiaInvalido());
+							String horasTotais = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDia());
 					%>
 
 					<tr class="coluna-sh">
 						<td align="center"><%=usuario.getNomeAluno()%></td>
-						<td align="center"><%=usuario.getHoraTotalDiaValido()%></td>
-						<td align="center"><%=usuario.getHoraTotalDiaInvalido()%></td>
-						<td align="center"><%=usuario.getHoraTotalDia()%></td>
+						<td align="center"><%=horasValidas%></td>
+						<td align="center"><%=horasInvalidas%></td>
+						<td align="center"><%=horasTotais%></td>
 					</tr>					
 					<%
 						}
