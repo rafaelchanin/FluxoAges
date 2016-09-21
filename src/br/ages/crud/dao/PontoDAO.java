@@ -120,8 +120,8 @@ public class PontoDAO {
 				}
 				else{
 					
-					if(status_ponto.equals("VALIDO")) jaExiste.setHoraTotalDiaValido(minutoTotal); // 
-					else jaExiste.setHoraTotalDiaInvalido(minutoTotal);
+					if(status_ponto.equals("VALIDO")) jaExiste.setHoraTotalDiaValido(jaExiste.getHoraTotalDiaValido() + minutoTotal); // 
+					else jaExiste.setHoraTotalDiaInvalido(jaExiste.getHoraTotalDiaInvalido() + minutoTotal);
 					jaExiste.setHoraTotalDia(jaExiste.getHoraTotalDiaInvalido() + jaExiste.getHoraTotalDiaValido());
 				}
 			}
