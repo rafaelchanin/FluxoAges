@@ -3,6 +3,7 @@ package br.ages.crud.bo;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.ages.crud.dao.PontoDAO;
@@ -62,11 +63,11 @@ public class PontoBO {
 		return statusPonto;
 	}
 
-	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario) throws NegocioException {
+	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario, Date dataEntrada, Date dataSaida) throws NegocioException {
 		pontoDAO = new PontoDAO();
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
 		try {
-			listaPontos = pontoDAO.listaPontoAlunos(idUsuario);
+			listaPontos = pontoDAO.listaPontoAlunos(idUsuario, dataEntrada, dataSaida);
 
 		} catch (SQLException e) {
 

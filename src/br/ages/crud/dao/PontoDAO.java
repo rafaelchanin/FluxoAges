@@ -1,10 +1,10 @@
 package br.ages.crud.dao;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
@@ -68,7 +68,7 @@ public class PontoDAO {
 
 	}
 
-	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario) throws SQLException {
+	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario, Date dataEntrada, Date dataSaida) throws SQLException {
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
 		Connection conexao = null;
 		try {
@@ -79,8 +79,10 @@ public class PontoDAO {
 			sql.append("FROM tb_ponto p, tb_usuario u ");
 			sql.append("where p.id_usuario_aluno = u.id_usuario ");
 			sql.append("and p.data_saida is not null ");
-						
+			sql.append("and p.data_entrada between ? and ? and p.data_saida between ? and ? "); //sql.append("and p.data_entrada between(?, ?) and p.data_saida between(?, ?) "); 
+					
 			PreparedStatement statement;
+			
 			if (idUsuario == 0) {
 				// sql.append(" and p.id_usuario_aluno = ?; ");
 				statement = conexao.prepareStatement(sql.toString());
@@ -88,8 +90,18 @@ public class PontoDAO {
 			} else {
 				sql.append("and p.id_usuario_aluno = ? ");
 				statement = conexao.prepareStatement(sql.toString());
-				statement.setInt(1, idUsuario);
+				statement.setInt(5, idUsuario);
 			}
+			
+			java.sql.Timestamp dataEntradaSql = new java.sql.Timestamp(dataEntrada.getTime());
+			statement.setTimestamp(1, dataEntradaSql);
+			
+			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
+			statement.setTimestamp(2, dataSaidaSql);
+			
+			statement.setTimestamp(3, dataEntradaSql);
+
+			statement.setTimestamp(4, dataSaidaSql);
 
 			sql.append("group by  u.nome, p.status_ponto ");
 			sql.append("order by u.nome, reverse(status_ponto);");
@@ -218,11 +230,6 @@ public class PontoDAO {
 		}
 
 		return listaPontos;
-	}
-
-	public static void main(String[] args) throws SQLException {
-		PontoDAO p = new PontoDAO();
-		System.out.println(p.listaPontoAlunos(1));
 	}
 
 	public Ponto buscaPontoId(int idPonto) throws PersistenciaException, SQLException {

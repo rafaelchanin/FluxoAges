@@ -1,7 +1,10 @@
 package br.ages.crud.command;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +25,7 @@ public class ListPontoTotalHorasCommand implements Command {
 	private ArrayList<ResumoPonto> listaPontosInvalidos;
 
 	@Override
-	public String execute(HttpServletRequest request) throws SQLException {
+	public String execute(HttpServletRequest request) throws SQLException, ParseException {
 		pontoBO = new PontoBO();
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
@@ -36,7 +39,7 @@ public class ListPontoTotalHorasCommand implements Command {
 
 			request.setAttribute("usuarios", usuarios);
 
-			listaPontos = pontoBO.listaPontoAlunos(idUsuario);
+			listaPontos = pontoBO.listaPontoAlunos(idUsuario, new SimpleDateFormat("dd-MM-yyy").parse("16-09-2016"), new SimpleDateFormat("dd-MM-yyy").parse("18-09-2016"));
 			listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
 			
 			//pode ser retirado no futuro

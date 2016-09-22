@@ -14,20 +14,29 @@
 
 	<div class="panel-body">
 		<form id="formListAluno" method="post">
-		<div class="form-group row">
-		<div class='col-sm-6' id='dtInicial'>
-			<label for="sel1" class="form-label ages">Data Inicia:<span class="red">*</span></label> 
-			<input>
-		</div>
-		<div class='col-sm-6' id='dtFinall'>
-			<label for="sel1" class="form-label ages">Data Inicia:<span class="red">*</span></label> 
-			<input>
-		</div>
-		<button class="btn btn-primary"> Buscar </button>
-		<div class='col-sm-6' id='nomeAluno'>
-			<label for="sel1" class="form-label ages">Aluno:<span class="red">*</span></label> 
-		</div>
-		</div>
+			<div class="form-group row">
+				<div class='col-sm-2' id='dtInicial'>
+					<label for="sel1" class="form-label ages">Data Inicial:<span class="red">*</span></label> 
+					<div class='input-group date' id='dataEntrada'>
+						<input type='text' class="form-control" id='dtEntrada' name="dtEntrada"/>
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class='col-sm-2' id='dtFinall'>
+					<label for="sel1" class="form-label ages">Data Final:<span class="red">*</span></label> 
+					<div class='input-group date' id='dataSaida'>
+						<input type='text' class="form-control" id="dtSaida" name="dtSaida"/> 
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class='col-sm-2 rowMargin' id='dtFinall'>
+					<button class="btn btn-primary addUser center-block"> Buscar </button>
+				</div>
+			</div>
 		</form>
 		<div class="table-responsive">
 		
@@ -97,5 +106,32 @@
 	            },
 	        }
 	    });
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('#dataEntrada').datetimepicker({
+			locale : 'pt-br',
+			format : "DD/MM/YYYY",
+			sideBySide : true
+		});
+
+		$('#dataSaida').datetimepicker({
+			useCurrent : false, 
+			locale : 'pt-br',
+			format : "DD/MM/YYYY",
+			sideBySide : true,
+			showTodayButton: true
+		});
+
+		$("#dataEntrada").on("dp.change", function(e) {
+			$('#dataSaida').data("DateTimePicker").minDate(e.date);
+			/* alert(document.getElementById('dataSaida').value); */
+		});
+
+		$("#dataSaida").on("dp.change", function(e) {
+			$('#dataEntrada').data("DateTimePicker").maxDate(e.date);
+			/* alert(document.getElementById('dataEntrada').value); */
+		});
 	});
 </script>
