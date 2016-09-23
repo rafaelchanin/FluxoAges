@@ -19,11 +19,7 @@ CHANGE COLUMN `hora_saida` `hora_saida` DATETIME NULL DEFAULT NULL COMMENT '' ;
 ALTER TABLE `ages_e`.`tb_tipo_usuario` 
 ADD COLUMN `FLAG_RESPONSAVEL` VARCHAR(1) NULL COMMENT '' AFTER `DATA_INCLUSAO`;
 
-<<<<<<< HEAD
 -- table tb_skills_definicao armazena a definiÃ§Ã£o de quad tipo de skill.
-=======
--- table tb_skills_definicao armazena a definição de quad tipo de skill.
->>>>>>> origin/dev
 CREATE TABLE `tb_skills_definicao` (
   `ID_SKILLS_DEFINICAO` int(11) NOT NULL,
   `TIPO` varchar(20) DEFAULT NULL,
@@ -32,11 +28,7 @@ CREATE TABLE `tb_skills_definicao` (
   PRIMARY KEY (`ID_SKILLS_DEFINICAO`)
 );
 
-<<<<<<< HEAD
 -- table tb_skills para armazenar as avaliaÃ§Ãµes dos alunos
-=======
--- table tb_skills para armazenar as avaliações dos alunos
->>>>>>> origin/dev
 CREATE TABLE TB_SKILLS (
   `ID_SKILLS` int(11) NOT NULL AUTO_INCREMENT,
   `ID_DEFINICAO` varchar(45) DEFAULT NULL,
@@ -53,13 +45,9 @@ CREATE TABLE TB_SKILLS (
   CONSTRAINT `FK_USUARIO_AVALIADOR` FOREIGN KEY (`ID_USUARIO_AVALIADOR`) REFERENCES `tb_usuario` (`ID_USUARIO`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-<<<<<<< HEAD
+
+
 -- adicionando FKs para tabela UsuÃ¡rio
-=======
-
-
--- adicionando FKs para tabela Usuário
->>>>>>> origin/dev
 ALTER TABLE `tb_ponto` 
 ADD INDEX `fk_aluno_idx` (`id_usuario_aluno` ASC)  COMMENT '';
 ALTER TABLE `ages_e`.`tb_ponto` 
@@ -68,10 +56,7 @@ ADD CONSTRAINT `fk_aluno`
   REFERENCES `ages_e`.`tb_usuario` (`ID_USUARIO`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> origin/dev
