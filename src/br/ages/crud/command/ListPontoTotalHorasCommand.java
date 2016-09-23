@@ -14,6 +14,7 @@ import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.model.ResumoPonto;
 import br.ages.crud.model.Usuario;
+import br.ages.crud.util.Util;
 
 public class ListPontoTotalHorasCommand implements Command {
 
@@ -30,24 +31,40 @@ public class ListPontoTotalHorasCommand implements Command {
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
 		proxima = "aluno/listPontoHora.jsp";
+		String dataEntrada, dataSaida;
+		Date dataEntradaDate, dataSaidaDate;
 
 		try {
 
 			Integer idUsuario = Integer.valueOf(request.getParameter("id_usuario"));
-
+			
+			 dataEntrada = request.getParameter("dtEntrada");
+			 dataSaida = request.getParameter("dtSaida");
+		
+			if (dataSaida == null || dataEntrada == null ) {
+	   			 dataEntradaDate = Util.getDataInicialSemestre();
+				 dataSaidaDate = new Date();
+			}else {
+				dataEntradaDate = Util.stringToDate(dataEntrada);
+				dataSaidaDate = Util.stringToDate(dataSaida);
+			}
+					
 			usuarios = usuarioBO.listarUsuarioAlunos();
 
 			request.setAttribute("usuarios", usuarios);
 
-			listaPontos = pontoBO.listaPontoAlunos(idUsuario, new SimpleDateFormat("dd-MM-yyy").parse("16-09-2016"), new SimpleDateFormat("dd-MM-yyy").parse("18-09-2016"));
-			listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
+			listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
+			//listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
 			
 			//pode ser retirado no futuro
 			request.setAttribute("listaPontos", listaPontos);
-			request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
+			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
 			
-			request.setAttribute("totalHorasAluno", pontoBO.calculatotalHorasAluno(listaPontos));
-			request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
+			//request.setAttribute("totalHorasAluno", pontoBO.calculatotalHorasAluno(listaPontos));
+			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
+			request.setAttribute("dtEntrada", dataEntrada);
+			request.setAttribute("dtSaida", dataSaida);
+		
 		} catch (NegocioException e) {
 			e.printStackTrace();
 			request.setAttribute("msgErro", e.getMessage());

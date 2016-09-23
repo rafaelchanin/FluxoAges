@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<div class='col-sm-2 rowMargin' id='dtFinall'>
-					<button class="btn btn-primary addUser center-block"> Buscar </button>
+					<button class="btn btn-primary addUser center-block" onclick="filtrarData();"> Buscar </button>
 				</div>
 			</div>
 		</form>
@@ -82,10 +82,18 @@
 <script>
 	function listar() {
 			var id =  document.getElementById("idAluno").value;
+			
 			 document.forms[0].action= 'main?acao=listaPontoHora&id_usuario=' + id;
 			 document.forms[0].submit();
 			 winconsole.log(id);
 		};
+	function filtrarData() {
+		/* var entrada = document.getElementById("dtEntrada").value;
+		var saida = document.getElementById("dtSaida").value; */
+		 document.forms[0].action= 'main?acao=listaPontoHora&id_usuario=0';
+		 document.forms[0].submit();
+		 winconsole.log(id);
+	};
 </script>
 <script>
 	
