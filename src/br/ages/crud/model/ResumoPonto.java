@@ -9,25 +9,25 @@ public class ResumoPonto implements Serializable {
 	private int idPonto;
 	private String nomeAluno;
 	private Date dataEtrada;
-	private Date horaTotalDia;
-
+	private int minutoTotalDia;
+	private int minutoTotalDiaInvalido;
+	private int minutoTotalDiaValido;	
+	
 	public ResumoPonto() {
 	}
 	
-	
-	public int getIdPonto() {
-		return idPonto;
-	}
-
-	public ResumoPonto(int idPonto, String nomeAluno, Date dataEtrada, Date horaTotalDia) {
+	public ResumoPonto(int idPonto, String nomeAluno, Date dataEtrada, int horaTotalDia) {
 		super();
 		this.idPonto = idPonto;
 		this.nomeAluno = nomeAluno;
 		this.dataEtrada = dataEtrada;
-		this.horaTotalDia = horaTotalDia;
+		this.minutoTotalDia = horaTotalDia;
 	}
-
-
+	
+	public int getIdPonto() {
+		return idPonto;
+	}
+	
 	public void setIdPonto(int idPonto) {
 		this.idPonto = idPonto;
 	}
@@ -48,12 +48,34 @@ public class ResumoPonto implements Serializable {
 		this.dataEtrada = dataEtrada;
 	}
 
-	public Date getHoraTotalDia() {
-		return horaTotalDia;
+	public int getHoraTotalDia() {
+		return minutoTotalDia;
 	}
 
-	public void setHoraTotalDia(Date horaEntrada) {
-		this.horaTotalDia = horaEntrada;
+	public void setHoraTotalDia(int horaEntrada) {
+		this.minutoTotalDia = horaEntrada;
 	}
 
+	@Override
+	public String toString() {
+		return "ResumoPonto [idPonto=" + idPonto + ", nomeAluno=" + nomeAluno + ", dataEtrada=" + dataEtrada + ", horaTotalDia=" + minutoTotalDia + "]";
+	}
+
+	public int getHoraTotalDiaInvalido() {
+		return minutoTotalDiaInvalido;
+	}
+
+	public void setHoraTotalDiaInvalido(int horaTotalDiaInvalido) {
+		this.minutoTotalDiaInvalido = horaTotalDiaInvalido;
+	}
+
+	public int getHoraTotalDiaValido() {
+		return minutoTotalDiaValido;
+	}
+
+	public void setHoraTotalDiaValido(int horaTotalDiaValido) {
+		this.minutoTotalDiaValido = horaTotalDiaValido;
+	}
+
+	
 }

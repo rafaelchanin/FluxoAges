@@ -1,10 +1,10 @@
 package br.ages.crud.dao;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
@@ -28,8 +28,8 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("insert into tb_ponto (data_entrada, hora_entrada, data_saida, hora_saida, id_usuario_aluno, id_usuario_responsavel, status_ponto)");
-			sql.append("values (?, ?, ?, ?, ?, ?, ?);");
+			sql.append("insert into tb_ponto (data_entrada, data_saida, id_usuario_aluno, id_usuario_responsavel, status_ponto)");
+			sql.append("values (?, ?, ?, ?, ?);");
 
 			// Cadastra a pessoa e gera e busca id gerado
 			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -38,18 +38,12 @@ public class PontoDAO {
 			java.sql.Timestamp dataEntrada = new java.sql.Timestamp(ponto.getDataEntrada().getTime());
 			statement.setTimestamp(1, dataEntrada);
 
-			java.sql.Time horaEntrada = new java.sql.Time(ponto.getDataEntrada().getTime());
-			statement.setTime(2, horaEntrada);
-
 			java.sql.Timestamp dataSaida = ponto.getDataSaida() == null ? null : new java.sql.Timestamp(ponto.getDataSaida().getTime());
-			statement.setTimestamp(3, dataSaida);
-
-			java.sql.Time horaSaida = ponto.getDataSaida() == null ? null : new java.sql.Time(ponto.getDataSaida().getTime());
-			statement.setTime(4, horaSaida);
-
-			statement.setInt(5, ponto.getAluno().getIdUsuario());
-			statement.setInt(6, ponto.getResponsavel().getIdUsuario());
-			statement.setString(7, String.valueOf(ponto.getStatus()));
+			statement.setTimestamp(2, dataSaida);
+			
+			statement.setInt(3, ponto.getAluno().getIdUsuario());
+			statement.setInt(4, ponto.getResponsavel().getIdUsuario());
+			statement.setString(5, String.valueOf(ponto.getStatus()));
 
 			statement.executeUpdate();
 
@@ -74,17 +68,97 @@ public class PontoDAO {
 
 	}
 
-	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario) throws SQLException {
+	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario, Date dataEntrada, Date dataSaida) throws SQLException {
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
 		Connection conexao = null;
 		try {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("select p.id_ponto, u.nome, p.data_entrada, timediff(p.hora_saida,p.hora_entrada) horas ");
+			sql.append("select u.nome, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
 			sql.append("FROM tb_ponto p, tb_usuario u ");
 			sql.append("where p.id_usuario_aluno = u.id_usuario ");
-			sql.append("and p.status_ponto ='" + StatusPonto.VALIDO + "'");
+			sql.append("and p.data_saida is not null ");
+			sql.append("and p.data_entrada between ? and ? and p.data_saida between ? and ? "); //sql.append("and p.data_entrada between(?, ?) and p.data_saida between(?, ?) "); 
+					
+			PreparedStatement statement;
+			
+			if (idUsuario == 0) {
+				// sql.append(" and p.id_usuario_aluno = ?; ");
+				statement = conexao.prepareStatement(sql.toString());
+				// statement.setInt(1, -1);
+			} else {
+				sql.append("and p.id_usuario_aluno = ? ");
+				statement = conexao.prepareStatement(sql.toString());
+				statement.setInt(5, idUsuario);
+			}
+			
+			java.sql.Timestamp dataEntradaSql = new java.sql.Timestamp(dataEntrada.getTime());
+			statement.setTimestamp(1, dataEntradaSql);
+			
+			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
+			statement.setTimestamp(2, dataSaidaSql);
+			
+			statement.setTimestamp(3, dataEntradaSql);
+
+			statement.setTimestamp(4, dataSaidaSql);
+
+			sql.append("group by  u.nome, p.status_ponto ");
+			sql.append("order by u.nome, reverse(status_ponto);");
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				String nome = resultSet.getString("u.nome");
+				ResumoPonto jaExiste = null;
+				int minutoTotal = resultSet.getInt("minutoTotal");
+				String status_ponto = resultSet.getString("p.status_ponto");
+				
+				for (ResumoPonto resumoPontoDoAluno : listaPontos) {
+					if (nome.equals(resumoPontoDoAluno.getNomeAluno())) {
+						jaExiste = resumoPontoDoAluno;
+						break;
+					}
+				}
+				
+				if(jaExiste == null){
+					ResumoPonto ponto = new ResumoPonto();
+					
+					if(status_ponto.equals("VALIDO")) ponto.setHoraTotalDiaValido(minutoTotal);
+					else ponto.setHoraTotalDiaInvalido(minutoTotal);
+						
+					ponto.setNomeAluno(nome);
+					ponto.setHoraTotalDia(ponto.getHoraTotalDiaInvalido() + ponto.getHoraTotalDiaValido());
+					listaPontos.add(ponto);
+				}
+				else{
+					
+					if(status_ponto.equals("VALIDO")) jaExiste.setHoraTotalDiaValido(jaExiste.getHoraTotalDiaValido() + minutoTotal); // 
+					else jaExiste.setHoraTotalDiaInvalido(jaExiste.getHoraTotalDiaInvalido() + minutoTotal);
+					jaExiste.setHoraTotalDia(jaExiste.getHoraTotalDiaInvalido() + jaExiste.getHoraTotalDiaValido());
+				}
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			conexao.close();
+		}
+
+		return listaPontos;
+	}
+	
+	public ArrayList<ResumoPonto> listaPontoInvalidoAlunos(int idUsuario) throws SQLException {
+		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
+		Connection conexao = null;
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("select p.id_ponto, u.nome, p.data_entrada, timestampdiff(minute,p.data_entrada,p.data_saida)  horas ");
+			sql.append("FROM tb_ponto p, tb_usuario u ");
+			sql.append("where p.id_usuario_aluno = u.id_usuario ");
+			sql.append("and p.status_ponto ='" + StatusPonto.INVALIDO + "'");
 
 			PreparedStatement statement;
 			if (idUsuario == 0) {
@@ -104,7 +178,7 @@ public class PontoDAO {
 				ponto.setIdPonto(resultSet.getInt("ID_PONTO"));
 				ponto.setNomeAluno(resultSet.getString("NOME"));
 				ponto.setDataEtrada(resultSet.getDate("DATA_ENTRADA"));
-				ponto.setHoraTotalDia(resultSet.getTime("HORAS"));
+				ponto.setHoraTotalDia(resultSet.getInt("HORAS"));
 				// " + horaTotal);
 
 				listaPontos.add(ponto);
@@ -143,7 +217,7 @@ public class PontoDAO {
 				ponto.setIdPonto(resultSet.getInt("ID_PONTO"));
 				ponto.setNomeAluno(resultSet.getString("NOME"));
 				ponto.setDataEtrada(resultSet.getDate("DATA_ENTRADA"));
-				ponto.setHoraTotalDia(resultSet.getTime("HORAS"));
+				ponto.setHoraTotalDia(resultSet.getInt("HORAS"));
 
 				listaPontos.add(ponto);
 			}
@@ -156,11 +230,6 @@ public class PontoDAO {
 		}
 
 		return listaPontos;
-	}
-
-	public static void main(String[] args) throws SQLException {
-		PontoDAO p = new PontoDAO();
-		System.out.println(p.listaPontoAlunos(1));
 	}
 
 	public Ponto buscaPontoId(int idPonto) throws PersistenciaException, SQLException {
@@ -276,7 +345,7 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT P.ID_PONTO, ID_USUARIO_ALUNO, ID_USUARIO_RESPONSAVEL, ");
+			sql.append("SELECT P.ID_PONTO, ID_USUARIO_ALUNO, ID_USUARIO_RESPONSAVEL, timestampdiff(minute,p.data_entrada,p.data_saida)  HORAS,");
 			sql.append("P.DATA_ENTRADA, P.HORA_ENTRADA, P.DATA_SAIDA, P.HORA_SAIDA, STATUS_PONTO ");
 			sql.append("FROM TB_PONTO P ");
 
@@ -296,6 +365,7 @@ public class PontoDAO {
 				ponto.setDataEntrada(resultSet.getTimestamp("DATA_ENTRADA"));
 				ponto.setDataSaida(resultSet.getTimestamp("DATA_SAIDA"));
 				ponto.setStatus(StatusPonto.valueOf(resultSet.getString("STATUS_PONTO")));
+				ponto.setHoraTotalDia(resultSet.getInt("HORAS"));
 				listaAlunos.add(ponto);
 			}
 		} catch (ClassNotFoundException | SQLException | PersistenciaException e) {

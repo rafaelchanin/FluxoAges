@@ -124,8 +124,22 @@ public class Util {
 			String version = configDB.getString(Constantes.VERSAO_SISTEMA);
 		return version;
 	}
+	
+	
+	public static Date getDataInicialSemestre() throws ParseException{
+		String semestre;
+		Date dSemestre;
+		int mes = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
+		int ano = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
+		if (mes >= 7)
+			semestre = "01"+"-"+"06"+"-"+ano;
+		else
+			semestre = "01"+"-"+"01"+"-"+ano;
+		dSemestre = new SimpleDateFormat("dd-MM-yyyy").parse(semestre);
+		//System.out.println(semestre);
+		return dSemestre;
+	}
 }
-
 /*
  * public String getBuild(){ EventContext application =
  * FacesContext.getCurrentInstance().getExternalContext(); InputStream

@@ -51,6 +51,11 @@ body{
 	width: 78%;
 }
 
+.rowMargin {
+	padding-top: 24px;
+}
+
+
 .limparUser {
 	width: 20%;
 }
