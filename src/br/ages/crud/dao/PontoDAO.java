@@ -248,7 +248,7 @@ public class PontoDAO {
 			sql.append("ID_USUARIO_ALUNO, ");
 			sql.append("ID_USUARIO_RESPONSAVEL, ");
 			sql.append("STATUS_PONTO ");
-			sql.append("FROM TB_PONTO ");
+			sql.append("FROM tb_ponto ");
 			sql.append("WHERE ID_PONTO = ?");
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setInt(1, idPonto);
@@ -285,11 +285,11 @@ public class PontoDAO {
 			int idPonto = ponto.getIdPonto();
 			conexao = ConexaoUtil.getConexao();
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE TB_PONTO SET ");
+			sql.append("UPDATE tb_ponto SET ");
 			sql.append("DATA_ENTRADA = ?, ");
-			sql.append("HORA_ENTRADA = ?, ");
+			//sql.append("HORA_ENTRADA = ?, ");
 			sql.append("DATA_SAIDA = ?, ");
-			sql.append("HORA_SAIDA = ?, ");
+			//sql.append("HORA_SAIDA = ?, ");
 			sql.append("ID_USUARIO_ALUNO = ?, ");
 			sql.append("ID_USUARIO_RESPONSAVEL = ?, ");
 			sql.append("STATUS_PONTO = ? ");
@@ -300,19 +300,19 @@ public class PontoDAO {
 			java.sql.Timestamp dataEntrada = new java.sql.Timestamp(ponto.getDataEntrada().getTime());
 			statement.setTimestamp(1, dataEntrada);
 
-			java.sql.Time horaEntrada = new java.sql.Time(ponto.getDataEntrada().getTime());
-			statement.setTime(2, horaEntrada);
+			//java.sql.Time horaEntrada = new java.sql.Time(ponto.getDataEntrada().getTime());
+			//statement.setTime(2, horaEntrada);
 
 			java.sql.Timestamp dataSaida = ponto.getDataSaida() == null ? null : new java.sql.Timestamp(ponto.getDataSaida().getTime());
-			statement.setTimestamp(3, dataSaida);
+			statement.setTimestamp(2, dataSaida);//3
 
-			java.sql.Time horaSaida = ponto.getDataSaida() == null ? null : new java.sql.Time(ponto.getDataSaida().getTime());
-			statement.setTime(4, horaSaida);
+			//java.sql.Time horaSaida = ponto.getDataSaida() == null ? null : new java.sql.Time(ponto.getDataSaida().getTime());
+			//statement.setTime(4, horaSaida);
 
-			statement.setInt(5, ponto.getAluno().getIdUsuario());
-			statement.setInt(6, ponto.getResponsavel().getIdUsuario());
-			statement.setString(7, String.valueOf(ponto.getStatus()));
-			statement.setInt(8, idPonto);
+			statement.setInt(3, ponto.getAluno().getIdUsuario());
+			statement.setInt(4, ponto.getResponsavel().getIdUsuario());
+			statement.setString(5, String.valueOf(ponto.getStatus()));
+			statement.setInt(6, idPonto);
 			statement.executeUpdate();
 
 			/*ResultSet resultset = statement.getGeneratedKeys();
