@@ -336,7 +336,7 @@ public class PontoDAO {
 
 	}
 
-	public ArrayList<Ponto> listaAlunos() throws SQLException {
+	public ArrayList<Ponto> listaAlunos(Date dataEntrada, Date dataSaida) throws SQLException {
 		UsuarioDAO alunoDAO = new UsuarioDAO();
 		UsuarioDAO responsavelDAO = new UsuarioDAO();
 		ArrayList<Ponto> listaAlunos = new ArrayList<>();
@@ -348,11 +348,22 @@ public class PontoDAO {
 			sql.append("select p.id_ponto, id_usuario_aluno, id_usuario_responsavel, timestampdiff(minute,p.data_entrada,p.data_saida)  horas,");
 			sql.append("p.data_entrada, p.hora_entrada, p.data_saida, p.hora_saida, status_ponto ");
 			sql.append("from tb_ponto p ");
+			sql.append("where p.data_entrada between ? and ? and p.data_saida between ? and ? ;");
 
 			PreparedStatement statement;
 
 			statement = conexao.prepareStatement(sql.toString());
-
+			
+			java.sql.Timestamp dataEntradaSql = new java.sql.Timestamp(dataEntrada.getTime());
+			statement.setTimestamp(1, dataEntradaSql);
+			
+			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
+			statement.setTimestamp(2, dataSaidaSql);
+			
+			statement.setTimestamp(3, dataEntradaSql);
+			
+			statement.setTimestamp(4, dataSaidaSql);
+			
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {

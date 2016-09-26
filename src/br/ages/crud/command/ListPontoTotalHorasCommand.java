@@ -43,6 +43,8 @@ public class ListPontoTotalHorasCommand implements Command {
 			if (dataSaida == null || dataEntrada == null ) {
 	   			 dataEntradaDate = Util.getDataInicialSemestre();
 				 dataSaidaDate = new Date();
+				 dataEntrada = Util.dateToString(dataEntradaDate);
+				 dataSaida = Util.dateToString(dataSaidaDate);
 			}else {
 				dataEntradaDate = Util.stringToDate(dataEntrada);
 				dataSaidaDate = Util.stringToDate(dataSaida);

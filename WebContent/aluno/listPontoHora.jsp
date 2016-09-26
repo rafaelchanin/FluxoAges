@@ -1,3 +1,4 @@
+<%@page import="br.ages.crud.util.Util"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.ages.crud.model.ResumoPonto"%>
 <%@page import="br.ages.crud.model.Usuario"%>
@@ -18,7 +19,7 @@
 				<div class='col-sm-2' id='dtInicial'>
 					<label for="sel1" class="form-label ages">Data Inicial:<span class="red">*</span></label> 
 					<div class='input-group date' id='dataEntrada'>
-						<input type='text' class="form-control" id='dtEntrada' name="dtEntrada"/>
+						<input type='text' class="form-control" id='dtEntrada' name="dtEntrada" value="<%=request.getAttribute("dtEntrada")%>"/>
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
@@ -27,7 +28,7 @@
 				<div class='col-sm-2' id='dtFinall'>
 					<label for="sel1" class="form-label ages">Data Final:<span class="red">*</span></label> 
 					<div class='input-group date' id='dataSaida'>
-						<input type='text' class="form-control" id="dtSaida" name="dtSaida"/> 
+						<input type='text' class="form-control" id="dtSaida" name="dtSaida" value="<%=request.getAttribute("dtSaida")%>"/> 
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>

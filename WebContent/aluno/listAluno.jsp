@@ -16,6 +16,29 @@
 
 	<div class="panel-body">
 		<form id="formListAluno" method="post">
+			<div class="form-group row">
+				<div class='col-sm-2' id='dtInicial'>
+					<label for="sel1" class="form-label ages">Data Inicial:<span class="red">*</span></label> 
+					<div class='input-group date' id='dataEntrada'>
+						<input type='text' class="form-control" id='dtEntrada' name="dtEntrada" value="<%=request.getAttribute("dtEntrada")%>"/>
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class='col-sm-2' id='dtFinall'>
+					<label for="sel1" class="form-label ages">Data Final:<span class="red">*</span></label> 
+					<div class='input-group date' id='dataSaida'>
+						<input type='text' class="form-control" id="dtSaida" name="dtSaida" value="<%=request.getAttribute("dtSaida")%>"/> 
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class='col-sm-2 rowMargin' id='dtFinall'>
+					<button class="btn btn-primary addUser center-block" onclick="filtrarData();"> Buscar </button>
+				</div>
+			</div>
 			<div class="table-responsive">
 				<table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed">
 					<thead>
@@ -97,6 +120,30 @@
 					"previous" : "Anterior"
 				},
 			}
+		});
+		
+		$('#dataEntrada').datetimepicker({
+			locale : 'pt-br',
+			format : "DD/MM/YYYY",
+			sideBySide : true
+		});
+
+		$('#dataSaida').datetimepicker({
+			useCurrent : false, 
+			locale : 'pt-br',
+			format : "DD/MM/YYYY",
+			sideBySide : true,
+			showTodayButton: true
+		});
+
+		$("#dataEntrada").on("dp.change", function(e) {
+			$('#dataSaida').data("DateTimePicker").minDate(e.date);
+			/* alert(document.getElementById('dataSaida').value); */
+		});
+
+		$("#dataSaida").on("dp.change", function(e) {
+			$('#dataEntrada').data("DateTimePicker").maxDate(e.date);
+			/* alert(document.getElementById('dataEntrada').value); */
 		});
 	});
 </script>

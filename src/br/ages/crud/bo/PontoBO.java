@@ -137,11 +137,11 @@ public class PontoBO {
 		}
 	}
 
-	public List<Ponto> listarAlunos() {
+	public List<Ponto> listarAlunos(Date dataEntrada, Date dataSaida) {
 		pontoDAO = new PontoDAO();
 		ArrayList<Ponto> listaAlunos = new ArrayList<>();
 		try {
-			listaAlunos = pontoDAO.listaAlunos();
+			listaAlunos = pontoDAO.listaAlunos(dataEntrada, dataSaida);
 		} catch (Exception e) {
 
 			e.printStackTrace();
