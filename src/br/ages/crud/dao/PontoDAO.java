@@ -345,9 +345,9 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT P.ID_PONTO, ID_USUARIO_ALUNO, ID_USUARIO_RESPONSAVEL, timestampdiff(minute,p.data_entrada,p.data_saida)  HORAS,");
-			sql.append("P.DATA_ENTRADA, P.HORA_ENTRADA, P.DATA_SAIDA, P.HORA_SAIDA, STATUS_PONTO ");
-			sql.append("FROM TB_PONTO P ");
+			sql.append("select p.id_ponto, id_usuario_aluno, id_usuario_responsavel, timestampdiff(minute,p.data_entrada,p.data_saida)  horas,");
+			sql.append("p.data_entrada, p.hora_entrada, p.data_saida, p.hora_saida, status_ponto ");
+			sql.append("from tb_ponto p ");
 
 			PreparedStatement statement;
 
@@ -357,15 +357,15 @@ public class PontoDAO {
 
 			while (resultSet.next()) {
 				Ponto ponto = new Ponto();
-				ponto.setIdPonto(resultSet.getInt("ID_PONTO"));
-				Usuario aluno = alunoDAO.buscaUsuarioId(resultSet.getInt("ID_USUARIO_ALUNO"));
+				ponto.setIdPonto(resultSet.getInt("id_ponto"));
+				Usuario aluno = alunoDAO.buscaUsuarioId(resultSet.getInt("id_usuario_aluno"));
 				ponto.setAluno(aluno);
-				Usuario responsavel = responsavelDAO.buscaUsuarioId(resultSet.getInt("ID_USUARIO_RESPONSAVEL"));
+				Usuario responsavel = responsavelDAO.buscaUsuarioId(resultSet.getInt("id_usuario_responsavel"));
 				ponto.setResponsavel(responsavel);
-				ponto.setDataEntrada(resultSet.getTimestamp("DATA_ENTRADA"));
-				ponto.setDataSaida(resultSet.getTimestamp("DATA_SAIDA"));
-				ponto.setStatus(StatusPonto.valueOf(resultSet.getString("STATUS_PONTO")));
-				ponto.setHoraTotalDia(resultSet.getInt("HORAS"));
+				ponto.setDataEntrada(resultSet.getTimestamp("data_entrada"));
+				ponto.setDataSaida(resultSet.getTimestamp("data_saida"));
+				ponto.setStatus(StatusPonto.valueOf(resultSet.getString("status_ponto")));
+				ponto.setHoraTotalDia(resultSet.getInt("horas"));
 				listaAlunos.add(ponto);
 			}
 		} catch (ClassNotFoundException | SQLException | PersistenciaException e) {
