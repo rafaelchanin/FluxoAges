@@ -29,7 +29,6 @@ import br.ages.crud.command.EditStakeholderCommand;
 import br.ages.crud.command.EditUserCommand;
 import br.ages.crud.command.EditaProjetoCommand;
 import br.ages.crud.command.ListPontoTotalHorasCommand;
-import br.ages.crud.command.ListPontoTotalHorasInvalidoCommand;
 import br.ages.crud.command.ListStakeholdersCommand;
 import br.ages.crud.command.ListUserCommand;
 import br.ages.crud.command.ListaAlunoCommand;
@@ -92,7 +91,6 @@ public class MainServlet extends HttpServlet {
 		comandos.put("listaAluno", new ListaAlunoCommand());
 		comandos.put("validaPontoHora", new ValidaPontoHoraCommand());
 		comandos.put("listaPontoHora", new ListPontoTotalHorasCommand());
-		comandos.put("listaPontoHoraInvalido", new ListPontoTotalHorasInvalidoCommand());
 		comandos.put("adicionaSkill", new AddSkillCommand());
 		comandos.put("skills", new CreateScreenSkillCommand());
 	}
