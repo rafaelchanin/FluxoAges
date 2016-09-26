@@ -9,7 +9,7 @@
 
 <div class="panel panel-primary">
 
-	<div class="panel-heading text-center">Hora Ponto Alunos</div>
+	<div class="panel-heading text-center">Lista Total Ponto</div>
 
 	<jsp:include page="/template/msg.jsp"></jsp:include>
 

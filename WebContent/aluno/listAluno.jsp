@@ -10,7 +10,7 @@
 <jsp:include page="../template/modalAluno.jsp"></jsp:include>
 <div class="panel panel-primary">
 
-	<div class="panel-heading text-center">Hora Ponto Alunos</div>
+	<div class="panel-heading text-center">Lista Ponto</div>
 
 	<jsp:include page="/template/msg.jsp"></jsp:include>
 
