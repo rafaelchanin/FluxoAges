@@ -82,24 +82,30 @@ public class Util {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date data;
 		try {
+			if (s == null || s.equals(""))
+				data = null;
+			else
 			data = formatter.parse(s);
+			return data;
 		} catch (ParseException e) {
 			throw new ParseException(MensagemContantes.MSG_ERR_CAMPO_DATA_INVALIDO, e.getErrorOffset());
 		}
-
-		return data;
 	}
 
 	public static Date stringToDateTime(String s) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date data;
 		try {
+			if (s == null || s.equals(""))
+				data = null;
+			else
 			data = formatter.parse(s);
+			return data;
 		} catch (ParseException e) {
 			throw new ParseException(MensagemContantes.MSG_ERR_CAMPO_DATA_INVALIDO, e.getErrorOffset());
 		}
 
-		return data;
+		//return data;
 	}
 
 	public static String dateToString(Date d) throws ParseException {

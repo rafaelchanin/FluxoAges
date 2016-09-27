@@ -376,7 +376,7 @@ public class PontoDAO {
 			sql.append("select p.id_ponto, id_usuario_aluno, id_usuario_responsavel, timestampdiff(minute,p.data_entrada,p.data_saida)  horas,");
 			sql.append("p.data_entrada, p.hora_entrada, p.data_saida, p.hora_saida, status_ponto ");
 			sql.append("from tb_ponto p ");
-			sql.append("where p.data_entrada between ? and ? and p.data_saida between ? and ? ;");
+			sql.append("where p.data_entrada between ? and ? ;");
 
 			PreparedStatement statement;
 
@@ -388,9 +388,9 @@ public class PontoDAO {
 			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
 			statement.setTimestamp(2, dataSaidaSql);
 			
-			statement.setTimestamp(3, dataEntradaSql);
+		//	statement.setTimestamp(3, dataEntradaSql);
 			
-			statement.setTimestamp(4, dataSaidaSql);
+		//	statement.setTimestamp(4, dataSaidaSql);
 			
 			ResultSet resultSet = statement.executeQuery();
 
