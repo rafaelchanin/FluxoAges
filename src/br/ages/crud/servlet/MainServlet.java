@@ -38,6 +38,7 @@ import br.ages.crud.command.LogoutCommand;
 import br.ages.crud.command.RemoveProjetoCommand;
 import br.ages.crud.command.RemoveStakeholderCommand;
 import br.ages.crud.command.RemoveUserCommand;
+import br.ages.crud.command.RemoverPontoAlunoCommand;
 import br.ages.crud.command.SenhaCommand;
 import br.ages.crud.command.UploadProjetoCommand;
 import br.ages.crud.command.ValidaPontoHoraCommand;
@@ -93,6 +94,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("listaPontoHora", new ListPontoTotalHorasCommand());
 		comandos.put("adicionaSkill", new AddSkillCommand());
 		comandos.put("skills", new CreateScreenSkillCommand());
+		comandos.put("removerPontoAluno", new RemoverPontoAlunoCommand());
 	}
 
 	@Override

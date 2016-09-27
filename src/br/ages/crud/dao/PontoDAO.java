@@ -68,6 +68,34 @@ public class PontoDAO {
 
 	}
 
+	
+	public boolean removePonto(int idPonto) throws NegocioException, SQLException, PersistenciaException {
+		Connection conexao = null;
+		boolean ok = false;
+		try {
+
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM tb_ponto ");
+			sql.append("WHERE id_ponto = ?;");
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setInt(1, idPonto);
+			ok = statement.execute();
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			conexao.close();
+			return ok;
+		}
+		
+		
+	}
+
+	
+	
 	public ArrayList<ResumoPonto> listaPontoAlunos(int idUsuario, Date dataEntrada, Date dataSaida) throws SQLException {
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
 		Connection conexao = null;

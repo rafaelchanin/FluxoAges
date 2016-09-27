@@ -50,6 +50,16 @@ public class PontoBO {
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO);
 		}
 	}
+	
+	public void removePonto(int idPonto) throws NegocioException, SQLException, PersistenciaException {
+		pontoDAO = new PontoDAO();
+		try {
+			pontoDAO.removePonto(idPonto);
+		} catch (NegocioException e) {
+			e.printStackTrace();
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO);
+		}
+	}
 
 	public StatusPonto validaStatusPonto(Usuario responsavel, String senhaResponsavel) throws PersistenciaException {
 		UsuarioBO usuarioBO = new UsuarioBO();
