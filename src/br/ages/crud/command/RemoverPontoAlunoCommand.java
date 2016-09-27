@@ -19,7 +19,7 @@ public class RemoverPontoAlunoCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request) {
-	proximo = "main?acao=listUser";
+	proximo = "main?acao=listaAluno";
 	this.pontoBO = new PontoBO();
 	
 	//Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioSessao");		
