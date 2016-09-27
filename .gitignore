@@ -10,3 +10,5 @@
 target/
 .settings
 target
+target/classes/ambiente.properties
+target/classes/log4j.properties
