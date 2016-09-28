@@ -82,24 +82,30 @@ public class Util {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date data;
 		try {
+			if (s == null || s.equals(""))
+				data = null;
+			else
 			data = formatter.parse(s);
+			return data;
 		} catch (ParseException e) {
 			throw new ParseException(MensagemContantes.MSG_ERR_CAMPO_DATA_INVALIDO, e.getErrorOffset());
 		}
-
-		return data;
 	}
 
 	public static Date stringToDateTime(String s) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date data;
 		try {
+			if (s == null || s.equals(""))
+				data = null;
+			else
 			data = formatter.parse(s);
+			return data;
 		} catch (ParseException e) {
 			throw new ParseException(MensagemContantes.MSG_ERR_CAMPO_DATA_INVALIDO, e.getErrorOffset());
 		}
 
-		return data;
+		//return data;
 	}
 
 	public static String dateToString(Date d) throws ParseException {
@@ -132,7 +138,7 @@ public class Util {
 		int mes = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
 		int ano = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
 		if (mes >= 7)
-			semestre = "01"+"-"+"06"+"-"+ano;
+			semestre = "01"+"-"+"07"+"-"+ano;
 		else
 			semestre = "01"+"-"+"01"+"-"+ano;
 		dSemestre = new SimpleDateFormat("dd-MM-yyyy").parse(semestre);
