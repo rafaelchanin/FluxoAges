@@ -61,11 +61,15 @@ public class AddPontoCommand implements Command {
 			ponto.setStatus(statusPonto);
 
 			boolean isValido;
+			if (dataEntrada == null)
+				isValido = false;
+				else {
 			if (dataSaida != null) {
 				isValido = pontoBO.validaPonto(ponto);
 			} else {
 				isValido = true;
 			}
+				}
 
 			if (isValido != false) {
 				if (isEdit != null && !"".equals(isEdit)) { // edita ponto
