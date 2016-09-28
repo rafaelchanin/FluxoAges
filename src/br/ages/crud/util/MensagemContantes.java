@@ -117,4 +117,7 @@ public class MensagemContantes {
 	
 	public static final String MSG_ERR_VALIDA_HORA_INVALIDA_PONTO = " Senha do Responsável inválida";
 
+	public static final String MSG_SUC_REM_PONTO = " O ponto foi excluido com sucesso";
+	
+	public static final String MSG_ERR_REM_PONTO = " Erro na exclusão do ponto";
 }
