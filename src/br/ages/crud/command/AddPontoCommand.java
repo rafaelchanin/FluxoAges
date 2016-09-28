@@ -34,8 +34,8 @@ public class AddPontoCommand implements Command {
 
 		String idAluno = request.getParameter("idAluno");
 		String idResponsavel = request.getParameter("idResponsavel");
-		String dataEntradaString = request.getParameter("dtEntrada");
-		String dataSaidaString = request.getParameter("dtSaida");
+		String dataEntradaString = request.getParameter("dtEntradaRegistro");
+		String dataSaidaString = request.getParameter("dtSaidaRegistro");
 		String senhaResponsavel = request.getParameter("senhaResponsavel");
 		String isEdit = request.getParameter("isEdit");
 
@@ -86,7 +86,7 @@ public class AddPontoCommand implements Command {
 			request.setAttribute("msgErro", e.getMessage());
 			e.printStackTrace();
 		}
-
+		
 		return proxima;
 	}
 }
