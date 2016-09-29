@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset c·ssio:4
+--changeset c√°ssio:4
 --comment Atualizacao tamanho do campo senha para implementar a criptografia do valor.
 
 USE ages_e;
