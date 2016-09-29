@@ -571,7 +571,7 @@ public class UsuarioDAO {
 			sql.append("from ages_e.tb_usuario u inner join ages_e.tb_tipo_usuario t ");
 			sql.append(" on t.id_tipo_usuario = u.id_tipo_usuario");
 			sql.append(" where t.nome = 'aluno'");
-			sql.append(" order by reverse(u.nome);");
+			sql.append(" order by u.nome;");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			ResultSet resultset = statement.executeQuery();
