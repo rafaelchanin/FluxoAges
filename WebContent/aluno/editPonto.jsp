@@ -28,14 +28,14 @@
 						</div>
 						<label class="form-label ages">Entrada:<span class="red">*</span></label> 
 						<div class='input-group date' id='dataEntrada'>
-							<input value="<%=Util.dateTimeToString(ponto.getDataEntrada())%>" type='text' class="form-control" id='dtEntrada' name="dtEntrada"/>
+							<input value="<%=Util.dateTimeToString(ponto.getDataEntrada())%>" type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
 						<label class="form-label ages">Saída:</label> 
 						<div class='input-group date' id='dataSaida'>
-							<input value="<%=Util.dateTimeToString(ponto.getDataSaida())%>" type='text' class="form-control" id="dtSaida" name="dtSaida"/> 
+							<input value="<%=Util.dateTimeToString(ponto.getDataSaida())%>" type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro"/> 
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -45,15 +45,16 @@
 						<div class='' id='nomeResponsavel'>
 							<label for="sel2" class="form-label ages">Responsável:</label> 
 							<select class="form-control" id="idResponsavel" name="idResponsavel" >
-						        <option value="<%=ponto.getResponsavel().getIdUsuario()%>"><%=ponto.getResponsavel().getNome()%></option>
-						         
+						        <option value="<%=ponto.getResponsavel().getIdUsuario()%>"><%=(ponto.getResponsavel().getNome() == null) ? "Selecione..." : ponto.getResponsavel().getNome()%></option>
 							 	<%
-									List<Usuario> listaResponsaveis = (List<Usuario>) request.getAttribute("responsaveis");
-									for (Usuario u : listaResponsaveis) {
+								List<Usuario> listaResponsaveis = (List<Usuario>) request.getAttribute("responsaveis");
+								for (Usuario u : listaResponsaveis) {
+							  		if (ponto.getResponsavel().getIdUsuario() != u.getIdUsuario()) {
 							  	 %>
-								<option value="<%=u.getIdUsuario()%>"><%=u.getNome()%></option>
+										<option value="<%=u.getIdUsuario()%>"><%=u.getNome()%></option>
 								<%
 									}
+								}
 								%>
 					        </select>
 						</div>

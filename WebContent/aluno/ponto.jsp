@@ -32,7 +32,7 @@
 					<div class="form-group">
 					<label class="form-label ages">Entrada:<span class="red">*</span></label> 
 						<div class='input-group date' id='dataEntrada'>
-							<input type='text' class="form-control" id='dtEntrada' name="dtEntrada"/>
+							<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<label class="form-label ages">Saída:</label> 
 						<div class='input-group date' id='dataSaida'>
-							<input type='text' class="form-control" id="dtSaida" name="dtSaida"/> 
+							<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro"/> 
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
