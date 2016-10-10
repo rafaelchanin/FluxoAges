@@ -40,7 +40,7 @@ public class ValidaPontoHoraCommand implements Command {
 			Ponto ponto = pontoBO.buscaPontoId(Integer.parseInt(idPonto));
 			Usuario responsavel = responsavelBO.buscaUsuarioId(Integer.parseInt(idResponsavel));
 
-			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel);
+			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel, null);
 			
 			if (statusPonto.equals(StatusPonto.VALIDO)) {
 				ponto.setResponsavel(responsavel);
