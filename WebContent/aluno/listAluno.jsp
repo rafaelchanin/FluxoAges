@@ -96,11 +96,14 @@
 </div>
 <jsp:include page="../template/foot.jsp"></jsp:include>
 <script>
-	function listar() {
-		var id = document.getElementById("idAluno").value;
-		document.forms[0].action = 'main?acao=listaPontoHora&id_usuario=' + id;
-		document.forms[0].submit();
-		winconsole.log(id);
+	function filtrarData() {
+		/* var entrada = document.getElementById("dtEntrada").value;
+		var saida = document.getElementById("dtSaida").value; */
+		
+		 form = document.getElementById("formListAluno");
+		form.action= "main?acao=listaAluno";
+		form.forms.submit();
+		
 	};
 </script>
 <script>

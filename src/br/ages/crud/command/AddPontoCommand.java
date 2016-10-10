@@ -57,7 +57,7 @@ public class AddPontoCommand implements Command {
 			ponto.setDataEntrada(dataEntrada);
 			ponto.setDataSaida(dataSaida);
 
-			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel);
+			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel, dataSaidaString);
 			ponto.setStatus(statusPonto);
 
 			boolean isValido;

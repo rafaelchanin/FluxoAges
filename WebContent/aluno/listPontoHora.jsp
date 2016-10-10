@@ -88,13 +88,13 @@
 			 document.forms[0].submit();
 			 winconsole.log(id);
 		};
-	function filtrarData() {
-		/* var entrada = document.getElementById("dtEntrada").value;
-		var saida = document.getElementById("dtSaida").value; */
-		 document.forms[0].action= 'main?acao=listaPontoHora&id_usuario=0';
-		 document.forms[0].submit();
-		 winconsole.log(id);
-	};
+//	function filtrarData() {
+//		/* var entrada = document.getElementById("dtEntrada").value;
+//		var saida = document.getElementById("dtSaida").value; */
+//		 document.forms[0].action= 'main?acao=listaPontoHora&id_usuario=0';
+//		 document.forms[0].submit();
+//		 winconsole.log(id);
+//	};
 </script>
 <script>
 	
