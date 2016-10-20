@@ -30,7 +30,7 @@ public class AddPontoCommand implements Command {
 		String pagina = request.getServletPath() +"?"+request.getQueryString();
 		
 		pontoBO = new PontoBO();
-		proxima = "main?acao=listaAluno";
+		proxima = "main?acao=registrarPonto";
 
 		String idAluno = request.getParameter("idAluno");
 		String idResponsavel = request.getParameter("idResponsavel");
@@ -63,15 +63,16 @@ public class AddPontoCommand implements Command {
 			boolean isValido;
 			if (dataEntrada == null)
 				isValido = false;
-				else {
-			if (dataSaida != null) {
-				isValido = pontoBO.validaPonto(ponto);
-			} else {
-				isValido = true;
-			}
+			else {
+				if (dataSaida != null) {
+					isValido = pontoBO.validaPonto(ponto, responsavel, senhaResponsavel);
+				} else {
+					isValido = true;
 				}
+			}
 
 			if (isValido != false) {
+				proxima = "main?acao=listaAluno";
 				if (isEdit != null && !"".equals(isEdit)) { // edita ponto
 					int idPonto = Integer.valueOf(request.getParameter("idPonto"));
 					ponto.setIdPonto(idPonto);

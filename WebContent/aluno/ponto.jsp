@@ -22,7 +22,7 @@
 									List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("usuarios");
 									for (Usuario u : listaUsuarios) {
 							  	 %>
-								<option value="<%=u.getIdUsuario()%>"><%=u.getNome()%></option>
+								<option value="<%=u.getIdUsuario()%>" <%=Integer.toString(u.getIdUsuario()).equals(request.getParameter("idAluno")) ? "selected" : ""%>><%=u.getNome()%></option>
 								<%
 									}
 								%>
@@ -32,7 +32,7 @@
 					<div class="form-group">
 					<label class="form-label ages">Entrada:<span class="red">*</span></label> 
 						<div class='input-group date' id='dataEntrada'>
-							<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro"/>
+							<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro" value="${param.dtEntradaRegistro}"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -41,7 +41,7 @@
 					<div class="form-group">
 						<label class="form-label ages">Saída:</label> 
 						<div class='input-group date' id='dataSaida'>
-							<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro"/> 
+							<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro" value="${param.dtSaidaRegistro}"/> 
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -57,7 +57,8 @@
 									List<Usuario> listaResponsaveis = (List<Usuario>) request.getAttribute("responsaveis");
 									for (Usuario u : listaResponsaveis) {
 							  	 %>
-								<option value="<%=u.getIdUsuario()%>"><%=u.getNome()%></option>
+								<option value="<%=u.getIdUsuario()%>" <%=Integer.toString(u.getIdUsuario()).equals(request.getParameter("idResponsavel")) ? "selected" : ""%>><%=u.getNome()%></option>
+								
 								<%
 									}
 								%>

@@ -56,6 +56,7 @@ public class CreateScreenPontoCommand implements Command {
 						break;
 					}
 				}
+				//
 				request.setAttribute("usuarios", usuarios);
 				proxima = "aluno/ponto.jsp";
 			}

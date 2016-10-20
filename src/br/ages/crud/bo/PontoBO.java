@@ -23,11 +23,18 @@ public class PontoBO {
 
 	private PontoDAO pontoDAO;
 
-	public Boolean validaPonto(Ponto ponto) throws NegocioException, SQLException {
-
+	public Boolean validaPonto(Ponto ponto, Usuario responsavel, String senha) throws NegocioException, SQLException, PersistenciaException {
+		UsuarioBO usuarioBO = new UsuarioBO();
 		if (ponto.getDataEntrada().getTime() > ponto.getDataSaida().getTime()) {
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA);
 		}
+		
+		if (senha != null || !senha.equals("")) {
+			if (usuarioBO.validaUsuarioResponsavel(responsavel.getUsuario(), senha) == false) {
+				throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA);
+			}
+		}
+			
 		return true;
 
 	}
