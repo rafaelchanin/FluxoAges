@@ -80,8 +80,9 @@ public class AddPontoCommand implements Command {
 			if (ponto.getResponsavel().getIdUsuario() != 0	& !usuarioBO.validaUsuarioResponsavel(ponto.getResponsavel().getUsuario(), senhaResponsavel)) {
 				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA + "<br>");
 				//TESTE
-				if (isEdit.equals("true"))
-					proxima= "main?acao=registrarPonto&id_ponto="+ ponto.getIdPonto()+"&isEdit=true" ;
+				if (isEdit.equals("true")) {
+					proxima= "main?acao=registrarPonto&id_ponto="+  Integer.valueOf(request.getParameter("idPonto"))+"&isEdit=true" ;
+				}
 				//FIM DO TESTE
 				isValido = false;
 			}
