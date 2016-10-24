@@ -23,18 +23,12 @@ public class PontoBO {
 
 	private PontoDAO pontoDAO;
 
-	public Boolean validaPonto(Ponto ponto, Usuario responsavel, String senha) throws NegocioException, SQLException, PersistenciaException {
+	public Boolean validaDataPonto(Ponto ponto) throws NegocioException, SQLException, PersistenciaException {
 		UsuarioBO usuarioBO = new UsuarioBO();
-		if (ponto.getDataEntrada().getTime() > ponto.getDataSaida().getTime()) {
-			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA);
-		}
-		
-		if (senha != null || !senha.equals("")) {
-			if (usuarioBO.validaUsuarioResponsavel(responsavel.getUsuario(), senha) == false) {
-				throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA);
+		if(ponto.getDataSaida() != null)
+			if (ponto.getDataEntrada().getTime() > ponto.getDataSaida().getTime()) {
+				return false;
 			}
-		}
-			
 		return true;
 
 	}
@@ -71,14 +65,10 @@ public class PontoBO {
 	public StatusPonto validaStatusPonto(Usuario responsavel, String senhaResponsavel, String dataSaida) throws PersistenciaException {
 		UsuarioBO usuarioBO = new UsuarioBO();
 		StatusPonto statusPonto;
-		if (dataSaida == null || dataSaida.equals(""))
+		if (dataSaida == null || dataSaida.equals("") || !usuarioBO.validaUsuarioResponsavel(responsavel.getUsuario(), senhaResponsavel))
 			statusPonto = StatusPonto.INVALIDO;
 		else {
-			if (usuarioBO.validaUsuarioResponsavel(responsavel.getUsuario(), senhaResponsavel)) {
-				statusPonto = StatusPonto.VALIDO;
-			} else {
-				statusPonto = StatusPonto.INVALIDO;
-			}
+			statusPonto = StatusPonto.VALIDO;
 		}
 		return statusPonto;
 	}
