@@ -103,6 +103,8 @@ public class MensagemContantes {
 
 	public static final String MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA = " Data de Saida menor que Data de Entrada";
 
+	public static final String MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA = " A senha do responsável esta incorreta";
+
 	public static final String MSG_SUC_CADASTRO_PONTO = " Cadastrado com SUCESSO o Ponto do Aluno ?";
 	
 	public static final String MSG_SUC_EDITA_PONTO = " Ponto do Aluno ? editadocom SUCESSO";

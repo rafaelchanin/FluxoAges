@@ -18,7 +18,6 @@ import br.ages.crud.util.Util;
 
 public class AddPontoCommand implements Command {
 
-
 	private String proxima;
 	private UsuarioBO usuarioBO;
 	private PontoBO pontoBO;
@@ -27,11 +26,14 @@ public class AddPontoCommand implements Command {
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, NegocioException {
 
-		String pagina = request.getServletPath() +"?"+request.getQueryString();
-		
-		pontoBO = new PontoBO();
-		proxima = "main?acao=listaAluno";
+		String pagina = request.getServletPath() + "?" + request.getQueryString();
 
+		pontoBO = new PontoBO();
+		//if (isEdit != null && !"".equals(isEdit)) {
+			//proxima = "main?acao=
+		//} else {
+			proxima = "main?acao=registrarPonto";
+		//}
 		String idAluno = request.getParameter("idAluno");
 		String idResponsavel = request.getParameter("idResponsavel");
 		String dataEntradaString = request.getParameter("dtEntradaRegistro");
@@ -60,37 +62,58 @@ public class AddPontoCommand implements Command {
 			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel, dataSaidaString);
 			ponto.setStatus(statusPonto);
 
-			boolean isValido;
-			if (dataEntrada == null)
-				isValido = false;
-				else {
-			if (dataSaida != null) {
-				isValido = pontoBO.validaPonto(ponto);
-			} else {
-				isValido = true;
-			}
-				}
+			StringBuilder msg = new StringBuilder();
+			boolean isValido = true;
 
+			// Valida data de entrada
+			if (dataEntrada == null) {
+				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA + "<br>");
+				isValido = false;
+			}
+			// Valida se data de entrada é vaior que data de saida e se não
+			// existe data de saida
+			if (!pontoBO.validaDataPonto(ponto)) {
+				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA + "<br>");
+				isValido = false;
+			}
+			// Valida se existe responsável e se a senha bate.
+			if (ponto.getResponsavel().getIdUsuario() != 0	& !usuarioBO.validaUsuarioResponsavel(ponto.getResponsavel().getUsuario(), senhaResponsavel)) {
+				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA + "<br>");
+				//TESTE
+				if (isEdit.equals("true")) {
+					proxima= "main?acao=registrarPonto&id_ponto="+  Integer.valueOf(request.getParameter("idPonto"))+"&isEdit=true" ;
+				}
+				//FIM DO TESTE
+				isValido = false;
+			}
+
+			// O ponto do aluno só é valido se tiver Aluno, DataEntrada,
+			// DataSaida e Responsável
 			if (isValido != false) {
 				if (isEdit != null && !"".equals(isEdit)) { // edita ponto
 					int idPonto = Integer.valueOf(request.getParameter("idPonto"));
 					ponto.setIdPonto(idPonto);
 					pontoBO.editaPonto(ponto);
-					request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDITA_PONTO.replace("?", ponto.getAluno().getNome()));
+					request.setAttribute("msgSucesso",
+							MensagemContantes.MSG_SUC_EDITA_PONTO.replace("?", ponto.getAluno().getNome()));
+					proxima = "main?acao=listaAluno";
 				} else { // cadastro ponto
 					pontoBO.cadastrarPonto(ponto);
-					request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_PONTO.replace("?", ponto.getAluno().getNome()));
+					request.setAttribute("msgSucesso",
+							MensagemContantes.MSG_SUC_CADASTRO_PONTO.replace("?", ponto.getAluno().getNome()));
+					proxima = "main?acao=listaAluno";
 				}
 			} else {
-					//request.setAttribute("msgErro", MensagemContantes.MSG_ERR_CADASTRO_PONTO.replace("?", ponto.getAluno().getNome()));
-				throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PONTO.replace("?", ponto.getAluno().getNome()));
-			
+				throw new NegocioException(msg.toString());
 			}
-		} catch (NegocioException | PersistenciaException | ParseException e) {
+
+		} catch (NegocioException | PersistenciaException |
+
+				ParseException e) {
 			request.setAttribute("msgErro", e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return proxima;
 	}
 }
