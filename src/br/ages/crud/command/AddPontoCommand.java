@@ -29,11 +29,6 @@ public class AddPontoCommand implements Command {
 		String pagina = request.getServletPath() + "?" + request.getQueryString();
 
 		pontoBO = new PontoBO();
-		//if (isEdit != null && !"".equals(isEdit)) {
-			//proxima = "main?acao=
-		//} else {
-			proxima = "main?acao=registrarPonto";
-		//}
 		String idAluno = request.getParameter("idAluno");
 		String idResponsavel = request.getParameter("idResponsavel");
 		String dataEntradaString = request.getParameter("dtEntradaRegistro");
@@ -41,6 +36,12 @@ public class AddPontoCommand implements Command {
 		String senhaResponsavel = request.getParameter("senhaResponsavel");
 		String isEdit = request.getParameter("isEdit");
 
+		if (isEdit != null && !"".equals(isEdit)) {
+			proxima= "main?acao=registrarPonto&id_ponto="+  Integer.valueOf(request.getParameter("idPonto"))+"&isEdit=true" ;
+		} else {
+			proxima = "main?acao=registrarPonto";
+		}
+		
 		try {
 
 			Ponto ponto = new Ponto();
@@ -79,11 +80,6 @@ public class AddPontoCommand implements Command {
 			// Valida se existe responsável e se a senha bate.
 			if (ponto.getResponsavel().getIdUsuario() != 0	& !usuarioBO.validaUsuarioResponsavel(ponto.getResponsavel().getUsuario(), senhaResponsavel)) {
 				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA + "<br>");
-				//TESTE
-				if (isEdit.equals("true")) {
-					proxima= "main?acao=registrarPonto&id_ponto="+  Integer.valueOf(request.getParameter("idPonto"))+"&isEdit=true" ;
-				}
-				//FIM DO TESTE
 				isValido = false;
 			}
 
@@ -96,24 +92,21 @@ public class AddPontoCommand implements Command {
 					pontoBO.editaPonto(ponto);
 					request.setAttribute("msgSucesso",
 							MensagemContantes.MSG_SUC_EDITA_PONTO.replace("?", ponto.getAluno().getNome()));
-					proxima = "main?acao=listaAluno";
 				} else { // cadastro ponto
 					pontoBO.cadastrarPonto(ponto);
 					request.setAttribute("msgSucesso",
 							MensagemContantes.MSG_SUC_CADASTRO_PONTO.replace("?", ponto.getAluno().getNome()));
-					proxima = "main?acao=listaAluno";
 				}
+				//cadastro realizado com sucesso. pode setar a proxima pagina para listagem de pontos
+				proxima = "main?acao=listaAluno";
 			} else {
 				throw new NegocioException(msg.toString());
 			}
 
-		} catch (NegocioException | PersistenciaException |
-
-				ParseException e) {
+		} catch (NegocioException | PersistenciaException | ParseException e) {
 			request.setAttribute("msgErro", e.getMessage());
 			e.printStackTrace();
 		}
-
 		return proxima;
 	}
 }
