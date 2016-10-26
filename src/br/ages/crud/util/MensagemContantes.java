@@ -107,7 +107,7 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_CADASTRO_PONTO = " Cadastrado com SUCESSO o Ponto do Aluno ?";
 	
-	public static final String MSG_SUC_EDITA_PONTO = " Ponto do Aluno ? editadocom SUCESSO";
+	public static final String MSG_SUC_EDITA_PONTO = " Ponto do Aluno ? editado com SUCESSO";
 
 	public static final String MSG_SUC_AVALIACAO = " Aluno ? avaliado com SUCESSO";
 
