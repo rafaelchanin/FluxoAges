@@ -9,7 +9,7 @@
 /.tern-project
 target/
 .settings
-target
+target/
 target/classes/ambiente.properties
 target/classes/log4j.properties
 /bower_components/
