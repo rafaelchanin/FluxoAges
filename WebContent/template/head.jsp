@@ -13,8 +13,7 @@
 	 	<link rel="stylesheet" href="./css/bootstrap-theme.min.css"> 
 
 		<!-- Include the plugin's CSS and JS: Cassio DataTable -->
-	<!-- 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"> -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="./css/dataTables.bootstrap.css">
 
 		<!-- STYLE -->
 		<link rel="stylesheet" href="./css/style.css">
@@ -27,8 +26,8 @@
 
 
 		<!-- Include the plugin's CSS and JS: Cassio DataTable -->
-		<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
- 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+ 		<script type="text/javascript" src="./js/dataTables.bootstrap.min.js"></script>
 
 		
 		<!-- Include the plugin's CSS and JS: Cassio Dual ListBox -->
@@ -98,7 +97,7 @@
 				          	<ul class="dropdown-menu">
 				            	<li><a href="main?acao=listaAluno">Lista Ponto</a></li>
 				            	<li><a href="main?acao=registrarPonto">Registrar Ponto</a></li>
-				            	<!--<li><a href="main?acao=skills">Avaliar Aluno</a></li>-->
+				            	<li><a href="main?acao=skills">Avaliar Aluno</a></li>
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
 				          	</ul>
         				</li>
@@ -115,6 +114,8 @@
                            
         					<ul class="dropdown-menu dropdown-menu-right">
         						<li><a href="main?acao=logout">Logout</a></li>
+        						<li><a href="projetosGitLab.xhtml">Projetos GitLAB</a></li>
+        						<li><a href="projetosGitLabUsers.xhtml">Usuários GitLAB</a></li>
         					</ul>
         				</li>
 			      	</ul>
