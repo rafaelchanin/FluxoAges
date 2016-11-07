@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+
+		<ui:define name="content">
+			<div class="container">
+				<div class="panel panel-primary">
+
+					<div class="panel-heading text-center">Users Projetos GitLAB</div>
+					<div class="panel-body">
+						<div class="table-responsive" >
+							<h:dataTable value="#{projetoMB.projetosGitLABUsers}" var="u"
+								cellspacing="0" width="100%" id="tableUsersProjectGitLab"
+								class="table table-responsive table-striped table-hover table-condensed table-bordered">
+							 <h:column>
+									<f:facet name="header">
+										<h:outputText value="ID" />
+									</f:facet>
+									<h:outputText value="#{u.id}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Nome" />
+									</f:facet>
+									<h:outputText value="#{u.name}" />
+								</h:column>	
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Data Criação" />
+									</f:facet>
+									<h:outputText value="#{u.created_at}" />
+								</h:column>	
+							</h:dataTable>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
