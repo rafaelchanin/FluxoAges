@@ -6,6 +6,7 @@ package br.ages.crud.util;
  *
  */
 public class Constantes {
+
 //br.ages.crud.util.config_bd ambiente
 	public static final String AMBIENTE_PROPERTIES = "ambiente";
 	public static final String CONEXAO_BD_DRIVE = "conexao.driver.mysql";
@@ -18,5 +19,9 @@ public class Constantes {
 	public static final int PROJETO_ARQUIVO_MAX_BYTES = 1024*1024*10;
 	public static final String PROJETO_UPLOAD_PATH = "projeto.upload.path";
 	public static final String PROJETO_FILE_EXT = ".pdf";
+
+//variaveis gitlab	
+	public static final String GITLAB_URL = "http://www.tools.ages.pucrs.br";
+	public static final String GITLAB_TOKEN = "cT5xMaSvdvxBrwvY4EFK";
 	
 }

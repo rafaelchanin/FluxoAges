@@ -14,7 +14,7 @@
 					<div class="panel-heading text-center">Projetos GitLAB</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<h:dataTable value="#{projetoMB.projetosGitLAB}" var="p"
+							<h:dataTable value="#{projetoMB.gitLabProjects}" var="p"
 								cellspacing="0" width="100%" id="tableProjectGitLab"
 								class="table table-responsive table-striped table-hover table-condensed table-bordered">
 								 <h:column>
@@ -33,7 +33,15 @@
 									<f:facet name="header">
 										<h:outputText value="URL" />
 									</f:facet>
-									<h:outputText value="#{p.web_url}" />
+									<h:outputText value="#{p.httpUrl}" />
+								</h:column> 
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Data"/>
+									</f:facet>
+									<h:outputText value="#{p.createdAt}" >
+										 <f:convertDateTime dateStyle="short" pattern="dd/MM/yyyy"/>
+									</h:outputText>
 								</h:column> 
 							</h:dataTable>
 						</div>

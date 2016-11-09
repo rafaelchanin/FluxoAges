@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+		
+			<h:form id="form">
+			<p:growl id="msgs" />
+
+			<p:panel id="groupsCommits" header="Grupos do GitLab" toggleable="true"
+				closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
+				style="margin-bottom:50px">
+
+				<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
+				<p:ajax event="toggle" listener="#{panelView.onToggle}"
+					update="msgs" />
+
+				<h:panelGrid columns="3" cellpadding="10">
+					<p:dataTable value="#{projetoMB.gitLabGroups}" var="gp">
+						<p:column headerText="Id">
+							<h:outputText value="#{gp.id}" />
+						</p:column>
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{gp.name}" />
+						</p:column>
+
+						<p:column headerText="Caminho">
+							<h:outputText value="#{gp.path}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+
+				<f:facet name="options">
+					<p:menu>
+						<p:submenu label="Settings">
+							<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
+								onclick="PF('panel').toggle()" />
+							<p:menuitem value="Remove" url="#" icon="ui-icon-close"
+								onclick="PF('panel').close()" />
+						</p:submenu>
+					</p:menu>
+				</f:facet>
+			</p:panel>
+			</h:form>		
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

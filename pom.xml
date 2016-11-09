@@ -223,7 +223,20 @@
 			<artifactId>el-api</artifactId>
 			<version>2.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.gitlab/java-gitlab-api -->
+		<dependency>
+			<groupId>org.gitlab</groupId>
+			<artifactId>java-gitlab-api</artifactId>
+			<version>1.2.7</version>
+		</dependency>
+		<!-- http://www.primefaces.org/docs/guide/primefaces_user_guide_6_0.pdf -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+		</dependency>
 	</dependencies>
+
 
 
 
