@@ -8,13 +8,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.gitlab.api.GitlabAPI;
 import org.gitlab.api.models.GitlabCommit;
 import org.gitlab.api.models.GitlabGroup;
 import org.gitlab.api.models.GitlabProject;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.chart.PieChartModel;
 
 import com.google.gson.Gson;
@@ -83,19 +87,6 @@ public class ProjetoMB implements Serializable {
 		
 	}
 
-	public List<GitlabGroup> getGitLabGroups() {
-		List<GitlabGroup> gitlabGroups = null;
-
-		try {
-			gitlabGroups = api.getGroups();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return gitlabGroups;
-
-	}
-
 	public List<GitlabCommit> getGitLabCommits() {
 		List<GitlabCommit> gitlabCommits = null;
 
@@ -134,4 +125,39 @@ public class ProjetoMB implements Serializable {
 		pieModel.setShowDataLabels(true);
 		pieModel.setShadow(true);
 	}
+	
+	public GitlabGroup getGitLabGroup(int groupId) {
+		GitlabGroup gitlabGroup = null;
+		
+		try {
+			gitlabGroup = api.getGroup(groupId);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return gitlabGroup;
+		
+	}
+	public List<GitlabGroup> getGitLabGroups() {
+		List<GitlabGroup> gitlabGroups = null;
+		
+		try {
+			gitlabGroups = api.getGroups();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return gitlabGroups;
+		
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Group Selected", ((GitlabGroup) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("Group Unselected", ((GitlabGroup) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 }

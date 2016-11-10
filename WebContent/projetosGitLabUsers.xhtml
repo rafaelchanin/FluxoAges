@@ -3,43 +3,58 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 
 		<ui:define name="content">
-			<div class="container">
-				<div class="panel panel-primary">
+				<h:form id="form">
+					<p:growl id="msgs" />
+					<p:panel  id="groupsUsers" header="Usuarios GitLab" toggleable="true" 
+						closable="false" toggleSpeed="500"
+						closeSpeed="500" widgetVar="panel" style="margin-bottom:50px">
+						
+						<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
+						<p:ajax event="toggle" listener="#{panelView.onToggle}"
+							update="msgs" />
+	
+						<h:dataTable value="#{projetoMB.projetosGitLABUsers}" var="u"
+							cellspacing="0" width="100%" id="tableUsersProjectGitLab">
+							<p:column headerText="Id" width="50">
+								<h:outputText value="#{u.id}" />
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{u.name}" />
+							</p:column>
+							<p:column headerText="Data Criacao" width="100">
+								<h:outputText value="#{u.created_at}" />
+							</p:column>
+						</h:dataTable>
+					</p:panel>
 
-					<div class="panel-heading text-center">Users Projetos GitLAB</div>
-					<div class="panel-body">
-						<div class="table-responsive" >
-							<h:dataTable value="#{projetoMB.projetosGitLABUsers}" var="u" 
-								cellspacing="0" width="100%" id="tableUsersProjectGitLab"
-								class="table table-responsive table-striped table-hover table-condensed table-bordered">
-							 <h:column>
-									<f:facet name="header">
-										<h:outputText value="ID" />
-									</f:facet>
-									<h:outputText value="#{u.id}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Nome" />
-									</f:facet>
-									<h:outputText value="#{u.name}" />
-								</h:column>	
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Data Criação" />
-									</f:facet>
-									<h:outputText value="#{u.created_at}" />
-								</h:column>	
-							</h:dataTable>
-						</div>
-					</div>
-				</div>
-			</div>
+					<p:panel id="groupsCommits" header="Commiters" toggleable="true"
+						closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
+						style="margin-bottom:50px">
+		
+						<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
+						<p:ajax event="toggle" listener="#{panelView.onToggle}"
+							update="msgs" />
+		
+						<p:chart type="pie" model="#{projetoMB.pieModel}" style="height:500px; width:500px" />
+						
+					</p:panel>
+						<f:facet name="options">
+							<p:menu>
+								<p:submenu label="Settings">
+									<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
+										onclick="PF('panel').toggle()" />
+									<p:menuitem value="Remove" url="#" icon="ui-icon-close"
+										onclick="PF('panel').close()" />
+								</p:submenu>
+							</p:menu>
+						</f:facet>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

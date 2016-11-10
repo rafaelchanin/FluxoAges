@@ -11,7 +11,7 @@ import org.primefaces.event.ToggleEvent;
 public class PanelView {
      
     public void onClose(CloseEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Fechado", "Fchado panel id:'" + event.getComponent().getId() + "'");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
      
