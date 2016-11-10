@@ -3,7 +3,9 @@ package br.ages.managebeans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -111,20 +113,36 @@ public class ProjetoMB implements Serializable {
         return pieModel;
     }
      
-	
+	 
 	private void createPieModel() {
         pieModel = new PieChartModel();
+//        
+//       for (GitlabCommit glc : getGitLabCommits()) {
+//    	   System.out.println(glc.getAuthorName() +"---"+ glc.hashCode());
+//       } 
+//       
+//       int count = (int) getGitLabCommits().parallelStream().map(g -> g.getId()).count();
+//       System.out.println(count);
         
+       Map<String, Integer> mapCommiters = new HashMap<>(); 
         
-        
-      //  getGitLabCommits().forEach(g -> pieModel.set(g.getAuthorName(), Integer.parseInt(g.getId())));
-        
-        pieModel.set("Brand 1", 540);
-        pieModel.set("Brand 2", 325);
-        pieModel.set("Brand 3", 702);
-        pieModel.set("Brand 4", 421);
-        
-        pieModel.setTitle("Commits");
-        pieModel.setLegendPosition("w");
+       getGitLabCommits().forEach(g -> {
+    	   Integer count = mapCommiters.get(g.getAuthorName());
+    	   mapCommiters.put(g.getAuthorName(), (count == null) ? 1 : count + 1);
+    	});
+       
+       
+       mapCommiters.keySet().stream().forEach(c -> System.out.println(c + " " + mapCommiters.get(c)));
+       
+       mapCommiters.keySet().forEach(c -> pieModel.set(c,  mapCommiters.get(c)));
+       
+     //  pieModel.set(g.getAuthorName(), g.hashCode()); 
+        pieModel.setTitle("Commits: Totais ::" + getGitLabCommits().size());
+        //pieModel.setLegendPosition("w");
+        pieModel.setLegendPosition("e");
+        pieModel.setFill(true);
+        pieModel.setShowDataLabels(true);
+        //pieModel.setDiameter(150);
+        pieModel.setShadow(true);
     }
 }
