@@ -20,8 +20,8 @@
 					<tr>
 						<th style="text-align: left;">Nome</th>
 						<th style="text-align: right;">Realizadas até o momento</th>
-						<th style="text-align: right;">Devendo para aprovação com 75%</th>
-						<th style="text-align: right;">Devendo para aprovação com 100%</th>
+						<th style="text-align: right;">Devendo para aprovação com 75% de presença</th>
+						<th style="text-align: right;">Devendo para aprovação com 100% de presença</th>
 					</tr>
 				</thead>
 
