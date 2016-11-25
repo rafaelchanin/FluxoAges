@@ -19,9 +19,9 @@
 				<thead>
 					<tr>
 						<th style="text-align: left;">Nome</th>
-						<th style="text-align: left;">Realizadas até o momento</th>
-						<th style="text-align: left;">Devendo para aprovação com 75%</th>
-						<th style="text-align: left;">Devendo para aprovação com 100%</th>
+						<th style="text-align: right;">Realizadas até o momento</th>
+						<th style="text-align: right;">Devendo para aprovação com 75%</th>
+						<th style="text-align: right;">Devendo para aprovação com 100%</th>
 					</tr>
 				</thead>
 
@@ -30,60 +30,75 @@
 						List<ResumoPonto> listaResumoPonto = (List<ResumoPonto>) request.getAttribute("listaPontos");
 						int id = 0;
 						for (ResumoPonto usuario : listaResumoPonto) {
-							
-							int horasPontoValidas = usuario.getHoraTotalDiaValido();
 							//3600 são o "mock" das 60h de presença em aula que o aluno deve ter
+							
+							//horas ponto previstas até agora
+							//METODO AINDA PRECISA SER FEITO! por enquanto, será mockado 60 horas
+							int hpPrevistasAteAgora = 3600; //mock
+							//horas aula previstas até agora
+							//METODO AINDA PRECISA SER FEITO! por enquanto, será mockado 60 horas
+							int haPrevistasAteAgora = 3600; //mock
+							//horas ponto realizadas até agora
+							int hpAteAgora = usuario.getHoraTotalDiaValido();
+							//horas aula realizadas até agora
+							//METODO AINDA PRECISA SER FEITO! por enquanto, será mockado 60 horas
+							int haAteAgora = 3600; //mock
+							//horas ponto previstas até o fim do semestre (fixo 60)
+							int hpPrevistasSemestre = 3600;
+							//horas aula previstas até o fim do semestre (fixo 60)
+							int haPrevistasSemestre = 3600;
+							
 							//5400 são o total de horas que o aluno deveria ter (presença + ponto) para ser aprovado
 							//7200 são o total de horas que o aluno deveria ter (presença + ponto) para ter 100% de aprovação
-							String horasAteOMomento = TimeConverter.ConvertMinuteToHours(3600 + horasPontoValidas);
-							String horasDevendo75 = TimeConverter.ConvertMinuteToHours(5400 - (3600 + horasPontoValidas));
-							String horasDevendo100 = TimeConverter.ConvertMinuteToHours(7200 - (3600 + horasPontoValidas));
+							int horasDevendo75 = 5400 - (3600 + hpAteAgora);
+							int horasDevendo100 = 7200 - (3600 + hpAteAgora);
+							
 					%>
 
 					<tr class="coluna-sh" data-toggle="collapse" data-target="#extraInfo<%=id%>">
 						<td align="left"><%=usuario.getNomeAluno()%></td>
-						<td align="left"><%=horasAteOMomento%></td>
-						<td align="left"><%=horasDevendo75%></td>
-						<td align="left"><%=horasDevendo100%></td>
+						<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpAteAgora + haAteAgora)%></td>
+						<td align="right"><%=TimeConverter.ConvertMinuteToHours(horasDevendo75)%></td>
+						<td align="right"><%=TimeConverter.ConvertMinuteToHours(horasDevendo100)%></td>
 					</tr>
 					<tr class="coluna-sh collapse" id="extraInfo<%=id%>">
 						<td colspan=12 align="center">
 							<table id="extraInfoTable" class="table">
 								<thead>
 									<tr>
-										<th style="text-align: center;">Tipo de horas</th>
-										<th style="text-align: center;">Realizadas até o momento</th>
-										<th style="text-align: center;">Previstas até o momento</th>
-										<th style="text-align: center;">Diferença<th></th>
-										<th style="text-align: center;">Previstas até o fim do semestre</th>
-										<th style="text-align: center;">Diferença<th></th>
+										<th style="text-align: left;">Tipo de horas</th>
+										<th style="text-align: right;">Realizadas até o momento</th>
+										<th style="text-align: right;">Previstas até o momento</th>
+										<th style="text-align: right;">Diferença</th>
+										<th style="text-align: right;">Previstas até o fim do semestre</th>
+										<th style="text-align: right;">Diferença</th>
 									</tr>
 								</thead>
 
 								<tbody>
 									<tr class="coluna-sh">
-										<td align="center">Extraclasse</td>
-										<td align="center">realizadasAteOMomento</td>
-										<td align="center">previstasAteOMomento</td>
-										<td align="center">previstasAteOMomento - realizadasAteOMomento</td>
-										<td align="center">previstasAteOFimDoSemestre</td>
-										<td align="center">previstasAteOFimDoSemestre - realizadasAteOMomento</td>
+										<td align="left">Extraclasse</td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasAteAgora - hpAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasSemestre)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasSemestre - hpAteAgora)%></td>
 									</tr>
 									<tr class="coluna-sh">
-										<td align="center">Em aula</td>
-										<td align="center">realizadasAteOMomento</td>
-										<td align="center">previstasAteOMomento</td>
-										<td align="center">previstasAteOMomento - realizadasAteOMomento</td>
-										<td align="center">previstasAteOFimDoSemestre</td>
-										<td align="center">previstasAteOFimDoSemestre - realizadasAteOMomento</td>
+										<td align="left">Em aula</td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(haAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(haPrevistasAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(haPrevistasAteAgora - haAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(haPrevistasSemestre)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(haPrevistasSemestre - haAteAgora)%></td>
 									</tr>
 									<tr class="coluna-sh">
-										<td align="center">Total</td>
-										<td align="center">realizadasAteOMomento</td>
-										<td align="center">previstasAteOMomento</td>
-										<td align="center">previstasAteOMomento - realizadasAteOMomento</td>
-										<td align="center">previstasAteOFimDoSemestre</td>
-										<td align="center">previstasAteOFimDoSemestre - realizadasAteOMomento</td>
+										<td align="left">Total</td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpAteAgora + haAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasAteAgora + haPrevistasAteAgora)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours((hpPrevistasAteAgora + haPrevistasAteAgora) - (hpAteAgora + haAteAgora))%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours(hpPrevistasSemestre + haPrevistasSemestre)%></td>
+										<td align="right"><%=TimeConverter.ConvertMinuteToHours((hpPrevistasSemestre + haPrevistasSemestre) - (hpAteAgora + haAteAgora))%></td>
 									</tr>
 								</tbody>
 							</table>
