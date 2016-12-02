@@ -9,32 +9,44 @@
 		<jsp:include page="/template/msg.jsp"></jsp:include>
 
 
-			<form method="post" action="">
-				<div class="form-group"></div>
-					<div class="row">
-						<div class="">
-							<div style="overflow: hidden;">
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-8">
-											<div id="datetimepicker1"></div>
-										</div>
-									</div>
+		<form method="post" action="">
+			<div class="form-group"></div>
+			<div class="row">
+				<div class="">
+					<div style="overflow: hidden;">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-4 center-block">
+									<div id="datepicker1"></div>
 								</div>
-								
+								<div class="col-sm-4 centered">
+									<div id="datepicker2"></div>
+								</div>
+								<div class="col-sm-4 centered">
+									<div id="datepicker3"></div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-4 center-block">
+									<div id="datepicker4"></div>
+								</div>
+								<div class="col-sm-4 centered">
+									<div id="datepicker5"></div>
+								</div>
+								<div class="text-center">
+									<input type="button" class="btn btn-warning limparUser pull-left"
+										id="limpar" value="Limpar"> <input
+										class="btn btn-primary addUser pull-right" type="submit"
+										value="Salvar">
+								</div>
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-				<div class="text-center">
-					<input class="btn btn-warning limparUser pull-left" type="reset" value="Limpar"> 
-					<input class="btn btn-primary addUser pull-right" type="submit" value="Salvar">
 				</div>
-			</form>
+			</div>
+		</form>
 
 
 
@@ -44,7 +56,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
 		function leapYear(year){
 		    var result; 
 		    if (years/400){
@@ -61,10 +72,10 @@
 		    }
 		    return result
 		 }
-		
+	
 		var date = new Date();
 		var maxDays = 3;
-		
+	
 		//var pra simular o mes de cada tabela
 		var month = 8;
 		switch(month){
@@ -107,22 +118,72 @@
 			break;
 		}
 		
-		var maxdate = "'" + date.getFullYear() + "-" + month + "-" + maxDays + "'";
-		console.log(maxdate);
-
-		$(function() {
-			$('#datetimepicker1').datetimepicker({
-				format: 'MM/dd/YYYY',
-				minDate: '2016-12-01', 
-				maxDate: '2016-12-31',
-				inline : true,
-				daysOfWeekDisabled: [0, 6],
-				showClear: true
-				
-			});
-			$('.picker-switch').prop("disabled", true);
-		});
+		var maxDate = maxDays + "/" + month + "/" + date.getFullYear();
 		
+		$(function() {
+			
+			$('#datepicker1').datepicker({
+				day: 1,
+				month: month-1,
+				year: 2016,
+				format: "d/m/yyyy",
+				multidate: true,
+				language: "pt-br",
+				daysOfWeekDisabled: [0, 6],
+				clearBtn: true,
+				startDate: "1/8/2016",
+				endDate: maxDate,
+				maxViewMode: "days"
+			});
+			$('#datepicker2').datepicker({
+				format: "d/m/yyyy",
+				multidate: true,
+				language: "pt-br",
+				daysOfWeekDisabled: [0, 6],
+				clearBtn: true,
+				startDate: "1/8/2016",
+				endDate: maxDate,
+				maxViewMode: "days"
+			});
+			$('#datepicker3').datepicker({
+				format: "d/m/yyyy",
+				multidate: true,
+				language: "pt-br",
+				daysOfWeekDisabled: [0, 6],
+				clearBtn: true,
+				startDate: "1/8/2016",
+				endDate: maxDate,
+				maxViewMode: "days"
+			});
+			$('#datepicker4').datepicker({
+				format: "d/m/yyyy",
+				multidate: true,
+				language: "pt-br",
+				daysOfWeekDisabled: [0, 6],
+				clearBtn: true,
+				startDate: "1/8/2016",
+				endDate: maxDate,
+				maxViewMode: "days"
+			});
+			$('#datepicker5').datepicker({
+				format: "d/m/yyyy",
+				multidate: true,
+				language: "pt-br",
+				daysOfWeekDisabled: [0, 6],
+				clearBtn: true,
+				startDate: "1/8/2016",
+				endDate: maxDate,
+				maxViewMode: "days"
+			});
+		});
+		$("#limpar").click( function(){
+				$('#datepicker1').data('datepicker').clearDates();
+				$('#datepicker2').data('datepicker').clearDates();
+				$('#datepicker3').data('datepicker').clearDates();
+				$('#datepicker4').data('datepicker').clearDates();
+				$('#datepicker5').data('datepicker').clearDates();
+		    }
+		);
 	});
 </script>
 
