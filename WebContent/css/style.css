@@ -31,6 +31,22 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.panel-lancamentoHoras{
+	max-width: 800px;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.panel-btnHoras{
+	vertical-align: middle;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 5px;
+}
+
 .panel-addSkills{
 	max-width: 800px;
 	float: none;
@@ -43,12 +59,24 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.panel-addStakeholder{
+	max-width: 400px;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .login {
 	width: 100%;
 }
 
 .addUser {
 	width: 78%;
+}
+
+.btnHoras {
+	width: 100%;
 }
 
 .rowMargin {
@@ -89,4 +117,8 @@ body{
 	font-size: 18px;
 	padding: 0px;
 	margin: 0 0 4px 240px;
+}
+
+.bold{
+	font-weigth: bold;
 }

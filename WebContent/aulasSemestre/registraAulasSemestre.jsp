@@ -2,18 +2,18 @@
 <%@page import="java.util.List"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
-<div class="panel panel-primary">
+<div class="panel panel-primary panel-lancamentoHoras">
 
 	<div class="panel-heading text-center">Dias de Aula</div>
 
-	<div class="panel-body">
+	<div class="panel-body ">
 
 		<jsp:include page="/template/msg.jsp"></jsp:include>
-		
+
 		<div class="row">
 			<div class="col-sm-6">
-				<label class="form-label ages">Turma: </label> 
-				<select class="form-control" id="turma" name="turma"required>
+				<label class="form-label ages">Turma: </label> <select
+					class="form-control" id="turma" name="turma" required>
 					<%
 						List<String> turmas = new ArrayList<>();
 					
@@ -30,50 +30,55 @@
 				</select>
 			</div>
 		</div>
-
+		<br>
 		<form method="post" action="">
-			<div class="form-group center-block"></div>
-			<div class="row">
-				<div class="">
-					<div style="overflow: hidden;">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-4 center-block">
-									<div id="datepicker1"></div>
-								</div>
-								<div class="col-sm-4 centered">
-									<div id="datepicker2"></div>
-								</div>
-								<div class="col-sm-4 centered">
-									<div id="datepicker3"></div>
-								</div>
-							</div>
+			<div class="form-group ">
+				<div class="row">
+					<div class="col-md-4 ">
+						<div id="datepicker1" align="center"></div>
+						<div align="center">
+							<input class="btn btn-sm" type="button" id="limpar1" value="Limpar">
 						</div>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-4 center-block">
-									<div id="datepicker4"></div>
-								</div>
-								<div class="col-sm-4 center-block">
-									<div id="datepicker5"></div>
-								</div>
-								<div class="col-sm-4 text-center">
-									<div class="row">
-										<input type="button" class="btn btn-warning limparUser" id="limpar" value="Limpar"> 
-										<input class="btn btn-primary addUser" type="submit" value="Salvar">
-									</div>
-								</div>
-							</div>
+					</div>
+					<div class="col-md-4 ">
+						<div id="datepicker2" align="center"></div>
+						<div align="center">
+							<input class="btn btn-sm" type="button" id="limpar2" value="Limpar">
+						</div>
+					</div>
+					<div class="col-md-4 text-center">
+						<div id="datepicker3" align="center"></div>
+						<div align="center">
+							<input class="btn btn-sm" type="button" id="limpar3" value="Limpar">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-4 ">
+						<div id="datepicker4" align="center"></div>
+						<div align="center">
+							<input class="btn btn-sm" type="button" id="limpar4" value="Limpar">
+						</div>
+					</div>
+					<div class="col-md-4 ">
+						<div id="datepicker5" align="center"></div>
+						<div align="center">
+							<input class="btn btn-sm" type="button" id="limpar5" value="Limpar">
+						</div>
+					</div>
+					<div class="col-md-4 ">
+						<div class="panel-btnHoras">
+							<input class="btn btn-primary btnHoras" type="submit" value="Salvar">
+							<br> 
+							<input type="button" class="btn btn-warning btnHoras" id="limpar" value="Limpar todos">
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
-
-
-
 	</div>
-
 </div>
 
 <script type="text/javascript">
@@ -115,7 +120,6 @@
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
-				clearBtn: true,
 				startDate: startDate1 + ano,
 				endDate: new Date(ano + endDate1),
 				maxViewMode: "days"
@@ -125,7 +129,6 @@
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
-				clearBtn: true,
 				startDate: startDate2 + ano,
 				endDate: new Date(ano + endDate2),
 				maxViewMode: "days"
@@ -135,7 +138,6 @@
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
-				clearBtn: true,
 				startDate: startDate3 + ano,
 				endDate: new Date(ano + endDate3),
 				maxViewMode: "days"
@@ -145,7 +147,6 @@
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
-				clearBtn: true,
 				startDate: startDate4 + ano,
 				endDate: new Date(ano + endDate4),
 				maxViewMode: "days"
@@ -155,7 +156,6 @@
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
-				clearBtn: true,
 				startDate: startDate5 + ano,
 				endDate: new Date(ano2 + endDate5),
 				maxViewMode: "days"
@@ -177,6 +177,31 @@
 				$('#datepicker5').data('datepicker').clearDates();
 		    }
 		);
+		
+		$("#limpar1").click( function(){
+			$('#datepicker1').data('datepicker').clearDates();
+			$('#datepicker1').data('datepicker').clearDates();
+	    });
+		
+		$("#limpar2").click( function(){
+			$('#datepicker2').data('datepicker').clearDates();
+			$('#datepicker2').data('datepicker').clearDates();
+	    });
+		
+		$("#limpar3").click( function(){
+			$('#datepicker3').data('datepicker').clearDates();
+			$('#datepicker3').data('datepicker').clearDates();
+	    });
+		
+		$("#limpar4").click( function(){
+			$('#datepicker4').data('datepicker').clearDates();
+			$('#datepicker4').data('datepicker').clearDates();
+	    });
+		
+		$("#limpar5").click( function(){
+			$('#datepicker5').data('datepicker').clearDates();
+			$('#datepicker5').data('datepicker').clearDates();
+	    });
 	});
 </script>
 
