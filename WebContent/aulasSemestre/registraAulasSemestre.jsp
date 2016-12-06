@@ -83,13 +83,15 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var semestre = document.getElementById("turma").value;
-		semestre = semestre.substring(5, 6);
-	
+		var startDate1, endDate1, startDate2, endDate2, startDate3, endDate3, startDate4, endDate4, startDate5, endDate5, ano2;
+		var ano = new Date().getFullYear();
+		var aux = 0;
+		$(startCalendar());
 		
-		$(function() {
-			var ano = new Date().getFullYear();
-			var startDate1, endDate1, startDate2, endDate2, startDate3, endDate3, startDate4, endDate4, startDate5, endDate5, ano2;
+		function startCalendar() {
+			var semestre = document.getElementById("turma").value;
+			semestre = semestre.substring(5, 6);
+			aux = semestre;
 			if(semestre == 1){
 				startDate1 = "1/3/";
 				endDate1 = "-04-01T00:00";
@@ -160,7 +162,7 @@
 				endDate: new Date(ano2 + endDate5),
 				maxViewMode: "days"
 			});
-		});
+		};
 		$("#limpar").click( function(){
 				$('#datepicker1').data('datepicker').clearDates();
 				$('#datepicker2').data('datepicker').clearDates();
@@ -202,6 +204,40 @@
 			$('#datepicker5').data('datepicker').clearDates();
 			$('#datepicker5').data('datepicker').clearDates();
 	    });
+		
+		$('#turma').on('change', function() {
+			var semestre = document.getElementById("turma").value;
+			semestre = semestre.substring(5, 6);
+			if(aux != semestre){
+				$('#datepicker1').data('datepicker').clearDates();
+				$('#datepicker2').data('datepicker').clearDates();
+				$('#datepicker3').data('datepicker').clearDates();
+				$('#datepicker4').data('datepicker').clearDates();
+				$('#datepicker5').data('datepicker').clearDates();
+				startCalendar();
+				$('#datepicker1').datepicker('setStartDate', startDate1 + ano);
+				$('#datepicker1').datepicker('setEndDate', new Date(ano + endDate1));
+				$('#datepicker2').datepicker('setStartDate', startDate2 + ano);
+				$('#datepicker2').datepicker('setEndDate', new Date(ano + endDate2));
+				$('#datepicker3').datepicker('setStartDate', startDate3 + ano);
+				$('#datepicker3').datepicker('setEndDate', new Date(ano + endDate3));
+				$('#datepicker4').datepicker('setStartDate', startDate4 + ano);
+				$('#datepicker4').datepicker('setEndDate', new Date(ano + endDate4));
+				$('#datepicker5').datepicker('setStartDate', startDate5 + ano);
+				$('#datepicker5').datepicker('setEndDate', new Date(ano2 + endDate5));
+			} else {
+				$('#datepicker1').data('datepicker').clearDates();
+				$('#datepicker1').data('datepicker').clearDates();
+				$('#datepicker2').data('datepicker').clearDates();
+				$('#datepicker2').data('datepicker').clearDates();
+				$('#datepicker3').data('datepicker').clearDates();
+				$('#datepicker3').data('datepicker').clearDates();
+				$('#datepicker4').data('datepicker').clearDates();
+				$('#datepicker4').data('datepicker').clearDates();
+				$('#datepicker5').data('datepicker').clearDates();
+				$('#datepicker5').data('datepicker').clearDates();
+			}
+		})
 	});
 </script>
 
