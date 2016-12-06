@@ -208,12 +208,12 @@
 		$('#turma').on('change', function() {
 			var semestre = document.getElementById("turma").value;
 			semestre = semestre.substring(5, 6);
+			$('#datepicker1').data('datepicker').clearDates();
+			$('#datepicker2').data('datepicker').clearDates();
+			$('#datepicker3').data('datepicker').clearDates();
+			$('#datepicker4').data('datepicker').clearDates();
+			$('#datepicker5').data('datepicker').clearDates();
 			if(aux != semestre){
-				$('#datepicker1').data('datepicker').clearDates();
-				$('#datepicker2').data('datepicker').clearDates();
-				$('#datepicker3').data('datepicker').clearDates();
-				$('#datepicker4').data('datepicker').clearDates();
-				$('#datepicker5').data('datepicker').clearDates();
 				startCalendar();
 				$('#datepicker1').datepicker('setStartDate', startDate1 + ano);
 				$('#datepicker1').datepicker('setEndDate', new Date(ano + endDate1));
@@ -227,15 +227,10 @@
 				$('#datepicker5').datepicker('setEndDate', new Date(ano2 + endDate5));
 			} else {
 				$('#datepicker1').data('datepicker').clearDates();
-				$('#datepicker1').data('datepicker').clearDates();
-				$('#datepicker2').data('datepicker').clearDates();
 				$('#datepicker2').data('datepicker').clearDates();
 				$('#datepicker3').data('datepicker').clearDates();
-				$('#datepicker3').data('datepicker').clearDates();
 				$('#datepicker4').data('datepicker').clearDates();
-				$('#datepicker4').data('datepicker').clearDates();
-				$('#datepicker5').data('datepicker').clearDates();
-				$('#datepicker5').data('datepicker').clearDates();
+				$('#datepicker5').data('datepicker').clearDates();;
 			}
 		})
 	});
