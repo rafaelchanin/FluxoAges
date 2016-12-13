@@ -337,4 +337,9 @@ public class UsuarioBO {
 	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
 	}
+	
+	public boolean addAlunoGitLab() {
+		return false;
+
+	}
 }
