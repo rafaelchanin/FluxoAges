@@ -8,32 +8,56 @@
 <h:body>
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
-		<h:form id="form">
-		<p:growl id="msgs"/>
-		<p:panel id="groupsCommits" header="#{projetoMB.g}" toggleable="true"
-				closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"
-				style="margin-bottom:50px">
+			<h:form id="form">
+				<p:growl id="msgs" />
+				<p:outputLabel for="projectsList" value="Projetos:" />
+				<p:selectOneListbox id="projectsList"
+					value="#{projetoMB.gitLabProjects}" var="p" filter="true"
+					filterMatchMode="contains">
+					<f:selectItems value="#{projetoMB.gitLabProjects}" var="p"
+						itemLabel="#{p.name}" itemValue="#{p}" />
+					<p:column>
+						<h:outputText value="#{p.name}" />
+					</p:column>
+				</p:selectOneListbox>
+				<p:panel id="groupsCommits" header="Commiters"
+					toggleable="true" closable="true" toggleSpeed="500"
+					closeSpeed="500" widgetVar="panel" style="margin-bottom:50px">
 
-				<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
-				<p:ajax event="toggle" listener="#{panelView.onToggle}"
-					update="msgs" />
+					<p:dataTable value="#{projetoMB.gitLabCommits}" var="c">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Autor" />
+							</f:facet>
+							<h:outputText value="#{c.authorName}" />
+						</p:column>		
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Titulo" />
+							</f:facet>
+							<h:outputText value="#{c.title}" />
+						</p:column>		
+					</p:dataTable>	
+					<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
+					<p:ajax event="toggle" listener="#{panelView.onToggle}"
+						update="msgs" />
 
-				<p:chart type="pie" model="#{projetoMB.pieModel}" style="height:500px; width:500px" />
+					<p:chart type="pie" model="#{projetoMB.pieModel}"
+						style="height:500px; width:500px" />
+
+					<f:facet name="options">
+						<p:menu>
+							<p:submenu label="Settings">
+								<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
+									onclick="PF('panel').toggle()" />
+								<p:menuitem value="Remove" url="#" icon="ui-icon-close"
+									onclick="PF('panel').close()" />
+							</p:submenu>
+						</p:menu>
+					</f:facet>
+				</p:panel>
 				
-				<f:facet name="options">
-					<p:menu>
-						<p:submenu label="Settings">
-							<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
-								onclick="PF('panel').toggle()" />
-							<p:menuitem value="Remove" url="#" icon="ui-icon-close"
-								onclick="PF('panel').close()" />
-						</p:submenu>
-					</p:menu>
-				</f:facet>
-		</p:panel>
-		<p:panel>
-		</p:panel>		
-		</h:form>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

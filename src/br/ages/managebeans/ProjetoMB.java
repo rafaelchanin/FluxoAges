@@ -151,6 +151,7 @@ public class ProjetoMB implements Serializable {
 		
 	}
 	
+	
 	public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Group Selected", ((GitlabGroup) event.getObject()).getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
