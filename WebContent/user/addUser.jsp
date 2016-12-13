@@ -63,6 +63,15 @@
 							}
 						%>
 					</select>
+					<div class="row">
+						<div class="col-sm-6">
+						    <label class="form-label ages">Usuário GitLab: <span class="red">*</span></label> 
+							<input class="form-control" id="usuarioGit" name="usuario"Git value="${param.usuarioGit}" type="text" maxlength="120" required>
+						</div>
+						<div class="col-sm-6">
+							<input class="btn btn-primary addUser pull-right" type="submit" value="Cria GitLab">
+						</div>
+					</div>
 				</div>
 				<p>
 					Campos que contém <span class="red">*</span> são obrigatórios
