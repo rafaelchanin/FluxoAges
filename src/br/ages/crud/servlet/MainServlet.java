@@ -19,24 +19,29 @@ import br.ages.crud.command.AddSkillCommand;
 import br.ages.crud.command.AddStakeholderCommand;
 import br.ages.crud.command.AddUserCommand;
 import br.ages.crud.command.AdicionaProjetoCommand;
+import br.ages.crud.command.AdicionaTurmaCommand;
 import br.ages.crud.command.Command;
 import br.ages.crud.command.CreateScreenPontoCommand;
 import br.ages.crud.command.CreateScreenProjectCommand;
 import br.ages.crud.command.CreateScreenSkillCommand;
 import br.ages.crud.command.CreateScreenStakeholderCommand;
+import br.ages.crud.command.CreateScreenTurmaCommand;
 import br.ages.crud.command.CreateScreenUserCommand;
 import br.ages.crud.command.EditStakeholderCommand;
 import br.ages.crud.command.EditUserCommand;
 import br.ages.crud.command.EditaProjetoCommand;
+import br.ages.crud.command.EditaTurmaCommand;
 import br.ages.crud.command.ListPontoTotalHorasCommand;
 import br.ages.crud.command.ListStakeholdersCommand;
 import br.ages.crud.command.ListUserCommand;
 import br.ages.crud.command.ListaAlunoCommand;
 import br.ages.crud.command.ListaProjetosCommand;
+import br.ages.crud.command.ListaTurmasCommand;
 import br.ages.crud.command.LoginCommand;
 import br.ages.crud.command.LogoutCommand;
 import br.ages.crud.command.RemoveProjetoCommand;
 import br.ages.crud.command.RemoveStakeholderCommand;
+import br.ages.crud.command.RemoveTurmaCommand;
 import br.ages.crud.command.RemoveUserCommand;
 import br.ages.crud.command.RemoverPontoAlunoCommand;
 import br.ages.crud.command.SenhaCommand;
@@ -77,6 +82,15 @@ public class MainServlet extends HttpServlet {
 		comandos.put("editaProjeto", new EditaProjetoCommand());
 		comandos.put("removeProjeto", new RemoveProjetoCommand());
 		comandos.put("uploadArquivoProjeto", new UploadProjetoCommand());
+		
+		//COMANDOS DE TURMA
+		
+		comandos.put("telaTurma", new CreateScreenTurmaCommand());
+		comandos.put("listaTurmas", new ListaTurmasCommand());
+		comandos.put("adicionaTurmas", new AdicionaTurmaCommand());
+		comandos.put("editaTurma", new EditaTurmaCommand());
+		comandos.put("removeTurma", new RemoveTurmaCommand());
+	
 		
 		//COMANDOS DE STAKEHOLDER
 		
