@@ -101,6 +101,16 @@
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
 				          	</ul>
         				</li>
+        				
+        				<li class="dropdown">
+			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Turmas
+				          		<span class="caret"></span>
+			          		</a>
+				          	<ul class="dropdown-menu">
+				            	<li><a href="main?acao=listaTurmas">Listar</a></li>
+				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
+				          	</ul>
+        				</li>
 
 					</ul>
 
