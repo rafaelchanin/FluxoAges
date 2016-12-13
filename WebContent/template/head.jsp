@@ -97,7 +97,7 @@
 				          	<ul class="dropdown-menu">
 				            	<li><a href="main?acao=listaAluno">Lista Ponto</a></li>
 				            	<li><a href="main?acao=registrarPonto">Registrar Ponto</a></li>
-				            	<li><a href="main?acao=skills">Avaliar Aluno</a></li>
+				            	<!-- <li><a href="main?acao=skills">Avaliar Aluno</a></li> -->
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
 				          	</ul>
         				</li>
@@ -114,8 +114,8 @@
                            
         					<ul class="dropdown-menu dropdown-menu-right">
         						<li><a href="main?acao=logout">Logout</a></li>
-        						<li><a href="projetosGitLab.xhtml">Projetos GitLAB</a></li>
-        						<li><a href="projetosGitLabUsers.xhtml">Usuários GitLAB</a></li>
+        						<!-- <li><a href="projetosGitLab.xhtml">Projetos GitLAB</a></li>
+        						<li><a href="projetosGitLabUsers.xhtml">Usuários GitLAB</a></li> -->
         					</ul>
         				</li>
 			      	</ul>

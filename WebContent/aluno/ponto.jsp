@@ -12,7 +12,7 @@
 		
 		<jsp:include page="/template/msg.jsp"></jsp:include>
 
-			<div class="table-responsive">
+			<!-- <div class="table-responsive"> -->
 				<form method="post" action="main?acao=adicionaPonto" >
 					<div class="form-group">
 						<div class='' id='nomeAluno'>
@@ -30,21 +30,25 @@
 						</div>
 					</div>
 					<div class="form-group">
-					<label class="form-label ages">Entrada:<span class="red">*</span></label> 
-						<div class='input-group date' id='dataEntrada'>
-							<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro" value="${param.dtEntradaRegistro}"/>
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label ages">Saída:</label> 
-						<div class='input-group date' id='dataSaida'>
-							<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro" value="${param.dtSaidaRegistro}"/> 
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
+						<div class="row">
+							<div class="col-sm-6">
+							<label class="form-label ages">Entrada:<span class="red">*</span></label> 
+								<div class='input-group date' id='dataEntrada'>
+									<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro" value="${param.dtEntradaRegistro}"/>
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-label ages">Saída:</label> 
+								<div class='input-group date' id='dataSaida'>
+									<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro" value="${param.dtSaidaRegistro}"/> 
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -85,7 +89,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 
 
 <!-- Initialize the plugin: -->
