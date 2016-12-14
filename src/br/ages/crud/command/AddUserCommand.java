@@ -26,9 +26,11 @@ public class AddUserCommand implements Command {
 		String matricula = request.getParameter("matricula");
 		String usuario = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
-		String statusUsuario = request.getParameter("statusUsuario"); // XXX Acrescentado  StatusUsuario
+		String statusUsuario = request.getParameter("statusUsuario"); 
 		String perfilAcesso = request.getParameter("perfilAcesso");
 		String tipoUsuario = request.getParameter("tipoUsuario");
+		String usuarioGitLab = request.getParameter("usuarioGitLab");
+		
 		try {
 			Usuario user = new Usuario();
 			user.setNome(nome);
@@ -38,6 +40,7 @@ public class AddUserCommand implements Command {
 			user.setSenha(senha);
 			user.setStatusUsuario(StatusUsuario.valueOf(statusUsuario));
 			user.setPerfilAcesso(PerfilAcesso.valueOf(perfilAcesso));
+			user.setUsuarioGitLab(usuarioGitLab);
 			TipoUsuario tUser = new TipoUsuario();
 			
 			tUser = usuarioBO.consultaTipoUsuario(tipoUsuario);
@@ -48,13 +51,14 @@ public class AddUserCommand implements Command {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_USUARIO_DADOS_INVALIDOS);
 			} else { // cadastro de pessoa com sucesso
 				usuarioBO.cadastraUsuario(user);
+				usuarioBO.addUsuarioGitLab(user);
 				proxima = "main?acao=listUser";
 				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_USUARIO.replace("?", user.getNome()));
 
 			}
 		} catch (Exception e) {
 			request.setAttribute("msgErro", e.getMessage());
-			//proxima = "main?acao=addUser";
+			
 		}
 
 		return proxima;

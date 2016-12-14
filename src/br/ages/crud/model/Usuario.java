@@ -21,6 +21,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 	private String matricula;
 	private String nome;
 	private String email;
+	private String usuarioGitLab;
 	private Date dataInclusao;
 
 	public Usuario() {
@@ -125,6 +126,14 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
 	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
 		this.perfilAcesso = perfilAcesso;
+	}
+
+	public String getUsuarioGitLab() {
+		return usuarioGitLab;
+	}
+
+	public void setUsuarioGitLab(String usuarioGitLab) {
+		this.usuarioGitLab = usuarioGitLab;
 	}
 
 	@Override
