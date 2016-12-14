@@ -9,6 +9,7 @@ import br.ages.crud.dao.TurmaDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Projeto;
+import br.ages.crud.model.Turma;
 //import br.ages.crud.model.Status;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.DataValidator;
@@ -21,14 +22,14 @@ public class TurmaBO {
 		turmaDAO = new TurmaDAO();
 	}
 
-	public boolean cadastrarTurma(Projeto project) throws SQLException, ParseException, NegocioException, PersistenciaException {
+	public boolean cadastrarTurma(Turma turma) throws SQLException, ParseException, NegocioException, PersistenciaException {
 		boolean ok = false;
-		ok = projetoDAO.cadastrarProjeto(project);
+		ok = turmaDAO.cadastrarTurma(turma);
 		if (ok == false)
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PROJETO);
 		return ok;
 	}
-
+/*
 	public boolean validarProjeto(Projeto project) throws NegocioException {
 		boolean valido = true;
 		StringBuilder msg = new StringBuilder();
@@ -62,11 +63,11 @@ public class TurmaBO {
 			}
 		return valido;
 	}
-
-	public void editarProjeto(Projeto project) throws NegocioException {
+*/
+	public void editaTurma(Turma turma) throws NegocioException {
 
 		try {
-			projetoDAO.editarProjeto(project);
+			turmaDAO.editaTurma(turma);
 		} catch (PersistenciaException | SQLException | ParseException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
@@ -74,19 +75,19 @@ public class TurmaBO {
 
 	}
 
-	public List<Projeto> listarProjeto() throws NegocioException {
-		List<Projeto> listProject = null;
+	public List<Turma> listarTurmas() throws NegocioException {
+		List<Turma> listTurma = null;
 
 		try {
-			listProject = projetoDAO.listarProjetos();
+			listTurma = turmaDAO.listarTurmas();
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
 		}
 
-		return listProject;
+		return listTurma;
 	}
-
+/*
 	public void removerProjeto(Projeto project) throws NegocioException {
 		try {
 			projetoDAO.removerProjeto(project);
@@ -95,8 +96,8 @@ public class TurmaBO {
 			throw new NegocioException(e);
 		}
 	}
-
-	public Projeto buscarProjeto(int idProjeto) throws NegocioException {
+*/
+/*	public Projeto buscarProjeto(int idProjeto) throws NegocioException {
 		try {
 			Projeto projeto = projetoDAO.consultarProjeto(idProjeto);
 			return projeto;
@@ -105,9 +106,9 @@ public class TurmaBO {
 			throw new NegocioException(e);
 		}
 	}
-
-	public void setProjetoDAO(ProjetoDAO projetoDAO) {
-		this.projetoDAO = projetoDAO;
+*/
+	public void setTurmaDAO(TurmaDAO turmaDAO) {
+		this.turmaDAO = turmaDAO;
 	}
 
 }
