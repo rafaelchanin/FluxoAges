@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Turma {
+	private int id;
 	private int numero;
 	private String status;
 	private int ages;
@@ -30,6 +31,10 @@ public class Turma {
 		this.ano=ano;
 		this.dtInclusao=dtInclusao;
 		this.alunos=alunos;
+	}
+
+	public Turma() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getNumero() {
@@ -86,6 +91,14 @@ public class Turma {
 
 	public void setAlunos(ArrayList<Usuario> alunos) {
 		this.alunos = alunos;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
