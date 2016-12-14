@@ -53,7 +53,8 @@
 							</select>
 						</div>
 					</div>
-					<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label> <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+					<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label>
+					 <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
 						<%
 							List<TipoUsuario> listaTipoUsuarios = (List<TipoUsuario>) request.getAttribute("tipoUsuarios");
 							for (TipoUsuario tipoUsuario : listaTipoUsuarios) {
@@ -63,13 +64,15 @@
 							}
 						%>
 					</select>
-					<div class="row">
-						<div class="col-sm-6">
-						    <label class="form-label ages">Usuário GitLab: <span class="red">*</span></label> 
-							<input class="form-control" id="usuarioGit" name="usuario"Git value="${param.usuarioGit}" type="text" maxlength="120" required>
-						</div>
-						<div class="col-sm-6">
-							<input class="btn btn-primary addUser pull-right" type="submit" value="Cria GitLab">
+					<div id="divUsuarioGitLab" class="divUsuarioGitLab" hidden="hidden">
+						<label class="form-label ages">Usuário GitLab:</label> 
+						<div class="row">
+							<div class="col-sm-6">
+								<input class="form-control" id="usuarioGit" name="usuario"Git value="${param.usuarioGit}" type="text" maxlength="120" required>
+							</div>
+							<div class="col-sm-6 center-block" >
+								<button class="btn btn-warning btn-block" >Criar Usuario GitLab</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -83,6 +86,38 @@
 			</form>
 	</div>
 </div>
+<script type="text/javascript">
 
+$(document).ready(function(){
+	$('#tipoUsuario').on('change', function() {
+	 var name = $('#nome').val()
+	 if ($('#nome').val() == "" || $('#nome').val() == ".")	
+		{	
+		 // alert("Informe o nome do Aluno")
+		  $('#msgE div').text( 'Informe o nome do Aluno')
+		  $('#msgE').show()
+		  $('#tipoUsuario').val(1)
+		} 
+	 else 
+	    {  
+		  var names = $('#nome').val().split(' ')
+	      var firstName = $('#nome').val().split(' ').slice(0, 1)
+	      var lastName = $('#nome').val().split(' ').slice(-1)
+	      var userGitLab = firstName + "." + lastName
+	      var n_userGitLab = removeDiacritics(userGitLab)
+	      if ( this.value == '2')  
+	      {
+	        $("#divUsuarioGitLab").show()
+	        $("#usuarioGit").val(n_userGitLab.toLowerCase())
+	      }
+	      else
+	      {
+	        $("#divUsuarioGitLab").hide()
+	      }
+		}
+    });
+	
+});
+</script>
 
 <jsp:include page="/template/foot.jsp"></jsp:include>
