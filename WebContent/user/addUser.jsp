@@ -119,8 +119,7 @@ $(document).ready(function(){
 	      }
 		}
 	 }
-	 
-    });
+	
 	
 });
 </script>
