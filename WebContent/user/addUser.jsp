@@ -86,38 +86,49 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('#tipoUsuario').on('change', function() {
-	
+	$('#tipoUsuario').on('change', function() {	
 	 if($('#tipoUsuario').val() == 2)
 	 {
-	 var name = $('#nome').val()
-	 if ($('#nome').val() == "" || $('#nome').val() == ".")	
-		{	
-		 // alert("Informe o nome do Aluno")
-		  $('#msgE div').text( 'Informe o nome do Aluno')
-		  $('#msgE').show()
-		  $('#tipoUsuario').val(1)
-		} 
-	 else 
-	    {  
+		 if ($('#nome').val() == "" || $('#nome').val() == ".")	
+			{	
+			  $('#msgE div').text( 'Informe o nome do Aluno')
+			  $('#msgE').show()
+			  $('#tipoUsuario').val(1)
+			} 
+		 else 
+		    {  
+		      $("#divUsuarioGitLab").show()
+		      $("#usuarioGitLab").val(createUsername())
+		    }
+	  }
+	   else
+	   {
+	     $("#divUsuarioGitLab").hide()
+	     $("#usuarioGitLab").val("")
+       }
+	 })
+	
+	$('#nome').blur(function() {
+	  $('#usuario').val(createUsername())		
+	})
+	
+	$('#matricula').blur(function() {
+	  $('#senha').val($('#matricula').val())		
+	})
+	
+	function createUsername() {
 		  var names = $('#nome').val().split(' ')
 	      var firstName = $('#nome').val().split(' ').slice(0, 1)
 	      var lastName = $('#nome').val().split(' ').slice(-1)
 	      var userGitLab = firstName + "." + lastName
 	      var n_userGitLab = removeDiacritics(userGitLab)
-	      if ( this.value == '2')  
-	      {
-	        $("#divUsuarioGitLab").show()
-	        $("#usuarioGitLab").val(n_userGitLab.toLowerCase())
-	      }
-	      else
-	      {
-	        $("#divUsuarioGitLab").hide()
-	      }
-		}
-	 }	
-	})
+	      
+	      return n_userGitLab.toLowerCase()
+	}
+	
 });
+	
+	
 </script>
 
 <jsp:include page="/template/foot.jsp"></jsp:include>

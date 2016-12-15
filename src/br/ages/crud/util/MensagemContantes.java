@@ -125,4 +125,6 @@ public class MensagemContantes {
 	
 	// msg GitLAB
 	public static final String MSG_ERR_EMAIL_GITLAB = "E-mail já cadastrado no GitLab";
+
+	public static final String MSG_ERR_USUARIO_GITLAB = "Usuario GitLAB já existe";
 }
