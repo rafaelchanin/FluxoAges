@@ -345,12 +345,20 @@ public class UsuarioBO {
 		this.usuarioDAO = usuarioDAO;
 	}
 
-	public boolean addUsuarioGitLab(Usuario user) throws IOException {
-		if (user != null) {
-			api.createUser(user.getEmail(), user.getMatricula(), user.getUsuarioGitLab(), user.getNome(), null, null,
-					null, null, null, null, null, null, false, false, false);
-			return true;
+	public boolean addUsuarioGitLab(Usuario user) throws IOException, NegocioException {
+		try {
+			
+			if (user != null) {
+				api.createUser(user.getEmail(), user.getMatricula(), user.getUsuarioGitLab(), user.getNome(), null, null,
+						null, null, null, null, null, null, false, false, false);
+				return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
 		}
+		
 		return false;
 
 	}

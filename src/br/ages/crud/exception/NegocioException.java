@@ -1,5 +1,7 @@
 package br.ages.crud.exception;
 
+import br.ages.crud.util.MensagemContantes;
+
 /**
  * Exceções de negócio
  * 
@@ -11,11 +13,17 @@ public class NegocioException extends Exception{
 	private static final long serialVersionUID = 1L;
 
 	public NegocioException(Exception e) {
-		super(e.getMessage());
+		super(traslateErrorMessage(e.getMessage()));
 	}
 
 	public NegocioException(String msg) {
-		super(msg);
+		super(traslateErrorMessage(msg));
+	}
+	
+	
+    public static String traslateErrorMessage(String msg){
+        msg = msg.contains("Email has already been taken") ? MensagemContantes.MSG_ERR_EMAIL_GITLAB : msg; 
+		return msg;
 	}
 
 }

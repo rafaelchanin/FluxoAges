@@ -122,4 +122,7 @@ public class MensagemContantes {
 	public static final String MSG_SUC_REM_PONTO = " O ponto foi excluido com sucesso";
 	
 	public static final String MSG_ERR_REM_PONTO = " Erro na exclusão do ponto";
+	
+	// msg GitLAB
+	public static final String MSG_ERR_EMAIL_GITLAB = "E-mail já cadastrado no GitLab";
 }

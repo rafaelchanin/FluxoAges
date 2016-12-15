@@ -70,9 +70,6 @@
 							<div class="col-sm-6">
 								<input class="form-control" id="usuarioGitLab" name="usuarioGitLab" value="${param.usuarioGitLab}" type="text" readonly="readonly">
 							</div>
-							<div class="col-sm-6 center-block" >
-								<button class="btn btn-warning btn-block" >Criar Usuario GitLab</button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -118,9 +115,8 @@ $(document).ready(function(){
 	        $("#divUsuarioGitLab").hide()
 	      }
 		}
-	 }
-	
-	
+	 }	
+	})
 });
 </script>
 
