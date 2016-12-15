@@ -23,6 +23,7 @@ public class NegocioException extends Exception{
 	
     public static String traslateErrorMessage(String msg){
         msg = msg.contains("Email has already been taken") ? MensagemContantes.MSG_ERR_EMAIL_GITLAB : msg; 
+        msg = msg.contains("Username has already been taken") ? MensagemContantes.MSG_ERR_USUARIO_GITLAB : msg; 
 		return msg;
 	}
 

@@ -38,6 +38,8 @@ public class EditUserCommand implements Command{
 		String matriculaString = request.getParameter("matricula");
 		String nomeString = request.getParameter("nome");
 		String emailString = request.getParameter("email");
+		String usuarioGitLab = request.getParameter("usuarioGitLab");
+
 		
 		
 		try{			
@@ -61,7 +63,8 @@ public class EditUserCommand implements Command{
 			usuario.setStatusUsuario(statusUsuario);
 			usuario.setMatricula(matriculaString);
 			usuario.setNome(nomeString);
-			usuario.setEmail(emailString);			
+			usuario.setEmail(emailString);	
+			usuario.setUsuarioGitLab(usuarioGitLab);
 			
 			request.setAttribute("usuario", usuario);
 			
