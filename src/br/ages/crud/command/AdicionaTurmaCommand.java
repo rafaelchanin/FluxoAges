@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import br.ages.crud.bo.ArquivoBO;
 import br.ages.crud.bo.ProjetoBO;
 import br.ages.crud.bo.StakeholderBO;
+import br.ages.crud.bo.TurmaBO;
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.Projeto;
 import br.ages.crud.model.Stakeholder;
 import br.ages.crud.model.StatusProjeto;
+import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.util.Util;
@@ -26,7 +29,7 @@ public class AdicionaTurmaCommand implements Command {
 
 	private String proxima;
 
-	private ProjetoBO projetoBO;
+	private TurmaBO turmaBO;
 
 	private ArquivoBO arquivoBO;
 
@@ -40,58 +43,60 @@ public class AdicionaTurmaCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, ParseException, PersistenciaException {
-		projetoBO = new ProjetoBO();
-		proxima = "main?acao=telaProjeto";
+		turmaBO = new TurmaBO();
+		proxima = "main?acao=telaTurma";
 
-		String nomeProjeto = request.getParameter("nomeProjeto");
-		String[] usuariosString = request.getParameterValues("listaUsuarios");
-		String[] stakeholdersString = request.getParameterValues("listaStakeholders");
-		String statusProjetoString = request.getParameter("statusProjeto");
-		String workspace = request.getParameter("workspace");
-		String dataInicioString = request.getParameter("dataInicio");
-		String dataFimPrevistoString = request.getParameter("dataFimPrevista");
-		String dataFimString = request.getParameter("dataFim");
+		String ano = request.getParameter("ano");
+		String[] alunos = request.getParameterValues("alunos");
+		//ArrayList<IdNomeUsuarioDTO> alunos = (ArrayList<IdNomeUsuarioDTO>) request.getParameterValues("alunos");
+		String semestre = request.getParameter("semestre");
+		String ages = request.getParameter("ages");
+		String numero = request.getParameter("numero");
+		String statusTurma = request.getParameter("statusTurma");
+		int numSemestre=0;
 
+		
+		if (semestre.equals("primeiro"))
+			numSemestre=1;
+		if (semestre.equals("segundo"))
+			numSemestre=2;
+		
 		try {
 			// cria o array de usuarios com o array de String do request
 			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			for (String s : usuariosString) {
+			for (String s : alunos) {
+				String[] temp = s.split(" ");
 				usuario = new Usuario();
-				usuario.setIdUsuario(Integer.valueOf(s));
+				usuario.setIdUsuario(Integer.valueOf(temp[0]));
+				usuario.setMatricula(temp[1]);
 				usuarios.add(usuario);
-			}
-			// mesma coisa mas com stakeholders
-			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
-			for (String s : stakeholdersString) {
-				stakeholder = new Stakeholder();
-				stakeholder.setIdStakeholder(Integer.valueOf(s));
-				stakeholders.add(stakeholder);
-			}
+			} 
+			
+		/*	for (IdNomeUsuarioDTO i : alunos) {
+				usuario = new Usuario();
+				usuario.setIdUsuario(i.getId());
+				usuario.setMatricula(i.getMatricula());
+				usuarios.add(usuario);
+			}*/
+		
 
-			// cria um StatusProjeto com o string do request
-			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString);
-			// cria Dates com os strings recebidos
-			Date dataInicio = Util.stringToDate(dataInicioString);
-			Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
-			Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
-
-			Projeto projeto = new Projeto();
-			projeto.setNomeProjeto(nomeProjeto);
-			projeto.setUsuarios(usuarios);
-			projeto.setStatusProjeto(statusProjeto);
-			projeto.setWorkspace(workspace);
-			projeto.setStakeholders(stakeholders);
-			projeto.setDataInicio(dataInicio);
-			projeto.setDataFim(dataFim);
-			projeto.setDataFimPrevisto(dataFimPrevisto);
-
-			boolean isValido = projetoBO.validarProjeto(projeto);
-
+			Turma turma = new Turma();
+			turma.setAno(Integer.valueOf(ano));
+			turma.setSemestre(numSemestre);
+			turma.setAges(Integer.valueOf(ages));
+			turma.setNumero(Integer.valueOf(numero));
+			turma.setStatus(statusTurma);;
+			turma.setAlunos(usuarios);
+			turma.setDtInclusao(new Date());
+			
+			//boolean isValido = projetoBO.validarProjeto(projeto);
+			boolean isValido=true;
+			
 			if (isValido) {
-				projetoBO.cadastrarProjeto(projeto);
-				request.getSession().setAttribute("projeto", projeto);
+				turmaBO.cadastrarTurma(turma);
+				request.getSession().setAttribute("turma", turma);
 				proxima = "project/uploadProject.jsp";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_PROJETO.replace("?", nomeProjeto));
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_PROJETO.replace("?", numero));
 			} else {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_PROJETO_DADOS_INVALIDOS);
 			}

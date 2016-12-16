@@ -74,7 +74,7 @@ public class TurmaDAO {
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO tb_turma_aluno (ID_ALUNO, MATRICULA, ID_TURMA)");
-		sql.append("VALUES (?, ?, ?)");
+		sql.append(" VALUES (?, ?, ?)");
 
 		PreparedStatement statement = conexao.prepareStatement(sql.toString());
 

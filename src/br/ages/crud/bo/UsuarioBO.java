@@ -10,6 +10,7 @@ import java.util.Map;
 import br.ages.crud.dao.UsuarioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
@@ -195,6 +196,20 @@ public class UsuarioBO {
 
 		try {
 			listUser = usuarioDAO.listarUsuariosAlunos();
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listUser;
+	}
+	
+	public List<IdNomeUsuarioDTO> alunosElegiveis() throws NegocioException {
+
+		List<IdNomeUsuarioDTO> listUser = null;
+
+		try {
+			listUser = usuarioDAO.alunosElegiveis();
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);

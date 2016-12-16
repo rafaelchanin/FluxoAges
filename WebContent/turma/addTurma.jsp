@@ -2,6 +2,7 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ages.crud.model.Usuario"%>
+<%@page import="br.ages.crud.model.IdNomeUsuarioDTO"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 
@@ -13,101 +14,81 @@
 
 <div class="panel panel-primary panel-addUser">
 
-	<div class="panel-heading text-center">Cadastro de Projeto</div>
+	<div class="panel-heading text-center">Cadastro de Turma</div>
 
 	<div class="panel-body">
 
 		<jsp:include page="/template/msg.jsp"></jsp:include>
 
-		<div class="table-responsive">
+	
 
-			<form method="post" action="main?acao=adicionaProjeto"> <!-- enctype="multipart/form-data" > -->
-
-				<%-- <div class="form-group">
-			           	<label class="form-label ages">Código do Projeto:</label>
-			           	<input class="form-control" id="codigo" name="codigo" value="${param.codigo}" type="text" maxlength="120" disabled>
-		            </div> --%>
+			<form method="post" action="main?acao=adicionaTurma"> <!-- enctype="multipart/form-data" > -->
 
 				<div class="form-group">
-					<label class="form-label ages">Nome: <span class="red">*</span></label> 
-					<input class="form-control" id="nomeProjeto" name="nomeProjeto" value="${param.nomeProjeto}" type="text"	maxlength="120" required>
-				</div>
-
-				<div class="form-group">
-					<label class="form-label ages">Status do Projeto: <span class="red">*</span></label> 
-					<select class="form-control" id="statusProjeto" name="statusProjeto"
-						required>
-						<option value="ATIVO" <%="ATIVO".equals(request.getParameter("statusProjeto")) ? "selected" : ""%>>Ativo</option>
-						<option value="INATIVO" <%="INATIVO".equals(request.getParameter("statusProjeto")) ? "selected" : ""%>>Inativo</option>
-						<option value="CONCLUIDO" <%="CONCLUIDO".equals(request.getParameter("statusProjeto")) ? "selected" : ""%>>Concluído</option>
-					</select>
-				</div>
+			      
 				
-				<div class="form-group integrante ">
-										
-					<!-- STAKEHOLDER -->
-					<!-- segue o link do antigo componente utilizado na criação da seleção de stakeholders -->
-					<!-- http://davidstutz.github.io/bootstrap-multiselect/#faq -->					
-					
-					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="listaStakeholders" class="listaStakeholders" required>
-						<%
-							List<Stakeholder> listaStakeholders = (List<Stakeholder>) request.getAttribute("listaStakeholders");
-							for (Stakeholder stakeholder : listaStakeholders) {
-						%>
-							<option value="<%=stakeholder.getIdStakeholder()%>"><%=stakeholder.getNomeStakeholder()%></option>
-						<%
-							}
-						%>
-						
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label ages">Ano:<span class="red">*</span></label> 
+								<div class='input-group date' id='dataEntrada'>
+									<input type='text' class="form-control" id="ano" name="ano" value="${param.ano}"/>
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-label ages">Semestre: <span class="red">*</span></label> 
+						<select class="form-control" id="semestre" name="semestre"
+							required>
+							<option value="primeiro" <%="primeiro".equals(request.getParameter("semestre")) ? "selected" : ""%>>Primeiro</option>
+							<option value="segundo" <%="segundo".equals(request.getParameter("semestre")) ? "selected" : ""%>>Segundo</option>
 						</select>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label ages">Ages: <span class="red">*</span></label> 
+						 <input type="number" class="form-control bfh-number" id="ages" name="ages" value="${param.ages}" min="1" max="4">
+					</div>
+	
+					<div class="col-sm-6">
+						<label class="form-label ages">Turma: <span class="red">*</span></label> 
+						<input class="form-control" id="numero" name="numero" value="${param.numero}" type="text"	maxlength="120" required>
+					</div>
+				</div>
 				
-				<div class="form-group integrante">					
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="form-label ages">Status da Turma: <span class="red">*</span></label> 
+						<select class="form-control" id="statusTurma" name="statusTurma"
+							required>
+							<option value="ATIVA" <%="ATIVA".equals(request.getParameter("statusTurma")) ? "selected" : ""%>>Ativa</option>
+							<option value="INATIVA" <%="INATIVA".equals(request.getParameter("statusTurma")) ? "selected" : ""%>>Inativa</option>
+							<option value="EXCLUIDA" <%="EXCLUIDA".equals(request.getParameter("statusTurma")) ? "selected" : ""%>>Excluída</option>
+						</select>
+					</div>
+				</div>
+								
 					<!-- USUARIOS -->
 					<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
+				<div class="row">
 					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="listaUsuarios" class="listaUsuarios" required>
+						<select multiple="multiple" size="10" name="alunos" class="alunos" required>
 						<%
-							List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
-							for (Usuario usuario : listaUsuarios) {
+							List<IdNomeUsuarioDTO> alunos = (List<IdNomeUsuarioDTO>) request.getAttribute("alunos");
+							for (IdNomeUsuarioDTO usuario : alunos) {
 						%>
-							<option value="<%=usuario.getIdUsuario()%>"><%=usuario.getNome()%></option>
+							<option value="<%=usuario.getId()%> <%=usuario.getMatricula()%>"><%=usuario.getNome()%></option>
 						<%
 							}
 						%>
 						
 						</select>
 					</div>
+					</div>
 				</div>
-				
-				<div class="form-group">
-					<label class="form-label ages">Workspace: <span class="red">*</span></label> 
-					<input class="form-control" id="workspace" name="workspace" value="${param.workspace}" type="text"
-						maxlength="120" required>
-				</div>
-
-				<div class="form-group">
-					<label class="form-label ages">Data de Início: <span class="red">*</span></label> <input class="form-control" id="dataInicio" name="dataInicio" value="${param.dataInicio}"
-						type="text" maxlength="10" placeholder="DD/MM/AAAA" required>
-				</div>
-
-				<div class="form-group">
-					<label class="form-label ages">Data de Fim Prevista: <span class="red">*</span></label> <input class="form-control" id="dataFimPrevista" name="dataFimPrevista"
-						value="${param.dataFimPrevista}" type="text" maxlength="10" placeholder="DD/MM/AAAA" required>
-				</div>
-
-				<div class="form-group">
-					<label class="form-label ages">Data de Fim:</label> <input class="form-control" id="dataFim" name="dataFim" value="${param.dataFim}" type="text"
-						maxlength="10" placeholder="DD/MM/AAAA">
-				</div>
-
-				<%-- <div class="form-group">
-					<label class="form-label ages">Arquivo: <span class="red">*</span></label> <input class="form-control" id="arquivo" name="arquivo" value="${param.arquivo}"
-						type="file" >
-				</div> --%>
-
 				<hr>
 
 				<p>
@@ -120,7 +101,7 @@
 						value="Cadastrar">
 				</div>
 			</form>
-		</div>
+
 	</div>
 </div>
 
@@ -129,27 +110,32 @@
 
 <!-- USUARIOS -->
 <!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
-<script>
-	var demo2 = $('.listaUsuarios').bootstrapDualListbox({
-		nonSelectedListLabel : 'Usuários',
-		selectedListLabel : 'Usuários do Projeto',
-		preserveSelectionOnMove : 'moved',
-		moveOnSelect : false,
-		nonSelectedFilter : '',
-		filterTextClear : 'Mostrar Todos',
-		infoTextEmpty : 'Sem usuarios '
+
+<script type="text/javascript">
+	$(function() {
+		$('#dataEntrada').datetimepicker({
+			locale : 'pt-br',
+			sideBySide : true,
+			format: "YYYY"
+		});
+
+	//	$("#dataEntrada").on("dp.change", function(e) {
+	//		$('#dataSaida').data("DateTimePicker").minDate(e.date);
+	//		/* alert(document.getElementById('dataSaida').value); */
+	//	});
+
 	});
 </script>
 
 <script>
-	var demo2 = $('.listaStakeholders').bootstrapDualListbox({
-		nonSelectedListLabel : 'Stakeholders',
-		selectedListLabel : 'Stakeholders do Projeto',
+	var demo2 = $('.alunos').bootstrapDualListbox({
+		nonSelectedListLabel : 'Alunos',
+		selectedListLabel : 'Alunos da Turma',
 		preserveSelectionOnMove : 'moved',
 		moveOnSelect : false,
 		nonSelectedFilter : '',
 		filterTextClear : 'Mostrar Todos',
-		infoTextEmpty : 'Sem stakeholders ',
+		infoTextEmpty : 'Sem alunos '
 	});
 </script>
 

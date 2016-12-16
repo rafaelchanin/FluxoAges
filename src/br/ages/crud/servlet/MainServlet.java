@@ -87,7 +87,7 @@ public class MainServlet extends HttpServlet {
 		
 		comandos.put("telaTurma", new CreateScreenTurmaCommand());
 		comandos.put("listaTurmas", new ListaTurmasCommand());
-		comandos.put("adicionaTurmas", new AdicionaTurmaCommand());
+		comandos.put("adicionaTurma", new AdicionaTurmaCommand());
 		comandos.put("editaTurma", new EditaTurmaCommand());
 		comandos.put("removeTurma", new RemoveTurmaCommand());
 	

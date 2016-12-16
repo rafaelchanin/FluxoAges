@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.ProjetoBO;
 import br.ages.crud.bo.StakeholderBO;
+import br.ages.crud.bo.TurmaBO;
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
+import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.PerfilAcesso;
 import br.ages.crud.model.Projeto;
 import br.ages.crud.model.Stakeholder;
@@ -21,28 +23,23 @@ public class CreateScreenTurmaCommand implements Command {
 	private String proxima;
 	
 	private ProjetoBO projetoBO;
-	
+	private TurmaBO turmaBO;
 	private UsuarioBO usuarioBO;
-	
 	private StakeholderBO stakeholderBO;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, NegocioException {
 		//TODO utilizar stakeholderBO.listaStakeholders ap�s a implementa��o do mesmo
-		proxima = "main?acao=listaProjetos";
+		proxima = "main?acao=listaTurmas";
 		Usuario currentUser = (Usuario)request.getSession().getAttribute("usuarioSessao");		
-		stakeholderBO = new StakeholderBO();
 		
 		try{
-			
-			List<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
-			stakeholders = stakeholderBO.listarStakeholder();
 			
 			if( !currentUser.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 			String isEdit = request.getParameter("isEdit");
 			
 			if (isEdit != null && !"".equals(isEdit)) {
-				proxima = "project/editProject.jsp";
+				proxima = "turma/editTurma.jsp";
 				projetoBO = new ProjetoBO();
 				usuarioBO = new UsuarioBO();
 				int idProjeto = Integer.parseInt(request.getParameter("id_projeto"));
@@ -62,19 +59,18 @@ public class CreateScreenTurmaCommand implements Command {
 				}
 				
 				request.setAttribute("projeto", projeto);
-				request.setAttribute("listaUsuarios", usuarios);
-				request.setAttribute("listaStakeholders", stakeholders);
+				request.setAttribute("alunos", usuarios);
+			//	request.setAttribute("listaStakeholders", stakeholders);
 				
 				
 			} else {
 				//TODO implementar StakeholderBO e DAO pra fazer essa parte
-				proxima = "project/addProject.jsp";
+				proxima = "turma/addTurma.jsp";
 		
 				usuarioBO = new UsuarioBO();
-				List<Usuario> usuarios = usuarioBO.listarUsuario();				
-				
-				request.setAttribute("listaStakeholders", stakeholders);		
-				request.setAttribute("listaUsuarios", usuarios);
+				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();				
+						
+				request.setAttribute("alunos", alunos);
 			}
 		} catch(Exception e){
 			request.setAttribute("msgErro", e.getMessage());
