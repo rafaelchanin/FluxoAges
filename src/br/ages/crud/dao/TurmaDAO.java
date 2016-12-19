@@ -55,8 +55,9 @@ public class TurmaDAO {
 				turma.setId(idTurma.intValue());
 				ok=true;
 			}
-
-			inserirAlunosTurma(conexao, turma);
+			
+			if (turma.getAlunos() != null) 
+				inserirAlunosTurma(conexao, turma);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);

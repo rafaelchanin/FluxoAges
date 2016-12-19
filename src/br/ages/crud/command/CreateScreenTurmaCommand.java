@@ -2,6 +2,7 @@ package br.ages.crud.command;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +70,12 @@ public class CreateScreenTurmaCommand implements Command {
 		
 				usuarioBO = new UsuarioBO();
 				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();				
-						
+				
+				Calendar hoje = Calendar.getInstance();
+				String ano = Integer.toString(hoje.get(hoje.YEAR));
+				System.out.println(ano);
+				request.setAttribute("ano", ano);
+				
 				request.setAttribute("alunos", alunos);
 			}
 		} catch(Exception e){

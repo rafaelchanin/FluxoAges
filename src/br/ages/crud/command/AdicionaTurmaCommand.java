@@ -48,7 +48,6 @@ public class AdicionaTurmaCommand implements Command {
 
 		String ano = request.getParameter("ano");
 		String[] alunos = request.getParameterValues("alunos");
-		//ArrayList<IdNomeUsuarioDTO> alunos = (ArrayList<IdNomeUsuarioDTO>) request.getParameterValues("alunos");
 		String semestre = request.getParameter("semestre");
 		String ages = request.getParameter("ages");
 		String numero = request.getParameter("numero");
@@ -61,16 +60,21 @@ public class AdicionaTurmaCommand implements Command {
 		if (semestre.equals("segundo"))
 			numSemestre=2;
 		
+		Turma turma = new Turma();
+		
 		try {
 			// cria o array de usuarios com o array de String do request
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			for (String s : alunos) {
-				String[] temp = s.split(" ");
-				usuario = new Usuario();
-				usuario.setIdUsuario(Integer.valueOf(temp[0]));
-				usuario.setMatricula(temp[1]);
-				usuarios.add(usuario);
-			} 
+			if (alunos != null) {
+				ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+				for (String s : alunos) {
+					String[] temp = s.split(" ");
+					usuario = new Usuario();
+					usuario.setIdUsuario(Integer.valueOf(temp[0]));
+					usuario.setMatricula(temp[1]);
+					usuarios.add(usuario);
+				}
+				turma.setAlunos(usuarios);
+			}
 			
 		/*	for (IdNomeUsuarioDTO i : alunos) {
 				usuario = new Usuario();
@@ -80,25 +84,27 @@ public class AdicionaTurmaCommand implements Command {
 			}*/
 		
 
-			Turma turma = new Turma();
-			turma.setAno(Integer.valueOf(ano));
+			if (!ano.equals(""))
+				turma.setAno(Integer.valueOf(ano));
 			turma.setSemestre(numSemestre);
-			turma.setAges(Integer.valueOf(ages));
-			turma.setNumero(Integer.valueOf(numero));
-			turma.setStatus(statusTurma);;
-			turma.setAlunos(usuarios);
+			if (!ages.equals(""))
+				turma.setAges(Integer.valueOf(ages));
+			if (!numero.equals(""))
+				turma.setNumero(Integer.valueOf(numero));
+			turma.setStatus(statusTurma);
+			
 			turma.setDtInclusao(new Date());
 			
 			//boolean isValido = projetoBO.validarProjeto(projeto);
-			boolean isValido=true;
+			boolean isValido = turmaBO.validarTurma(turma);
 			
 			if (isValido) {
 				turmaBO.cadastrarTurma(turma);
 				request.getSession().setAttribute("turma", turma);
-				proxima = "project/uploadProject.jsp";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_PROJETO.replace("?", numero));
+				proxima = "turma/listTurma.jsp";
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TURMA.replace("?", numero));
 			} else {
-				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_PROJETO_DADOS_INVALIDOS);
+				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS);
 			}
 
 		} catch (NegocioException e) {

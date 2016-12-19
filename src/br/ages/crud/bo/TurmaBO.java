@@ -21,6 +21,36 @@ public class TurmaBO {
 	public TurmaBO() {
 		turmaDAO = new TurmaDAO();
 	}
+	
+	public boolean validarTurma(Turma turma) throws NegocioException {
+		boolean valido = true;
+		StringBuilder msg = new StringBuilder();
+		msg.append(MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS.concat("<br/>"));
+
+			DataValidator validator = new DataValidator();
+
+			if (turma.getStatus() == null || turma.getStatus().equals("")) {
+				valido = false;
+				msg.append(MensagemContantes.MSG_ERR_CAMPO_INVALIDO.replace("?", "Status ").concat("<br/>"));
+			}
+			if (turma.getNumero() == 0) {
+				valido = false;
+				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Número da Turma ").concat("<br/>"));
+			}
+			if (turma.getAges() == 0) {
+				valido = false;
+				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Ages ").concat("<br/>"));
+			}
+			if (turma.getAno() == 0) {
+				valido = false;
+				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Ano ").concat("<br/>"));
+			}
+			
+			if (!valido) {
+				throw new NegocioException(msg.toString());
+			}
+		return valido;
+	}
 
 	public boolean cadastrarTurma(Turma turma) throws SQLException, ParseException, NegocioException, PersistenciaException {
 		boolean ok = false;

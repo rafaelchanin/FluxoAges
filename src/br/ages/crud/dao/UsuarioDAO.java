@@ -57,7 +57,7 @@ public class UsuarioDAO {
 			sql.append(" FROM tb_turma t");
 			sql.append(" INNER JOIN tb_turma_aluno ta");
 			sql.append(" ON t.id_turma=ta.id_turma");
-			sql.append(" WHERE t.STATUS_TURMA = 'ATIVO')");
+			sql.append(" WHERE t.STATUS_TURMA = 'ATIVA')");
 			
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			ResultSet resultset = statement.executeQuery();

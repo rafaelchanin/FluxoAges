@@ -61,7 +61,22 @@ public class MensagemContantes {
 	
 	public static final String MSG_INF_SEM_PERISSAO = "Acesso negado! Você NÃO tem permissão apra acessar essa funcionalidade.";
 	
+	//msgs de Turma
+	
+	public static final String MSG_ERR_TURMA_DADOS_INVALIDOS = "Dados da turma inválidos ou inconsistentes!";
+	
+	public static final String MSG_ERR_TURMA_ARQUIVO_INVALIDO = "Arquivo excede o ?Mb ou não é do tipo PDF!";
+	
+	public static final String MSG_ERR_TURMA_DATA_INCONSISTENTE = "Data de inicio deve ser anterior à data de fim?!"; //'?' proposital
+	
+	public static final String MSG_ERR_CADASTRO_TURMA = "Ocorreu um erro no cadastro da turma.";
 
+	public static final String MSG_SUC_CADASTRO_TURMA = "Turma ? cadastrada com sucesso!";
+	
+	public static final String MSG_SUC_EDICAO_TURMA = "Turma ? editada com sucesso!";
+
+	public static final String MSG_SUC_REMOVE_TURMA = "Turma ? removida com sucesso!";
+	
 	//msgs de projeto
 
 	public static final String MSG_ERR_PROJETO_DADOS_INVALIDOS = "Dados do projeto inválidos ou inconsistentes!";

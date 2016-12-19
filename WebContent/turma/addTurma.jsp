@@ -1,5 +1,6 @@
 <%@page import="br.ages.crud.model.Stakeholder"%>
 <%@page import="java.util.Arrays"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ages.crud.model.Usuario"%>
 <%@page import="br.ages.crud.model.IdNomeUsuarioDTO"%>
@@ -31,7 +32,7 @@
 					<div class="col-sm-6">
 						<label class="form-label ages">Ano:<span class="red">*</span></label> 
 								<div class='input-group date' id='dataEntrada'>
-									<input type='text' class="form-control" id="ano" name="ano" value="${param.ano}"/>
+									<input type='text' class="form-control" id="ano" name="ano" value="<%=request.getAttribute("ano")%>" required/>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -50,7 +51,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label ages">Ages: <span class="red">*</span></label> 
-						 <input type="number" class="form-control bfh-number" id="ages" name="ages" value="${param.ages}" min="1" max="4">
+						 <input type="number" class="form-control bfh-number" id="ages" name="ages" value="1" min="1" max="4" required>
 					</div>
 	
 					<div class="col-sm-6">
@@ -75,7 +76,7 @@
 					<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
 				<div class="row">
 					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="alunos" class="alunos" required>
+						<select multiple="multiple" size="10" name="alunos" class="alunos">
 						<%
 							List<IdNomeUsuarioDTO> alunos = (List<IdNomeUsuarioDTO>) request.getAttribute("alunos");
 							for (IdNomeUsuarioDTO usuario : alunos) {
