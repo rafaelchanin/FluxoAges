@@ -56,7 +56,7 @@ public class TurmaBO {
 		boolean ok = false;
 		ok = turmaDAO.cadastrarTurma(turma);
 		if (ok == false)
-			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PROJETO);
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_TURMA);
 		return ok;
 	}
 /*
