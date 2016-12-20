@@ -94,19 +94,9 @@ public class UsuarioBO {
 		String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 		try {
-			// valida campos est�o preenchidos corretamente
-			// Matricula
-			/*
-			 * if (usuario.getMatricula() == null ||
-			 * "".equals(usuario.getMatricula())) { isValido = false;
-			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace(
-			 * "?", "Matricula ").concat("<br/>"));
-			 * 
-			 * }
-			 */
 			if (!usuario.getMatricula().matches("\\d{5,9}")) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_MATRICULA_INVALIDA.replace("?", "Matricula ").concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_MATRICULA_INVALIDA.concat("<br/>"));
 			}
 			// Nome
 			if (usuario.getNome() == null || "".equals(usuario.getNome())) {
@@ -120,7 +110,7 @@ public class UsuarioBO {
 			}
 			if (!usuario.getEmail().matches(EMAIL_PATTERN)) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_EMAIL_INVALIDO.replace("?", "Email ").concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_EMAIL_INVALIDO.concat("<br/>"));
 			}
 
 			String nome = Normalizer.normalize(usuario.getNome(), Normalizer.Form.NFD)
@@ -128,7 +118,7 @@ public class UsuarioBO {
 
 			if (!nome.matches("([a-zA-Z]*)(.*)")) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_NOME_INVALIDO.replace("?", "Nome ").concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_NOME_INVALIDO.concat("<br/>"));
 			}
 			// Senha
 			Map<String, Object> valores = new HashMap<>();
@@ -136,32 +126,16 @@ public class UsuarioBO {
 			if (!new SenhaValidator().validar(valores)) {
 				isValido = false;
 			}
-
-			// flag administrador
-			/*
-			 * if (usuario.getPerfilAcesso() == null ||
-			 * "".equals(usuario.getPerfilAcesso())) { isValido = false;
-			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace(
-			 * "?", "Flag Administrador").concat("<br/>")); } // tipo usuario if
-			 * (usuario.getTipoUsuario() == null ||
-			 * "".equals(usuario.getTipoUsuario())) { isValido = false;
-			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace(
-			 * "?", "Flag Tipo Usu�rio").concat("<br/>")); }
-			 */
-
 			// valida se Pessoa esta ok
 			if (!isValido) {
 				throw new NegocioException(msg.toString());
 			}
-			//
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
 		}
-
 		return isValido;
-
 	}
 
 	/**
