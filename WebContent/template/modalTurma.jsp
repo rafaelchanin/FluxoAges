@@ -1,27 +1,16 @@
 
 <script>
 $( document ).ready(function() {
-	$('#modalExcluir').on('show.bs.modal', function (event) {
-	  	var botao = $(event.relatedTarget);
-	  	var usuario = botao.data('usuario');
-		var id = botao.data('id');
-	  	
-	  	$(this).find('.modal-title').text('Excluir usuário');
-	  	$(this).find('#modal-descricao').text('Você realmente deseja excluir o usuário (' + usuario + ')?');
-	  	
-	  	$('#formExcluir').attr('action', "main?acao=removerUsuario&id_usuario=" + id);
-	});
-	
 	
 	$('#modalEditar').on('show.bs.modal', function (event) {
 	  	var botao = $(event.relatedTarget);
 	  	var usuario = botao.data('usuario');
 		var id = botao.data('id');
 	  	
-	  	$(this).find('.modal-title').text('Editar usuário');
-	  	$(this).find('#modal-descricao').text('Você realmente deseja editar o usuário (' + usuario + ')?');
+	  	$(this).find('.modal-title').text('Editar Turma');
+	  	$(this).find('#modal-descricao').text('Você realmente deseja editar a turma (' + usuario + ')?');
 	  	
-	  	$('#formEditar').attr('action', "main?acao=telaUser&id_usuario=" + id + "&isEdit=true");
+	  	$('#formEditar').attr('action', "main?acao=telaTurma&id_turma=" + id + "&isEdit=true");
 	});
 });
 </script>
