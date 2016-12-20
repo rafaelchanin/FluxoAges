@@ -100,7 +100,7 @@ public class TurmaDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select id_turma, status_turma, ages, semestre, ano, dt_inclusao");
+			sql.append(" select id_turma, numero, status_turma, ages, semestre, ano, dt_inclusao");
 			sql.append(" from tb_turma ");
 			sql.append(" where  status_turma <> 'excluido' ");
 
@@ -110,6 +110,7 @@ public class TurmaDAO {
 			while (resultSet.next()) {
 				Turma turma = new Turma();
 				turma.setId(resultSet.getInt("id_turma"));
+				turma.setNumero(resultSet.getInt("numero"));
 				turma.setStatus(resultSet.getString("status_turma"));
 				turma.setAges(resultSet.getInt("ages"));
 				turma.setSemestre(resultSet.getInt("semestre"));
@@ -136,7 +137,7 @@ public class TurmaDAO {
 		try {
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT ID_USUARIO, MATRICULA ");
+			sql.append("SELECT ID_ALUNO, MATRICULA ");
 			sql.append(" FROM tb_turma_aluno");
 			sql.append(" WHERE ID_TURMA = ?");
 
