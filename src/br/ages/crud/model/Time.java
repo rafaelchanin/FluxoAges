@@ -35,6 +35,9 @@ public class Time {
 		this.dtInclusao = dtInclusao;
 		this.alunos = alunos;
 	}
+	public Time() {
+	}
+
 	public int getId() {
 		return id;
 	}
