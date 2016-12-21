@@ -194,7 +194,8 @@ public class TurmaDAO {
 			statement.executeUpdate();
 			
 			removerAlunosTurma(conexao, turma);
-			inserirAlunosTurma(conexao, turma);
+			if (turma.getAlunos() != null)
+				inserirAlunosTurma(conexao, turma);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);

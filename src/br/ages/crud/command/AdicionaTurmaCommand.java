@@ -101,8 +101,9 @@ public class AdicionaTurmaCommand implements Command {
 			if (isValido) {
 				turmaBO.cadastrarTurma(turma);
 				request.getSession().setAttribute("turma", turma);
-				proxima = "turma/listTurma.jsp";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TURMA.replace("?", numero));
+				//proxima = "turma/listTurma.jsp";
+				proxima = "main?acao=listaTurmas";
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TURMA.replace("?", turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()));
 			} else {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS);
 			}

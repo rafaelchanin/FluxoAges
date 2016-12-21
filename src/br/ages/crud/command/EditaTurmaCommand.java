@@ -46,9 +46,9 @@ public class EditaTurmaCommand implements Command{
 		
 		int numSemestre=0;
 
-		if (semestre.equals("Primeiro"))
+		if (semestre.equals("primeiro"))
 			numSemestre=1;
-		if (semestre.equals("Segundo"))
+		if (semestre.equals("segundo"))
 			numSemestre=2;
 		
 		Turma turma = new Turma();
@@ -95,8 +95,8 @@ public class EditaTurmaCommand implements Command{
 						if (isValido) {
 							turmaBO.editaTurma(turma);
 							request.getSession().setAttribute("turma", turma);
-							proxima = "turma/listTurma.jsp";
-							request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDIT_TURMA.replace("?", numero));
+							proxima = "main?acao=listaTurmas";
+							request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDIT_TURMA.replace("?", turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()));
 						} else {
 							request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS);
 						}
