@@ -73,6 +73,8 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_CADASTRO_TURMA = "Turma ? cadastrada com sucesso!";
 	
+	public static final String MSG_SUC_EDIT_TURMA = "Turma ? editada com sucesso!";
+	
 	public static final String MSG_SUC_EDICAO_TURMA = "Turma ? editada com sucesso!";
 
 	public static final String MSG_SUC_REMOVE_TURMA = "Turma ? removida com sucesso!";

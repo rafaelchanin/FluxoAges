@@ -16,6 +16,7 @@ import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.PerfilAcesso;
 import br.ages.crud.model.Projeto;
 import br.ages.crud.model.Stakeholder;
+import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 
@@ -41,13 +42,13 @@ public class CreateScreenTurmaCommand implements Command {
 			
 			if (isEdit != null && !"".equals(isEdit)) {
 				proxima = "turma/editTurma.jsp";
-				projetoBO = new ProjetoBO();
+				turmaBO = new TurmaBO();
 				usuarioBO = new UsuarioBO();
-				int idProjeto = Integer.parseInt(request.getParameter("id_projeto"));
-				Projeto projeto = projetoBO.buscarProjeto(idProjeto);
+				int idTurma = Integer.parseInt(request.getParameter("id_turma"));
+				Turma turma = turmaBO.buscarTurma(idTurma);
 				
-				List<Usuario> usuarioProjeto = projeto.getUsuarios();
-				List<Usuario> usuarios = usuarioBO.listarUsuario();
+				//List<Usuario> alunosTurma = turma.getAlunos();
+				/*List<Usuario> usuarios = usuarioBO.listarUsuario();
 
 				
 				for(int i = 0; i < usuarioProjeto.size(); i++){
@@ -57,10 +58,19 @@ public class CreateScreenTurmaCommand implements Command {
 							break;
 						}
 					}
+				}*/
+				List<IdNomeUsuarioDTO> alunosProjeto = new ArrayList<>();
+				for (Usuario aluno : turma.getAlunos()) {
+					IdNomeUsuarioDTO dto = new IdNomeUsuarioDTO();
+					dto.setId(aluno.getIdUsuario());
+					dto.setMatricula(aluno.getMatricula());
+					dto.setNome(aluno.getNome());
+					alunosProjeto.add(dto);
 				}
-				
-				request.setAttribute("projeto", projeto);
-				request.setAttribute("alunos", usuarios);
+				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveis();
+				request.setAttribute("turma", turma);
+				request.setAttribute("alunosProjeto", alunosProjeto);
+				request.setAttribute("alunos", alunosDisponiveis);
 			//	request.setAttribute("listaStakeholders", stakeholders);
 				
 				

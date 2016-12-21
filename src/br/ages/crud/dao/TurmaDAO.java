@@ -215,4 +215,43 @@ public class TurmaDAO {
 
 		return ok;
 	}
+
+	public Turma buscaTurma(int idTurma) {
+		Connection conexao = null;
+
+
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select id_turma, numero, status_turma, ages, semestre, ano, dt_inclusao");
+			sql.append(" from tb_turma ");
+			sql.append(" where  id_turma = ? ");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setInt(1, idTurma);
+			ResultSet resultSet = statement.executeQuery();
+			Turma turma = new Turma();
+			while (resultSet.next()) {
+				turma.setId(resultSet.getInt("id_turma"));
+				turma.setNumero(resultSet.getInt("numero"));
+				turma.setStatus(resultSet.getString("status_turma"));
+				turma.setAges(resultSet.getInt("ages"));
+				turma.setSemestre(resultSet.getInt("semestre"));
+				turma.setAno(resultSet.getInt("ano"));
+
+				Date dataInclusao = resultSet.getDate("dt_inclusao");
+				turma.setDtInclusao(dataInclusao);
+
+				turma.setAlunos(buscarAlunosTurma(conexao, resultSet.getInt("id_turma")));
+				
+				
+			}
+			return turma;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return turma;
+	}
 }

@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import br.ages.crud.bo.ArquivoBO;
-import br.ages.crud.bo.ProjetoBO;
-import br.ages.crud.model.Projeto;
+import br.ages.crud.bo.TurmaBO;
+import br.ages.crud.bo.UsuarioBO;
+import br.ages.crud.model.Turma;
 import br.ages.crud.model.Stakeholder;
 import br.ages.crud.model.StatusProjeto;
 import br.ages.crud.model.Usuario;
@@ -19,7 +20,11 @@ import br.ages.crud.util.Util;
 
 public class EditaTurmaCommand implements Command{
 	
-	private ProjetoBO projetoBO;
+	private TurmaBO turmaBO;
+	
+	private UsuarioBO usuarioBO;
+
+	private Usuario usuario;
 	
 	private ArquivoBO arquivoBO;
 	
@@ -27,59 +32,75 @@ public class EditaTurmaCommand implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException {
-		projetoBO =  new ProjetoBO();
-		proxima = "project/editProject.jsp";
+		turmaBO =  new TurmaBO();
+		proxima = "turma/editTurma.jsp";
+		String idTurma = request.getParameter("idTurma");
+		String ano = request.getParameter("ano");
+		String[] alunos = request.getParameterValues("alunos");
+		String semestre = request.getParameter("semestre");
+		String ages = request.getParameter("ages");
+		String numero = request.getParameter("numero");
+		String statusTurma = request.getParameter("statusTurma");
+
+		int id = Integer.parseInt(idTurma);
 		
-		String idProjetoString = request.getParameter("idProjeto");
-		String nomeProjeto = request.getParameter("nomeProjeto");
-		String[] usuariosString = request.getParameterValues("listaUsuarios");
-		String statusProjetoString = request.getParameter("statusProjeto");
-		String[] stakeholdersString = request.getParameterValues("listaStakeholders");
-		String workspace = request.getParameter("workspace");
-		String dataInicioString = request.getParameter("dataInicio");
-		String dataFimString = request.getParameter("dataFim");
-		String dataFimPrevistoString = request.getParameter("dataFimPrevisto");
+		int numSemestre=0;
+
+		if (semestre.equals("Primeiro"))
+			numSemestre=1;
+		if (semestre.equals("Segundo"))
+			numSemestre=2;
+		
+		Turma turma = new Turma();
 		
 		try{
-			Integer idProjeto = Integer.parseInt(idProjetoString);
+			// cria o array de usuarios com o array de String do request
+						if (alunos != null) {
+							ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+							for (String s : alunos) {
+								String[] temp = s.split(" ");
+								usuario = new Usuario();
+								usuario.setIdUsuario(Integer.valueOf(temp[0]));
+								usuario.setMatricula(temp[1]);
+								usuarios.add(usuario);
+							}
+							turma.setAlunos(usuarios);
+						}
+						
+						//turma.setId(idTurma);
+						
+					/*	for (IdNomeUsuarioDTO i : alunos) {
+							usuario = new Usuario();
+							usuario.setIdUsuario(i.getId());
+							usuario.setMatricula(i.getMatricula());
+							usuarios.add(usuario);
+						}*/
+					
+						turma.setId(id);
+						
+						if (!ano.equals(""))
+							turma.setAno(Integer.valueOf(ano));
+						turma.setSemestre(numSemestre);
+						if (!ages.equals(""))
+							turma.setAges(Integer.valueOf(ages));
+						if (!numero.equals(""))
+							turma.setNumero(Integer.valueOf(numero));
+						turma.setStatus(statusTurma);
+						
+						turma.setDtInclusao(new Date());
+						
+						//boolean isValido = projetoBO.validarProjeto(projeto);
+						boolean isValido = turmaBO.validarTurma(turma);
+						
+						if (isValido) {
+							turmaBO.editaTurma(turma);
+							request.getSession().setAttribute("turma", turma);
+							proxima = "turma/listTurma.jsp";
+							request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDIT_TURMA.replace("?", numero));
+						} else {
+							request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS);
+						}
 
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();		
-			for(String s: usuariosString){
-				usuarios.add(new Usuario(Integer.parseInt(s)));
-			}
-			
-			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();	
-			for(String s: stakeholdersString){
-				stakeholders.add(new Stakeholder(Integer.parseInt(s)));
-			}
-			
-			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString); 
-			Date dataInicio = Util.stringToDate(dataInicioString);				
-			Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
-			Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
-			
-			
-			Projeto projeto = new Projeto();
-			projeto.setIdProjeto(idProjeto);
-			projeto.setNomeProjeto(nomeProjeto);
-			projeto.setUsuarios(usuarios);
-			projeto.setStatusProjeto(statusProjeto);
-			projeto.setWorkspace(workspace);
-			projeto.setStakeholders(stakeholders);
-			projeto.setDataInicio(dataInicio);
-			projeto.setDataFim(dataFim);
-			projeto.setDataFimPrevisto(dataFimPrevisto);
-
-			boolean isValido = projetoBO.validarProjeto(projeto);
-
-			if(isValido){
-				projetoBO.editarProjeto(projeto);
-				proxima = "main?acao=listaProjetos";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDICAO_PROJETO.replace("?", projeto.getNomeProjeto()));
-
-			} else {
-				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_PROJETO_DADOS_INVALIDOS);
-			}
 		}catch(Exception e){
 			request.setAttribute("msgErro", e.getMessage());
 		}		

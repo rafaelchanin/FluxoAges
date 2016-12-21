@@ -127,16 +127,11 @@ public class TurmaBO {
 		}
 	}
 */
-/*	public Projeto buscarProjeto(int idProjeto) throws NegocioException {
-		try {
-			Projeto projeto = projetoDAO.consultarProjeto(idProjeto);
-			return projeto;
-		} catch (PersistenciaException | SQLException e) {
-			e.printStackTrace();
-			throw new NegocioException(e);
-		}
+	public Turma buscarTurma(int idTurma) throws NegocioException, PersistenciaException, SQLException {
+		Turma turma= turmaDAO.buscaTurma(idTurma);
+		return turma;
 	}
-*/
+
 	public void setTurmaDAO(TurmaDAO turmaDAO) {
 		this.turmaDAO = turmaDAO;
 	}
