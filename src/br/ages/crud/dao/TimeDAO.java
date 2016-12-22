@@ -7,14 +7,12 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Time;
-import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 
@@ -97,7 +95,7 @@ public class TimeDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE tb_turma SET ID_ORIENTADOR = ?, STATUS_TIME = ?, ID_PROJETO = ?, "
+			sql.append("UPDATE tb_time SET ID_ORIENTADOR = ?, STATUS_TIME = ?, ID_PROJETO = ?, "
 					+ "SEMESTRE = ?, ANO = ? WHERE ID_TIME = ?;");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
@@ -164,8 +162,8 @@ public class TimeDAO {
 			statement.setInt(1, idTime);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) { //precisa de while, supostamente só existe um time/turma com um id
-				time.setId(resultSet.getInt("id_turma"));
-				time.setStatus(resultSet.getString("status_turma"));
+				time.setId(resultSet.getInt("id_time"));
+				time.setStatus(resultSet.getString("status_time"));
 				time.setSemestre(resultSet.getInt("semestre"));
 				time.setAno(resultSet.getInt("ano"));				
 				time.setDtInclusao(resultSet.getDate("dt_inclusao"));
@@ -203,15 +201,15 @@ public class TimeDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao");
 			sql.append(" from tb_time ");
-			sql.append(" where  status_turma <> 'excluido' ");
+			sql.append(" where  status_time <> 'excluido' ");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				Time time = new Time();
-				time.setId(resultSet.getInt("id_turma"));
-				time.setStatus(resultSet.getString("status_turma"));
+				time.setId(resultSet.getInt("id_time"));
+				time.setStatus(resultSet.getString("status_time"));
 				time.setSemestre(resultSet.getInt("semestre"));
 				time.setAno(resultSet.getInt("ano"));				
 				time.setDtInclusao(resultSet.getDate("dt_inclusao"));
