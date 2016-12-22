@@ -34,7 +34,7 @@ public class RemoveTimeCommand implements Command{
 			time.setId(idTime);
 			//TODO
 			timeBO.removerTime(time);
-			request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_REMOVE_PROJETO.replace("?", idTime.toString()).concat("<br/>")); 
+			request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_REMOVE_TIME.replace("?", idTime.toString()).concat("<br/>")); 
 
 		} catch (Exception e) {
 			request.setAttribute("msgErro", e.getMessage());

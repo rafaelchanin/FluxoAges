@@ -3,7 +3,6 @@ package br.ages.crud.bo;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.util.MensagemContantes;
-import br.ages.crud.validator.DataValidator;
 
 import java.util.List;
 import java.sql.SQLException;
@@ -11,7 +10,7 @@ import java.text.ParseException;
 
 import br.ages.crud.dao.TimeDAO;
 import br.ages.crud.model.Time;
-import br.ages.crud.model.Turma;
+
 
 public class TimeBO {
 	private TimeDAO timeDAO;
@@ -24,9 +23,9 @@ public class TimeBO {
 		boolean valido = true;
 		
 		StringBuilder msg = new StringBuilder();
-		//msg.append(MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS.concat("<br/>"));
+		msg.append(MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS.concat("<br/>"));
 
-			DataValidator validator = new DataValidator();
+			//DataValidator validator = new DataValidator();
 
 			if (time.getStatus() == null || time.getStatus().equals("")) {
 				valido = false;
@@ -50,7 +49,7 @@ public class TimeBO {
 		ok = timeDAO.cadastrarTime(time);
 		if (ok == false)
 			//TODO fazer a mensagem "CONTANTE" apropriada
-			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PROJETO);
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_TIME);
 		return ok;
 	}
 	

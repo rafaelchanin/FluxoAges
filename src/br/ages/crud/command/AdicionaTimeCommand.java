@@ -76,9 +76,9 @@ public class AdicionaTimeCommand implements Command {
 				request.getSession().setAttribute("time", time);
 				proxima = "main?acao=listaTimes";
 				//TODO arrumar mensagem de erro e também colocar o nome do projeto e do orientador em vez de ID
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TURMA.replace("?", time.getAno()+" / "+ time.getSemestre()+" - Projeto "+ time.getProjeto()+" - "+ time.getOrientador()));
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TIME.replace("?", time.getAno()+" / "+ time.getSemestre()+" - Projeto "+ time.getProjeto()+" - "+ time.getOrientador()));
 			} else {
-				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS);
+				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS);
 			}
 
 		} catch (NegocioException e) {
