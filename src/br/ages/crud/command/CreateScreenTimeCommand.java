@@ -33,10 +33,10 @@ public class CreateScreenTimeCommand implements Command {
 			String isEdit = request.getParameter("isEdit");
 
 			if (isEdit != null && !"".equals(isEdit)) {
-				proxima = "turma/editTurma.jsp";
+				proxima = "time/editTime.jsp";
 				timeBO = new TimeBO();
 				usuarioBO = new UsuarioBO();
-				int idTime = Integer.parseInt(request.getParameter("id_turma"));
+				int idTime = Integer.parseInt(request.getParameter("id_time"));
 				Time time = timeBO.buscarTime(idTime);
 
 				List<IdNomeUsuarioDTO> alunosProjeto = new ArrayList<>();
