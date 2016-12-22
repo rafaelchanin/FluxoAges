@@ -6,7 +6,7 @@
 <!-- MODAL / POPUP -->
 <jsp:include page="../template/modalTurma.jsp"></jsp:include>
  		
-<div class="panel panel-primary">
+<div class="panel panel-primary panel-Turma">
    		
 	<div class="panel-heading text-center">Turmas</div>
                
@@ -33,9 +33,9 @@
 				%>
 				          
             	<tr>
-	            	<td align="center"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></td>
-	            	<td align="center"><%=turma.getStatus()%></td>
-	            	<td align="center">
+	            	<td align="center" class="col-sm-4"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></td>
+	            	<td align="center" class="col-sm-2"><%=turma.getStatus()%></td>
+	            	<td align="center" class="col-sm-6">
 					<button data-toggle="collapse" data-target="#usuarios<%=turma.getId()%>"><%=turma.getAlunos().size()%></button>
 							<div id="usuarios<%=turma.getId()%>" class="collapse">
 								<%
@@ -43,14 +43,14 @@
 										for (Usuario usuario : listUsuarios) {
 								%>
 								<div class="row">
-									<div align="left" class="col-sm-10" >* <%=usuario.getNome()%></div>
+									<div align="left" class="col-sm-10">* <%=usuario.getNome()%></div>
 								</div>
 								<%
 									}
 								%>
 							</div>
 					</td>
-	            	<td align="center">
+	            	<td align="center" class="col-sm-1">
 						<form action="" method="post">
             				<a href="" data-toggle="modal" data-id="<%=turma.getId() %>" data-usuario="<%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%>" 
             				data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
