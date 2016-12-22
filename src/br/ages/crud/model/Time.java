@@ -21,7 +21,6 @@ public class Time {
 		this.ano = ano;
 		this.status = status;
 		this.dtInclusao = dtInclusao;
-		this.alunos = alunos;
 	}
 
 	public Time(int id, int orientador, int projeto, int semestre, int ano, String status, Date dtInclusao,
