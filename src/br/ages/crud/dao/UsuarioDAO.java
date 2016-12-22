@@ -119,10 +119,9 @@ public class UsuarioDAO {
 	 */
 	public List<Usuario> listarUsuarios() throws PersistenciaException, SQLException {
 		Connection conexao = null;
-		// tentativa de readaptação do listarUsuarios()
 		try {
 			conexao = ConexaoUtil.getConexao();
-
+			
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT ");
 			sql.append("u.`ID_USUARIO`,");
@@ -141,8 +140,6 @@ public class UsuarioDAO {
 			
 			sql.append("from ages_e.tb_usuario u inner join ages_e.tb_tipo_usuario t ");
 			sql.append("on t.id_tipo_usuario = u.id_tipo_usuario ");
-			
-			//funciona no workbench mas aqui n�o
 			sql.append("where STATUS_USUARIO='ATIVO'");
 			
 

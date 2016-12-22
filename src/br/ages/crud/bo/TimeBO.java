@@ -63,6 +63,9 @@ public class TimeBO {
 		}
 	}
 	
+	public Time buscarTime(int idTime) throws NegocioException, PersistenciaException, SQLException {
+		return timeDAO.buscaTime(idTime);
+	}
 	public List<Time> listarTimes() throws NegocioException{
 		List<Time> listTime = null;
 		try {

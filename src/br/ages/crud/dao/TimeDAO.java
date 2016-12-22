@@ -7,10 +7,12 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Time;
+import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 
@@ -28,7 +30,7 @@ public class TimeDAO {
 	}
 	private boolean inserirAlunosTime(){
 		boolean ok = false;
-		
+		//TODO ddd
 		return ok;
 	}
 	public void editarTime(Time time) throws PersistenciaException, SQLException, ParseException{
@@ -36,6 +38,38 @@ public class TimeDAO {
 		
 	}
 	
+	public Time buscaTime(int idTime){
+		Connection conexao = null;
+		Time time = new Time();
+
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao");
+			sql.append(" from tb_time ");
+			sql.append(" where  id_time = ? ");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setInt(1, idTime);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) { //precisa de while, supostamente só existe um time/turma com um id
+				time.setId(resultSet.getInt("id_turma"));
+				time.setStatus(resultSet.getString("status_turma"));
+				time.setSemestre(resultSet.getInt("semestre"));
+				time.setAno(resultSet.getInt("ano"));				
+				time.setDtInclusao(resultSet.getDate("dt_inclusao"));
+				time.setOrientador(resultSet.getInt("id_orientador"));
+				time.setProjeto(resultSet.getInt("id_projeto"));
+				time.setAlunos(buscarAlunosTime(conexao, resultSet.getInt("id_time")));
+			}
+			return time;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return time;
+	}
 	public boolean removerAlunosTime(Connection conexao, Time time) throws SQLException{
 		boolean ok = false;
 
