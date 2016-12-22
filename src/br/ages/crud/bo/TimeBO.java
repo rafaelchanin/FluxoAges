@@ -75,4 +75,16 @@ public class TimeBO {
 		}
 		return listTime;
 	}
+
+	public void removerTime(Time time) throws NegocioException {
+		try {
+			timeDAO.removerTime(time);
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+		
+	}
+	
+	
 }
