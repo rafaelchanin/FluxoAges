@@ -96,6 +96,10 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_REMOVE_TURMA = "Turma ? removida com sucesso!";
 	
+	public static final String MSG_ERR_CADASTRO_DIAS_AULAS_TURMA = "Ocorreu um erro na hora de cadastrar os dias de aula da turma ?";
+	
+	public static final String MSG_ERR_CADASTRO_PRESENCAS_AULA = "Ocorreu um erro na hora de cadastrar as presenças da aula ?";
+	
 	//msgs de projeto
 
 	public static final String MSG_ERR_PROJETO_DADOS_INVALIDOS = "Dados do projeto inválidos ou inconsistentes!";
