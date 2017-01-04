@@ -22,7 +22,7 @@ public class Turma {
 		this.ano=ano;
 		this.dtInclusao=dtInclusao;
 		alunos = new ArrayList<>();
-		setAulas(new ArrayList<>());
+		aulas = new ArrayList<>();
 	}
 	
 	public Turma(int numero, String status, int ages, int semestre, int ano, Date dtInclusao, ArrayList<Usuario> alunos) {
