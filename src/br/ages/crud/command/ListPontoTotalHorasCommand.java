@@ -29,7 +29,10 @@ public class ListPontoTotalHorasCommand implements Command {
 		pontoBO = new PontoBO();
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
-		proxima = "aluno/listPontoHora.jsp";
+
+		//proxima = "aluno/listPontoHora.jsp";
+		proxima = "aulasSemestre/registraAulasSemestre.jsp";
+
 		String dataEntrada, dataSaida;
 		Date dataEntradaDate, dataSaidaDate;
 
