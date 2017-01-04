@@ -12,6 +12,7 @@ public class Turma {
 	private int ano;
 	private Date dtInclusao;
 	private ArrayList<Usuario> alunos;
+	private ArrayList<Aula> aulas;
 	
 	public Turma(int numero, String status, int ages, int semestre, int ano, Date dtInclusao) {
 		this.numero=numero;
@@ -21,6 +22,7 @@ public class Turma {
 		this.ano=ano;
 		this.dtInclusao=dtInclusao;
 		alunos = new ArrayList<>();
+		setAulas(new ArrayList<>());
 	}
 	
 	public Turma(int numero, String status, int ages, int semestre, int ano, Date dtInclusao, ArrayList<Usuario> alunos) {
@@ -99,6 +101,14 @@ public class Turma {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public ArrayList<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(ArrayList<Aula> aulas) {
+		this.aulas = aulas;
 	}
 	
 	
