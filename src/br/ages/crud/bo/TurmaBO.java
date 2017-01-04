@@ -117,6 +117,19 @@ public class TurmaBO {
 
 		return listTurma;
 	}
+	
+	public List<Turma> listarTurmasAtivas() throws NegocioException {
+		List<Turma> listTurma = null;
+
+		try {
+			listTurma = turmaDAO.listarTurmasAtivas();
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listTurma;
+	}
 /*
 	public void removerProjeto(Projeto project) throws NegocioException {
 		try {

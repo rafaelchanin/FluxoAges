@@ -114,6 +114,7 @@
 				          	<ul class="dropdown-menu">
 				            	<li><a href="main?acao=listaTurmas">Listar</a></li>
 				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
+				            	<li><a href="main?acao=registrarAulas">Registrar Aulas</a></li>
 				          	</ul>
         				</li>
         				

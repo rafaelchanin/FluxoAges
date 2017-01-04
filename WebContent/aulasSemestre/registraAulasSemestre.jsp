@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="br.ages.crud.model.Turma"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <div class="panel panel-primary panel-lancamentoHoras">
@@ -15,15 +16,12 @@
 				<label class="form-label ages">Turma: </label> <select
 					class="form-control" id="turma" name="turma" required>
 					<%
-						List<String> turmas = new ArrayList<>();
+						List<Turma> turmasAtivas = (List<Turma>) request.getAttribute("turmasAtivas");
 					
-						turmas.add("2016/1 - AGES I - 127");
-						turmas.add("2016/2 - AGES I - 127");
-						turmas.add("2016/2 - AGES II - 127");
 					
-						for (String turma : turmas) {
+						for (Turma turma : turmasAtivas) {
 					%>
-					<option value="<%=turma%>"><%=turma%></option>
+					<option value="<%=turma%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
 					<%
 						}
 					%>

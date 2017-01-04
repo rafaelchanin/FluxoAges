@@ -130,6 +130,44 @@ public class TurmaDAO {
 		return listaTurmas;
 	}
 	
+	public ArrayList<Turma> listarTurmasAtivas() throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		ArrayList<Turma> listaTurmas = new ArrayList<Turma>();
+
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select id_turma, numero, status_turma, ages, semestre, ano, dt_inclusao");
+			sql.append(" from tb_turma ");
+			sql.append(" where  status_turma = 'ATIVA' ");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Turma turma = new Turma();
+				turma.setId(resultSet.getInt("id_turma"));
+				turma.setNumero(resultSet.getInt("numero"));
+				turma.setStatus(resultSet.getString("status_turma"));
+				turma.setAges(resultSet.getInt("ages"));
+				turma.setSemestre(resultSet.getInt("semestre"));
+				turma.setAno(resultSet.getInt("ano"));
+
+				Date dataInclusao = resultSet.getDate("dt_inclusao");
+				turma.setDtInclusao(dataInclusao);
+
+				turma.setAlunos(buscarAlunosTurma(conexao, resultSet.getInt("id_turma")));
+				
+				listaTurmas.add(turma);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return listaTurmas;
+	}
+	
 	private ArrayList<Usuario> buscarAlunosTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
 
 		List<Usuario> alunosTurma = new ArrayList<Usuario>();
