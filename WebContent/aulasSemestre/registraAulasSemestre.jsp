@@ -15,13 +15,14 @@
 			<div class="col-sm-6">
 				<label class="form-label ages">Turma: </label> <select
 					class="form-control" id="turma" name="turma" required>
+					
 					<%
 						List<Turma> turmasAtivas = (List<Turma>) request.getAttribute("turmasAtivas");
 					
 					
 						for (Turma turma : turmasAtivas) {
 					%>
-					<option value="<%=turma%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
+					<option value="<%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
 					<%
 						}
 					%>
@@ -88,7 +89,7 @@
 		
 		function startCalendar() {
 			var semestre = document.getElementById("turma").value;
-			semestre = semestre.substring(5, 6);
+			semestre = semestre.substring(7,8);
 			aux = semestre;
 			if(semestre == 1){
 				startDate1 = "1/3/";
@@ -205,7 +206,7 @@
 		
 		$('#turma').on('change', function() {
 			var semestre = document.getElementById("turma").value;
-			semestre = semestre.substring(5, 6);
+			semestre = semestre.substring(7, 8);
 			$('#datepicker1').data('datepicker').clearDates();
 			$('#datepicker2').data('datepicker').clearDates();
 			$('#datepicker3').data('datepicker').clearDates();
