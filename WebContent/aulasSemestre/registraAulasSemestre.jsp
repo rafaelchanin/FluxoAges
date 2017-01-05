@@ -10,7 +10,7 @@
 	<div class="panel-body ">
 
 		<jsp:include page="/template/msg.jsp"></jsp:include>
-
+		
 		<div class="row">
 			<div class="col-sm-6">
 				<label class="form-label ages">Turma: </label> <select
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<br>
-		<form method="post" action="">
+		<form method="post" action="main?acao=adicionaAulas">
 			<div class="form-group ">
 				<div class="row">
 					<div class="col-md-4 ">
