@@ -216,14 +216,20 @@
 				startCalendar();
 				$('#datepicker1').datepicker('setStartDate', startDate1 + ano);
 				$('#datepicker1').datepicker('setEndDate', new Date(ano + endDate1));
+				$('#datepicker1').datepicker('update');
 				$('#datepicker2').datepicker('setStartDate', startDate2 + ano);
 				$('#datepicker2').datepicker('setEndDate', new Date(ano + endDate2));
+				$('#datepicker2').datepicker('update');
 				$('#datepicker3').datepicker('setStartDate', startDate3 + ano);
 				$('#datepicker3').datepicker('setEndDate', new Date(ano + endDate3));
+				$('#datepicker3').datepicker('update');
 				$('#datepicker4').datepicker('setStartDate', startDate4 + ano);
 				$('#datepicker4').datepicker('setEndDate', new Date(ano + endDate4));
+				$('#datepicker4').datepicker('update');
 				$('#datepicker5').datepicker('setStartDate', startDate5 + ano);
 				$('#datepicker5').datepicker('setEndDate', new Date(ano2 + endDate5));
+				$('#datepicker5').datepicker('update');
+				
 			} else {
 				$('#datepicker1').data('datepicker').clearDates();
 				$('#datepicker2').data('datepicker').clearDates();
