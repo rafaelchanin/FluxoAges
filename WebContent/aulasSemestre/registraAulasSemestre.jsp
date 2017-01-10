@@ -10,7 +10,7 @@
 	<div class="panel-body ">
 
 		<jsp:include page="/template/msg.jsp"></jsp:include>
-		
+		<form id="form" method="post" action="main?acao=adicionaAulas">
 		<div class="row">
 			<div class="col-sm-6">
 				<label class="form-label ages">Turma: </label> <select
@@ -22,7 +22,8 @@
 					
 						for (Turma turma : turmasAtivas) {
 					%>
-					<option value="<%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
+					<option value="<%=turma.getId()%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
+					
 					<%
 						}
 					%>
@@ -30,7 +31,7 @@
 			</div>
 		</div>
 		<br>
-		<form method="post" action="main?acao=adicionaAulas">
+		<!-- <form id="form" method="post" action="main?acao=adicionaAulas"> -->
 			<div class="form-group ">
 				<div class="row">
 					<div class="col-md-4 ">
@@ -62,14 +63,14 @@
 						</div>
 					</div>
 					<div class="col-md-4 ">
-						<div id="datepicker5" align="center"></div>
+						<div id="datepicker5" align="center"></div><input type="hidden" name="dias" id="dias" value="null" />
 						<div align="center">
 							<input class="btn btn-sm" type="button" id="limpar5" value="Limpar">
 						</div>
 					</div>
 					<div class="col-md-4 ">
 						<div class="panel-btnHoras">
-							<input class="btn btn-primary btnHoras" type="submit" value="Salvar">
+							<input class="btn btn-primary btnHoras" type="button" onclick="funcSubmit()" value="Salvar">
 							<br> 
 							<input type="button" class="btn btn-warning btnHoras" id="limpar" value="Limpar todos">
 						</div>
@@ -238,8 +239,29 @@
 				$('#datepicker5').data('datepicker').clearDates();;
 			}
 		})
-	});
+});
+	
+	function funcSubmit() {
+		var aulas = [];
+		var form = document.getElementById("form");
+		i=0;
+		aulas = $('#datepicker1').data('datepicker').getDates().concat($('#datepicker2').data('datepicker').getDates()
+				, $('#datepicker3').data('datepicker').getDates(), $('#datepicker4').data('datepicker').getDates(), 
+				$('#datepicker5').data('datepicker').getDates());
+		
+		for (i=0; i < aulas.length; i++) {
+			console.log("ENTREI NO FOR");
+			aulas[i] = aulas[i].getDate() + '/' + (aulas[i].getMonth() + 1) + '/' + aulas[i].getFullYear();
+			console.log(aulas[i]);
+		}
+		
+		console.log(aulas);
+		
+		var a = document.getElementById("dias");
+		  a.value = aulas;
+		  
+		 form.submit();
+	}
+	
 </script>
-
-
 <jsp:include page="../template/foot.jsp"></jsp:include>

@@ -87,6 +87,10 @@ public class MensagemContantes {
 	public static final String MSG_ERR_TURMA_DATA_INCONSISTENTE = "Data de inicio deve ser anterior à data de fim?!"; //'?' proposital
 	
 	public static final String MSG_ERR_CADASTRO_TURMA = "Ocorreu um erro no cadastro da turma.";
+	
+	public static final String MSG_SUC_CADASTRO_AULAS = "Aulas da turma ? cadastrado com sucesso.";
+	
+	public static final String MSG_ERR_CADASTRO_AULAS = "Aulas da turma ? não foram cadastradas!";
 
 	public static final String MSG_SUC_CADASTRO_TURMA = "Turma ? cadastrada com sucesso!";
 	

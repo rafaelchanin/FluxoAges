@@ -3,20 +3,26 @@ package br.ages.crud.command;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.ArquivoBO;
+import br.ages.crud.bo.AulaBO;
 import br.ages.crud.bo.ProjetoBO;
 import br.ages.crud.bo.StakeholderBO;
+import br.ages.crud.bo.TurmaBO;
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Aula;
 import br.ages.crud.model.Projeto;
 import br.ages.crud.model.Stakeholder;
 import br.ages.crud.model.StatusProjeto;
+import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.util.Util;
@@ -26,74 +32,52 @@ public class AdicionaAulasCommand implements Command {
 
 	private String proxima;
 
-	private ProjetoBO projetoBO;
+	private AulaBO aulaBO;
 
 	private ArquivoBO arquivoBO;
-
+	private ProjetoBO projetoBO;
 	private UsuarioBO usuarioBO;
 
 	private Usuario usuario;
-
-	private StakeholderBO stakeholderBO;
 
 	private Stakeholder stakeholder;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, ParseException, PersistenciaException {
+		aulaBO = new AulaBO();
 		projetoBO = new ProjetoBO();
-		proxima = "main?acao=telaProjeto";
-
-		String nomeProjeto = request.getParameter("nomeProjeto");
-		String[] usuariosString = request.getParameterValues("listaUsuarios");
-		String[] stakeholdersString = request.getParameterValues("listaStakeholders");
-		String statusProjetoString = request.getParameter("statusProjeto");
-		String workspace = request.getParameter("workspace");
-		String dataInicioString = request.getParameter("dataInicio");
-		String dataFimPrevistoString = request.getParameter("dataFimPrevista");
-		String dataFimString = request.getParameter("dataFim");
-
+		Turma turma = new Turma();
+		proxima = "main?acao=listaTurmas";
+		String dias = request.getParameter("dias");
+		String idTurma = request.getParameter("turma");
+		
 		try {
-			// cria o array de usuarios com o array de String do request
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			for (String s : usuariosString) {
-				usuario = new Usuario();
-				usuario.setIdUsuario(Integer.valueOf(s));
-				usuarios.add(usuario);
-			}
-			// mesma coisa mas com stakeholders
-			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
-			for (String s : stakeholdersString) {
-				stakeholder = new Stakeholder();
-				stakeholder.setIdStakeholder(Integer.valueOf(s));
-				stakeholders.add(stakeholder);
-			}
-
-			// cria um StatusProjeto com o string do request
-			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString);
-			// cria Dates com os strings recebidos
-			Date dataInicio = Util.stringToDate(dataInicioString);
-			Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
-			Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
-
-			Projeto projeto = new Projeto();
-			projeto.setNomeProjeto(nomeProjeto);
-			projeto.setUsuarios(usuarios);
-			projeto.setStatusProjeto(statusProjeto);
-			projeto.setWorkspace(workspace);
-			projeto.setStakeholders(stakeholders);
-			projeto.setDataInicio(dataInicio);
-			projeto.setDataFim(dataFim);
-			projeto.setDataFimPrevisto(dataFimPrevisto);
-
-			boolean isValido = projetoBO.validarProjeto(projeto);
-
+		int id = Integer.parseInt(idTurma);
+		String[] aulas = dias.split("[,]");
+		ArrayList<Aula> diasAulas = new ArrayList<>();
+		turma.setId(id);
+		for (String s : aulas) {
+			Date data = new Date();
+			data = Util.stringToDate(s);
+			Aula aula = new Aula();
+			aula.setData(data);
+			aula.setIdTurma(id);
+			aula.setDtInclusao(new Date());
+			aula.setStatus("AULA");
+			aula.setObservacao("");
+			diasAulas.add(aula);
+		}
+		turma.setAulas(diasAulas);
+		
+				
+		//	boolean isValido = projetoBO.validarProjeto(projeto);
+			boolean isValido=true;
 			if (isValido) {
-				projetoBO.cadastrarProjeto(projeto);
-				request.getSession().setAttribute("projeto", projeto);
-				proxima = "project/uploadProject.jsp";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_PROJETO.replace("?", nomeProjeto));
+			aulaBO.cadastrarDiasAulasTurma(turma);
+			proxima = "main?acao=listaTurmas";
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_AULAS.replace("?", "nomeTurma"));
 			} else {
-				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_PROJETO_DADOS_INVALIDOS);
+				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_CADASTRO_AULAS);
 			}
 
 		} catch (NegocioException e) {
@@ -103,5 +87,7 @@ public class AdicionaAulasCommand implements Command {
 
 		return proxima;
 	}
+
+
 
 }
