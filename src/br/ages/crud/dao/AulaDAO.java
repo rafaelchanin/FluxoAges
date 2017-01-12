@@ -37,8 +37,9 @@ public class AulaDAO {
 		try {
 			Integer idAula = null;
 			conexao = ConexaoUtil.getConexao();
-	
-
+			
+			removerAulasTurma(conexao, turma.getId());
+			
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO tb_aula (ID_TURMA, DT_INCLUSAO, OBSERVACAO, STATUS, DATA)");
 			sql.append(" VALUES (?, ?, ?, ?, ?)");
@@ -46,10 +47,10 @@ public class AulaDAO {
 			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
 			for (Aula aula : aulas) {
-				
+
 				java.sql.Date dataInclusao = new java.sql.Date(aula.getDtInclusao().getTime());
 				java.sql.Date data = new java.sql.Date(aula.getData().getTime());
-				
+
 				statement.setInt(1, turma.getId());
 				statement.setDate(2, dataInclusao);
 				statement.setString(3, aula.getObservacao());
@@ -57,7 +58,7 @@ public class AulaDAO {
 				statement.setDate(5, data);
 
 				ok = statement.execute();
-				
+
 				ResultSet resultset = statement.getGeneratedKeys();
 				if (resultset.first()) {
 					idAula = resultset.getInt(1);
@@ -71,6 +72,19 @@ public class AulaDAO {
 		}
 			return ok;
 		}
+
+	private boolean removerAulasTurma(Connection conexao, int idTurma) throws SQLException {
+		boolean ok = false;
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE FROM tb_aula WHERE ID_TURMA = ?");
+
+		PreparedStatement statement = conexao.prepareStatement(sql.toString());
+		statement.setInt(1, idTurma);
+		ok = statement.execute();
+
+		return ok;
+	}
 	
 	public boolean cadastrarPresencasAula(Aula aula) throws SQLException, PersistenciaException {
 

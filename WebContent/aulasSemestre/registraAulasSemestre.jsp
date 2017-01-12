@@ -13,18 +13,23 @@
 		<form id="form" method="post" action="main?acao=adicionaAulas">
 		<div class="row">
 			<div class="col-sm-6">
-				<label class="form-label ages">Turma: </label> <select
-					class="form-control" id="turma" name="turma" required>
+				<label class="form-label ages">Turma: </label>
+				<select class="form-control" id="turma" name="turma" required>
 					
 					<%
 						List<Turma> turmasAtivas = (List<Turma>) request.getAttribute("turmasAtivas");
 					
-					
 						for (Turma turma : turmasAtivas) {
+							if (request.getAttribute("nomeTurma").equals(turma.toString())) {
+						%>	
+					<option data-aulas="<%=turma.getAulasString()%>" value="<%=turma.toString()+"|"+turma.getId()%>" selected><%=turma.toString()%></option>
+						<%
+							} else {
 					%>
-					<option value="<%=turma.getId()%>"><%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%></option>
+					<option data-aulas="<%=turma.getAulasString()%>" value="<%=turma.toString()+"|"+turma.getId()%>"><%=turma.toString()%></option>
 					
 					<%
+							}
 						}
 					%>
 				</select>
@@ -86,7 +91,12 @@
 		var startDate1, endDate1, startDate2, endDate2, startDate3, endDate3, startDate4, endDate4, startDate5, endDate5, ano2;
 		var ano = new Date().getFullYear();
 		var aux = 0;
+		
+		
+		
 		$(startCalendar());
+		
+		reloadDatePicker();
 		
 		function startCalendar() {
 			var semestre = document.getElementById("turma").value;
@@ -205,14 +215,19 @@
 			$('#datepicker5').data('datepicker').clearDates();
 	    });
 		
-		$('#turma').on('change', function() {
+		function reloadDatePicker() {
 			var semestre = document.getElementById("turma").value;
+			
+			var aulasString = $('#turma option:selected').attr("data-aulas");
 			semestre = semestre.substring(7, 8);
 			$('#datepicker1').data('datepicker').clearDates();
 			$('#datepicker2').data('datepicker').clearDates();
 			$('#datepicker3').data('datepicker').clearDates();
 			$('#datepicker4').data('datepicker').clearDates();
 			$('#datepicker5').data('datepicker').clearDates();
+			
+			var aulas = aulasString.split(",");
+			
 			if(aux != semestre){
 				startCalendar();
 				$('#datepicker1').datepicker('setStartDate', startDate1 + ano);
@@ -230,14 +245,80 @@
 				$('#datepicker5').datepicker('setStartDate', startDate5 + ano);
 				$('#datepicker5').datepicker('setEndDate', new Date(ano2 + endDate5));
 				$('#datepicker5').datepicker('update');
+				i=0;
+				var date1 = [];
+				var date2 = [];
+				var date3 = [];
+				var date4 = [];
+				var date5 = [];
+				for (i=0;i<aulas.length; i++) {
+					if (aulas[i].substring(3, 5) == 03 || aulas[i].substring(3, 5) == 08) 
+						date1.push(aulas[i]);
+					else if (aulas[i].substring(3, 5) == 04 || aulas[i].substring(3, 5) == 09)
+						date2.push(aulas[i]);
+						else if (aulas[i].substring(3, 5) == 05 || aulas[i].substring(3, 5) == 10)
+							date3.push(aulas[i]);
+							else if (aulas[i].substring(3, 5) == 06 || aulas[i].substring(3, 5) == 11)
+								date4.push(aulas[i]);
+								else if (aulas[i].substring(3, 5) == 07 || aulas[i].substring(3, 5) == 12)
+									date5.push(aulas[i]);	
+				}
+				//for (i=0;i<date1.length ; i++) {
+					//alert(date1[i]);
+				//}
+				if (date1[0] != null)
+					$('#datepicker1').datepicker('setDates', date1);
+				if (date2[0] != null)
+					$('#datepicker2').datepicker('setDates', date2);
+				if (date3[0] != null)
+					$('#datepicker3').datepicker('setDates', date3);
+				if (date4[0] != null)
+					$('#datepicker4').datepicker('setDates', date4);
+				if (date5[0] != null)
+					$('#datepicker5').datepicker('setDates', date5);
 				
 			} else {
 				$('#datepicker1').data('datepicker').clearDates();
 				$('#datepicker2').data('datepicker').clearDates();
 				$('#datepicker3').data('datepicker').clearDates();
 				$('#datepicker4').data('datepicker').clearDates();
-				$('#datepicker5').data('datepicker').clearDates();;
+				$('#datepicker5').data('datepicker').clearDates();
+				i=0;
+				var date1 = [];
+				var date2 = [];
+				var date3 = [];
+				var date4 = [];
+				var date5 = [];
+				for (i=0;i<aulas.length; i++) {
+					if (aulas[i].substring(3, 5) == 03 || aulas[i].substring(3, 5) == 08) 
+						date1.push(aulas[i]);
+					else if (aulas[i].substring(3, 5) == 04 || aulas[i].substring(3, 5) == 09)
+						date2.push(aulas[i]);
+						else if (aulas[i].substring(3, 5) == 05 || aulas[i].substring(3, 5) == 10)
+							date3.push(aulas[i]);
+							else if (aulas[i].substring(3, 5) == 06 || aulas[i].substring(3, 5) == 11)
+								date4.push(aulas[i]);
+								else if (aulas[i].substring(3, 5) == 07 || aulas[i].substring(3, 5) == 12)
+									date5.push(aulas[i]);	
+				}
+				//for (i=0;i<date1.length ; i++) {
+					//alert(date1[i]);
+				//}
+				if (date1[0] != null)
+					$('#datepicker1').datepicker('setDates', date1);
+				if (date2[0] != null)
+					$('#datepicker2').datepicker('setDates', date2);
+				if (date3[0] != null)
+					$('#datepicker3').datepicker('setDates', date3);
+				if (date4[0] != null)
+					$('#datepicker4').datepicker('setDates', date4);
+				if (date5[0] != null)
+					$('#datepicker5').datepicker('setDates', date5);	
 			}
+		}
+		
+		$('#turma').on('change', function() {
+			reloadDatePicker();
 		})
 });
 	
@@ -250,12 +331,8 @@
 				$('#datepicker5').data('datepicker').getDates());
 		
 		for (i=0; i < aulas.length; i++) {
-			console.log("ENTREI NO FOR");
 			aulas[i] = aulas[i].getDate() + '/' + (aulas[i].getMonth() + 1) + '/' + aulas[i].getFullYear();
-			console.log(aulas[i]);
 		}
-		
-		console.log(aulas);
 		
 		var a = document.getElementById("dias");
 		  a.value = aulas;

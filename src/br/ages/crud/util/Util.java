@@ -115,6 +115,7 @@ public class Util {
 
 		return data;
 	}
+	
 	public static String dateTimeToString(Date d) throws ParseException {
 		if(d != null) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

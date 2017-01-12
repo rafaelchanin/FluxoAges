@@ -13,6 +13,7 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Aula;
 import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
@@ -157,7 +158,7 @@ public class TurmaDAO {
 				Date dataInclusao = resultSet.getDate("dt_inclusao");
 				turma.setDtInclusao(dataInclusao);
 
-				turma.setAlunos(buscarAlunosTurma(conexao, resultSet.getInt("id_turma")));
+				turma.setAulas(buscarAulasTurma(conexao, resultSet.getInt("id_turma")));
 				
 				listaTurmas.add(turma);
 			}
@@ -200,6 +201,49 @@ public class TurmaDAO {
 		}
 
 		return (ArrayList<Usuario>) alunosTurma;
+
+	}
+	
+	private ArrayList<Aula> buscarAulasTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
+
+		ArrayList<Aula> aulasTurma = new ArrayList<Aula>();
+
+		try {
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT ID_AULA, DATA, STATUS, OBSERVACAO, DT_INCLUSAO ");
+			sql.append(" FROM tb_aula");
+			sql.append(" WHERE ID_TURMA = ?");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setInt(1, idTurma);
+
+			ResultSet resultSet = statement.executeQuery();
+			int idAluno = 0;
+			//usuarioDAO = new UsuarioDAO();
+			//alunoTurma = new Usuario();
+
+			while (resultSet.next()) {
+				Aula aula = new Aula();
+				aula.setId(resultSet.getInt("id_aula"));
+				Date data = resultSet.getDate("data");
+				aula.setData(data);
+				aula.setStatus(resultSet.getString("status"));
+				aula.setObservacao(resultSet.getString("observacao"));
+				Date dataInc = resultSet.getDate("dt_inclusao");
+				aula.setDtInclusao(dataInc);
+				aula.setIdTurma(idTurma);
+				
+				aulasTurma.add(aula);
+			}
+
+			//Collections.sort(aulasTurma);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return aulasTurma;
 
 	}
 	

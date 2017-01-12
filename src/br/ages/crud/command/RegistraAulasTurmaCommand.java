@@ -68,11 +68,13 @@ public class RegistraAulasTurmaCommand implements Command {
 			//pode ser retirado no futuro
 			request.setAttribute("listaPontos", listaPontos);
 			request.setAttribute("turmasAtivas", turmasAtivas);
+
 			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
 			
 			//request.setAttribute("totalHorasAluno", pontoBO.calculatotalHorasAluno(listaPontos));
 			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
-			request.setAttribute("dtEntrada", dataEntrada);
+			if (request.getAttribute("nomeTurma") == null || request.getAttribute("nomeTurma").equals(""))
+				request.setAttribute("nomeTurma", "");
 			request.setAttribute("dtSaida", dataSaida);
 		
 		} catch (NegocioException e) {

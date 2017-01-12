@@ -47,12 +47,13 @@ public class AdicionaAulasCommand implements Command {
 		aulaBO = new AulaBO();
 		projetoBO = new ProjetoBO();
 		Turma turma = new Turma();
-		proxima = "main?acao=listaTurmas";
+		proxima = "main?acao=registrarAulas";
 		String dias = request.getParameter("dias");
 		String idTurma = request.getParameter("turma");
-		
+		String[] tempId = idTurma.split("[|]");
+		String nomeTurma = tempId[0];
 		try {
-		int id = Integer.parseInt(idTurma);
+		int id = Integer.parseInt(tempId[1]);
 		String[] aulas = dias.split("[,]");
 		ArrayList<Aula> diasAulas = new ArrayList<>();
 		turma.setId(id);
@@ -74,8 +75,8 @@ public class AdicionaAulasCommand implements Command {
 			boolean isValido=true;
 			if (isValido) {
 			aulaBO.cadastrarDiasAulasTurma(turma);
-			proxima = "main?acao=listaTurmas";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_AULAS.replace("?", "nomeTurma"));
+			proxima = "main?acao=registrarAulas";
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_AULAS.replace("?", nomeTurma));
 			} else {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_CADASTRO_AULAS);
 			}
@@ -84,7 +85,7 @@ public class AdicionaAulasCommand implements Command {
 			request.setAttribute("msgErro", e.getMessage());
 			e.printStackTrace();
 		}
-
+		request.setAttribute("nomeTurma", nomeTurma);
 		return proxima;
 	}
 

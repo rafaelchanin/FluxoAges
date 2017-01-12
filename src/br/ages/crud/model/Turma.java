@@ -1,9 +1,14 @@
 package br.ages.crud.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Turma {
+import br.ages.crud.util.Util;
+
+public class Turma{
+	
+
 	private int id;
 	private int numero;
 	private String status;
@@ -107,8 +112,33 @@ public class Turma {
 		return aulas;
 	}
 
+	public String getAulasString() {
+		String date = "";
+		if (aulas == null) {
+			return "";
+		}
+		else {
+			for (Aula aula : aulas){
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				String data;
+				data = formatter.format(aula.getData());
+				//date = date + "," + aula.getData().toString();
+				if (date.equals("")) 
+					date=data;
+				else
+					date = date + "," + data;
+			}
+			return date;
+		}
+	}
+	
 	public void setAulas(ArrayList<Aula> aulas) {
 		this.aulas = aulas;
+	}
+	
+	@Override
+	public String toString() {
+		return ano + " / " + semestre + " - AGES " + ages +" - " + numero;
 	}
 	
 	
