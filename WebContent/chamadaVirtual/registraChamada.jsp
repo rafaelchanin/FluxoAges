@@ -62,10 +62,10 @@
 							<th style="text-align: center;">Horas/dia</th>
 							<th style="text-align: center;">Status</th>
 							<th style="text-align: center;"></th>
-							<th style="text-align: center;"></th>--> 
+							<th style="text-align: center;"></th>
 							
 						
-							
+							--> 
 						</tr>
 					</thead>
 
@@ -173,10 +173,11 @@
 		var mes = document.getElementById("mes").value;
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var aulas = aulasString.split(",");
+		$("#chamada tr").remove();
+		$('#chamada').append('<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th></tr>');
 		var tr = document.getElementById('chamada').tHead.children[0];
-		
 		var i=0;
-		tr.insertCell(0).outerHTML = '<th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
+		//tr.insertCell(0).outerHTML = '<th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
 		for (i=0; i<aulas.length; i++) {
 			if (aulas[i].substring(3,5) == mes) {
 				tr.insertCell(1).outerHTML = '<th style="text-align: center;">' + aulas[i].substring(0,2) + '</th>';
