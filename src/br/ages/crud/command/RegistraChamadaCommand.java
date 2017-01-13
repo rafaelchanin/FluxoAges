@@ -35,7 +35,7 @@ public class RegistraChamadaCommand implements Command {
 		usuarios = new ArrayList<>();
 
 		//proxima = "aluno/listPontoHora.jsp";
-		proxima = "aulasSemestre/registraAulasSemestre.jsp";
+		proxima = "chamadaVirtual/registraChamada.jsp";
 
 		String dataEntrada, dataSaida;
 		Date dataEntradaDate, dataSaidaDate;

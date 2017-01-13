@@ -95,7 +95,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("removeTurma", new RemoveTurmaCommand());
 		comandos.put("registrarAulas", new RegistraAulasTurmaCommand());
 		comandos.put("adicionaAulas", new AdicionaAulasCommand());
-		comandos.put("main?acao=registrarChamada", new RegistraChamadaCommand());
+		comandos.put("registrarChamada", new RegistraChamadaCommand());
 	
 		
 		//COMANDOS DE STAKEHOLDER
