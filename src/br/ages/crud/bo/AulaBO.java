@@ -129,11 +129,24 @@ public class AulaBO {
 		return listAula;
 	}
 	
-	public List<Presenca> listarPresencasAula(Aula aula) throws NegocioException {
+	public List<Presenca> listarPresencasAula(int idAula) throws NegocioException {
 		List<Presenca> listPresencas = null;
 
 		try {
-			listPresencas = aulaDAO.listarPresencasAula(aula);
+			listPresencas = aulaDAO.listarPresencasAula(idAula);
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listPresencas;
+	}
+	
+	public List<Presenca> listarPresencasAlunoTurma(int idAluno, int idTurma) throws NegocioException {
+		List<Presenca> listPresencas = null;
+
+		try {
+			listPresencas = aulaDAO.listarPresencasAlunoTurma(idAluno, idTurma);
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);

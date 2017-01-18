@@ -159,6 +159,7 @@ public class TurmaDAO {
 				turma.setDtInclusao(dataInclusao);
 
 				turma.setAulas(buscarAulasTurma(conexao, resultSet.getInt("id_turma")));
+				turma.setAlunos(buscarAlunosTurma(conexao, resultSet.getInt("id_turma")));
 				
 				listaTurmas.add(turma);
 			}
@@ -205,7 +206,7 @@ public class TurmaDAO {
 	}
 	
 	private ArrayList<Aula> buscarAulasTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
-
+		AulaDAO aulaDAO = new AulaDAO();
 		ArrayList<Aula> aulasTurma = new ArrayList<Aula>();
 
 		try {
@@ -233,6 +234,8 @@ public class TurmaDAO {
 				Date dataInc = resultSet.getDate("dt_inclusao");
 				aula.setDtInclusao(dataInc);
 				aula.setIdTurma(idTurma);
+	
+				aula.setPresencas(aulaDAO.listarPresencasAula(resultSet.getInt("id_aula")));
 				
 				aulasTurma.add(aula);
 			}

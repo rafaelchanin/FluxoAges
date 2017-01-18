@@ -9,10 +9,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.ages.crud.bo.AulaBO;
 import br.ages.crud.bo.PontoBO;
 import br.ages.crud.bo.TurmaBO;
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
+import br.ages.crud.model.Presenca;
 import br.ages.crud.model.ResumoPonto;
 import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
@@ -25,12 +27,14 @@ public class RegistraChamadaCommand implements Command {
 	private List<Usuario> usuarios;
 	private PontoBO pontoBO;
 	private TurmaBO turmaBO;
+	private AulaBO aulaBO;
 	private ArrayList<ResumoPonto> listaPontos;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, ParseException {
 		pontoBO = new PontoBO();
 		turmaBO = new TurmaBO();
+		aulaBO = new AulaBO();
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
 
@@ -47,6 +51,24 @@ public class RegistraChamadaCommand implements Command {
 			 dataEntrada = request.getParameter("dtEntrada");
 			 dataSaida = request.getParameter("dtSaida");
 			 turmasAtivas = turmaBO.listarTurmasAtivas();
+			 
+			 for (Turma turma : turmasAtivas) {
+				 String presencasTurma = "";
+				 for (Usuario aluno : turma.getAlunos()) {
+					 String presencasAluno = "";
+					 for (Presenca presenca : aulaBO.listarPresencasAlunoTurma(aluno.getIdUsuario(), turma.getId())) {
+						if (presencasAluno.equals("")) {
+							presencasAluno = aluno.getIdUsuario() + ":" + presenca.getIdAula();
+						}
+						else {
+							presencasAluno += "," + presenca.getIdAula(); 
+						}
+					 }
+					 if (!presencasAluno.equals(""))
+						 presencasTurma += presencasAluno + ";";
+				 }
+				 turma.setPresencas(presencasTurma);
+			 }
 		
 			if (dataSaida == null || dataEntrada == null ) {
 	   			 dataEntradaDate = Util.getDataInicialSemestre();

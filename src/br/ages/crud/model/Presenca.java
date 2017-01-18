@@ -2,8 +2,7 @@ package br.ages.crud.model;
 
 public class Presenca {
 	private int idAula;
-	private int idAluno;
-	private String matriculaAluno;
+	private Usuario aluno;
 	private int idTurma;
 	private String status;
 	
@@ -11,10 +10,9 @@ public class Presenca {
 		
 	}
 	
-	public Presenca(int idAula, int idAluno, String matriculaAluno, int idTurma, String status) {
+	public Presenca(int idAula, Usuario aluno, int idTurma, String status) {
 		this.idAula=idAula;
-		this.idAluno=idAluno;
-		this.matriculaAluno=matriculaAluno;
+		this.aluno=aluno;
 		this.idTurma=idTurma;
 		this.status=status;
 	}
@@ -25,18 +23,15 @@ public class Presenca {
 	public void setIdAula(int idAula) {
 		this.idAula = idAula;
 	}
-	public int getIdAluno() {
-		return idAluno;
+	
+	public Usuario getAluno() {
+		return aluno;
 	}
-	public void setIdAluno(int idAluno) {
-		this.idAluno = idAluno;
+
+	public void setAluno(Usuario aluno) {
+		this.aluno = aluno;
 	}
-	public String getMatriculaAluno() {
-		return matriculaAluno;
-	}
-	public void setMatriculaAluno(String matriculaAluno) {
-		this.matriculaAluno = matriculaAluno;
-	}
+
 	public int getIdTurma() {
 		return idTurma;
 	}

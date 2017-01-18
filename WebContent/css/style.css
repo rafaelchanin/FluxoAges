@@ -25,6 +25,19 @@ body{
 	margin-right: auto;
 }
 
+.btnPresenca {
+  -webkit-border-radius: 11;
+  -moz-border-radius: 11;
+  border-radius: 11px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  background: #00ff00;
+  padding: 4px 7px 4px 7px;
+  text-decoration: none;
+}
+
+
 .panel-Turma{
 	max-width: 800px;
 	float: none;

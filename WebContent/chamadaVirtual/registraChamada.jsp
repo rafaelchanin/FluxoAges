@@ -28,11 +28,11 @@
 						for (Turma turma : turmasAtivas) {
 							if (request.getAttribute("nomeTurma").equals(turma.toString())) {
 						%>	
-					<option data-aulas="<%=turma.getAulasString()%>" value="<%=turma.toString()+"|"+turma.getId()%>" selected><%=turma.toString()%></option>
+					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-alunos="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>" selected><%=turma.toString()%></option>
 						<%
 							} else {
 					%>
-					<option data-aulas="<%=turma.getAulasString()%>" value="<%=turma.toString()+"|"+turma.getId()%>"><%=turma.toString()%></option>
+					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-alunos="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>"><%=turma.toString()%></option>
 					
 					<%
 							}
@@ -40,6 +40,7 @@
 					%>
 				</select>
 				</div>
+				
 				<div class='col-sm-2' id='dtFinall'>
 					<label for="sel1" class="form-label ages">Mês:<span class="red">*</span></label> 
 					<select class="form-control" id="mes" name="mes" required>
@@ -55,8 +56,8 @@
 			<div class="table-responsive">
 				<table id="chamada" class="table table-responsive table-striped table-hover table-condensed">
 					<thead>
-						<tr id="titulo">
-							<!--<th style="text-align: center;">Nome Aluno</th>
+						<!--<tr id="titulo">
+							<th style="text-align: center;">Nome Aluno</th>
 							<th style="text-align: center;">Data Entrada</th>
 							<th style="text-align: center;">Data Saída</th>
 							<th style="text-align: center;">Horas/dia</th>
@@ -65,11 +66,11 @@
 							<th style="text-align: center;"></th>
 							
 						
-							--> 
-						</tr>
+							
+						</tr>--> 
 					</thead>
 
-					<tbody>
+					<tbody> <!--
 						<tr class="coluna-sh">
 							<td align="center">ponto.getAluno().getNome()</td>
 							<td align="center">Util.dateTimeToString(ponto.getDataEntrada())</td>
@@ -79,7 +80,7 @@
 							<td align="center">teste</td>
 							<td align="center">teste</td>
 						</tr>
-
+-->
 					</tbody>
 
 				</table>
@@ -138,7 +139,6 @@
 	});
 	
 	$("#turma").on('change', function(e) {
-		alert("troco a turma");
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var aulas = aulasString.split(",");
 		var semestre = document.getElementById("turma").value;
@@ -172,19 +172,38 @@
 	$("#mes").on('change', function(e) {
 		var mes = document.getElementById("mes").value;
 		var aulasString = $('#turma option:selected').attr("data-aulas");
+		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
+		alert(presen);
+		var alunosString = $('#turma option:selected').attr("data-alunos");
 		var aulas = aulasString.split(",");
-		$("#chamada tr").remove();
-		$('#chamada').append('<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th></tr>');
-		var tr = document.getElementById('chamada').tHead.children[0];
+		var aulasMes = [];
+		var alunos = alunosString.split(",");
+		$('#chamada').empty()
+		var titulo = "";
+		titulo += '<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
+		//var tr = document.getElementById('chamada').tHead.children[0];
 		var i=0;
+		var j=0;
 		//tr.insertCell(0).outerHTML = '<th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
 		for (i=0; i<aulas.length; i++) {
 			if (aulas[i].substring(3,5) == mes) {
-				tr.insertCell(1).outerHTML = '<th style="text-align: center;">' + aulas[i].substring(0,2) + '</th>';
+				aulasMes.push(aulas[i].substring(0,2));
+				//tr.insertCell(1).outerHTML = '<th style="text-align: center;">' + aulas[i].substring(0,2) + '</th>';
+				titulo +='<th style="text-align: center;">' + aulas[i].substring(0,2) + '</th>';
 			}
 		}
-	
-
-		
+		titulo +='</tr>';
+		$('#chamada').append(titulo);
+		var linha = "";
+		for (i=0;i<alunos.length;i++) {
+			
+			linha += '<tr class="coluna-sh">';
+			linha += '<td align="center">' + alunos[i] + '</td>';
+			for (j=0; j<aulasMes.length; j++) {
+				linha += '<td align="center">' + '<button class="btnPresenca">P</button>' + '</td>';
+			}
+			linha += '</tr>';
+		}
+		$('#chamada').append(linha);
 	});
 </script>

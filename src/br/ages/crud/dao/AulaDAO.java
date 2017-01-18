@@ -106,8 +106,8 @@ public class AulaDAO {
 				
 				
 				statement.setInt(1, aula.getId());
-				statement.setInt(2, presenca.getIdAluno());
-				statement.setString(3, presenca.getMatriculaAluno());
+				statement.setInt(2, presenca.getAluno().getIdUsuario());
+				statement.setString(3, presenca.getAluno().getMatricula());
 				statement.setInt(4, presenca.getIdTurma());
 				statement.setString(5, presenca.getStatus());
 
@@ -157,7 +157,7 @@ public class AulaDAO {
 		return aulas;
 	}
 	
-	public ArrayList<Presenca> listarPresencasAula(Aula aula) throws PersistenciaException, SQLException {
+	public ArrayList<Presenca> listarPresencasAula(int idAula) throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		ArrayList<Presenca> presencas = new ArrayList<Presenca>();
 
@@ -170,17 +170,19 @@ public class AulaDAO {
 			sql.append(" where id_aula = ? ");
 			
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
-			statement.setInt(1, aula.getId());
+			statement.setInt(1, idAula);
 			
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				Presenca presenca = new Presenca();
-				presenca.setIdAluno(resultSet.getInt("id_aluno"));
-				presenca.setMatriculaAluno(resultSet.getString("matricula"));
+				Usuario aluno = new Usuario();
+				aluno.setIdUsuario(resultSet.getInt("id_aluno"));
+				aluno.setMatricula(resultSet.getString("matricula"));
+				presenca.setAluno(aluno);
 				presenca.setIdTurma(resultSet.getInt("id_turma"));
 				presenca.setStatus(resultSet.getString("status"));
-				presenca.setIdAula(aula.getId());
+				presenca.setIdAula(idAula);
 				presencas.add(presenca);
 			}
 		} catch (Exception e) {
@@ -190,4 +192,42 @@ public class AulaDAO {
 		return presencas;
 	}
 	
+
+
+public ArrayList<Presenca> listarPresencasAlunoTurma(int idAluno, int idTurma) throws PersistenciaException, SQLException {
+	Connection conexao = null;
+	ArrayList<Presenca> presencas = new ArrayList<Presenca>();
+
+	try {
+		conexao = ConexaoUtil.getConexao();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select id_aluno, matricula, id_turma, status, id_aula");
+		sql.append(" from tb_presenca ");
+		sql.append(" where id_aluno = ? and id_turma = ? and status = 'PRESENTE' ");
+		
+		PreparedStatement statement = conexao.prepareStatement(sql.toString());
+		statement.setInt(1, idAluno);
+		statement.setInt(2, idTurma);
+		
+		ResultSet resultSet = statement.executeQuery();
+
+		while (resultSet.next()) {
+			Presenca presenca = new Presenca();
+			Usuario aluno = new Usuario();
+			aluno.setIdUsuario(idAluno);
+			aluno.setMatricula(resultSet.getString("matricula"));
+			presenca.setAluno(aluno);
+			presenca.setIdTurma(idTurma);
+			presenca.setStatus(resultSet.getString("status"));
+			presenca.setIdAula(resultSet.getInt("id_aula"));
+			presencas.add(presenca);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return presencas;
+}
+
 }

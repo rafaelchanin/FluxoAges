@@ -12,6 +12,7 @@ public class Turma{
 	private int id;
 	private int numero;
 	private String status;
+	private String presencas;
 	private int ages;
 	private int semestre;
 	private int ano;
@@ -132,6 +133,23 @@ public class Turma{
 		}
 	}
 	
+	public String getAlunosString() {
+		String alunosString = "";
+		if (alunos == null) {
+			return "";
+		}
+		else {
+			for (Usuario aluno : alunos){
+				//date = date + "," + aula.getData().toString();
+				if (alunosString.equals("")) 
+					alunosString=aluno.getNome();
+				else
+					alunosString = alunosString + "," + aluno.getNome();
+			}
+			return alunosString;
+		}
+	}
+	
 	public void setAulas(ArrayList<Aula> aulas) {
 		this.aulas = aulas;
 	}
@@ -139,6 +157,14 @@ public class Turma{
 	@Override
 	public String toString() {
 		return ano + " / " + semestre + " - AGES " + ages +" - " + numero;
+	}
+
+	public String getPresencas() {
+		return presencas;
+	}
+
+	public void setPresencas(String presencas) {
+		this.presencas = presencas;
 	}
 	
 	
