@@ -20,23 +20,27 @@ import br.ages.crud.command.AddStakeholderCommand;
 import br.ages.crud.command.AddUserCommand;
 import br.ages.crud.command.AdicionaAulasCommand;
 import br.ages.crud.command.AdicionaProjetoCommand;
+import br.ages.crud.command.AdicionaTimeCommand;
 import br.ages.crud.command.AdicionaTurmaCommand;
 import br.ages.crud.command.Command;
 import br.ages.crud.command.CreateScreenPontoCommand;
 import br.ages.crud.command.CreateScreenProjectCommand;
 import br.ages.crud.command.CreateScreenSkillCommand;
 import br.ages.crud.command.CreateScreenStakeholderCommand;
+import br.ages.crud.command.CreateScreenTimeCommand;
 import br.ages.crud.command.CreateScreenTurmaCommand;
 import br.ages.crud.command.CreateScreenUserCommand;
 import br.ages.crud.command.EditStakeholderCommand;
 import br.ages.crud.command.EditUserCommand;
 import br.ages.crud.command.EditaProjetoCommand;
+import br.ages.crud.command.EditaTimeCommand;
 import br.ages.crud.command.EditaTurmaCommand;
 import br.ages.crud.command.ListPontoTotalHorasCommand;
 import br.ages.crud.command.ListStakeholdersCommand;
 import br.ages.crud.command.ListUserCommand;
 import br.ages.crud.command.ListaAlunoCommand;
 import br.ages.crud.command.ListaProjetosCommand;
+import br.ages.crud.command.ListaTimesCommand;
 import br.ages.crud.command.ListaTurmasCommand;
 import br.ages.crud.command.LoginCommand;
 import br.ages.crud.command.LogoutCommand;
@@ -97,6 +101,12 @@ public class MainServlet extends HttpServlet {
 		comandos.put("adicionaAulas", new AdicionaAulasCommand());
 		comandos.put("registrarChamada", new RegistraChamadaCommand());
 	
+		
+		//COMANDOS DE TIME
+		comandos.put("telaTime", new CreateScreenTimeCommand());
+		comandos.put("listaTimes", new ListaTimesCommand());
+		comandos.put("adicionaTime", new AdicionaTimeCommand());
+		comandos.put("editaTime", new EditaTimeCommand());
 		
 		//COMANDOS DE STAKEHOLDER
 		
