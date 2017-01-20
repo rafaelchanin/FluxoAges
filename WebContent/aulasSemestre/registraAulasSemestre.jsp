@@ -217,7 +217,7 @@
 		
 		function reloadDatePicker() {
 			var semestre = document.getElementById("turma").value;
-			
+			var i=0;
 			var aulasString = $('#turma option:selected').attr("data-aulas");
 			semestre = semestre.substring(7, 8);
 			$('#datepicker1').data('datepicker').clearDates();
@@ -226,7 +226,14 @@
 			$('#datepicker4').data('datepicker').clearDates();
 			$('#datepicker5').data('datepicker').clearDates();
 			
-			var aulas = aulasString.split(",");
+			var aulasTemp = aulasString.split(",");
+			var aulas = [];
+			for (i=0; i < aulasTemp.length; i++) {
+				
+				var tempo = aulasTemp[i].split(":");
+			
+				aulas.push(tempo[1]);
+			}
 			
 			if(aux != semestre){
 				startCalendar();

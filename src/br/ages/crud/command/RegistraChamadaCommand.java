@@ -58,7 +58,7 @@ public class RegistraChamadaCommand implements Command {
 					 String presencasAluno = "";
 					 for (Presenca presenca : aulaBO.listarPresencasAlunoTurma(aluno.getIdUsuario(), turma.getId())) {
 						if (presencasAluno.equals("")) {
-							presencasAluno = aluno.getIdUsuario() + ":" + presenca.getIdAula();
+							presencasAluno = aluno.getIdUsuario() + "-" + aluno.getMatricula() + ":" + presenca.getIdAula();
 						}
 						else {
 							presencasAluno += "," + presenca.getIdAula(); 

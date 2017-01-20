@@ -125,9 +125,9 @@ public class Turma{
 				data = formatter.format(aula.getData());
 				//date = date + "," + aula.getData().toString();
 				if (date.equals("")) 
-					date=data;
+					date=aula.getId() + ":" + data;
 				else
-					date = date + "," + data;
+					date = date + "," + aula.getId() + ":" + data;
 			}
 			return date;
 		}
@@ -142,9 +142,9 @@ public class Turma{
 			for (Usuario aluno : alunos){
 				//date = date + "," + aula.getData().toString();
 				if (alunosString.equals("")) 
-					alunosString=aluno.getNome();
+					alunosString=aluno.getIdUsuario() + "-" + aluno.getMatricula() + ":" + aluno.getNome();
 				else
-					alunosString = alunosString + "," + aluno.getNome();
+					alunosString = alunosString + "," + aluno.getIdUsuario() + "-" + aluno.getMatricula() + ":" + aluno.getNome();
 			}
 			return alunosString;
 		}

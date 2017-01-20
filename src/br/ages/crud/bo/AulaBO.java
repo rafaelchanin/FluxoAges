@@ -70,6 +70,22 @@ public class AulaBO {
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PRESENCAS_AULA);
 		return ok;
 	}
+	
+	public boolean cadastrarPresencas(List<Presenca> presencas) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		boolean ok = false;
+		ok = aulaDAO.cadastrarPresencas(presencas);
+		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PRESENCAS_AULA);
+		return ok;
+	}
+	
+	public boolean excluirPresencas(List<Presenca> presencas) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		boolean ok = false;
+		ok = aulaDAO.excluirPresencas(presencas);
+		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_PRESENCAS_AULA);
+		return ok;
+	}
 /*
 	public boolean validarProjeto(Projeto project) throws NegocioException {
 		boolean valido = true;
@@ -134,6 +150,19 @@ public class AulaBO {
 
 		try {
 			listPresencas = aulaDAO.listarPresencasAula(idAula);
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listPresencas;
+	}
+	
+	public List<Presenca> listarPresencasTurma(int idTurma) throws NegocioException {
+		List<Presenca> listPresencas = null;
+
+		try {
+			listPresencas = aulaDAO.listarPresencasTurma(idTurma);
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);

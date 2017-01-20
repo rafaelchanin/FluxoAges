@@ -19,6 +19,7 @@ import br.ages.crud.command.AddSkillCommand;
 import br.ages.crud.command.AddStakeholderCommand;
 import br.ages.crud.command.AddUserCommand;
 import br.ages.crud.command.AdicionaAulasCommand;
+import br.ages.crud.command.AdicionaChamadasCommand;
 import br.ages.crud.command.AdicionaProjetoCommand;
 import br.ages.crud.command.AdicionaTurmaCommand;
 import br.ages.crud.command.Command;
@@ -96,6 +97,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("registrarAulas", new RegistraAulasTurmaCommand());
 		comandos.put("adicionaAulas", new AdicionaAulasCommand());
 		comandos.put("registrarChamada", new RegistraChamadaCommand());
+		comandos.put("adicionaChamada", new AdicionaChamadasCommand());
 	
 		
 		//COMANDOS DE STAKEHOLDER

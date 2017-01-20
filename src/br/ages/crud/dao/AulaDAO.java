@@ -121,6 +121,74 @@ public class AulaDAO {
 			return ok;
 		}
 	
+	public boolean cadastrarPresencas(List<Presenca> presencas) throws SQLException, PersistenciaException {
+
+		boolean ok = false;
+		Connection conexao = null;
+		//ArrayList<Presenca> presencas = aula.getPresencas();
+		try {
+			conexao = ConexaoUtil.getConexao();
+	
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("INSERT INTO tb_presenca (ID_AULA, ID_ALUNO, MATRICULA, ID_TURMA, STATUS)");
+			sql.append(" VALUES (?, ?, ?, ?, ?)");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+			for (Presenca presenca : presencas) {
+				
+				
+				statement.setInt(1, presenca.getIdAula());
+				statement.setInt(2, presenca.getAluno().getIdUsuario());
+				statement.setString(3, presenca.getAluno().getMatricula());
+				statement.setInt(4, presenca.getIdTurma());
+				statement.setString(5, presenca.getStatus());
+
+				ok = statement.execute();
+				
+			}
+			ok=true;
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {				
+			conexao.close();
+		}
+			return ok;
+		}
+	
+	public boolean excluirPresencas(List<Presenca> presencas) throws SQLException, PersistenciaException {
+
+		boolean ok = false;
+		Connection conexao = null;
+		//ArrayList<Presenca> presencas = aula.getPresencas();
+		try {
+			conexao = ConexaoUtil.getConexao();
+	
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM tb_presenca WHERE ID_AULA = ? AND ID_ALUNO = ? AND MATRICULA = ? AND ID_TURMA = ? AND STATUS = ?");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+			for (Presenca presenca : presencas) {
+				statement.setInt(1, presenca.getIdAula());
+				statement.setInt(2, presenca.getAluno().getIdUsuario());
+				statement.setString(3, presenca.getAluno().getMatricula());
+				statement.setInt(4, presenca.getIdTurma());
+				statement.setString(5, presenca.getStatus());
+
+				ok = statement.execute();
+				
+			}
+			ok=true;
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {				conexao.close();
+		}
+			return ok;
+		}
+	
 	public ArrayList<Aula> listarDiasAulasTurma(Turma turma) throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
@@ -193,6 +261,41 @@ public class AulaDAO {
 	}
 	
 
+	public ArrayList<Presenca> listarPresencasTurma(int idTurma) throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		ArrayList<Presenca> presencas = new ArrayList<Presenca>();
+
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select id_aluno, matricula, id_turma, status, id_aula");
+			sql.append(" from tb_presenca ");
+			sql.append(" where id_turma = ? ");
+			
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setInt(1, idTurma);
+			
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Presenca presenca = new Presenca();
+				Usuario aluno = new Usuario();
+				aluno.setIdUsuario(resultSet.getInt("id_aluno"));
+				aluno.setMatricula(resultSet.getString("matricula"));
+				presenca.setAluno(aluno);
+				presenca.setIdTurma(idTurma);
+				presenca.setStatus(resultSet.getString("status"));
+				presenca.setIdAula(resultSet.getInt("id_aula"));
+				presencas.add(presenca);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return presencas;
+	}
+	
 
 public ArrayList<Presenca> listarPresencasAlunoTurma(int idAluno, int idTurma) throws PersistenciaException, SQLException {
 	Connection conexao = null;

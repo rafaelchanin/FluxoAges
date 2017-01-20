@@ -45,4 +45,8 @@ public class Presenca {
 		this.status = status;
 	}
 	
+	public String toString() {
+		return "" + idAula + aluno.getIdUsuario() + idTurma;
+	}
+	
 }
