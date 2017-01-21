@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
+import br.ages.crud.bo.ProjetoBO;
+import br.ages.crud.bo.StakeholderBO;
 import br.ages.crud.bo.TimeBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
@@ -72,6 +74,7 @@ public class AdicionaTimeCommand implements Command {
 			boolean isValido = timeBO.validarTime(time);
 			
 			if (isValido) {
+				//ProjetoBO proj = new ProjetoBO();
 				timeBO.cadastrarTime(time);
 				request.getSession().setAttribute("time", time);
 				proxima = "main?acao=listaTimes";

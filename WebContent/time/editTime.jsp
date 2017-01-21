@@ -1,4 +1,7 @@
 <%@page import="br.ages.crud.model.Stakeholder"%>
+<%@page import="br.ages.crud.model.Projeto"%>
+<%@page import="br.ages.crud.bo.ProjetoBO"%>
+<%@page import="br.ages.crud.bo.StakeholderBO"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
@@ -58,7 +61,10 @@
 						<label class="form-label ages">Projeto: <span class="red">*</span></label> 
 						<select class="form-control" id="projeto" name="projeto"
 							required>
-							<option value="19">PLACEHOLDONIA</option>
+							<%	ProjetoBO projetoBO = new ProjetoBO();
+								for (Projeto proj : projetoBO.listarProjeto()){%>
+							<option value=<%=proj.getIdProjeto()%>><%=proj.getNomeProjeto()%></option>
+							<% } %>
 						</select>
 					</div>
 	
@@ -66,7 +72,10 @@
 						<label class="form-label ages">Orientador: <span class="red">*</span></label> 
 						<select class="form-control" id="orientador" name="orientador"
 							required>
-							<option value="19">PLACEHOLDEIRO</option>
+							<%	StakeholderBO stakeholderBO = new StakeholderBO();
+								for (Stakeholder stake: stakeholderBO.listarStakeholder()){%>
+							<option value=<%=stake.getIdStakeholder()%>><%=stake.getNomeStakeholder()%></option>
+							<% } %>
 						</select>
 					</div>
 				</div>

@@ -1,6 +1,9 @@
 <%@page import="br.ages.crud.model.Usuario"%>
+<%@page import="br.ages.crud.model.Stakeholder"%>
 <%@page import="br.ages.crud.model.Time"%>
 <%@page import="java.util.List"%>
+<%@page import="br.ages.crud.bo.ProjetoBO"%>
+<%@page import="br.ages.crud.bo.StakeholderBO"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
@@ -20,6 +23,8 @@
             <thead>
                 <tr>
                     <th style="text-align: center;">Nome</th>
+                    <th style="text-align: center;">Projeto</th>
+                    <th style="text-align: center;">Orientador</th>                    
                     <th style="text-align: center;">Status</th>
 					<th style="text-align: center;">Alunos</th>
 					<th style="text-align: center;"></th>
@@ -27,13 +32,22 @@
             </thead>
 
             <tbody> 
-            	<%
+            	<%	
+            		ProjetoBO proj = new ProjetoBO();
+            		
 					List<Time> listaTimes = (List<Time>) request.getAttribute("listaTimes");
 					for (Time time : listaTimes) {
+						
 				%>
 				          
             	<tr>
 	            	<td align="center" class="col-sm-4"><%=time.getAno()+" / "+ time.getSemestre()+" - AGES "%></td>
+	            	<td align="center" class="col-sm-1"><%=proj.buscarProjeto(time.getProjeto()).getNomeProjeto()%></td>
+	            	
+	            	<!-- stakeholder não funcionam sempre, pq?? -->
+	            	<!-- StakeholderBO.buscaStakeholderId(time.getOrientador()).getNomeStakeholder() -->
+	            	<td align="center" class="col-sm-3"><%="o que deveria ser está comentado no código!@!@@$@%FFFFFFFFFF"%></td>
+	            	
 	            	<td align="center" class="col-sm-2"><%=time.getStatus()%></td>
 	            	<td align="center" class="col-sm-6">
 					<button data-toggle="collapse" data-target="#usuarios<%=time.getId()%>"><%=time.getAlunos().size()%></button>
