@@ -14,7 +14,7 @@ import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 
 public class EditaTimeCommand implements Command{
-	
+
 	private TimeBO timeBO;
 	private Usuario usuario;
 	private String proxima;
@@ -32,56 +32,56 @@ public class EditaTimeCommand implements Command{
 		String projeto = request.getParameter("projeto");
 
 		int id = Integer.parseInt(idTime);
-		
+
 		int numSemestre=0;
 		if (semestre.equals("primeiro"))
 			numSemestre=1;
 		else
 			numSemestre=2;
-		
+
 		Time time = new Time();
-		
+
 		try{
-						if (alunos != null) {
-							ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-							for (String s : alunos) {
-								String[] temp = s.split(" ");
-								usuario = new Usuario();
-								usuario.setIdUsuario(Integer.valueOf(temp[0]));
-								usuario.setMatricula(temp[1]);
-								usuarios.add(usuario);
-							}
-							time.setAlunos(usuarios);
-						}
-						
-					
-						time.setId(id);
-						
-						if (!ano.equals(""))
-							time.setAno(Integer.valueOf(ano));
-						time.setSemestre(numSemestre);
-						if (!orientador.equals(""))
-							time.setOrientador(Integer.valueOf(orientador));
-						time.setStatus(statusTime);
-						if (!projeto.equals(""))
-							time.setProjeto(Integer.valueOf(projeto));
-						time.setDtInclusao(new Date());
-						
-						boolean isValido = timeBO.validarTime(time);
-						
-						if (isValido) {
-							timeBO.editarTime(time);
-							request.getSession().setAttribute("time", time);
-							proxima = "main?acao=listaTimes";
-							request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TIME.replace("?", time.getAno()+" / "+ time.getSemestre()+" - Projeto "+ time.getProjeto()+" - "+ time.getOrientador()));
-						} else {
-							request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS);
-						}
+			if (alunos != null) {
+				ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+				for (String s : alunos) {
+					String[] temp = s.split(" ");
+					usuario = new Usuario();
+					usuario.setIdUsuario(Integer.valueOf(temp[0]));
+					usuario.setMatricula(temp[1]);
+					usuarios.add(usuario);
+				}
+				time.setAlunos(usuarios);
+			}
+
+
+			time.setId(id);
+
+			if (!ano.equals(""))
+				time.setAno(Integer.valueOf(ano));
+			time.setSemestre(numSemestre);
+			if (!orientador.equals(""))
+				time.setOrientador(Integer.valueOf(orientador));
+			time.setStatus(statusTime);
+			if (!projeto.equals(""))
+				time.setProjeto(Integer.valueOf(projeto));
+			time.setDtInclusao(new Date());
+
+			boolean isValido = timeBO.validarTime(time);
+
+			if (isValido) {
+				timeBO.editarTime(time);
+				request.getSession().setAttribute("time", time);
+				proxima = "main?acao=listaTimes";
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TIME.replace("?", time.getAno()+" / "+ time.getSemestre()+" - Projeto "+ time.getProjeto()+" - "+ time.getOrientador()));
+			} else {
+				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS);
+			}
 
 		}catch(Exception e){
 			request.setAttribute("msgErro", e.getMessage());
 		}		
-		
+
 		return proxima;		
 	}
 

@@ -17,14 +17,14 @@ import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 
 public class TimeDAO {
-	
+
 	private UsuarioDAO usuarioDAO;
 	private Usuario alunoTime;
-	
+
 	public TimeDAO(){
-		
+
 	}
-	
+
 	public boolean cadastrarTime(Time time) throws PersistenciaException, SQLException, ParseException {
 		boolean ok = false;
 		Connection conexao = null;
@@ -55,7 +55,7 @@ public class TimeDAO {
 				time.setId(idTime.intValue());
 				ok=true;
 			}
-			
+
 			if (time.getAlunos() != null) 
 				inserirAlunosTime(conexao, time);
 
@@ -87,7 +87,7 @@ public class TimeDAO {
 		}
 		return ok;
 	}
-	
+
 	public void editarTime(Time time) throws PersistenciaException, SQLException, ParseException{
 		Connection conexao = null;
 		try {
@@ -107,7 +107,7 @@ public class TimeDAO {
 			statement.setInt(6, time.getId());
 
 			statement.executeUpdate();
-			
+
 			removerAlunosTime(conexao, time);
 			if (time.getAlunos() != null)
 				inserirAlunosTime(conexao, time);
@@ -118,7 +118,7 @@ public class TimeDAO {
 			conexao.close();
 		}
 	}
-	
+
 	public void removerTime(Time time) throws PersistenciaException {
 		Connection conexao = null;
 		try {
@@ -145,7 +145,7 @@ public class TimeDAO {
 			}
 		}
 	}
-	
+
 	public Time buscaTime(int idTime){
 		Connection conexao = null;
 		Time time = new Time();
@@ -189,12 +189,12 @@ public class TimeDAO {
 		ok = statement.execute();
 
 		return ok;
-		
+
 	}
 	public ArrayList<Time> listarTimes() throws PersistenciaException, SQLException{
 		Connection conexao = null;
 		ArrayList<Time> listaTimes = new ArrayList<Time>();
-		
+
 		try {
 			conexao = ConexaoUtil.getConexao();
 
@@ -216,18 +216,18 @@ public class TimeDAO {
 				time.setOrientador(resultSet.getInt("id_orientador"));
 				time.setProjeto(resultSet.getInt("id_projeto"));
 				time.setAlunos(buscarAlunosTime(conexao, resultSet.getInt("id_time")));
-				
+
 				listaTimes.add(time);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		
-		
+
+
 		return listaTimes;
 	}
-	
+
 	private ArrayList<Usuario> buscarAlunosTime(Connection conexao, int idTime) throws PersistenciaException, SQLException {
 
 		List<Usuario> alunosTime = new ArrayList<Usuario>();
@@ -260,6 +260,6 @@ public class TimeDAO {
 		return (ArrayList<Usuario>) alunosTime;
 
 	}
-	
+
 
 }
