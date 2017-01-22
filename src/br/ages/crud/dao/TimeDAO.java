@@ -235,7 +235,7 @@ public class TimeDAO {
 		try {
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT ID_USUARIO, MATRICULA ");
+			sql.append("SELECT ID_ALUNO, MATRICULA ");
 			sql.append(" FROM tb_time_aluno");
 			sql.append(" WHERE ID_TIME = ?");
 
