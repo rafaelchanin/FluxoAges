@@ -22,7 +22,7 @@
 
             <thead>
                 <tr>
-                    <th style="text-align: center;">Nome</th>
+                    <th style="text-align: center;">Ano/Semestre</th>
                     <th style="text-align: center;">Projeto</th>
                     <th style="text-align: center;">Orientador</th>                    
                     <th style="text-align: center;">Status</th>
