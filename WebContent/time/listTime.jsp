@@ -22,7 +22,7 @@
 
             <thead>
                 <tr>
-                    <th style="text-align: center;">Ano/Semestre</th>
+                    <th style="text-align: center;">Ano / Semestre</th>
                     <th style="text-align: center;">Projeto</th>
                     <th style="text-align: center;">Orientador</th>                    
                     <th style="text-align: center;">Status</th>
@@ -41,7 +41,7 @@
 				%>
 				          
             	<tr>
-	            	<td align="center" class="col-sm-4"><%=time.getAno()+" / "+ time.getSemestre()+"%></td>
+	            	<td align="center" class="col-sm-4"><%=time.getAno()+" / "+ time.getSemestre()%></td>
 	            	<td align="center" class="col-sm-1"><%=proj.buscarProjeto(time.getProjeto()).getNomeProjeto()%></td>
 	            	
 	            	<!-- stakeholder não funcionam sempre, pq?? -->
