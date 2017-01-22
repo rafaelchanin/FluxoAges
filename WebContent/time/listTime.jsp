@@ -34,7 +34,7 @@
             <tbody> 
             	<%	
             		ProjetoBO proj = new ProjetoBO();
-            		
+            		StakeholderBO stake = new StakeholderBO();
 					List<Time> listaTimes = (List<Time>) request.getAttribute("listaTimes");
 					for (Time time : listaTimes) {
 						
@@ -46,7 +46,7 @@
 	            	
 	            	<!-- stakeholder não funcionam sempre, pq?? -->
 	            	<!-- StakeholderBO.buscaStakeholderId(time.getOrientador()).getNomeStakeholder() -->
-	            	<td align="center" class="col-sm-3"><%="o que deveria ser está comentado no código!@!@@$@%FFFFFFFFFF"%></td>
+	            	<td align="center" class="col-sm-3"><%=stake.buscaStakeholderId(time.getOrientador()).getNomeStakeholder()%></td>
 	            	
 	            	<td align="center" class="col-sm-2"><%=time.getStatus()%></td>
 	            	<td align="center" class="col-sm-6">

@@ -23,7 +23,7 @@ public class EditaTimeCommand implements Command{
 	public String execute(HttpServletRequest request) throws SQLException {
 		timeBO =  new TimeBO();
 		proxima = "time/editTime.jsp";
-		String idTime = request.getParameter("idTurma");
+		String idTime = request.getParameter("idTime");
 		String ano = request.getParameter("ano");
 		String[] alunos = request.getParameterValues("alunos");
 		String semestre = request.getParameter("semestre");
@@ -67,7 +67,6 @@ public class EditaTimeCommand implements Command{
 							time.setProjeto(Integer.valueOf(projeto));
 						time.setDtInclusao(new Date());
 						
-						//boolean isValido = projetoBO.validarProjeto(projeto);
 						boolean isValido = timeBO.validarTime(time);
 						
 						if (isValido) {
