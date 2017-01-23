@@ -57,6 +57,7 @@ public class AdicionaAulasCommand implements Command {
 		String[] aulas = dias.split("[,]");
 		ArrayList<Aula> diasAulas = new ArrayList<>();
 		turma.setId(id);
+		//List<Aula> aulasExistentes = aulaBO.listarDiasAulasTurma(id);
 		for (String s : aulas) {
 			Date data = new Date();
 			data = Util.stringToDate(s);
@@ -66,9 +67,22 @@ public class AdicionaAulasCommand implements Command {
 			aula.setDtInclusao(new Date());
 			aula.setStatus("AULA");
 			aula.setObservacao("");
-			diasAulas.add(aula);
+			//boolean teste = false;;
+			//for (Aula aulaVerificada : aulasExistentes) {
+			//	if (aula.toString().equals(aulaVerificada.toString())) {
+			//		teste = true;
+			//	}
+			//}
+			//if (teste == false)
+				diasAulas.add(aula);
 		}
 		turma.setAulas(diasAulas);
+		
+		//for (Aula aulaVerificado : aulasExistentes) {
+		//	for (Aula aulaBanco : turma.getAulas()) {
+		//		
+		//	}
+		//}
 		
 				
 		//	boolean isValido = projetoBO.validarProjeto(projeto);

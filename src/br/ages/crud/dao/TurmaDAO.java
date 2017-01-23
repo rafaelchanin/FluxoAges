@@ -330,7 +330,7 @@ public class TurmaDAO {
 				turma.setDtInclusao(dataInclusao);
 
 				turma.setAlunos(buscarAlunosTurma(conexao, resultSet.getInt("id_turma")));
-				
+				turma.setAulas(buscarAulasTurma(conexao, resultSet.getInt("id_turma")));
 				
 			}
 			return turma;

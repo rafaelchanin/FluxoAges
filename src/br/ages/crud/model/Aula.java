@@ -70,4 +70,8 @@ public class Aula {
 		this.idTurma = idTurma;
 	}
 	
+	public String toString() {
+		return "" + idTurma + data;
+	}
+	
 }

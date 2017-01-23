@@ -189,7 +189,7 @@ public class AulaDAO {
 			return ok;
 		}
 	
-	public ArrayList<Aula> listarDiasAulasTurma(Turma turma) throws PersistenciaException, SQLException {
+	public ArrayList<Aula> listarDiasAulasTurma(int idTurma) throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
 
@@ -202,7 +202,7 @@ public class AulaDAO {
 			sql.append(" where id_turma = ? ");
 			
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
-			statement.setInt(1, turma.getId());
+			statement.setInt(1, idTurma);
 			
 			ResultSet resultSet = statement.executeQuery();
 

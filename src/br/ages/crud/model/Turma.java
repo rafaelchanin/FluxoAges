@@ -133,6 +133,28 @@ public class Turma{
 		}
 	}
 	
+	public String getAulasPresencaString() {
+		String date = "";
+		if (aulas == null) {
+			return "";
+		}
+		else {
+			for (Aula aula : aulas){
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				String data;
+				if (aula.getPresencas().size() != 0) {
+					data = formatter.format(aula.getData());
+				
+					if (date.equals("")) 
+						date=aula.getId() + ":" + data;
+					else
+						date = date + "," + aula.getId() + ":" + data;
+				}
+			}
+			return date;
+		}
+	}
+	
 	public String getAlunosString() {
 		String alunosString = "";
 		if (alunos == null) {

@@ -132,11 +132,11 @@ public class AulaBO {
 
 	}*/
 
-	public List<Aula> listarDiasAulasTurma(Turma turma) throws NegocioException {
+	public List<Aula> listarDiasAulasTurma(int idTurma) throws NegocioException {
 		List<Aula> listAula = null;
 
 		try {
-			listAula = aulaDAO.listarDiasAulasTurma(turma);
+			listAula = aulaDAO.listarDiasAulasTurma(idTurma);
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
