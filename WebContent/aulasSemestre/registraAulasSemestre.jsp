@@ -88,6 +88,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		var startDate1, endDate1, startDate2, endDate2, startDate3, endDate3, startDate4, endDate4, startDate5, endDate5, ano2;
 		var ano = new Date().getFullYear();
 		var aux = 0;
@@ -128,7 +129,7 @@
 				ano2 = ano + 1;
 			}
 			$('#datepicker1').datepicker({
-				format: "d/m/yyyy",
+				format: "dd/mm/yyyy",
 				multidate: true,
 				language: "pt-BR",
 				daysOfWeekDisabled: [0, 6],
@@ -136,6 +137,7 @@
 				endDate: new Date(ano + endDate1),
 				maxViewMode: "days"
 			});
+		
 			$('#datepicker2').datepicker({
 				format: "d/m/yyyy",
 				multidate: true,
@@ -215,6 +217,8 @@
 			$('#datepicker5').data('datepicker').clearDates();
 	    });
 		
+		
+		
 		function reloadDatePicker() {
 			var semestre = document.getElementById("turma").value;
 			var i=0;
@@ -243,6 +247,7 @@
 				var tempo2 = presencasTemp[i].split(":");
 			
 				presencas.push(tempo2[1]);
+				
 			}
 			
 			if(aux != semestre){
@@ -352,13 +357,6 @@
 								else if (aulas[i].substring(3, 5) == 07 || aulas[i].substring(3, 5) == 12)
 									date5.push(aulas[i]);	
 				}
-				
-				
-				
-
-			
-			
-
 				i=0;
 				var pre1 = [];
 				var pre2 = [];
@@ -403,6 +401,7 @@
 					$('#datepicker5').datepicker('setDates', date5);
 				
 			}
+			
 		}
 
 		
@@ -429,6 +428,10 @@
 		  
 		 form.submit();
 	}
+	
+	$("html").on("mouseenter",".active.disabled.day", function() {
+	    $(this).attr('title', 'Essa aula possui presenças!');
+	});
 	
 </script>
 <jsp:include page="../template/foot.jsp"></jsp:include>
