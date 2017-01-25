@@ -29,16 +29,16 @@ public class AulaDAO {
 	public AulaDAO() {	
 	}
 	
-	public boolean cadastrarDiasAulasTurma(Turma turma) throws SQLException, PersistenciaException {
+	public boolean cadastrarDiasAulas(List<Aula> aulas) throws SQLException, PersistenciaException {
 
 		boolean ok = false;
 		Connection conexao = null;
-		ArrayList<Aula> aulas = turma.getAulas();
+		//ArrayList<Aula> aulas = turma.getAulas();
 		try {
 			Integer idAula = null;
 			conexao = ConexaoUtil.getConexao();
 			
-			removerAulasTurma(conexao, turma.getId());
+			//removerAulasTurma(conexao, turma.getId());
 			
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO tb_aula (ID_TURMA, DT_INCLUSAO, OBSERVACAO, STATUS, DATA)");
@@ -51,7 +51,7 @@ public class AulaDAO {
 				java.sql.Date dataInclusao = new java.sql.Date(aula.getDtInclusao().getTime());
 				java.sql.Date data = new java.sql.Date(aula.getData().getTime());
 
-				statement.setInt(1, turma.getId());
+				statement.setInt(1, aula.getIdTurma());
 				statement.setDate(2, dataInclusao);
 				statement.setString(3, aula.getObservacao());
 				statement.setString(4, aula.getStatus());
@@ -73,18 +73,31 @@ public class AulaDAO {
 			return ok;
 		}
 
-	private boolean removerAulasTurma(Connection conexao, int idTurma) throws SQLException {
+	public boolean removerDiasAulas(List<Aula> aulas) throws SQLException {
+
 		boolean ok = false;
+		Connection conexao = null;
+		
+		try {
+			conexao = ConexaoUtil.getConexao();
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM tb_aula WHERE ID_AULA = ? AND ID_TURMA = ? ");
 
-		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE FROM tb_aula WHERE ID_TURMA = ?");
+			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
-		PreparedStatement statement = conexao.prepareStatement(sql.toString());
-		statement.setInt(1, idTurma);
-		ok = statement.execute();
-
-		return ok;
-	}
+			for (Aula aula : aulas) {
+				statement.setInt(1, aula.getId());
+				statement.setInt(2, aula.getIdTurma());
+				ok = statement.execute();
+				
+			}
+			ok=true;
+		} catch (ClassNotFoundException | SQLException e) {
+			
+		} finally {				conexao.close();
+		}
+			return ok;
+		}
 	
 	public boolean cadastrarPresencasAula(Aula aula) throws SQLException, PersistenciaException {
 

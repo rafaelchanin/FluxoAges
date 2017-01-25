@@ -55,9 +55,10 @@ public class AdicionaAulasCommand implements Command {
 		try {
 		int id = Integer.parseInt(tempId[1]);
 		String[] aulas = dias.split("[,]");
-		ArrayList<Aula> diasAulas = new ArrayList<>();
+		List<Aula> diasAulas = new ArrayList<>();
 		turma.setId(id);
-		//List<Aula> aulasExistentes = aulaBO.listarDiasAulasTurma(id);
+		List<Aula> aulasExistentes = aulaBO.listarDiasAulasTurma(id);
+		List<Aula> aulasExcluir = new ArrayList<>();
 		for (String s : aulas) {
 			Date data = new Date();
 			data = Util.stringToDate(s);
@@ -67,28 +68,38 @@ public class AdicionaAulasCommand implements Command {
 			aula.setDtInclusao(new Date());
 			aula.setStatus("AULA");
 			aula.setObservacao("");
-			//boolean teste = false;;
-			//for (Aula aulaVerificada : aulasExistentes) {
-			//	if (aula.toString().equals(aulaVerificada.toString())) {
-			//		teste = true;
-			//	}
-			//}
-			//if (teste == false)
+			boolean teste = false;;
+			for (Aula aulaVerificada : aulasExistentes) {
+				if (aula.toString().equals(aulaVerificada.toString())) {
+					teste = true;
+				}
+			}
+			if (teste == false)
 				diasAulas.add(aula);
 		}
-		turma.setAulas(diasAulas);
 		
-		//for (Aula aulaVerificado : aulasExistentes) {
-		//	for (Aula aulaBanco : turma.getAulas()) {
-		//		
-		//	}
-		//}
+		
+		for (Aula aulaBanco : aulasExistentes) {
+			boolean teste = false;
+			for (Aula aulaTela : turma.getAulas()) {
+				if (aulaBanco.toString().equals(aulaTela.toString())) {
+					teste = true;
+					break;
+				}
+			}
+			if (teste == false)
+				aulasExcluir.add(aulaBanco);
+		}
 		
 				
 		//	boolean isValido = projetoBO.validarProjeto(projeto);
 			boolean isValido=true;
 			if (isValido) {
-			aulaBO.cadastrarDiasAulasTurma(turma);
+			if(!diasAulas.isEmpty())
+				aulaBO.cadastrarDiasAulas(diasAulas);
+			if(!aulasExcluir.isEmpty())
+				aulaBO.removerDiasAulas(aulasExcluir);
+			
 			proxima = "main?acao=registrarAulas";
 				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_AULAS.replace("?", nomeTurma));
 			} else {

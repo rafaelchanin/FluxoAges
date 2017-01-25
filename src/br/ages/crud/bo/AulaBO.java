@@ -55,9 +55,17 @@ public class AulaBO {
 		return valido;
 	}*/
 
-	public boolean cadastrarDiasAulasTurma(Turma turma) throws SQLException, ParseException, NegocioException, PersistenciaException {
+	public boolean cadastrarDiasAulas(List<Aula> aulas) throws SQLException, ParseException, NegocioException, PersistenciaException {
 		boolean ok = false;
-		ok = aulaDAO.cadastrarDiasAulasTurma(turma);
+		ok = aulaDAO.cadastrarDiasAulas(aulas);
+		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_DIAS_AULAS_TURMA);
+		return ok;
+	}
+	
+	public boolean removerDiasAulas(List<Aula> aulas) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		boolean ok = false;
+		ok = aulaDAO.removerDiasAulas(aulas);
 		if (ok == false)
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_DIAS_AULAS_TURMA);
 		return ok;

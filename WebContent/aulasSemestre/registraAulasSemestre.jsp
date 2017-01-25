@@ -274,6 +274,7 @@
 				var date3 = [];
 				var date4 = [];
 				var date5 = [];
+				
 				for (i=0;i<aulas.length; i++) {
 					if (aulas[i].substring(3, 5) == 03 || aulas[i].substring(3, 5) == 08) 
 						date1.push(aulas[i]);
@@ -294,6 +295,7 @@
 				var pre3 = [];
 				var pre4 = [];
 				var pre5 = [];
+				if (presencas[0] != null) {
 				for (i=0;i<presencas.length; i++) {
 					if (presencas[i].substring(3, 5) == 03 || presencas[i].substring(3, 5) == 08) 
 						pre1.push(presencas[i]);
@@ -305,6 +307,7 @@
 								pre4.push(presencas[i]);
 								else if (presencas[i].substring(3, 5) == 07 || presencas[i].substring(3, 5) == 12)
 									pre5.push(presencas[i]);	
+				}
 				}
 				if (pre1[0] != null)
 					$('#datepicker1').datepicker('setDatesDisabled', pre1);
@@ -330,9 +333,10 @@
 					$('#datepicker5').datepicker('setDatesDisabled', pre5);
 				if (date5[0] != null)
 					$('#datepicker5').datepicker('setDates', date5);
-				
-				
-				
+		
+			
+			
+			
 			} else {
 				$('#datepicker1').data('datepicker').clearDates();
 				$('#datepicker2').data('datepicker').clearDates();
@@ -363,6 +367,7 @@
 				var pre3 = [];
 				var pre4 = [];
 				var pre5 = [];
+				if (presencas[0] != null) {
 				for (i=0;i<presencas.length; i++) {
 					if (presencas[i].substring(3, 5) == 03 || presencas[i].substring(3, 5) == 08) 
 						pre1.push(presencas[i]);
@@ -374,6 +379,7 @@
 								pre4.push(presencas[i]);
 								else if (presencas[i].substring(3, 5) == 07 || presencas[i].substring(3, 5) == 12)
 									pre5.push(presencas[i]);	
+				}
 				}
 				if (pre1[0] != null)
 					$('#datepicker1').datepicker('setDatesDisabled', pre1);

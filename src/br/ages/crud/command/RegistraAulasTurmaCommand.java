@@ -62,11 +62,11 @@ public class RegistraAulasTurmaCommand implements Command {
 
 			//request.setAttribute("usuarios", usuarios);
 
-			listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
+			// listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
 			//listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
 			
 			//pode ser retirado no futuro
-			request.setAttribute("listaPontos", listaPontos);
+			// request.setAttribute("listaPontos", listaPontos);
 			request.setAttribute("turmasAtivas", turmasAtivas);
 
 			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
@@ -75,7 +75,7 @@ public class RegistraAulasTurmaCommand implements Command {
 			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
 			if (request.getAttribute("nomeTurma") == null || request.getAttribute("nomeTurma").equals(""))
 				request.setAttribute("nomeTurma", "");
-			request.setAttribute("dtSaida", dataSaida);
+			// request.setAttribute("dtSaida", dataSaida);
 		
 		} catch (NegocioException e) {
 			e.printStackTrace();

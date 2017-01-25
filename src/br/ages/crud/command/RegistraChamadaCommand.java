@@ -48,8 +48,8 @@ public class RegistraChamadaCommand implements Command {
 
 			//Integer idUsuario = Integer.valueOf(request.getParameter("id_usuario"));
 			Integer idUsuario=1;
-			 dataEntrada = request.getParameter("dtEntrada");
-			 dataSaida = request.getParameter("dtSaida");
+			 //dataEntrada = request.getParameter("dtEntrada");
+			 //dataSaida = request.getParameter("dtSaida");
 			 turmasAtivas = turmaBO.listarTurmasAtivas();
 			 
 			 for (Turma turma : turmasAtivas) {
@@ -70,25 +70,25 @@ public class RegistraChamadaCommand implements Command {
 				 turma.setPresencas(presencasTurma);
 			 }
 		
-			if (dataSaida == null || dataEntrada == null ) {
-	   			 dataEntradaDate = Util.getDataInicialSemestre();
-				 dataSaidaDate = new Date();
-				 dataEntrada = Util.dateToString(dataEntradaDate);
-				 dataSaida = Util.dateToString(dataSaidaDate);
-			}else {
-				dataEntradaDate = Util.stringToDate(dataEntrada);
-				dataSaidaDate = Util.stringToDate(dataSaida);
-			}
+			//if (dataSaida == null || dataEntrada == null ) {
+	   		//	 dataEntradaDate = Util.getDataInicialSemestre();
+			//	 dataSaidaDate = new Date();
+			//	 dataEntrada = Util.dateToString(dataEntradaDate);
+			//	 dataSaida = Util.dateToString(dataSaidaDate);
+			//}else {
+			//	dataEntradaDate = Util.stringToDate(dataEntrada);
+			//	dataSaidaDate = Util.stringToDate(dataSaida);
+			//}
 					
 			//usuarios = usuarioBO.listarUsuarioAlunos();
 
 			//request.setAttribute("usuarios", usuarios);
 
-			listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
+			//listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
 			//listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
 			
 			//pode ser retirado no futuro
-			request.setAttribute("listaPontos", listaPontos);
+			//request.setAttribute("listaPontos", listaPontos);
 			request.setAttribute("turmasAtivas", turmasAtivas);
 
 			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
@@ -97,7 +97,7 @@ public class RegistraChamadaCommand implements Command {
 			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
 			if (request.getAttribute("nomeTurma") == null || request.getAttribute("nomeTurma").equals(""))
 				request.setAttribute("nomeTurma", "");
-			request.setAttribute("dtSaida", dataSaida);
+			//request.setAttribute("dtSaida", dataSaida);
 		
 		} catch (NegocioException e) {
 			e.printStackTrace();
