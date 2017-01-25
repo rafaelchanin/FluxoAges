@@ -63,6 +63,7 @@ public class AdicionaChamadasCommand implements Command {
 		List<Presenca> presencasTela = new ArrayList<>();
 		List<Presenca> aulasExcluir = new ArrayList<>();
 		List<Presenca> aulasAdicionar = new ArrayList<>();
+		if (!resultados[0].equals("")) {
 		for (String s : resultados) {
 			String temp[] = s.split("[:]");
 			String tempUsuario = temp[0];
@@ -88,6 +89,7 @@ public class AdicionaChamadasCommand implements Command {
 			}
 			if (teste == true)
 				aulasAdicionar.add(presenca);
+		}
 		}
 		
 		for (Presenca pBanco : presencasBanco) {
