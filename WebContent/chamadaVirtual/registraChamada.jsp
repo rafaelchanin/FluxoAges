@@ -92,7 +92,8 @@
 	
 	function defineMeses() {
 		var aulasString = $('#turma option:selected').attr("data-aulas");
-		var aulas = aulasString.split(",");
+		if (aulasString != null)
+			var aulas = aulasString.split(",");
 		var semestre = document.getElementById("turma").value;
 		semestre = semestre.substring(7, 8);
 		if (semestre == 1) {
@@ -139,9 +140,11 @@
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
 		var alunosString = $('#turma option:selected').attr("data-alunos");
-		var aulas = aulasString.split(",");
+		if (aulasString != null)
+			var aulas = aulasString.split(",");
 		var aulasMes = [];
-		var alunos = alunosString.split(",");
+		if (alunosString != null)
+			var alunos = alunosString.split(",");
 		$('#chamada').empty()
 		var titulo = "";
 		titulo += '<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
@@ -178,9 +181,6 @@
 							verif=1;
 							break;
 						}
-					/*	else {
-							linha += '<td align="center">' + '<input type="button" id="' + ArrayIdAluno[0] + ':' + aulasMes[j] + '" value="F" onclick="clickBotao(this);" class="btnFalta" />' + '</td>';
-						}*/
 					}
 				}
 				if (verif==0)

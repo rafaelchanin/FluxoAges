@@ -231,23 +231,25 @@
 			$('#datepicker4').data('datepicker').clearDates();
 			$('#datepicker5').data('datepicker').clearDates();
 			
-			var aulasTemp = aulasString.split(",");
-			var presencasTemp = presencasString.split(",");
 			var aulas = [];
 			var presencas = [];
-			for (i=0; i < aulasTemp.length; i++) {
-				
-				var tempo = aulasTemp[i].split(":");
 			
-				aulas.push(tempo[1]);
+			if (aulasString != null) {
+				var aulasTemp = aulasString.split(",");
+				for (i=0; i < aulasTemp.length; i++) {
+				
+					var tempo = aulasTemp[i].split(":");
+			
+					aulas.push(tempo[1]);
+				}
 			}
 			
-			for (i=0; i < presencasTemp.length; i++) {
-				
-				var tempo2 = presencasTemp[i].split(":");
-			
-				presencas.push(tempo2[1]);
-				
+			if (presencasTemp != null) {
+				var presencasTemp = presencasString.split(",");
+				for (i=0; i < presencasTemp.length; i++) {
+					var tempo2 = presencasTemp[i].split(":");
+					presencas.push(tempo2[1]);
+				}
 			}
 			
 			if(aux != semestre){
