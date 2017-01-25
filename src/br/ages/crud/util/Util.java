@@ -115,6 +115,7 @@ public class Util {
 
 		return data;
 	}
+	
 	public static String dateTimeToString(Date d) throws ParseException {
 		if(d != null) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -126,7 +127,7 @@ public class Util {
 		return "";
 	}
 
-	public  String getVersion() {
+	public static String getVersion() {
 			String version = configDB.getString(Constantes.VERSAO_SISTEMA);
 		return version;
 	}

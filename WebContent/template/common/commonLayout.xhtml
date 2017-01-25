@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+	<h:outputStylesheet name="bootstrap.min.css" library="css" />
+	<h:outputStylesheet name="bootstrap-theme.min.css" library="css" />
+	<h:outputStylesheet name="dataTables.bootstrap.css" library="css" />
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputScript name="bootstrap.min.js" library="js"></h:outputScript>
+	
+	<h:outputScript name="jquery.dataTables.min.js" library="js"></h:outputScript>
+	<h:outputScript name="dataTables.bootstrap.min.js" library="js"></h:outputScript>
+	<h:outputScript name="jquery.dataTables.min.css" library="css"></h:outputScript>
+	
+	<h:outputScript name="jquery.bootstrap-duallistbox.min.js" library="js"></h:outputScript>
+	<h:outputStylesheet name="bootstrap-duallistbox.min.css" library="css" />
+
+	<h:outputScript name="moment.js" library="js"></h:outputScript>
+	<h:outputScript name="pt-br.js" library="js"></h:outputScript>
+	<h:outputScript name="transition.js" library="js"></h:outputScript>
+	<h:outputScript name="collapse.js" library="js"></h:outputScript>
+	<h:outputScript name="bootstrap-datetimepicker.min.js" library="js"></h:outputScript>
+
+	<h:outputStylesheet name="bootstrap-datetimepicker.min.css" library="css" />
+
+	<h:outputScript name="scriptsGenericos.js" library="js"></h:outputScript>
+    </h:head>
+
+    <h:body>
+
+	<div id="page">
+
+	    <div id="header">
+		<ui:insert name="header" >
+		  <ui:include src="/template/common/commonHeader.xhtml" />
+		</ui:insert>
+	    </div>
+
+	    <div id="content">
+	  	<ui:insert name="content" >
+	 	  <ui:include src="/template/common/commonContent.xhtml" />
+	   	</ui:insert>
+	    </div>
+
+	    <div id="footer">
+	    	<ui:insert name="footer" >
+	    	  <ui:include src="/template/common/commonFooter.xhtml" />
+	    	</ui:insert>
+    	    </div>
+
+        </div>
+
+    </h:body>
+</html>

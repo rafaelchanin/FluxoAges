@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<p:growl id="msgs" showDetail="true" />
+				
+				<p:panel id="projetos" header="Projetos do GitLab" style="margin-bottom:50px">
+					<h:panelGrid columns="3" cellpadding="10">
+						<p:dataTable value="#{projetoMB.gitLabProjects}" var="p">
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="NOME" />
+									</f:facet>
+									<h:outputText value="#{p.name}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="URL" />
+									</f:facet>
+									<h:outputText value="#{p.httpUrl}" />
+								</p:column> 
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="Data"/>
+									</f:facet>
+									<h:outputText value="#{p.createdAt}" >
+										 <f:convertDateTime dateStyle="short" pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</p:column> 
+							</p:dataTable>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

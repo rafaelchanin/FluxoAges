@@ -13,8 +13,7 @@
 	 	<link rel="stylesheet" href="./css/bootstrap-theme.min.css"> 
 
 		<!-- Include the plugin's CSS and JS: Cassio DataTable -->
-	<!-- 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"> -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="./css/dataTables.bootstrap.css">
 
 		<!-- STYLE -->
 		<link rel="stylesheet" href="./css/style.css">
@@ -27,8 +26,8 @@
 
 
 		<!-- Include the plugin's CSS and JS: Cassio DataTable -->
-		<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
- 		<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+ 		<script type="text/javascript" src="./js/dataTables.bootstrap.min.js"></script>
 
 		
 		<!-- Include the plugin's CSS and JS: Cassio Dual ListBox -->
@@ -43,6 +42,11 @@
 		<script type="text/javascript" src="./js/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap-datetimepicker.min.css">
 		
+		<!-- Include the plugin's CSS and JS: Cassio Date Picker -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css">
+		<script src="js/masked.js" type="text/javascript"></script>
 	
 	</head>
     
@@ -98,8 +102,30 @@
 				          	<ul class="dropdown-menu">
 				            	<li><a href="main?acao=listaAluno">Lista Ponto</a></li>
 				            	<li><a href="main?acao=registrarPonto">Registrar Ponto</a></li>
-				            	<!--<li><a href="main?acao=skills">Avaliar Aluno</a></li>-->
+				            	<!-- <li><a href="main?acao=skills">Avaliar Aluno</a></li> -->
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
+				          	</ul>
+        				</li>
+        				
+        				<li class="dropdown">
+			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Turmas
+				          		<span class="caret"></span>
+			          		</a>
+				          	<ul class="dropdown-menu">
+				            	<li><a href="main?acao=listaTurmas">Listar</a></li>
+				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
+				            	<li><a href="main?acao=registrarAulas">Registrar Aulas</a></li>
+				            	<li><a href="main?acao=registrarChamada">Chamada Virtual</a></li>
+				          	</ul>
+        				</li>
+        				
+        				<li class="dropdown">
+			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Times
+				          		<span class="caret"></span>
+			          		</a>
+				          	<ul class="dropdown-menu">
+				            	<li><a href="main?acao=listaTimes">Listar</a></li>
+				            	<li><a href="main?acao=telaTime">Cadastrar</a></li>
 				          	</ul>
         				</li>
 
@@ -115,6 +141,8 @@
                            
         					<ul class="dropdown-menu dropdown-menu-right">
         						<li><a href="main?acao=logout">Logout</a></li>
+        						<!-- <li><a href="projetosGitLab.xhtml">Projetos GitLAB</a></li>
+        						<li><a href="projetosGitLabUsers.xhtml">Usuários GitLAB</a></li> -->
         					</ul>
         				</li>
 			      	</ul>
