@@ -73,7 +73,7 @@ public class TurmaDAO {
 		boolean ok = false;
 
 		ArrayList<Usuario> listaAlunos = new ArrayList<>(turma.getAlunos());
-
+		try {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO tb_turma_aluno (ID_ALUNO, MATRICULA, ID_TURMA)");
 		sql.append(" VALUES (?, ?, ?)");
@@ -89,7 +89,11 @@ public class TurmaDAO {
 			ok = statement.execute();
 
 		}
-
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return ok;
 	}
 	
@@ -126,6 +130,9 @@ public class TurmaDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			conexao.close();
 		}
 
 		return listaTurmas;
@@ -166,6 +173,9 @@ public class TurmaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			conexao.close();
+		}
 
 		return listaTurmas;
 	}
@@ -200,6 +210,7 @@ public class TurmaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 		return (ArrayList<Usuario>) alunosTurma;
 
@@ -245,6 +256,7 @@ public class TurmaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 		return aulasTurma;
 
@@ -292,17 +304,24 @@ public class TurmaDAO {
 	private boolean removerAlunosTurma(Connection conexao, Turma turma) throws SQLException {
 		boolean ok = false;
 
+		try {
 		StringBuilder sql = new StringBuilder();
 		sql.append("DELETE FROM tb_turma_aluno WHERE ID_TURMA = ?");
 
 		PreparedStatement statement = conexao.prepareStatement(sql.toString());
 		statement.setInt(1, turma.getId());
 		ok = statement.execute();
-
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			conexao.close();
+		}
 		return ok;
 	}
 
-	public Turma buscaTurma(int idTurma) {
+	public Turma buscaTurma(int idTurma) throws SQLException {
 		Connection conexao = null;
 
 
@@ -337,6 +356,7 @@ public class TurmaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 		return turma;
 	}

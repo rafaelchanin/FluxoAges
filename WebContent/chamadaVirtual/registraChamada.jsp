@@ -11,7 +11,7 @@
 <jsp:include page="../template/modalAluno.jsp"></jsp:include>
 <div class="panel panel-primary">
 
-	<div class="panel-heading text-center">Lista Ponto</div>
+	<div class="panel-heading text-center">Chamada Virtual</div>
 
 	<jsp:include page="/template/msg.jsp"></jsp:include>
 
@@ -141,7 +141,7 @@
 		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
 		var alunosString = $('#turma option:selected').attr("data-alunos");
 		var aulasMes = [];
-		if (alunosString != null)
+		if (alunosString != "") {
 			var alunos = alunosString.split(",");
 		$('#chamada').empty()
 		var titulo = "";
@@ -191,6 +191,11 @@
 			}
 		}
 		$('#chamada').append(linha);
+	} else {
+		$('#chamada').empty();
+		$('#chamada').append("Essa turma não possui alunos cadastrados!")
+	}
+		
 	}
 	
 	function funcSubmit() {

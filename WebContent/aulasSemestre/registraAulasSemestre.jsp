@@ -244,7 +244,7 @@
 				}
 			}
 			
-			if (presencasTemp != null) {
+			if (presencasString != null) {
 				var presencasTemp = presencasString.split(",");
 				for (i=0; i < presencasTemp.length; i++) {
 					var tempo2 = presencasTemp[i].split(":");

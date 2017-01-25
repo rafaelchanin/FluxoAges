@@ -1,7 +1,10 @@
 package br.ages.crud.model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import br.ages.crud.util.Util;
 
 public class Aula {
 	private int id;
@@ -71,7 +74,13 @@ public class Aula {
 	}
 	
 	public String toString() {
-		return "" + idTurma + data;
+		try {
+			return "" + idTurma + Util.dateToString(data);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 }

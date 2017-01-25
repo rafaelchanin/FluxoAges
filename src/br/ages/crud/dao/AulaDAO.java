@@ -68,7 +68,8 @@ public class AulaDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
-		} finally {				conexao.close();
+		} finally {				
+			conexao.close();
 		}
 			return ok;
 		}
@@ -129,7 +130,8 @@ public class AulaDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
-		} finally {				conexao.close();
+		} finally {				
+			conexao.close();
 		}
 			return ok;
 		}
@@ -227,12 +229,15 @@ public class AulaDAO {
 				aula.setStatus(resultSet.getString("status"));
 				aula.setObservacao(resultSet.getString("observacao"));
 				Date dataInclusao = resultSet.getDate("dt_inclusao");
-				turma.setDtInclusao(dataInclusao);
-				aula.setIdTurma(turma.getId());
+				aula.setDtInclusao(dataInclusao);
+				aula.setIdTurma(idTurma);
 				aulas.add(aula);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			conexao.close();
 		}
 
 		return aulas;
@@ -268,6 +273,9 @@ public class AulaDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			conexao.close();
 		}
 
 		return presencas;
@@ -305,6 +313,9 @@ public class AulaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			conexao.close();
+		}
 
 		return presencas;
 	}
@@ -341,6 +352,9 @@ public ArrayList<Presenca> listarPresencasAlunoTurma(int idAluno, int idTurma) t
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
+	}
+	finally {
+		conexao.close();
 	}
 
 	return presencas;

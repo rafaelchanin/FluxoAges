@@ -57,6 +57,7 @@ public class AdicionaAulasCommand implements Command {
 		String[] aulas = dias.split("[,]");
 		List<Aula> diasAulas = new ArrayList<>();
 		turma.setId(id);
+		ArrayList<Aula> aulasTurmas = new ArrayList<>();
 		List<Aula> aulasExistentes = aulaBO.listarDiasAulasTurma(id);
 		List<Aula> aulasExcluir = new ArrayList<>();
 		for (String s : aulas) {
@@ -68,14 +69,17 @@ public class AdicionaAulasCommand implements Command {
 			aula.setDtInclusao(new Date());
 			aula.setStatus("AULA");
 			aula.setObservacao("");
-			boolean teste = false;;
+			aulasTurmas.add(aula);
+			boolean teste = false;
 			for (Aula aulaVerificada : aulasExistentes) {
 				if (aula.toString().equals(aulaVerificada.toString())) {
 					teste = true;
+					break;
 				}
 			}
 			if (teste == false)
 				diasAulas.add(aula);
+			turma.setAulas(aulasTurmas);
 		}
 		
 		
