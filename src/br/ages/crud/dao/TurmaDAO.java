@@ -214,7 +214,7 @@ public class TurmaDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT ID_AULA, DATA, STATUS, OBSERVACAO, DT_INCLUSAO ");
 			sql.append(" FROM tb_aula");
-			sql.append(" WHERE ID_TURMA = ?");
+			sql.append(" WHERE ID_TURMA = ? ORDER BY DATA");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setInt(1, idTurma);

@@ -140,8 +140,6 @@
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
 		var alunosString = $('#turma option:selected').attr("data-alunos");
-		if (aulasString != null)
-			var aulas = aulasString.split(",");
 		var aulasMes = [];
 		if (alunosString != null)
 			var alunos = alunosString.split(",");
@@ -150,43 +148,47 @@
 		titulo += '<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
 		var i=0;
 		var j=0;
-		for (i=0; i<aulas.length; i++) {
-			var temp = aulas[i].split(":");
-			if (temp[1].substring(3,5) == mes) {
-				aulasMes.push(temp[0]);
-				titulo +='<th style="text-align: center;">' + temp[1].substring(0,2) + '</th>';
+		if (aulasString != null) {
+			var aulas = aulasString.split(",");
+			for (i=0; i<aulas.length; i++) {
+				var temp = aulas[i].split(":");
+				if (temp[1].substring(3,5) == mes) {
+					aulasMes.push(temp[0]);
+					titulo +='<th style="text-align: center;">' + temp[1].substring(0,2) + '</th>';
+				}
 			}
 		}
 		titulo +='</tr>';
 		$('#chamada').append(titulo);
+		
 		var linha = "";
-		var ArrayAlunoAulas = presen.split(";"); //aluno: aulas
-		for (i=0;i<alunos.length;i++) {
-			
-			linha += '<tr class="coluna-sh">';
-			var ArrayIdAluno = alunos[i].split(":");
-			linha += '<td align="center">' + ArrayIdAluno[1] + '</td>';
-			
-			for (j=0; j<aulasMes.length; j++) {
-				var z=0;
-				var verif=0;
-				for (z=0;z<ArrayAlunoAulas.length;z++) {
-					if  (ArrayAlunoAulas[z] != "") {
-						var ArrayIdAulas = ArrayAlunoAulas[z].split(":");
-						var idNomeVerificado = ArrayIdAulas[0];
-						var idAulasVerificado = ArrayIdAulas[1];
-						var ArrayidAulasVerificados = idAulasVerificado.split(",");
-						if (idNomeVerificado == ArrayIdAluno[0] && jQuery.inArray(aulasMes[j], ArrayidAulasVerificados) != -1) {
-							linha += '<td align="center">' + '<input type="button" id="' + ArrayIdAluno[0] + ':' + aulasMes[j] + '" value="P" onclick="clickBotao(this);" class="btnPresenca" />' + '</td>';
-							verif=1;
-							break;
+		if (presen != null) {
+			var ArrayAlunoAulas = presen.split(";"); //aluno: aulas
+			for (i=0;i<alunos.length;i++) {
+				linha += '<tr class="coluna-sh">';
+				var ArrayIdAluno = alunos[i].split(":");
+				linha += '<td align="center">' + ArrayIdAluno[1] + '</td>';
+				for (j=0; j<aulasMes.length; j++) {
+					var z=0;
+					var verif=0;
+					for (z=0;z<ArrayAlunoAulas.length;z++) {
+						if  (ArrayAlunoAulas[z] != "") {
+							var ArrayIdAulas = ArrayAlunoAulas[z].split(":");
+							var idNomeVerificado = ArrayIdAulas[0];
+							var idAulasVerificado = ArrayIdAulas[1];
+							var ArrayidAulasVerificados = idAulasVerificado.split(",");
+							if (idNomeVerificado == ArrayIdAluno[0] && jQuery.inArray(aulasMes[j], ArrayidAulasVerificados) != -1) {
+								linha += '<td align="center">' + '<input type="button" id="' + ArrayIdAluno[0] + ':' + aulasMes[j] + '" value="P" onclick="clickBotao(this);" class="btnPresenca" />' + '</td>';
+								verif=1;
+								break;
+							}
 						}
 					}
+					if (verif==0)
+						linha += '<td align="center">' + '<input type="button" id="' + ArrayIdAluno[0] + ':' + aulasMes[j] + '" value="F" onclick="clickBotao(this);" class="btnFalta" />' + '</td>';
 				}
-				if (verif==0)
-					linha += '<td align="center">' + '<input type="button" id="' + ArrayIdAluno[0] + ':' + aulasMes[j] + '" value="F" onclick="clickBotao(this);" class="btnFalta" />' + '</td>';
+				linha += '</tr>';
 			}
-			linha += '</tr>';
 		}
 		$('#chamada').append(linha);
 	}
