@@ -17,6 +17,7 @@ import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
+import br.ages.crud.util.Constantes;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.SenhaValidator;
 
@@ -34,6 +35,7 @@ public class UsuarioBO {
 	
 	public UsuarioBO() {
 		usuarioDAO = new UsuarioDAO();
+		api = GitlabAPI.connect(Constantes.GITLAB_URL, Constantes.GITLAB_TOKEN);
 	}
 
 	/**
@@ -364,6 +366,7 @@ public class UsuarioBO {
 			if (user != null) {
 				api.createUser(user.getEmail(), user.getMatricula(), user.getUsuarioGitLab(), user.getNome(), null, null,
 						null, null, null, null, null, null, false, false, false);
+
 				return true;
 			}
 			
