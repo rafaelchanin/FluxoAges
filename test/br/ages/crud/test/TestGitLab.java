@@ -42,9 +42,6 @@ public class TestGitLab {
 	
 	public static void main(String[] args) {
 		api = GitlabAPI.connect(TEST_URL, TEST_TOKEN);
-		
-		
-		
 		try {
 		List<GitlabProject> gitlabProjects = api.getAllProjects();
 		
