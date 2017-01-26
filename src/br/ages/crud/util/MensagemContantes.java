@@ -82,6 +82,8 @@ public class MensagemContantes {
 	
 	public static final String MSG_ERR_TURMA_DADOS_INVALIDOS = "Dados da turma inválidos ou inconsistentes!";
 	
+	public static final String MSG_ERR_TURMA_ALUNOS_INVALIDOS = "Você esta removendo alunos  que possuem presenças cadastradas nessa turma!";
+	
 	public static final String MSG_ERR_TURMA_ARQUIVO_INVALIDO = "Arquivo excede o ?Mb ou não é do tipo PDF!";
 	
 	public static final String MSG_ERR_TURMA_DATA_INCONSISTENTE = "Data de inicio deve ser anterior à data de fim?!"; //'?' proposital

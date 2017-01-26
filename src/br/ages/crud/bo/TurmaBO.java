@@ -8,8 +8,10 @@ import br.ages.crud.dao.ProjetoDAO;
 import br.ages.crud.dao.TurmaDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Presenca;
 import br.ages.crud.model.Projeto;
 import br.ages.crud.model.Turma;
+import br.ages.crud.model.Usuario;
 //import br.ages.crud.model.Status;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.DataValidator;
@@ -51,10 +53,52 @@ public class TurmaBO {
 			}
 		return valido;
 	}
+	
+	
+	public boolean validarAlunos(int idTurma, List<Usuario> adicionar, List<Usuario> remover) throws NegocioException {
+		boolean valido = true;
+		AulaBO aulaBO = new AulaBO();
+		StringBuilder msg = new StringBuilder();
+		msg.append(MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS.concat("<br/>"));
+		//DataValidator validatoor = new DataValidator();
+		List<Presenca> presencas = aulaBO.listarPresencasTurma(idTurma);
+		
+		for (Usuario alunoRemover : remover) {
+			if (valido==false)
+				break;
+			for (Presenca presenca : presencas) {
+				if (presenca.getAluno().getIdUsuario() == alunoRemover.getIdUsuario()) {
+					valido=false;
+					msg.append(MensagemContantes.MSG_ERR_TURMA_ALUNOS_INVALIDOS.concat("<br/>"));
+					break;
+				}
+			}
+		}	
+			if (!valido) {
+				throw new NegocioException(msg.toString());
+			}
+		return valido;
+	}
 
 	public boolean cadastrarTurma(Turma turma) throws SQLException, ParseException, NegocioException, PersistenciaException {
 		boolean ok = false;
 		ok = turmaDAO.cadastrarTurma(turma);
+		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_TURMA);
+		return ok;
+	}
+	
+	public boolean inserirAlunosTurma(int idTurma, List<Usuario> alunos) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		boolean ok = false;
+		ok = turmaDAO.inserirAlunosTurma(idTurma, alunos);
+		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_TURMA);
+		return ok;
+	}
+	
+	public boolean removerAlunosTurma(int idTurma, List<Usuario> alunos) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		boolean ok = false;
+		ok = turmaDAO.removerAlunosTurma(idTurma, alunos);
 		if (ok == false)
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_TURMA);
 		return ok;

@@ -58,7 +58,7 @@ public class TurmaDAO {
 			}
 			
 			if (turma.getAlunos() != null) 
-				inserirAlunosTurma(conexao, turma);
+				inserirAlunosTurmaCadastro(conexao, turma);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
@@ -68,7 +68,7 @@ public class TurmaDAO {
 		return ok;
 	}
 	
-	private boolean inserirAlunosTurma(Connection conexao, Turma turma) throws SQLException {
+	private boolean inserirAlunosTurmaCadastro(Connection conexao, Turma turma) throws SQLException {
 
 		boolean ok = false;
 
@@ -94,6 +94,38 @@ public class TurmaDAO {
 			e.printStackTrace();
 		}
 		
+		return ok;
+	}
+	
+	public boolean inserirAlunosTurma(int idTurma, List<Usuario> alunos) throws SQLException {
+		boolean ok = false;
+		Connection conexao = null;
+		try {
+				conexao = ConexaoUtil.getConexao();
+			
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO tb_turma_aluno (ID_TURMA, ID_ALUNO, MATRICULA)");
+		sql.append(" VALUES (?, ?, ?)");
+
+		PreparedStatement statement = conexao.prepareStatement(sql.toString());
+
+		for (Usuario usuario : alunos) {
+
+			statement.setInt(1, idTurma);
+			statement.setInt(2, usuario.getIdUsuario());
+			statement.setString(3, usuario.getMatricula());
+
+			ok = statement.execute();
+
+		}
+		ok=true;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conexao.close();
+		}
+	
 		return ok;
 	}
 	
@@ -290,9 +322,9 @@ public class TurmaDAO {
 
 			statement.executeUpdate();
 			
-			removerAlunosTurma(conexao, turma);
-			if (turma.getAlunos() != null)
-				inserirAlunosTurma(conexao, turma);
+			//removerAlunosTurma(conexao, turma);
+			//if (turma.getAlunos() != null)
+			//	inserirAlunosTurma(conexao, turma);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
@@ -301,19 +333,31 @@ public class TurmaDAO {
 		}
 	}
 	
-	private boolean removerAlunosTurma(Connection conexao, Turma turma) throws SQLException {
+	public boolean removerAlunosTurma(int idTurma, List<Usuario> alunos) throws SQLException {
 		boolean ok = false;
-
+		Connection conexao = null;
 		try {
+				conexao = ConexaoUtil.getConexao();
+		
 		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE FROM tb_turma_aluno WHERE ID_TURMA = ?");
-
+		sql.append("DELETE FROM tb_turma_aluno WHERE ID_TURMA = ? AND ID_ALUNO = ?");
+		
 		PreparedStatement statement = conexao.prepareStatement(sql.toString());
-		statement.setInt(1, turma.getId());
-		ok = statement.execute();
+
+		for (Usuario usuario : alunos) {
+
+			statement.setInt(1, idTurma);
+			statement.setInt(2, usuario.getIdUsuario());
+			 
+			
+			ok = statement.execute();
+
 		}
-		catch (Exception e) {
+		ok=true;
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			conexao.close();
 		}
 	
 		return ok;
