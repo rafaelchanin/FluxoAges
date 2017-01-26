@@ -52,14 +52,15 @@ public class AdicionaChamadasCommand implements Command {
 		String StringResultado  = request.getParameter("resultado");
 		String StringTurma = request.getParameter("turma");
 		String[] tempTurma = StringTurma.split("[|]");
-		
+		String mesString = request.getParameter("mes");
+		int mes = Integer.parseInt(mesString);
 		String nomeTurma = tempTurma[0];
 		int idTurma = Integer.parseInt(tempTurma[1]);
 		
 		String[] resultados = StringResultado.split("[,]");
 		
 		try {
-		List<Presenca> presencasBanco = aulaBO.listarPresencasTurma(idTurma);
+		List<Presenca> presencasBanco = aulaBO.listarPresencasTurmaMes(idTurma, mes);
 		List<Presenca> presencasTela = new ArrayList<>();
 		List<Presenca> aulasExcluir = new ArrayList<>();
 		List<Presenca> aulasAdicionar = new ArrayList<>();
