@@ -179,6 +179,19 @@ public class AulaBO {
 		return listPresencas;
 	}
 	
+	public List<Presenca> listarPresencasTurmaMes(int idTurma, int mes) throws NegocioException {
+		List<Presenca> listPresencas = null;
+
+		try {
+			listPresencas = aulaDAO.listarPresencasTurmaMes(idTurma, mes);
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listPresencas;
+	}
+	
 	public List<Presenca> listarPresencasAlunoTurma(int idAluno, int idTurma) throws NegocioException {
 		List<Presenca> listPresencas = null;
 

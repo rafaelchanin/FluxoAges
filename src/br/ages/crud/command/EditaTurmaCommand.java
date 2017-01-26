@@ -3,6 +3,7 @@ package br.ages.crud.command;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -54,30 +55,43 @@ public class EditaTurmaCommand implements Command{
 		Turma turma = new Turma();
 		
 		try{
-			// cria o array de usuarios com o array de String do request
+			Turma existente = turmaBO.buscarTurma(id);
+			List<Usuario> usuariosAdicionar = new ArrayList<>();
+			List<Usuario> usuariosRemover = new ArrayList<>();
+			ArrayList<Usuario> alunosTela = new ArrayList<>();
 						if (alunos != null) {
-							ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 							for (String s : alunos) {
 								String[] temp = s.split(" ");
 								usuario = new Usuario();
 								usuario.setIdUsuario(Integer.valueOf(temp[0]));
 								usuario.setMatricula(temp[1]);
-								usuarios.add(usuario);
+								boolean ver=false;
+								alunosTela.add(usuario);
+								for (Usuario aluno : existente.getAlunos()) {
+									if(s.equals(aluno.getIdUsuario()+" "+aluno.getMatricula())) {
+										ver=true;
+										break;
+									}
+								}
+								if (ver==false)
+									usuariosAdicionar.add(usuario);
 							}
-							turma.setAlunos(usuarios);
+							//turma.setAlunos(alunosTela);
 						}
 						
-						//turma.setId(idTurma);
 						
-					/*	for (IdNomeUsuarioDTO i : alunos) {
-							usuario = new Usuario();
-							usuario.setIdUsuario(i.getId());
-							usuario.setMatricula(i.getMatricula());
-							usuarios.add(usuario);
-						}*/
-					
+						for (Usuario alunoBanco : existente.getAlunos()) {
+							boolean tes=false;
+							for (Usuario alunoTela : alunosTela) {
+								if (alunoBanco.getIdUsuario() == alunoTela.getIdUsuario()) {
+									tes=true;
+									break;
+								}
+							}
+							if (tes==false)
+								usuariosRemover.add(alunoBanco);
+						}
 						turma.setId(id);
-						
 						if (!ano.equals(""))
 							turma.setAno(Integer.valueOf(ano));
 						turma.setSemestre(numSemestre);
@@ -90,10 +104,15 @@ public class EditaTurmaCommand implements Command{
 						turma.setDtInclusao(new Date());
 						
 						//boolean isValido = projetoBO.validarProjeto(projeto);
-						boolean isValido = turmaBO.validarTurma(turma);
+						boolean isValidoTurma = turmaBO.validarTurma(turma);
+						boolean isValidoAlunos = turmaBO.validarAlunos(id, usuariosAdicionar, usuariosRemover);
 						
-						if (isValido) {
+						if (isValidoTurma && isValidoAlunos) {
 							turmaBO.editaTurma(turma);
+							if (!usuariosAdicionar.isEmpty())
+								turmaBO.inserirAlunosTurma(id, usuariosAdicionar);
+							if (!usuariosRemover.isEmpty())
+								turmaBO.removerAlunosTurma(id, usuariosRemover);
 							request.getSession().setAttribute("turma", turma);
 							proxima = "main?acao=listaTurmas";
 							request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_EDIT_TURMA.replace("?", turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()));
