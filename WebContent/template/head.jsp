@@ -21,6 +21,8 @@
         <!-- JQUERY -->
         <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
+		<script src="./js/index.js"></script> 
+		
 		<!-- BOOTSTRAP -->
 		<script src="./js/bootstrap.min.js"></script> 
 
