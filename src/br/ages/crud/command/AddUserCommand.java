@@ -50,7 +50,8 @@ public class AddUserCommand implements Command {
 			if (isValido == false) {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_USUARIO_DADOS_INVALIDOS);
 			} else { // cadastro de pessoa com sucesso
-				usuarioBO.addUsuarioGitLab(user);
+				if (!user.getUsuarioGitLab().equals(""))
+					usuarioBO.addUsuarioGitLab(user);
 				usuarioBO.cadastraUsuario(user);
 				proxima = "main?acao=listUser";
 				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_USUARIO.replace("?", user.getNome()));

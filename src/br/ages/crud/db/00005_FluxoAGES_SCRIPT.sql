@@ -1,4 +1,3 @@
-
 --liquibase formatted sql
 --changeset andre:5
 --comment Correcao tb_tipo_usuario; Turma; Times
@@ -54,4 +53,3 @@ KEY fk_timetu_idx (ID_TIME),
   CONSTRAINT fk_matricula_tu FOREIGN KEY (MATRICULA) REFERENCES tb_usuario (MATRICULA) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT fk_aluno_tu FOREIGN KEY (ID_ALUNO) REFERENCES tb_usuario (ID_USUARIO) ON DELETE NO ACTION ON UPDATE NO ACTION
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
