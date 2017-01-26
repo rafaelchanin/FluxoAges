@@ -315,9 +315,7 @@ public class TurmaDAO {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		finally {
-			conexao.close();
-		}
+	
 		return ok;
 	}
 

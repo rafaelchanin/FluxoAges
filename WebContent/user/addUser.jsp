@@ -53,7 +53,8 @@
 							</select>
 						</div>
 					</div>
-					<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label> <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+					<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label>
+					 <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
 						<%
 							List<TipoUsuario> listaTipoUsuarios = (List<TipoUsuario>) request.getAttribute("tipoUsuarios");
 							for (TipoUsuario tipoUsuario : listaTipoUsuarios) {
@@ -63,6 +64,14 @@
 							}
 						%>
 					</select>
+					<div id="divUsuarioGitLab" class="divUsuarioGitLab" hidden="hidden">
+						<label class="form-label ages">Usuário GitLab:</label> 
+						<div class="row">
+							<div class="col-sm-6">
+								<input class="form-control" id="usuarioGitLab" name="usuarioGitLab" value="${param.usuarioGitLab}" type="text" readonly="readonly">
+							</div>
+						</div>
+					</div>
 				</div>
 				<p>
 					Campos que contém <span class="red">*</span> são obrigatórios
@@ -74,6 +83,52 @@
 			</form>
 	</div>
 </div>
+<script type="text/javascript">
 
+$(document).ready(function(){
+	$('#tipoUsuario').on('change', function() {	
+	 if($('#tipoUsuario').val() == 2)
+	 {
+		 if ($('#nome').val() == "" || $('#nome').val() == ".")	
+			{	
+			  $('#msgE div').text( 'Informe o nome do Aluno')
+			  $('#msgE').show()
+			  $('#tipoUsuario').val(1)
+			} 
+		 else 
+		    {  
+		      $("#divUsuarioGitLab").show()
+		      $("#usuarioGitLab").val(createUsername())
+		    }
+	  }
+	   else
+	   {
+	     $("#divUsuarioGitLab").hide()
+	     $("#usuarioGitLab").val("")
+       }
+	 })
+	
+	$('#nome').blur(function() {
+	  $('#usuario').val(createUsername())		
+	})
+	
+	$('#matricula').blur(function() {
+	  $('#senha').val($('#matricula').val())		
+	})
+	
+	function createUsername() {
+		  var names = $('#nome').val().split(' ')
+	      var firstName = $('#nome').val().split(' ').slice(0, 1)
+	      var lastName = $('#nome').val().split(' ').slice(-1)
+	      var userGitLab = firstName + "." + lastName
+	      var n_userGitLab = removeDiacritics(userGitLab)
+	      
+	      return n_userGitLab.toLowerCase()
+	}
+	
+});
+	
+	
+</script>
 
 <jsp:include page="/template/foot.jsp"></jsp:include>

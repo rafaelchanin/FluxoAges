@@ -133,6 +133,7 @@ public class UsuarioDAO {
 			sql.append("u.`MATRICULA`,");
 			sql.append("u.`NOME` unome,");
 			sql.append("u.`EMAIL`,");
+			sql.append("u.`USUARIO_GITLAB`,");
 			sql.append("t.`ID_TIPO_USUARIO`,");
 			sql.append("t.`NOME` tnome,");
 			sql.append("t.`DESCRICAO`,");
@@ -152,6 +153,7 @@ public class UsuarioDAO {
 				dto.setMatricula(resultset.getString("MATRICULA"));
 				dto.setNome(resultset.getString("unome"));
 				dto.setEmail(resultset.getString("EMAIL"));
+				dto.setUsuarioGitLab(resultset.getString("USUARIO_GITLAB"));
 				dto.setUsuario(resultset.getString("USUARIO"));
 				dto.setSenha(resultset.getString("SENHA"));
 				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
@@ -181,8 +183,8 @@ public class UsuarioDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("insert into tb_usuario (usuario, senha, perfil_acesso, status_usuario, id_tipo_usuario, matricula, nome, email, data_inclusao)");
-			sql.append("values (?, ?, ?, ?, ?, ?, ?, ?, ? )");
+			sql.append("insert into tb_usuario (usuario, senha, perfil_acesso, status_usuario, id_tipo_usuario, matricula, nome, email, usuario_gitlab, data_inclusao)");
+			sql.append("values (?, ?, ?, ?, ?, ?, ?, ?, ? , ?)");
 
 			// converte a data para data Juliana, data que o banco reconhece;
 			java.util.Date utilDate = new java.util.Date();
@@ -198,7 +200,8 @@ public class UsuarioDAO {
 			statement.setString(6, usuario.getMatricula());
 			statement.setString(7, usuario.getNome());
 			statement.setString(8, usuario.getEmail());
-			statement.setDate(9, dataCadastro);
+			statement.setString(9, usuario.getUsuarioGitLab());
+			statement.setDate(10, dataCadastro);
 
 			statement.executeUpdate();
 
@@ -210,6 +213,7 @@ public class UsuarioDAO {
 			return idUsuario;
 
 		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 			throw new PersistenciaException(MensagemContantes.MSG_ERR_USUARIO_JA_EXISTENTE.replace("?", usuario.getUsuario()));
 
 		} finally {
@@ -217,6 +221,7 @@ public class UsuarioDAO {
 		}
 	}
 
+	//TODO separar usuario do tipo usuario
 	/**
 	 * M?todo de remo??o de um usu?rio a partir do seu id.
 	 * 
@@ -252,6 +257,7 @@ public class UsuarioDAO {
 		return removidoOK;
 	}
 
+	//TODO separar usuario do tipo usuario
 	public Usuario buscaUsuarioNome(String nomeUsuario) throws PersistenciaException {
 
 		Usuario usuario = new Usuario();
@@ -312,6 +318,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
+	//TODO separar usuario do tipo usuario
 	public Usuario buscaUsuarioId(int idUsuario) throws PersistenciaException, SQLException {
 		// adicionar informações de tipo de usuario?
 		Usuario usuario = new Usuario();
@@ -321,11 +328,11 @@ public class UsuarioDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			// sql.append("SELECT * FROM AGES_E.TB_USUARIO WHERE ID_USUARIO = ?;");
 			//
 			sql.append("select ");
 			sql.append("u.`id_usuario`,");
 			sql.append("u.`usuario`,");
+			sql.append("u.`usuario_gitlab`,");
 			sql.append("u.`senha`,");
 			sql.append("u.`perfil_acesso`,");
 			sql.append("u.`status_usuario`,");
@@ -350,6 +357,7 @@ public class UsuarioDAO {
 				usuario.setMatricula(resultset.getString("MATRICULA"));
 				usuario.setNome(resultset.getString("unome"));
 				usuario.setEmail(resultset.getString("EMAIL"));
+				usuario.setUsuarioGitLab(resultset.getString("USUARIO_GITLAB"));
 				usuario.setUsuario(resultset.getString("USUARIO"));
 				usuario.setSenha(resultset.getString("SENHA"));
 				usuario.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));

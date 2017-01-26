@@ -26,46 +26,35 @@
                		<div class="form-group">
 			           	<label class="form-label ages">Matrícula:</label>
 			           	<input class="form-control" id="matricula" name="matricula" value="<%=usuario.getMatricula() %>" type="text" maxlength="9" readonly>
-		            </div>
-		            
-		            <div class="form-group">
-			           	<label class="form-label ages">Nome: <span class="red">*</span></label>
+		              	<label class="form-label ages">Nome: <span class="red">*</span></label>
 			           	<input class="form-control" id="nome" name="nome" value="<%=usuario.getNome() %>" type="text" maxlength="120" required>
-		            </div>
-
-					<div class="form-group">
-			           	<label class="form-label ages">Usuário:</label>
-			           	<input class="form-control" id="usuario" name="usuario" value="<%=usuario.getUsuario() %>" type="text" maxlength="120" readonly>
-		            </div>
-                    
-					<div class="form-group">
-			           	<label class="form-label ages">Senha: <span class="red">*</span></label>
-			           	<input class="form-control" id="senha" name="senha" value="<%=usuario.getSenha() %>" type="text" maxlength="8" required>
-		            </div>
-				
-					<div class="form-group">
-			           	<label class="form-label ages">E-Mail: <span class="red">*</span></label>
+			            <div class="row">
+							<div class="col-sm-4">
+					           	<label class="form-label ages">Usuário:</label>
+					           	<input class="form-control" id="usuario" name="usuario" value="<%=usuario.getUsuario() %>" type="text" maxlength="120" readonly>
+							</div>
+							<div class="col-sm-4">
+					           	<label class="form-label ages">Usuário GitLab:</label>
+					           	<input class="form-control" id="usuarioGit" name="usuarioGit" value="<%=usuario.getUsuarioGitLab() %>" type="text" maxlength="120" readonly>
+							</div>
+							<div class="col-sm-4">
+					           	<label class="form-label ages">Senha: <span class="red">*</span></label>
+					           	<input class="form-control" id="senha" name="senha" value="<%=usuario.getSenha() %>" type="text" maxlength="8" required>
+							</div>
+			            </div>
+					   	<label class="form-label ages">E-Mail: <span class="red">*</span></label>
 			           	<input class="form-control" id="email" name="email" value="<%=usuario.getEmail() %>" type="text" maxlength="120" required>
-		            </div>
-                    
-                    <div class="form-group">
-			           	<label class="form-label ages">Perfil de Acesso: <span class="red">*</span></label>
+		               	<label class="form-label ages">Perfil de Acesso: <span class="red">*</span></label>
 			           	<select class="form-control" id="perfilAcesso" name="perfilAcesso" required>
                             <option value="NAVEGADOR" <%= "NAVEGADOR".equals(usuario.getPerfilAcesso().toString()) ? "selected" : "" %>>Navegador</option>
 			           		<option value="ADMINISTRADOR" <%= "ADMINISTRADOR".equals(usuario.getPerfilAcesso().toString()) ? "selected" : "" %>>Administrador</option>
 		           		</select>
-		            </div>
-		            
-		            <div class="form-group">
-			           	<label class="form-label ages">Status: <span class="red">*</span></label>
+		               	<label class="form-label ages">Status: <span class="red">*</span></label>
 			           	<select class="form-control" id="statusUsuario" name="statusUsuario" required>
 			           		<option value="ATIVO" <%= "ATIVO".equals(usuario.getStatusUsuario().toString()) ? "selected" : "" %>>Ativo</option>
                             <option value="INATIVO" <%= "INATIVO".equals(usuario.getStatusUsuario().toString()) ? "selected" : "" %>>Inativo</option>
 		           		</select>
-		            </div>
-		            
-		            <div class="form-group">
-			           	<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label>
+		           		<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label>
 			           	<select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
 						<%
 							List<TipoUsuario> listaTipoUsuarios = (List<TipoUsuario>) request.getAttribute("tipoUsuarios");

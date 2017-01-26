@@ -1,5 +1,7 @@
+
 package br.ages.crud.bo;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.Normalizer;
 import java.text.ParseException;
@@ -7,12 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.gitlab.api.GitlabAPI;
+
 import br.ages.crud.dao.UsuarioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
+import br.ages.crud.util.Constantes;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.SenhaValidator;
 
@@ -26,9 +31,11 @@ import br.ages.crud.validator.SenhaValidator;
 public class UsuarioBO {
 	
 	private UsuarioDAO usuarioDAO = null;
-
+	private GitlabAPI api;
+	
 	public UsuarioBO() {
 		usuarioDAO = new UsuarioDAO();
+		api = GitlabAPI.connect(Constantes.GITLAB_URL, Constantes.GITLAB_TOKEN);
 	}
 
 	/**
@@ -352,4 +359,25 @@ public class UsuarioBO {
 	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
 	}
+
+	public boolean addUsuarioGitLab(Usuario user) throws IOException, NegocioException {
+		try {
+			
+			if (user != null) {
+				api.createUser(user.getEmail(), user.getMatricula(), user.getUsuarioGitLab(), user.getNome(), null, null,
+						null, null, null, null, null, null, false, false, false);
+
+				return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+		
+		return false;
+
+	}
+	
+	
 }

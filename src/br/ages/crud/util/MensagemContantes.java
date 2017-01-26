@@ -34,12 +34,12 @@ public class MensagemContantes {
 	
 	public static final String MSG_ERR_SENHA_INVALIDA = "A senha do usuario ï¿½ invï¿½lida: Deve ter no mï¿½nimo 3 e no mï¿½ximo 8 caracteres, apenas nï¿½meros e letras!";
 	
-	public static final String MSG_ERR_MATRICULA_INVALIDA = "Matrï¿½cula invï¿½lida!";
+	public static final String MSG_ERR_MATRICULA_INVALIDA = "Matricula invalida!";
 	
-	public static final String MSG_ERR_EMAIL_INVALIDO = "E-mail com formato inválido.<br>não use acentuaï¿½ï¿½o e caracteres especiais!"
+	public static final String MSG_ERR_EMAIL_INVALIDO = "E-mail com formato inválido.<br>não use acentuacao e caracteres especiais!"
 			+ "<br>Exemplo correto: ages_user@acad.pucrs.br";
 	
-	public static final String MSG_ERR_NOME_INVALIDO = "Nome com formato inválido.<br>Exemplo correto: Joï¿½o Cardoso";
+	public static final String MSG_ERR_NOME_INVALIDO = "Nome com formato inválido.<br>Exemplo correto: Joao Cardoso";
 	
 	public static final String MSG_ERR_USUARIO_JA_EXISTENTE = "Usuário ou matrï¿½culajá cadastrados!";
 	
@@ -166,4 +166,8 @@ public class MensagemContantes {
 	public static final String MSG_ERR_REM_PONTO = " Erro na exclusão do ponto";
 
 	
+	// msg GitLAB
+	public static final String MSG_ERR_EMAIL_GITLAB = "E-mail já cadastrado no GitLab";
+
+	public static final String MSG_ERR_USUARIO_GITLAB = "Usuario GitLAB já existe";
 }

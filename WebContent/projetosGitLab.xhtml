@@ -11,7 +11,6 @@
 		<ui:define name="content">
 			<h:form>
 				<p:growl id="msgs" showDetail="true" />
-				
 				<p:panel id="projetos" header="Projetos do GitLab" style="margin-bottom:50px">
 					<h:panelGrid columns="3" cellpadding="10">
 						<p:dataTable value="#{projetoMB.gitLabProjects}" var="p">
@@ -26,6 +25,12 @@
 										<h:outputText value="URL" />
 									</f:facet>
 									<h:outputText value="#{p.httpUrl}" />
+								</p:column> 
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="URL" />
+									</f:facet>
+									<h:outputText value="#{p.tagList}" />
 								</p:column> 
 								<p:column>
 									<f:facet name="header">

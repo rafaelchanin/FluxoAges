@@ -19,10 +19,15 @@
 				<p:ajax event="close" listener="#{panelView.onClose}" update="msgs" />
 				<p:ajax event="toggle" listener="#{panelView.onToggle}"
 					update="msgs" />
-
 				<h:panelGrid columns="3" cellpadding="10">
-					<p:dataTable value="#{projetoMB.gitLabGroups}" var="gp">
-						<p:column headerText="Id">
+					<p:dataTable value="#{projetoMB.gitLabGroups}" var="gp"
+					selectionMode="single"  rowKey="#{gp.id}" 
+					selection="#{projetoMB.gitLabGroup}">
+					
+					<p:ajax event="rowSelect" listener="#{projetoMB.onRowSelect}" update=":form:msgs" />
+       			    <p:ajax event="rowUnselect" listener="#{projetoMB.onRowUnselect}" update=":form:msgs" />
+       
+						<p:column headerText="Id" width="50">
 							<h:outputText value="#{gp.id}" />
 						</p:column>
 

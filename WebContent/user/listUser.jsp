@@ -23,6 +23,7 @@
 					<th style="text-align: center;">Nome</th>
 					<th style="text-align: center;">E-mail</th>
 					<th style="text-align: center;">Usuário</th>
+					<th style="text-align: center;">GitLAB</th>
 					<th style="text-align: center;">Perfil</th>
 					<th style="text-align: center;">Status</th>
 					<th style="text-align: center;">Tipo</th>
@@ -43,6 +44,7 @@
 	            	<td align="center"><%=usuario.getNome()%></td>
 	            	<td align="center"><%=usuario.getEmail()%></td>
 	            	<td align="center"><%=usuario.getUsuario()%></td>
+	            	<td align="center"><%=usuario.getUsuarioGitLab()%></td>
 	            	<td align="center"><%=usuario.getPerfilAcesso()%></td> 
 	            	<td align="center"><%=usuario.getStatusUsuario()%></td>
 	            	<td align="center"><%=usuario.getTipoUsuario().getNome()%></td>
