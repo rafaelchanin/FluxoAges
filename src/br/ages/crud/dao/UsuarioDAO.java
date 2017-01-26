@@ -11,6 +11,7 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.PerfilAcesso;
 import br.ages.crud.model.StatusUsuario;
 import br.ages.crud.model.TipoUsuario;
@@ -38,8 +39,46 @@ public class UsuarioDAO {
 	 * @param usuarioDTO
 	 * @return
 	 * @throws PersistenciaException
+	 * @throws SQLException 
 	 */
 
+	public ArrayList<IdNomeUsuarioDTO> alunosElegiveis() throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		ArrayList<IdNomeUsuarioDTO> alunos = new ArrayList<>();
+		// tentativa de readaptação do listarUsuarios()
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT ID_USUARIO, NOME, MATRICULA");
+			sql.append(" FROM tb_usuario");
+			sql.append(" WHERE ID_TIPO_USUARIO=2 AND ID_USUARIO NOT IN");
+			sql.append(" (SELECT ta.ID_ALUNO");
+			sql.append(" FROM tb_turma t");
+			sql.append(" INNER JOIN tb_turma_aluno ta");
+			sql.append(" ON t.id_turma=ta.id_turma");
+			sql.append(" WHERE t.STATUS_TURMA = 'ATIVA')");
+			
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			ResultSet resultset = statement.executeQuery();
+			while (resultset.next()) {
+				IdNomeUsuarioDTO dto = new IdNomeUsuarioDTO();
+				dto.setId(resultset.getInt("ID_USUARIO"));
+				dto.setNome(resultset.getString("NOME"));
+				dto.setMatricula(resultset.getString("MATRICULA"));
+
+				alunos.add(dto);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
+		}
+		return alunos;
+		
+	}
+	
 	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException {
 		Usuario usuario = new Usuario();
 		try {
@@ -80,10 +119,9 @@ public class UsuarioDAO {
 	 */
 	public List<Usuario> listarUsuarios() throws PersistenciaException, SQLException {
 		Connection conexao = null;
-		// tentativa de readaptação do listarUsuarios()
 		try {
 			conexao = ConexaoUtil.getConexao();
-
+			
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT ");
 			sql.append("u.`ID_USUARIO`,");
@@ -103,8 +141,6 @@ public class UsuarioDAO {
 			
 			sql.append("from ages_e.tb_usuario u inner join ages_e.tb_tipo_usuario t ");
 			sql.append("on t.id_tipo_usuario = u.id_tipo_usuario ");
-			
-			//funciona no workbench mas aqui n�o
 			sql.append("where STATUS_USUARIO='ATIVO'");
 			
 

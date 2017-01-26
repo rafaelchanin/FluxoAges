@@ -61,7 +61,49 @@ public class MensagemContantes {
 	
 	public static final String MSG_INF_SEM_PERISSAO = "Acesso negado! Você NÃO tem permissão apra acessar essa funcionalidade.";
 	
+	
+	//msgs de Time
+	
+	public static final String MSG_ERR_TIME_DADOS_INVALIDOS = "Dados do time inválidos ou inconsistentes!";
+	
+	public static final String MSG_ERR_TIME_DATA_INCONSISTENTE = "Data de inicio deve ser anterior à data de fim?!"; 
+	
+	public static final String MSG_ERR_CADASTRO_TIME = "Ocorreu um erro no cadastro do time.";
 
+	public static final String MSG_SUC_CADASTRO_TIME = "Time ? cadastrado com sucesso!";
+	
+	public static final String MSG_SUC_EDIT_TIME = "Time ? editado com sucesso!";
+	
+	public static final String MSG_SUC_EDICAO_TIME = "Time ? editado com sucesso!";
+
+	public static final String MSG_SUC_REMOVE_TIME = "Time ? removido com sucesso!";
+	
+	//msgs de Turma
+	
+	public static final String MSG_ERR_TURMA_DADOS_INVALIDOS = "Dados da turma inválidos ou inconsistentes!";
+	
+	public static final String MSG_ERR_TURMA_ARQUIVO_INVALIDO = "Arquivo excede o ?Mb ou não é do tipo PDF!";
+	
+	public static final String MSG_ERR_TURMA_DATA_INCONSISTENTE = "Data de inicio deve ser anterior à data de fim?!"; //'?' proposital
+	
+	public static final String MSG_ERR_CADASTRO_TURMA = "Ocorreu um erro no cadastro da turma.";
+	
+	public static final String MSG_SUC_CADASTRO_AULAS = "Aulas da turma ? cadastrado com sucesso.";
+	
+	public static final String MSG_ERR_CADASTRO_AULAS = "Aulas da turma ? não foram cadastradas!";
+
+	public static final String MSG_SUC_CADASTRO_TURMA = "Turma ? cadastrada com sucesso!";
+	
+	public static final String MSG_SUC_EDIT_TURMA = "Turma ? editada com sucesso!";
+	
+	public static final String MSG_SUC_EDICAO_TURMA = "Turma ? editada com sucesso!";
+
+	public static final String MSG_SUC_REMOVE_TURMA = "Turma ? removida com sucesso!";
+	
+	public static final String MSG_ERR_CADASTRO_DIAS_AULAS_TURMA = "Ocorreu um erro na hora de cadastrar os dias de aula da turma ?";
+	
+	public static final String MSG_ERR_CADASTRO_PRESENCAS_AULA = "Ocorreu um erro na hora de cadastrar as presenças da aula ?";
+	
 	//msgs de projeto
 
 	public static final String MSG_ERR_PROJETO_DADOS_INVALIDOS = "Dados do projeto inválidos ou inconsistentes!";
@@ -122,6 +164,7 @@ public class MensagemContantes {
 	public static final String MSG_SUC_REM_PONTO = " O ponto foi excluido com sucesso";
 	
 	public static final String MSG_ERR_REM_PONTO = " Erro na exclusão do ponto";
+
 	
 	// msg GitLAB
 	public static final String MSG_ERR_EMAIL_GITLAB = "E-mail já cadastrado no GitLab";

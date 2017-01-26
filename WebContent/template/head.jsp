@@ -20,7 +20,6 @@
 
         <!-- JQUERY -->
         <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="./js/index.js"></script>
 
 		<!-- BOOTSTRAP -->
 		<script src="./js/bootstrap.min.js"></script> 
@@ -43,6 +42,11 @@
 		<script type="text/javascript" src="./js/bootstrap-datetimepicker.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap-datetimepicker.min.css">
 		
+		<!-- Include the plugin's CSS and JS: Cassio Date Picker -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.min.css">
+		<script src="js/masked.js" type="text/javascript"></script>
 	
 	</head>
     
@@ -102,6 +106,28 @@
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
 				          	</ul>
         				</li>
+        				
+        				<li class="dropdown">
+			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Turmas
+				          		<span class="caret"></span>
+			          		</a>
+				          	<ul class="dropdown-menu">
+				            	<li><a href="main?acao=listaTurmas">Listar</a></li>
+				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
+				            	<li><a href="main?acao=registrarAulas">Registrar Aulas</a></li>
+				            	<li><a href="main?acao=registrarChamada">Chamada Virtual</a></li>
+				          	</ul>
+        				</li>
+        				
+        				<li class="dropdown">
+			          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Times
+				          		<span class="caret"></span>
+			          		</a>
+				          	<ul class="dropdown-menu">
+				            	<li><a href="main?acao=listaTimes">Listar</a></li>
+				            	<li><a href="main?acao=telaTime">Cadastrar</a></li>
+				          	</ul>
+        				</li>
 
 					</ul>
 
@@ -123,5 +149,3 @@
 			      	
 		    	</div>
 			</nav>
-
-    		

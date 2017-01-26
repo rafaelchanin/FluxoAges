@@ -1,3 +1,4 @@
+
 package br.ages.crud.bo;
 
 import java.io.IOException;
@@ -9,14 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.gitlab.api.GitlabAPI;
-import org.gitlab.api.models.GitlabUser;
 
 import br.ages.crud.dao.UsuarioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.IdNomeUsuarioDTO;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
-import br.ages.crud.util.Constantes;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.SenhaValidator;
 
@@ -28,13 +28,12 @@ import br.ages.crud.validator.SenhaValidator;
  * 
  */
 public class UsuarioBO {
-
+	
 	private UsuarioDAO usuarioDAO = null;
 	private GitlabAPI api;
-
+	
 	public UsuarioBO() {
 		usuarioDAO = new UsuarioDAO();
-		api = GitlabAPI.connect(Constantes.GITLAB_URL, Constantes.GITLAB_TOKEN);
 	}
 
 	/**
@@ -94,9 +93,19 @@ public class UsuarioBO {
 		String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 		try {
+			// valida campos est�o preenchidos corretamente
+			// Matricula
+			/*
+			 * if (usuario.getMatricula() == null ||
+			 * "".equals(usuario.getMatricula())) { isValido = false;
+			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?",
+			 * "Matricula ").concat("<br/>"));
+			 * 
+			 * }
+			 */
 			if (!usuario.getMatricula().matches("\\d{5,9}")) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_MATRICULA_INVALIDA.concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_MATRICULA_INVALIDA.replace("?", "Matricula ").concat("<br/>"));
 			}
 			// Nome
 			if (usuario.getNome() == null || "".equals(usuario.getNome())) {
@@ -110,15 +119,14 @@ public class UsuarioBO {
 			}
 			if (!usuario.getEmail().matches(EMAIL_PATTERN)) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_EMAIL_INVALIDO.concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_EMAIL_INVALIDO.replace("?", "Email ").concat("<br/>"));
 			}
 
-			String nome = Normalizer.normalize(usuario.getNome(), Normalizer.Form.NFD)
-					.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+			String nome = Normalizer.normalize(usuario.getNome(), Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 
 			if (!nome.matches("([a-zA-Z]*)(.*)")) {
 				isValido = false;
-				msg.append(MensagemContantes.MSG_ERR_NOME_INVALIDO.concat("<br/>"));
+				msg.append(MensagemContantes.MSG_ERR_NOME_INVALIDO.replace("?", "Nome ").concat("<br/>"));
 			}
 			// Senha
 			Map<String, Object> valores = new HashMap<>();
@@ -126,16 +134,32 @@ public class UsuarioBO {
 			if (!new SenhaValidator().validar(valores)) {
 				isValido = false;
 			}
+
+			// flag administrador
+			/*
+			 * if (usuario.getPerfilAcesso() == null ||
+			 * "".equals(usuario.getPerfilAcesso())) { isValido = false;
+			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?",
+			 * "Flag Administrador").concat("<br/>")); } // tipo usuario if
+			 * (usuario.getTipoUsuario() == null ||
+			 * "".equals(usuario.getTipoUsuario())) { isValido = false;
+			 * msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?",
+			 * "Flag Tipo Usu�rio").concat("<br/>")); }
+			 */
+
 			// valida se Pessoa esta ok
 			if (!isValido) {
 				throw new NegocioException(msg.toString());
 			}
+			//
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
 		}
+
 		return isValido;
+
 	}
 
 	/**
@@ -177,6 +201,20 @@ public class UsuarioBO {
 
 		try {
 			listUser = usuarioDAO.listarUsuariosAlunos();
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listUser;
+	}
+	
+	public List<IdNomeUsuarioDTO> alunosElegiveis() throws NegocioException {
+
+		List<IdNomeUsuarioDTO> listUser = null;
+
+		try {
+			listUser = usuarioDAO.alunosElegiveis();
 		} catch (PersistenciaException | SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException(e);
@@ -302,18 +340,19 @@ public class UsuarioBO {
 		return listResponsaveis;
 	}
 
-	public Usuario buscaSenha(Usuario usuarioDto) throws NegocioException {
+	public Usuario buscaSenha(Usuario usuarioDto) throws NegocioException{
 
 		Usuario usuario;
-		try {
-			usuario = usuarioDAO.buscaUsuarioPorSenha(usuarioDto);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new NegocioException(e);
-		}
-
-		return usuario;
+			try {
+				usuario = usuarioDAO.buscaUsuarioPorSenha(usuarioDto);
+				} catch (Exception e) {
+				e.printStackTrace();
+				throw new NegocioException(e);
+			}
+		
+	return usuario;
 	}
+
 
 	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
@@ -336,4 +375,6 @@ public class UsuarioBO {
 		return false;
 
 	}
+	
+	
 }
