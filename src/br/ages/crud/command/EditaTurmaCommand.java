@@ -34,8 +34,9 @@ public class EditaTurmaCommand implements Command{
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException {
 		turmaBO =  new TurmaBO();
-		proxima = "turma/editTurma.jsp";
 		String idTurma = request.getParameter("idTurma");
+		proxima = "main?acao=telaTurma&id_turma=" + idTurma + "&isEdit=true";
+		
 		String ano = request.getParameter("ano");
 		String[] alunos = request.getParameterValues("alunos");
 		String semestre = request.getParameter("semestre");

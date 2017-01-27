@@ -60,7 +60,7 @@ public class TurmaBO {
 		AulaBO aulaBO = new AulaBO();
 		StringBuilder msg = new StringBuilder();
 		msg.append(MensagemContantes.MSG_ERR_TURMA_DADOS_INVALIDOS.concat("<br/>"));
-		//DataValidator validatoor = new DataValidator();
+		DataValidator validator = new DataValidator();
 		List<Presenca> presencas = aulaBO.listarPresencasTurma(idTurma);
 		
 		for (Usuario alunoRemover : remover) {
