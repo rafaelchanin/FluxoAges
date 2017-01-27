@@ -61,7 +61,7 @@
 	
 					<div class="col-sm-6">
 						<label class="form-label ages">Turma: <span class="red">*</span></label> 
-						<input class="form-control" id="numero" name="numero" value="<%=turma.getNumero() %>" type="text"	maxlength="120" required>
+						<input class="form-control" id="numero" name="numero" value="<%=turma.getNumero() %>" type="text" minlength="3" maxlength="3" pattern="[0-9][0-9][0-9]" title="A turma é composta por três números!" required>
 					</div>
 				</div>
 				
