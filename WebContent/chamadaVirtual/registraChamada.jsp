@@ -24,7 +24,7 @@
 					
 					<%
 						List<Turma> turmasAtivas = (List<Turma>) request.getAttribute("turmasAtivas");
-					
+						String mesString = (String) request.getAttribute("mesString");
 						for (Turma turma : turmasAtivas) {
 							if (request.getAttribute("nomeTurma").equals(turma.toString())) {
 						%>	
@@ -43,12 +43,12 @@
 				
 				<div class='col-sm-2' id='dtFinall'>
 					<label for="sel1" class="form-label ages">Mês:<span class="red">*</span></label> 
-					<select class="form-control" id="mes" name="mes" value required>
-						<option id="primeiro" value="primeiro"></option>
-						<option id="segundo" value="segundo"></option>
-						<option id="terceiro" value="terceiro"></option>
-						<option id="quarto" value="quarto"></option>
-						<option id="quinto" value="quinto"></option>
+					<select class="form-control" id="mes" name="mes" required>
+						<option id="primeiro" value="primeiro" <%if (mesString.equals("03") || mesString.equals("08")) {%> selected <%}%>></option>
+						<option id="segundo" value="segundo" <%if (mesString.equals("04") || mesString.equals("09")) {%> selected <%}%>></option>
+						<option id="terceiro" value="terceiro" <%if (mesString.equals("05") || mesString.equals("10")) {%> selected <%}%>></option>
+						<option id="quarto" value="quarto" <%if (mesString.equals("06") || mesString.equals("11")) {%> selected <%}%>></option>
+						<option id="quinto" value="quinto" <%if (mesString.equals("07") || mesString.equals("12")) {%> selected <%}%>></option>
 					
 				</select>
 				</div>

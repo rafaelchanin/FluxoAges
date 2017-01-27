@@ -97,6 +97,8 @@ public class RegistraChamadaCommand implements Command {
 			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
 			if (request.getAttribute("nomeTurma") == null || request.getAttribute("nomeTurma").equals(""))
 				request.setAttribute("nomeTurma", "");
+			if (request.getAttribute("mesString") == null || request.getAttribute("mesString").equals(""))
+				request.setAttribute("mesString", "");
 			//request.setAttribute("dtSaida", dataSaida);
 		
 		} catch (NegocioException e) {
