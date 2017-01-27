@@ -43,7 +43,7 @@
 				
 				<div class='col-sm-2' id='dtFinall'>
 					<label for="sel1" class="form-label ages">Mês:<span class="red">*</span></label> 
-					<select class="form-control" id="mes" name="mes" required>
+					<select class="form-control" id="mes" name="mes" value required>
 						<option id="primeiro" value="primeiro"></option>
 						<option id="segundo" value="segundo"></option>
 						<option id="terceiro" value="terceiro"></option>
