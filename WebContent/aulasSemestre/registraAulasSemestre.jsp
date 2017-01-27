@@ -5,7 +5,7 @@
 
 <div class="panel panel-primary panel-lancamentoHoras">
 
-	<div class="panel-heading text-center">Dias de Aula</div>
+	<div class="panel-heading text-center">Calendário</div>
 
 	<div class="panel-body ">
 
