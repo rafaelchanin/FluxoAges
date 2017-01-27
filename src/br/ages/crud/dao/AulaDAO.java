@@ -337,7 +337,7 @@ public class AulaDAO {
 			
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setInt(1, idTurma);
-			statement.setInt(1, mes);
+			statement.setInt(2, mes);
 			
 			ResultSet resultSet = statement.executeQuery();
 

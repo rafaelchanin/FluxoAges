@@ -124,6 +124,7 @@ public class AdicionaChamadasCommand implements Command {
 			e.printStackTrace();
 		}
 		request.setAttribute("nomeTurma", nomeTurma);
+		request.setAttribute("mesString", mesString);
 		return proxima;
 	}
 
