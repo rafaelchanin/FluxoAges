@@ -640,6 +640,54 @@ public class UsuarioDAO {
 		}
 		return listarUsuarios;
 	}
+	
+	public List<Usuario> listarUsuariosProfessores() throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		// tentativa de readaptação do listarUsuarios()
+		try {
+			conexao = ConexaoUtil.getConexao();
+			listarUsuarios = new ArrayList<>();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("select ");
+			sql.append("u.`id_usuario`,");
+			sql.append("u.`usuario`,");
+			sql.append("u.`senha`,");
+			sql.append("u.`perfil_acesso`,");
+			sql.append("u.`status_usuario`,");
+			sql.append("u.`id_tipo_usuario`,");
+			sql.append("u.`matricula`,");
+			sql.append("u.`nome`,");
+			sql.append("u.`email` ");
+
+			sql.append("from ages_e.tb_usuario u inner join ages_e.tb_tipo_usuario t ");
+			sql.append(" on t.id_tipo_usuario = u.id_tipo_usuario");
+			sql.append(" where t.nome = 'Professor'");
+			sql.append(" order by u.nome;");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			ResultSet resultset = statement.executeQuery();
+			while (resultset.next()) {
+				Usuario dto = new Usuario();
+				dto.setIdUsuario(resultset.getInt("ID_USUARIO"));
+				dto.setMatricula(resultset.getString("MATRICULA"));
+				dto.setNome(resultset.getString("NOME"));
+				dto.setEmail(resultset.getString("EMAIL"));
+				dto.setUsuario(resultset.getString("USUARIO"));
+				dto.setSenha(resultset.getString("SENHA"));
+				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
+				dto.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+
+				listarUsuarios.add(dto);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
+		}
+		return listarUsuarios;
+	}
 
 	public Usuario buscaUsuarioPorSenha(Usuario usuarioDto) throws PersistenciaException {
 		Usuario usuario = new Usuario();

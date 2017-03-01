@@ -211,6 +211,20 @@ public class UsuarioBO {
 		return listUser;
 	}
 	
+	public List<Usuario> listarUsuarioProfessores() throws NegocioException {
+
+		List<Usuario> listUser = null;
+
+		try {
+			listUser = usuarioDAO.listarUsuariosProfessores();
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listUser;
+	}
+	
 	public List<IdNomeUsuarioDTO> alunosElegiveis() throws NegocioException {
 
 		List<IdNomeUsuarioDTO> listUser = null;
