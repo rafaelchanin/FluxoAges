@@ -3,7 +3,7 @@
 <%@page import="br.ages.crud.model.Time"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ages.crud.bo.ProjetoBO"%>
-<%@page import="br.ages.crud.bo.StakeholderBO"%>
+<%@page import="br.ages.crud.bo.UsuarioBO"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
@@ -35,7 +35,8 @@
 				<tbody>
 					<%	
             		ProjetoBO proj = new ProjetoBO();
-            		StakeholderBO stake = new StakeholderBO();
+            		UsuarioBO stake = new UsuarioBO();
+            		//Usuario stake = stakeBO.buscaUsuarioId(idUsuario)
 					List<Time> listaTimes = (List<Time>) request.getAttribute("listaTimes");
 					for (Time time : listaTimes) {
 						
@@ -47,7 +48,7 @@
 
 						<!-- usando como static o stakeholder não funcionam sempre, pq?? -->
 						<!-- StakeholderBO.buscaStakeholderId(time.getOrientador()).getNomeStakeholder() -->
-						<td align="center" class="col-sm-3"><%=stake.buscaStakeholderId(time.getOrientador()).getNomeStakeholder()%></td>
+						<td align="center" class="col-sm-3"><%=stake.buscaUsuarioId(time.getOrientador()).getNome()%></td>
 
 						<td align="center" class="col-sm-2"><%=time.getStatus()%></td>
 						<td align="center" class="col-sm-6">

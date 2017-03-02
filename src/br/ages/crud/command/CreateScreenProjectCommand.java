@@ -48,11 +48,11 @@ public class CreateScreenProjectCommand implements Command {
 				int idProjeto = Integer.parseInt(request.getParameter("id_projeto"));
 				Projeto projeto = projetoBO.buscarProjeto(idProjeto);
 				
-				List<Usuario> usuarioProjeto = projeto.getUsuarios();
-				List<Usuario> usuarios = usuarioBO.listarUsuario();
+			//	List<Usuario> usuarioProjeto = projeto.getUsuarios();
+			//	List<Usuario> usuarios = usuarioBO.listarUsuario();
 
 				
-				for(int i = 0; i < usuarioProjeto.size(); i++){
+			/*	for(int i = 0; i < usuarioProjeto.size(); i++){
 					for(int j = 0; j < usuarios.size(); j++){
 						if(usuarios.get(j).getIdUsuario() == usuarioProjeto.get(i).getIdUsuario()){
 							usuarios.remove(j);
@@ -60,9 +60,9 @@ public class CreateScreenProjectCommand implements Command {
 						}
 					}
 				}
-				
+				*/
 				request.setAttribute("projeto", projeto);
-				request.setAttribute("listaUsuarios", usuarios);
+				//request.setAttribute("listaUsuarios", usuarios);
 				request.setAttribute("listaStakeholders", stakeholders);
 				
 				
@@ -71,10 +71,10 @@ public class CreateScreenProjectCommand implements Command {
 				proxima = "project/addProject.jsp";
 		
 				usuarioBO = new UsuarioBO();
-				List<Usuario> usuarios = usuarioBO.listarUsuario();				
+				//List<Usuario> usuarios = usuarioBO.listarUsuario();				
 				
 				request.setAttribute("listaStakeholders", stakeholders);		
-				request.setAttribute("listaUsuarios", usuarios);
+				//request.setAttribute("listaUsuarios", usuarios);
 			}
 		} catch(Exception e){
 			request.setAttribute("msgErro", e.getMessage());

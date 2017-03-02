@@ -32,7 +32,7 @@ public class CreateScreenTimeCommand implements Command {
 			if( !currentUser.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 			String isEdit = request.getParameter("isEdit");
 
-			if (isEdit != null && !"".equals(isEdit)) {
+			if (isEdit != null && !"".equals(isEdit)) { //edição
 				proxima = "time/editTime.jsp";
 				timeBO = new TimeBO();
 				usuarioBO = new UsuarioBO();
@@ -47,25 +47,26 @@ public class CreateScreenTimeCommand implements Command {
 					dto.setNome(aluno.getNome());
 					alunosProjeto.add(dto);
 				}
-				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveis();
+				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveisTime();
+				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				request.setAttribute("time", time);
 				request.setAttribute("alunosProjeto", alunosProjeto);
 				request.setAttribute("alunos", alunosDisponiveis);
-				//	request.setAttribute("listaStakeholders", stakeholders);
+				request.setAttribute("orientadores", orientadores);
 
 
-			} else {
+			} else {//cadastro
 				
 				proxima = "time/addTime.jsp";
 
 				usuarioBO = new UsuarioBO();
-				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();				
-
+				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveisTime();				
+				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				Calendar hoje = Calendar.getInstance();
 				String ano = Integer.toString(hoje.get(hoje.YEAR));
 				System.out.println(ano);
 				request.setAttribute("ano", ano);
-
+				request.setAttribute("orientadores", orientadores);
 				request.setAttribute("alunos", alunos);
 			}
 		} catch(Exception e){

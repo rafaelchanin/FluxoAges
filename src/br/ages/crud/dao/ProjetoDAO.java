@@ -65,7 +65,7 @@ public class ProjetoDAO {
 				Date dataFimPrevisto = resultSet.getDate("data_fim_previsto");
 				projeto.setDataFimPrevisto(dataFimPrevisto);
 
-				projeto.setUsuarios(buscarUsuariosProjeto(conexao, resultSet.getInt("id_projeto")));
+				//projeto.setUsuarios(buscarUsuariosProjeto(conexao, resultSet.getInt("id_projeto")));
 				projeto.setStakeholders(buscarStakeholdersProjeto(conexao, resultSet.getInt("id_projeto")));
 				
 				listaProjetos.add(projeto);
@@ -186,7 +186,7 @@ public class ProjetoDAO {
 				ok=true;
 			}
 
-			inserirUsuariosProjeto(conexao, projeto);
+			//inserirUsuariosProjeto(conexao, projeto);
 			inserirStakeholdersProjeto(conexao, projeto);
 
 		} catch (ClassNotFoundException | SQLException e) {

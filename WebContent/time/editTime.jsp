@@ -1,7 +1,7 @@
 <%@page import="br.ages.crud.model.Stakeholder"%>
 <%@page import="br.ages.crud.model.Projeto"%>
 <%@page import="br.ages.crud.bo.ProjetoBO"%>
-<%@page import="br.ages.crud.bo.StakeholderBO"%>
+<%@page import="br.ages.crud.bo.UsuarioBO"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
@@ -73,9 +73,15 @@
 							<%
 								ProjetoBO projetoBO = new ProjetoBO();
 								for (Projeto proj : projetoBO.listarProjeto()) {
+									if (time.getProjeto() == proj.getIdProjeto()) {
+										%>
+										<option value=<%=proj.getIdProjeto()%> selected="selected" ><%=proj.getNomeProjeto()%></option>
+										<%
+									} else {
 							%>
 							<option value=<%=proj.getIdProjeto()%>><%=proj.getNomeProjeto()%></option>
 							<%
+									}
 								}
 							%>
 						</select>
@@ -86,11 +92,15 @@
 							class="red">*</span></label> <select class="form-control" id="orientador"
 							name="orientador" required>
 							<%
-								StakeholderBO stakeholderBO = new StakeholderBO();
-								for (Stakeholder stake : stakeholderBO.listarStakeholder()) {
-							%>
-							<option value=<%=stake.getIdStakeholder()%>><%=stake.getNomeStakeholder()%></option>
+								UsuarioBO orientadorBO = new UsuarioBO();
+								for (Usuario stake : orientadorBO.listarUsuarioProfessores()) {
+									if (time.getOrientador() == stake.getIdUsuario()) {
+										%>
+										<option value=<%=stake.getIdUsuario()%> selected="selected" ><%=stake.getNome()%></option>
+									<%} else { %>
+							<option value=<%=stake.getIdUsuario()%>><%=stake.getNome()%></option>
 							<%
+									}
 								}
 							%>
 						</select>

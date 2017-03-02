@@ -64,24 +64,6 @@
 					</div>
 				</div>
 				
-				<div class="form-group integrante">					
-					<!-- USUARIOS -->
-					<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
-					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="listaUsuarios" class="listaUsuarios" required>
-						<%
-							List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
-							for (Usuario usuario : listaUsuarios) {
-						%>
-							<option value="<%=usuario.getIdUsuario()%>"><%=usuario.getNome()%></option>
-						<%
-							}
-						%>
-						
-						</select>
-					</div>
-				</div>
-				
 				<div class="form-group">
 					<label class="form-label ages">Workspace: <span class="red">*</span></label> 
 					<input class="form-control" id="workspace" name="workspace" value="${param.workspace}" type="text"

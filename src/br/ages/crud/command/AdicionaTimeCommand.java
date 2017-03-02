@@ -9,7 +9,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.ProjetoBO;
-import br.ages.crud.bo.StakeholderBO;
+import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.bo.TimeBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
@@ -75,11 +75,12 @@ public class AdicionaTimeCommand implements Command {
 
 			if (isValido) {
 				ProjetoBO proj = new ProjetoBO();
-				StakeholderBO stake = new StakeholderBO();
+				UsuarioBO stakeBO = new UsuarioBO();
+				Usuario stake = stakeBO.buscaUsuarioId(Integer.valueOf(orientador));
 				timeBO.cadastrarTime(time);
 				request.getSession().setAttribute("time", time);
 				proxima = "main?acao=listaTimes";
-				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TIME.replace("?", time.getAno()+" / "+  time.getSemestre()+" - Projeto "+ proj.buscarProjeto(time.getProjeto()).getNomeProjeto()+" - Orientador " + stake.buscaStakeholderId(time.getOrientador()).getNomeStakeholder()));
+				request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_TIME.replace("?", time.getAno()+" / "+  time.getSemestre()+" - Projeto "+ proj.buscarProjeto(time.getProjeto()).getNomeProjeto()+" - Orientador " + stake.getNome()));
 			} else {
 				request.setAttribute("msgErro", MensagemContantes.MSG_ERR_TIME_DADOS_INVALIDOS);
 			}
