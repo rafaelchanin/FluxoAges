@@ -44,7 +44,7 @@ public class AdicionaProjetoCommand implements Command {
 		proxima = "main?acao=telaProjeto";
 
 		String nomeProjeto = request.getParameter("nomeProjeto");
-		String[] usuariosString = request.getParameterValues("listaUsuarios");
+		//String[] usuariosString = request.getParameterValues("listaUsuarios");
 		String[] stakeholdersString = request.getParameterValues("listaStakeholders");
 		String statusProjetoString = request.getParameter("statusProjeto");
 		String workspace = request.getParameter("workspace");
@@ -55,11 +55,11 @@ public class AdicionaProjetoCommand implements Command {
 		try {
 			// cria o array de usuarios com o array de String do request
 			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			for (String s : usuariosString) {
+			/*for (String s : usuariosString) {
 				usuario = new Usuario();
 				usuario.setIdUsuario(Integer.valueOf(s));
 				usuarios.add(usuario);
-			}
+			}*/
 			// mesma coisa mas com stakeholders
 			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
 			for (String s : stakeholdersString) {
@@ -77,7 +77,7 @@ public class AdicionaProjetoCommand implements Command {
 
 			Projeto projeto = new Projeto();
 			projeto.setNomeProjeto(nomeProjeto);
-			projeto.setUsuarios(usuarios);
+			//projeto.setUsuarios(usuarios);
 			projeto.setStatusProjeto(statusProjeto);
 			projeto.setWorkspace(workspace);
 			projeto.setStakeholders(stakeholders);
