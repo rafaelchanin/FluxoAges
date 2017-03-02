@@ -79,6 +79,43 @@ public class UsuarioDAO {
 		
 	}
 	
+	public ArrayList<IdNomeUsuarioDTO> alunosElegiveisTime() throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		ArrayList<IdNomeUsuarioDTO> alunos = new ArrayList<>();
+		// tentativa de readaptação do listarUsuarios()
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT ID_USUARIO, NOME, MATRICULA");
+			sql.append(" FROM tb_usuario");
+			sql.append(" WHERE ID_TIPO_USUARIO=2 AND ID_USUARIO IN");
+			sql.append(" (SELECT ta.ID_ALUNO");
+			sql.append(" FROM tb_turma t");
+			sql.append(" INNER JOIN tb_turma_aluno ta");
+			sql.append(" ON t.id_turma=ta.id_turma");
+			sql.append(" WHERE t.STATUS_TURMA = 'ATIVA')");
+			
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			ResultSet resultset = statement.executeQuery();
+			while (resultset.next()) {
+				IdNomeUsuarioDTO dto = new IdNomeUsuarioDTO();
+				dto.setId(resultset.getInt("ID_USUARIO"));
+				dto.setNome(resultset.getString("NOME"));
+				dto.setMatricula(resultset.getString("MATRICULA"));
+
+				alunos.add(dto);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
+		}
+		return alunos;
+		
+	}
+	
 	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException {
 		Usuario usuario = new Usuario();
 		try {

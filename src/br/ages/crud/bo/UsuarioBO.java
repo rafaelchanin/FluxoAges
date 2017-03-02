@@ -238,6 +238,20 @@ public class UsuarioBO {
 
 		return listUser;
 	}
+	
+	public List<IdNomeUsuarioDTO> alunosElegiveisTime() throws NegocioException {
+
+		List<IdNomeUsuarioDTO> listUser = null;
+
+		try {
+			listUser = usuarioDAO.alunosElegiveisTime();
+		} catch (PersistenciaException | SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException(e);
+		}
+
+		return listUser;
+	}
 
 	/**
 	 * Lista as pessoas a partir das classes de DAO

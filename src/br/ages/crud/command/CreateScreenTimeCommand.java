@@ -47,7 +47,7 @@ public class CreateScreenTimeCommand implements Command {
 					dto.setNome(aluno.getNome());
 					alunosProjeto.add(dto);
 				}
-				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveis();
+				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveisTime();
 				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				request.setAttribute("time", time);
 				request.setAttribute("alunosProjeto", alunosProjeto);
@@ -60,7 +60,7 @@ public class CreateScreenTimeCommand implements Command {
 				proxima = "time/addTime.jsp";
 
 				usuarioBO = new UsuarioBO();
-				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();				
+				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveisTime();				
 				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				Calendar hoje = Calendar.getInstance();
 				String ano = Integer.toString(hoje.get(hoje.YEAR));
