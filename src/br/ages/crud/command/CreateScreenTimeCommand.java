@@ -48,10 +48,11 @@ public class CreateScreenTimeCommand implements Command {
 					alunosProjeto.add(dto);
 				}
 				List<IdNomeUsuarioDTO> alunosDisponiveis = usuarioBO.alunosElegiveis();
+				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				request.setAttribute("time", time);
 				request.setAttribute("alunosProjeto", alunosProjeto);
 				request.setAttribute("alunos", alunosDisponiveis);
-				//	request.setAttribute("listaStakeholders", stakeholders);
+				request.setAttribute("orientadores", orientadores);
 
 
 			} else {
@@ -60,12 +61,12 @@ public class CreateScreenTimeCommand implements Command {
 
 				usuarioBO = new UsuarioBO();
 				List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();				
-
+				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				Calendar hoje = Calendar.getInstance();
 				String ano = Integer.toString(hoje.get(hoje.YEAR));
 				System.out.println(ano);
 				request.setAttribute("ano", ano);
-
+				request.setAttribute("orientadores", orientadores);
 				request.setAttribute("alunos", alunos);
 			}
 		} catch(Exception e){

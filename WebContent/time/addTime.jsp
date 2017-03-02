@@ -76,10 +76,11 @@
 							class="red">*</span></label> <select class="form-control" id="orientador"
 							name="orientador" required>
 							<%
-								StakeholderBO stakeholderBO = new StakeholderBO();
-								for (Stakeholder stake : stakeholderBO.listarStakeholder()) {
+								List<Usuario> orientadores = (List<Usuario>) request.getAttribute("orientadores");
+								
+								for (Usuario orientador : orientadores) {
 							%>
-							<option value=<%=stake.getIdStakeholder()%>><%=stake.getNomeStakeholder()%></option>
+							<option value=<%=orientador.getIdUsuario()%>><%=orientador.getNome()%></option>
 							<%
 								}
 							%>
