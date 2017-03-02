@@ -32,7 +32,7 @@ public class CreateScreenTimeCommand implements Command {
 			if( !currentUser.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 			String isEdit = request.getParameter("isEdit");
 
-			if (isEdit != null && !"".equals(isEdit)) {
+			if (isEdit != null && !"".equals(isEdit)) { //edição
 				proxima = "time/editTime.jsp";
 				timeBO = new TimeBO();
 				usuarioBO = new UsuarioBO();
@@ -55,7 +55,7 @@ public class CreateScreenTimeCommand implements Command {
 				request.setAttribute("orientadores", orientadores);
 
 
-			} else {
+			} else {//cadastro
 				
 				proxima = "time/addTime.jsp";
 

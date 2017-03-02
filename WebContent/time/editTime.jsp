@@ -73,9 +73,15 @@
 							<%
 								ProjetoBO projetoBO = new ProjetoBO();
 								for (Projeto proj : projetoBO.listarProjeto()) {
+									if (time.getProjeto() == proj.getIdProjeto()) {
+										%>
+										<option value=<%=proj.getIdProjeto()%> selected="selected" ><%=proj.getNomeProjeto()%></option>
+										<%
+									} else {
 							%>
 							<option value=<%=proj.getIdProjeto()%>><%=proj.getNomeProjeto()%></option>
 							<%
+									}
 								}
 							%>
 						</select>
@@ -88,9 +94,13 @@
 							<%
 								UsuarioBO orientadorBO = new UsuarioBO();
 								for (Usuario stake : orientadorBO.listarUsuarioProfessores()) {
-							%>
+									if (time.getOrientador() == stake.getIdUsuario()) {
+										%>
+										<option value=<%=stake.getIdUsuario()%> selected="selected" ><%=stake.getNome()%></option>
+									<%} else { %>
 							<option value=<%=stake.getIdUsuario()%>><%=stake.getNome()%></option>
 							<%
+									}
 								}
 							%>
 						</select>
