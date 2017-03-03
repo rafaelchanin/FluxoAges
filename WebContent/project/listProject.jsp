@@ -26,7 +26,6 @@
 					<tr>
 						<th style="text-align: center;">ID</th>
 						<th style="text-align: center;">Nome</th>
-						<th style="text-align: center;">Usuários</th>
 						<th style="text-align: center;">Status</th>
 						<th style="text-align: center;">Workspace</th>
 						<th style="text-align: center;">Stakeholders</th>
@@ -48,21 +47,6 @@
 					<tr>
 						<td align="center"><%=projeto.getIdProjeto()%></td>
 						<td align="center"><%=projeto.getNomeProjeto()%></td>
-						<td align="center">
-							<button data-toggle="collapse" data-target="#usuarios<%=projeto.getIdProjeto()%>"><%=projeto.getUsuarios().size()%></button>
-							<div id="usuarios<%=projeto.getIdProjeto()%>" class="collapse">
-								<%
-									List<Usuario> listUsuarios = projeto.getUsuarios();
-										for (Usuario usuario : listUsuarios) {
-								%>
-								<div class="row">
-									<div align="left" class="col-sm-10" >* <%=usuario.getNome()%></div>
-								</div>
-								<%
-									}
-								%>
-							</div>
-						</td>
 						<td align="center"><%=projeto.getStatusProjeto()%></td>
 						<td align="center"><%=projeto.getWorkspace()%></td>
 						<td align="center">

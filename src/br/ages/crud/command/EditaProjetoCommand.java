@@ -32,7 +32,7 @@ public class EditaProjetoCommand implements Command{
 		
 		String idProjetoString = request.getParameter("idProjeto");
 		String nomeProjeto = request.getParameter("nomeProjeto");
-		String[] usuariosString = request.getParameterValues("listaUsuarios");
+		//String[] usuariosString = request.getParameterValues("listaUsuarios");
 		String statusProjetoString = request.getParameter("statusProjeto");
 		String[] stakeholdersString = request.getParameterValues("listaStakeholders");
 		String workspace = request.getParameter("workspace");
@@ -44,13 +44,16 @@ public class EditaProjetoCommand implements Command{
 			Integer idProjeto = Integer.parseInt(idProjetoString);
 
 			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();		
-			for(String s: usuariosString){
+			/*for(String s: usuariosString){
 				usuarios.add(new Usuario(Integer.parseInt(s)));
-			}
+			}*/
 			
 			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();	
-			for(String s: stakeholdersString){
-				stakeholders.add(new Stakeholder(Integer.parseInt(s)));
+			if (stakeholdersString != null) {
+				for(String s: stakeholdersString){
+					if (!s.equals(""))
+						stakeholders.add(new Stakeholder(Integer.parseInt(s)));
+				}
 			}
 			
 			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString); 
