@@ -57,52 +57,24 @@
 							List<Stakeholder> listaStakeholdersProjeto = (List<Stakeholder>) projeto.getStakeholders();
 						
 							for (Stakeholder stakeholder : listaStakeholders) {
-						%>
-							<option value="<%=stakeholder.getIdStakeholder()%>"><%=stakeholder.getNomeStakeholder()%></option>
-						<%
+								boolean ver = false;
+								for (Stakeholder stakeholderP : listaStakeholdersProjeto) {
+									if (stakeholder.getIdStakeholder() == stakeholderP.getIdStakeholder()) {
+										ver=true;
+										break;
+									}
+								}
+								if (ver == true) {
+									%>
+									<option value="<%=stakeholder.getIdStakeholder()%>" selected="selected"><%=stakeholder.getNomeStakeholder()%></option>
+									<%
+								} else {
+									%>
+									<option value="<%=stakeholder.getIdStakeholder()%>"><%=stakeholder.getNomeStakeholder()%></option>
+									<%
+								}
 							}
 						%>
-						
-						<%
-							for (Stakeholder stakeholder : listaStakeholdersProjeto) {
-						%>
-							<option value="<%=stakeholder.getIdStakeholder()%>" selected="selected"><%=stakeholder.getNomeStakeholder()%></option>
-						<%
-							}
-						%>
-						
-						
-						</select>
-					</div>
-				</div>
-				
-				<div class="form-group integrante">					
-					<!-- USUARIOS -->
-					<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
-					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="listaUsuarios" id="listaUsuarios" class="listaUsuarios" >
-						<%
-							
-							List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
-							List<Usuario> listaUsuariosProjeto = (List<Usuario>) projeto.getUsuarios();
-							
-							
-							
-							for (Usuario usuario : listaUsuarios) {
-						%>
-							<option value="<%=usuario.getIdUsuario()%>"><%=usuario.getNome()%></option>	
-						<%
-							}
-						%>
-						
-						<%	
-							for (Usuario usuarioProjeto : listaUsuariosProjeto) {
-						%>
-							<option value="<%=usuarioProjeto.getIdUsuario()%>" selected="selected"><%=usuarioProjeto.getNome()%></option>
-						<%
-							}
-						%>
-						  
 						</select>
 					</div>
 				</div>

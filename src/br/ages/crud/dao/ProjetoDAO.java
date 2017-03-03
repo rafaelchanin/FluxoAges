@@ -271,7 +271,7 @@ public class ProjetoDAO {
 				projeto.setUsuarios(usuarios);
 				ArrayList<Stakeholder> stakeholders = buscarStakeholdersProjeto(conexao, projeto.getIdProjeto());
 				projeto.setStakeholders(stakeholders);
-				projeto.setStakeholders(new ArrayList<Stakeholder>());
+				//projeto.setStakeholders(new ArrayList<Stakeholder>());
 
 			}
 		} catch (ClassNotFoundException | SQLException e) {
