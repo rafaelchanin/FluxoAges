@@ -54,36 +54,48 @@ public class AdicionaProjetoCommand implements Command {
 
 		try {
 			// cria o array de usuarios com o array de String do request
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+			//ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 			/*for (String s : usuariosString) {
 				usuario = new Usuario();
 				usuario.setIdUsuario(Integer.valueOf(s));
 				usuarios.add(usuario);
 			}*/
 			// mesma coisa mas com stakeholders
-			ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
-			for (String s : stakeholdersString) {
-				stakeholder = new Stakeholder();
-				stakeholder.setIdStakeholder(Integer.valueOf(s));
-				stakeholders.add(stakeholder);
+			Projeto projeto = new Projeto();
+			if (stakeholdersString != null) {
+				ArrayList<Stakeholder> stakeholders = new ArrayList<Stakeholder>();
+				for (String s : stakeholdersString) {
+					stakeholder = new Stakeholder();
+					stakeholder.setIdStakeholder(Integer.valueOf(s));
+					stakeholders.add(stakeholder);
+				}
+				projeto.setStakeholders(stakeholders);
 			}
 
 			// cria um StatusProjeto com o string do request
 			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString);
 			// cria Dates com os strings recebidos
-			Date dataInicio = Util.stringToDate(dataInicioString);
-			Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
-			Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
-
-			Projeto projeto = new Projeto();
+			if (!dataInicioString.equals("")) {
+				Date dataInicio = Util.stringToDate(dataInicioString);
+				projeto.setDataInicio(dataInicio);
+			}
+			if (!dataFimPrevistoString.equals("")) {
+				Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
+				projeto.setDataFimPrevisto(dataFimPrevisto);
+			}
+			if (!dataFimString.equals("")) {
+				Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
+				projeto.setDataFim(dataFim);
+			}
+			
 			projeto.setNomeProjeto(nomeProjeto);
 			//projeto.setUsuarios(usuarios);
 			projeto.setStatusProjeto(statusProjeto);
 			projeto.setWorkspace(workspace);
-			projeto.setStakeholders(stakeholders);
-			projeto.setDataInicio(dataInicio);
-			projeto.setDataFim(dataFim);
-			projeto.setDataFimPrevisto(dataFimPrevisto);
+			
+			
+			
+			
 
 			boolean isValido = projetoBO.validarProjeto(projeto);
 

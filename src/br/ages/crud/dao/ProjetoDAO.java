@@ -187,7 +187,8 @@ public class ProjetoDAO {
 			}
 
 			//inserirUsuariosProjeto(conexao, projeto);
-			inserirStakeholdersProjeto(conexao, projeto);
+			if (projeto.getStakeholders() != null)
+				inserirStakeholdersProjeto(conexao, projeto);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
