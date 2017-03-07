@@ -65,7 +65,7 @@ public class EditaProjetoCommand implements Command{
 			Projeto projeto = new Projeto();
 			projeto.setIdProjeto(idProjeto);
 			projeto.setNomeProjeto(nomeProjeto);
-			projeto.setUsuarios(usuarios);
+			//projeto.setUsuarios(usuarios);
 			projeto.setStatusProjeto(statusProjeto);
 			projeto.setWorkspace(workspace);
 			projeto.setStakeholders(stakeholders);
