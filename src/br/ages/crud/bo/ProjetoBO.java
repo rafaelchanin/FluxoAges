@@ -53,6 +53,10 @@ public class ProjetoBO {
 				valido = false;
 				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Nome do projeto ").concat("<br/>"));
 			}
+			if (project.getWorkspace() == null || project.getWorkspace().equals("")) {
+				valido = false;
+				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Workspace ").concat("<br/>"));
+			}
 			if (project.getDataInicio() == null) {
 				valido = false;
 				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Data de início ").concat("<br/>"));
@@ -61,11 +65,12 @@ public class ProjetoBO {
 				valido = false;
 				msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?", "Data de fim previsto ").concat("<br/>"));
 			}
-			if (!validator.maisCedoQue(project.getDataInicio(), project.getDataFimPrevisto())) {
-				valido = false;
-				msg.append(MensagemContantes.MSG_ERR_PROJETO_DATA_INCONSISTENTE.replace("?", " previsto").concat("<br/>"));
+			if (project.getDataInicio() != null && project.getDataFimPrevisto() != null) {
+				if (!validator.maisCedoQue(project.getDataInicio(), project.getDataFimPrevisto())) {
+					valido = false;
+					msg.append(MensagemContantes.MSG_ERR_PROJETO_DATA_INCONSISTENTE.replace("?", " previsto").concat("<br/>"));
+				}
 			}
-
 			if (!valido) {
 				throw new NegocioException(msg.toString());
 			}
