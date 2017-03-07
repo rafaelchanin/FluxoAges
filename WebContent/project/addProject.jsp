@@ -42,7 +42,7 @@
 						<option value="CONCLUIDO" <%="CONCLUIDO".equals(request.getParameter("statusProjeto")) ? "selected" : ""%>>Concluído</option>
 					</select>
 				</div>
-				
+				<%-- 
 				<div class="form-group integrante ">
 										
 					<!-- STAKEHOLDER -->
@@ -62,7 +62,7 @@
 						
 						</select>
 					</div>
-				</div>
+				</div> --%>
 				
 				<div class="form-group">
 					<label class="form-label ages">Workspace: <span class="red">*</span></label> 
