@@ -28,9 +28,10 @@ public class EditaProjetoCommand implements Command{
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException {
 		projetoBO =  new ProjetoBO();
-		proxima = "project/editProject.jsp";
-		
 		String idProjetoString = request.getParameter("idProjeto");
+		//proxima = "project/editProject.jsp";
+		proxima = "main?acao=telaProjeto&id_projeto=" + idProjetoString + "&isEdit=true";
+		
 		String nomeProjeto = request.getParameter("nomeProjeto");
 		//String[] usuariosString = request.getParameterValues("listaUsuarios");
 		String statusProjetoString = request.getParameter("statusProjeto");
@@ -42,8 +43,8 @@ public class EditaProjetoCommand implements Command{
 		
 		try{
 			Integer idProjeto = Integer.parseInt(idProjetoString);
-
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();		
+			Projeto projeto = new Projeto();
+			//ArrayList<Usuario> usuarios = new ArrayList<Usuario>();		
 			/*for(String s: usuariosString){
 				usuarios.add(new Usuario(Integer.parseInt(s)));
 			}*/
@@ -54,24 +55,32 @@ public class EditaProjetoCommand implements Command{
 					if (!s.equals(""))
 						stakeholders.add(new Stakeholder(Integer.parseInt(s)));
 				}
+				projeto.setStakeholders(stakeholders);
 			}
 			
 			StatusProjeto statusProjeto = StatusProjeto.valueOf(statusProjetoString); 
-			Date dataInicio = Util.stringToDate(dataInicioString);				
-			Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
-			Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
+			if (!dataInicioString.equals("")) {
+				Date dataInicio = Util.stringToDate(dataInicioString);
+				projeto.setDataInicio(dataInicio);
+			}
+			if (!dataFimPrevistoString.equals("")) {
+				Date dataFimPrevisto = Util.stringToDate(dataFimPrevistoString);
+				projeto.setDataFimPrevisto(dataFimPrevisto);
+			}
+			if (!dataFimString.equals("")) {
+				Date dataFim = dataFimString.equals("") ? null : Util.stringToDate(dataFimString);
+				projeto.setDataFim(dataFim);
+			}
 			
 			
-			Projeto projeto = new Projeto();
+			
 			projeto.setIdProjeto(idProjeto);
 			projeto.setNomeProjeto(nomeProjeto);
 			//projeto.setUsuarios(usuarios);
 			projeto.setStatusProjeto(statusProjeto);
 			projeto.setWorkspace(workspace);
-			projeto.setStakeholders(stakeholders);
-			projeto.setDataInicio(dataInicio);
-			projeto.setDataFim(dataFim);
-			projeto.setDataFimPrevisto(dataFimPrevisto);
+			
+			
 
 			boolean isValido = projetoBO.validarProjeto(projeto);
 
