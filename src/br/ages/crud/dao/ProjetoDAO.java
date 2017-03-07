@@ -310,8 +310,8 @@ public class ProjetoDAO {
 
 			statement.executeUpdate();
 			
-			removerUsuariosProjeto(conexao, projeto);
-			inserirUsuariosProjeto(conexao, projeto);
+			//sremoverUsuariosProjeto(conexao, projeto);
+			//inserirUsuariosProjeto(conexao, projeto);
 			removerStakeholdersProjeto(conexao, projeto);
 			inserirStakeholdersProjeto(conexao, projeto);
 
