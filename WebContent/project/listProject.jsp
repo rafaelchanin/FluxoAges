@@ -84,12 +84,12 @@
 	            		</form>
 	            		</td>
 	            		
-	            		<td align="center">
+	            		<%-- <td align="center">
 	            			<form action="" method="post">
 	            				<a href="" data-toggle="modal" data-id="<%=projeto.getIdProjeto() %>" data-projeto="<%=projeto.getNomeProjeto()%>" 
 	            				data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
 	            			</form>
-	            		</td>
+	            		</td>--%>
 					</tr>
 
 					<%
