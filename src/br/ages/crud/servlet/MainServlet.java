@@ -47,6 +47,7 @@ import br.ages.crud.command.LoginCommand;
 import br.ages.crud.command.LogoutCommand;
 import br.ages.crud.command.RegistraAulasTurmaCommand;
 import br.ages.crud.command.RegistraChamadaCommand;
+import br.ages.crud.command.RelatorioHorasCommand;
 import br.ages.crud.command.RemoveProjetoCommand;
 import br.ages.crud.command.RemoveStakeholderCommand;
 import br.ages.crud.command.RemoveTurmaCommand;
@@ -102,6 +103,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("adicionaAulas", new AdicionaAulasCommand());
 		comandos.put("registrarChamada", new RegistraChamadaCommand());
 		comandos.put("adicionaChamada", new AdicionaChamadasCommand());
+		comandos.put("relatorioHoras", new RelatorioHorasCommand());
 	
 		
 		//COMANDOS DE TIME
