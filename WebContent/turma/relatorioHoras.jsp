@@ -11,7 +11,7 @@
 <jsp:include page="../template/modalAluno.jsp"></jsp:include>
 <div class="panel panel-primary">
 
-	<div class="panel-heading text-center">Chamada Virtual</div>
+	<div class="panel-heading text-center">Relatório de Horas</div>
 
 	<jsp:include page="/template/msg.jsp"></jsp:include>
 
@@ -41,17 +41,7 @@
 				</select>
 				</div>
 				
-				<div class='col-sm-2' id='dtFinall'>
-					<label for="sel1" class="form-label ages">Mês:<span class="red">*</span></label> 
-					<select class="form-control" id="mes" name="mes" required>
-						<option id="primeiro" value="primeiro" <%if (mesString.equals("03") || mesString.equals("08")) {%> selected <%}%>></option>
-						<option id="segundo" value="segundo" <%if (mesString.equals("04") || mesString.equals("09")) {%> selected <%}%>></option>
-						<option id="terceiro" value="terceiro" <%if (mesString.equals("05") || mesString.equals("10")) {%> selected <%}%>></option>
-						<option id="quarto" value="quarto" <%if (mesString.equals("06") || mesString.equals("11")) {%> selected <%}%>></option>
-						<option id="quinto" value="quinto" <%if (mesString.equals("07") || mesString.equals("12")) {%> selected <%}%>></option>
-					
-				</select>
-				</div>
+				
 			</div>
 			<div class="table-responsive">
 				<table id="chamada" class="table table-responsive table-striped table-hover table-condensed">
@@ -81,62 +71,18 @@
 
 <script>
 	$(document).ready(function() {
-		defineMeses();
+	
 		montaTabela();
 	});
 	
 	$("#turma").on('change', function(e) {
-		defineMeses();
+	
 		montaTabela();
 	});
 	
-	function defineMeses() {
-		var aulasString = $('#turma option:selected').attr("data-aulas");
-		if (aulasString != null)
-			var aulas = aulasString.split(",");
-		var semestre = document.getElementById("turma").value;
-		semestre = semestre.substring(7, 8);
-		if (semestre == 1) {
-			document.getElementById("primeiro").innerHTML = "Março";
-			document.getElementById("primeiro").value = "03";
-			document.getElementById("segundo").innerHTML = "Abril";
-			document.getElementById("segundo").value = "04";
-			document.getElementById("terceiro").innerHTML = "Maio";
-			document.getElementById("terceiro").value = "05";
-			document.getElementById("quarto").innerHTML = "Junho";
-			document.getElementById("quarto").value = "06";
-			document.getElementById("quinto").innerHTML = "Julho";
-			document.getElementById("quinto").value = "07";
-		}
-		else {
-			document.getElementById("primeiro").innerHTML = "Agosto";
-			document.getElementById("primeiro").value = "08";
-			document.getElementById("segundo").innerHTML = "Setembro";
-			document.getElementById("segundo").value = "09";
-			document.getElementById("terceiro").innerHTML = "Outubro";
-			document.getElementById("terceiro").value = "10";
-			document.getElementById("quarto").innerHTML = "Novembro";
-			document.getElementById("quarto").value = "11";
-			document.getElementById("quinto").innerHTML = "Dezembro";
-			document.getElementById("quinto").value = "12";
-		}
-	}
 	
-	function clickBotao(loc) {
-		if (loc.value == 'P') {
-			loc.value = 'F';  
-			loc.className = 'btnFalta';
-		} else {
-			loc.value = 'P';
-			loc.className = 'btnPresenca';
-		}
-	}
 	
-	$("#mes").on('change', function(e) {
-		montaTabela();
-	});
 	function montaTabela() {
-		var mes = document.getElementById("mes").value;
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
 		var alunosString = $('#turma option:selected').attr("data-alunos");
@@ -146,22 +92,18 @@
 		$('#chamada').empty()
 		var titulo = "";
 		titulo += '<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
-		var i=0;
-		var j=0;
-		if (aulasString != null) {
-			var aulas = aulasString.split(",");
-			for (i=0; i<aulas.length; i++) {
-				var temp = aulas[i].split(":");
-				if (temp[1].substring(3,5) == mes) {
-					aulasMes.push(temp[0]);
-					titulo +='<th style="text-align: center;">' + temp[1].substring(0,2) + '</th>';
-				}
-			}
-		}
+		titulo +='<th style="text-align: center;"> Realizadas até o momento </th>';
+		titulo +='<th style="text-align: center;"> Devendo para aprovacao com 75%</th>';
+		titulo +='<th style="text-align: center;"> Devendo para aprovacao com 100%</th>';
 		titulo +='</tr>';
 		$('#chamada').append(titulo);
 		
+		var i=0;
+		var j=0;
 		var linha = "";
+		var aulas = aulasString.split(","); //vetor com a estrutura idAula:data
+		var qntTotalAulas = aulas.length;
+		
 		if (presen != null) {
 			var ArrayAlunoAulas = presen.split(";"); //aluno: aulas
 			for (i=0;i<alunos.length;i++) {

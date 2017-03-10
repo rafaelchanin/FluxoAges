@@ -86,6 +86,19 @@ public class PontoBO {
 		return listaPontos;
 	}
 	
+	public int totalHoraAluno(int idUsuario, Date dataEntrada, Date dataSaida) throws NegocioException {
+		pontoDAO = new PontoDAO();
+		int total =0;
+		try {
+			total = pontoDAO.totalHoraAluno(idUsuario, dataEntrada, dataSaida);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return total;
+	}
+	
 	public ArrayList<ResumoPonto> listaPontoInvalidoAlunos(int idUsuario) throws NegocioException {
 		pontoDAO = new PontoDAO();
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();
