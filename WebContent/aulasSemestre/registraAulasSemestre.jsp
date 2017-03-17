@@ -1,6 +1,7 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="br.ages.crud.model.Turma"%>
+<%@page import="br.ages.crud.model.Periodo"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <div class="panel panel-primary panel-lancamentoHoras">
@@ -35,6 +36,49 @@
 				</select>
 			</div>
 		</div>
+
+		<div id="diassemana" class="row">
+			<div class="col-sm-4">
+				<label class="form-label ages">Dia: </label>
+				<select class="form-control" id="dia" name="dia" required>
+					
+					<option value="2">Segunda-feira</option>
+					<option value="3">Terca-feira</option>
+					<option value="4">Quarta-feira</option>
+					<option value="5">Quinta-feira</option>
+					<option value="6">Sexta-feira</option>
+					
+					
+				</select>
+			</div>
+		
+		
+		
+			<div id="horario" class="col-sm-2">
+				<label class="form-label ages">Horário: </label>
+				<select class="form-control" id="horario" name="horario" required>
+					
+					<%
+					List<Periodo> periodos = (List<Periodo>) request.getAttribute("periodos");
+					
+					for (Periodo periodo : periodos) {
+						%>
+					
+					<option value="<%=periodo.getId()%>"><%=periodo.getHorario()%></option>
+					
+					<% } %>
+					
+				</select>
+			</div>
+		
+	
+			<div class="col-sm-2" style="top: 25px;">
+							
+				<input class="btn btn-primary btnHorario" type="button" onclick="funcGerar()" value="Gerar">
+			
+			</div>
+		</div>
+	</div>
 		<br>
 		<!-- <form id="form" method="post" action="main?acao=adicionaAulas"> -->
 			<div class="form-group ">
@@ -407,9 +451,7 @@
 					$('#datepicker5').datepicker('setDatesDisabled', pre5);
 				if (date5[0] != null)
 					$('#datepicker5').datepicker('setDates', date5);
-				
 			}
-			
 		}
 
 		
@@ -435,6 +477,35 @@
 		  a.value = aulas;
 		  
 		 form.submit();
+	}
+	
+	function funcGerar() {
+		var diasemana = document.getElementById("dia").value;
+		$("#diassemana").clone().insertAfter("#diassemana");
+		//var teste = $("table tr td:nth-child(" + diasemana + ")").css("background-color","#ffff00");
+		var cellsWeek = $("table tr td:nth-child(" + diasemana + ")").not( 'td.disabled' );
+		var controleDia = 0;
+		var controleDatePicker = 1;
+		var mes = $('#datepicker1').data('datepicker').getStartDate().getMonth() + 2;
+		var ano = $('#datepicker1').data('datepicker').getStartDate().getFullYear();
+		var date = [];
+		for (i=0;i<cellsWeek.length;i++) {
+			var tempDate = '#datepicker' + controleDatePicker;
+			var temp = Number(cellsWeek[i].innerText,10);
+			if (temp > controleDia) {
+				date.push(cellsWeek[i].innerText+'/'+mes+'/'+ano);
+				controleDia=cellsWeek[i].innerText;
+			} else {
+				$(tempDate).datepicker('setDates', date);
+				date.length = 0;
+				controleDatePicker += 1;
+				controleDia=cellsWeek[i].innerText;
+				mes +=1;
+				date.push(cellsWeek[i].innerText+'/'+mes+'/'+ano);
+			}
+		}
+		$(tempDate).datepicker('setDates', date);
+		
 	}
 	
 	$("html").on("mouseenter",".active.disabled.day", function() {
