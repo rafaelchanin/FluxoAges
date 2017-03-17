@@ -47,7 +47,7 @@ public class RelatorioHorasCommand implements Command {
 			Integer idUsuario=1;
 			 
 			turmasAtivas = turmaBO.listarTurmasAtivas();
-			 
+			 /*POR ENQUANTO
 			 for (Turma turma : turmasAtivas) {
 				 String presencasTurma = "";
 				 for (Usuario aluno : turma.getAlunos()) {
@@ -68,7 +68,7 @@ public class RelatorioHorasCommand implements Command {
 				request.setAttribute("nomeTurma", "");
 			if (request.getAttribute("mesString") == null || request.getAttribute("mesString").equals(""))
 				request.setAttribute("mesString", "");
-		
+		*/
 		} catch (NegocioException e) {
 			e.printStackTrace();
 			request.setAttribute("msgErro", e.getMessage());
