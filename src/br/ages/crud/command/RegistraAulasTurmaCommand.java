@@ -9,10 +9,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.ages.crud.bo.PeriodoBO;
 import br.ages.crud.bo.PontoBO;
 import br.ages.crud.bo.TurmaBO;
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
+import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Periodo;
 import br.ages.crud.model.ResumoPonto;
 import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
@@ -25,18 +28,19 @@ public class RegistraAulasTurmaCommand implements Command {
 	private List<Usuario> usuarios;
 	private PontoBO pontoBO;
 	private TurmaBO turmaBO;
+	private PeriodoBO periodoBO;
 	private ArrayList<ResumoPonto> listaPontos;
 
 	@Override
-	public String execute(HttpServletRequest request) throws SQLException, ParseException {
+	public String execute(HttpServletRequest request) throws SQLException, ParseException, PersistenciaException {
 		pontoBO = new PontoBO();
 		turmaBO = new TurmaBO();
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
-
+		periodoBO = new PeriodoBO();
 		//proxima = "aluno/listPontoHora.jsp";
 		proxima = "aulasSemestre/registraAulasSemestre.jsp";
-
+		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
 		String dataEntrada, dataSaida;
 		Date dataEntradaDate, dataSaidaDate;
 		List<Turma> turmasAtivas;
@@ -47,7 +51,7 @@ public class RegistraAulasTurmaCommand implements Command {
 			 dataEntrada = request.getParameter("dtEntrada");
 			 dataSaida = request.getParameter("dtSaida");
 			 turmasAtivas = turmaBO.listarTurmasAtivas();
-		
+			 periodos = periodoBO.listaPeriodo();
 			if (dataSaida == null || dataEntrada == null ) {
 	   			 dataEntradaDate = Util.getDataInicialSemestre();
 				 dataSaidaDate = new Date();
@@ -57,6 +61,7 @@ public class RegistraAulasTurmaCommand implements Command {
 				dataEntradaDate = Util.stringToDate(dataEntrada);
 				dataSaidaDate = Util.stringToDate(dataSaida);
 			}
+			
 					
 			//usuarios = usuarioBO.listarUsuarioAlunos();
 
@@ -68,6 +73,8 @@ public class RegistraAulasTurmaCommand implements Command {
 			//pode ser retirado no futuro
 			// request.setAttribute("listaPontos", listaPontos);
 			request.setAttribute("turmasAtivas", turmasAtivas);
+			request.setAttribute("periodos", periodos);
+			
 
 			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
 			
