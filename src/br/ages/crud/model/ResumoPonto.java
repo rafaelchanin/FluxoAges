@@ -8,6 +8,7 @@ public class ResumoPonto implements Serializable {
 	private static final long serialVersionUID = -8690624546267273422L;
 	private int idPonto;
 	private String nomeAluno;
+	private int idAluno;
 	private Date dataEtrada;
 	private int minutoTotalDia;
 	private int minutoTotalDiaInvalido;
@@ -75,6 +76,14 @@ public class ResumoPonto implements Serializable {
 
 	public void setHoraTotalDiaValido(int horaTotalDiaValido) {
 		this.minutoTotalDiaValido = horaTotalDiaValido;
+	}
+
+	public int getIdAluno() {
+		return idAluno;
+	}
+
+	public void setIdAluno(int idAluno) {
+		this.idAluno = idAluno;
 	}
 
 	

@@ -26,49 +26,53 @@ public class RelatorioHorasCommand implements Command {
 	private UsuarioBO usuarioBO;
 	private List<Usuario> usuarios;
 	private PontoBO pontoBO;
-	private TurmaBO turmaBO;
-	private AulaBO aulaBO;
 	private ArrayList<ResumoPonto> listaPontos;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, ParseException {
 		pontoBO = new PontoBO();
-		turmaBO = new TurmaBO();
-		aulaBO = new AulaBO();
 		usuarioBO = new UsuarioBO();
 		usuarios = new ArrayList<>();
+
 		proxima = "turma/relatorioHoras.jsp";
+		//proxima = "aulasSemestre/registraAulasSemestre.jsp";
 
 		String dataEntrada, dataSaida;
 		Date dataEntradaDate, dataSaidaDate;
-		List<Turma> turmasAtivas;
+
 		try {
 
-			Integer idUsuario=1;
-			 
-			turmasAtivas = turmaBO.listarTurmasAtivas();
-			 /*POR ENQUANTO
-			 for (Turma turma : turmasAtivas) {
-				 String presencasTurma = "";
-				 for (Usuario aluno : turma.getAlunos()) {
-					 String presencasAluno = aluno.getIdUsuario() + "-" + aluno.getMatricula() + ":";
-					 int total = 0;
-					 int qtdPresencas = aulaBO.listarPresencasAlunoTurma(aluno.getIdUsuario(), turma.getId()).size();
-					 float qtdHorasAdicionais = pontoBO.totalHoraAluno(idUsuario, dataEntrada, dataSaida)
-					 }
-					 if (!presencasAluno.equals(""))
-						 presencasTurma += presencasAluno + ";";
-				 }
-				 turma.setPresencas(presencasTurma);
-			 }
+			//Integer idUsuario = Integer.valueOf(request.getParameter("id_usuario"));
+			Integer idUsuario = 0;
+			 dataEntrada = request.getParameter("dtEntrada");
+			 dataSaida = request.getParameter("dtSaida");
+		
+			if (dataSaida == null || dataEntrada == null ) {
+	   			 dataEntradaDate = Util.getDataInicialSemestre();
+				 dataSaidaDate = new Date();
+				 dataEntrada = Util.dateToString(dataEntradaDate);
+				 dataSaida = Util.dateToString(dataSaidaDate);
+			}else {
+				dataEntradaDate = Util.stringToDate(dataEntrada);
+				dataSaidaDate = Util.stringToDate(dataSaida);
+			}
+					
+			//usuarios = usuarioBO.listarUsuarioAlunos();
 
-			request.setAttribute("turmasAtivas", turmasAtivas);
+			//request.setAttribute("usuarios", usuarios);
 
-			if (request.getAttribute("nomeTurma") == null || request.getAttribute("nomeTurma").equals(""))
-				request.setAttribute("nomeTurma", "");
-			if (request.getAttribute("mesString") == null || request.getAttribute("mesString").equals(""))
-				request.setAttribute("mesString", "");
-		*/
+			listaPontos = pontoBO.listaPontoAlunos(idUsuario, dataEntradaDate, dataSaidaDate);
+			//listaPontosInvalidos = pontoBO.listaPontoInvalidoAlunos(idUsuario);
+			
+			//pode ser retirado no futuro
+			request.setAttribute("listaPontos", listaPontos);
+			//request.setAttribute("listaPontosInvalidos", listaPontosInvalidos);
+			
+			//request.setAttribute("totalHorasAluno", pontoBO.calculatotalHorasAluno(listaPontos));
+			//request.setAttribute("totalHorasInvalidoAluno", pontoBO.calculatotalHorasAluno(listaPontosInvalidos));
+			request.setAttribute("dtEntrada", dataEntrada);
+			request.setAttribute("dtSaida", dataSaida);
+		
 		} catch (NegocioException e) {
 			e.printStackTrace();
 			request.setAttribute("msgErro", e.getMessage());

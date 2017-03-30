@@ -103,7 +103,7 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("select u.nome, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
+			sql.append("select u.nome, u.id_usuario, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
 			sql.append("FROM tb_ponto p, tb_usuario u ");
 			sql.append("where p.id_usuario_aluno = u.id_usuario ");
 			sql.append("and p.data_saida is not null ");
@@ -137,6 +137,7 @@ public class PontoDAO {
 
 			while (resultSet.next()) {
 				String nome = resultSet.getString("u.nome");
+				int idAluno = resultSet.getInt("u.id_usuario");
 				ResumoPonto jaExiste = null;
 				int minutoTotal = resultSet.getInt("minutoTotal");
 				String status_ponto = resultSet.getString("p.status_ponto");
@@ -155,6 +156,7 @@ public class PontoDAO {
 					else ponto.setHoraTotalDiaInvalido(minutoTotal);
 						
 					ponto.setNomeAluno(nome);
+					ponto.setIdAluno(idAluno);
 					ponto.setHoraTotalDia(ponto.getHoraTotalDiaInvalido() + ponto.getHoraTotalDiaValido());
 					listaPontos.add(ponto);
 				}
