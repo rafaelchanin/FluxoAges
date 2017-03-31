@@ -2,8 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.ages.crud.model.ResumoPonto"%>
 <%@page import="br.ages.crud.model.Usuario"%>
+<%@page import="br.ages.crud.model.TimePontoDTO"%>
 <%@page import="br.ages.crud.util.TimeConverter"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 
@@ -16,104 +18,117 @@
 	<div class="panel-body">
 		<form id="formListAluno" method="post">
 			<div class="form-group row">
-				<div class='col-sm-2' id='dtInicial'>
-					<label for="sel1" class="form-label ages">Data Inicial:<span class="red">*</span></label> 
-					<div class='input-group date' id='dataEntrada'>
-						<input type='text' class="form-control" id='dtEntrada' name="dtEntrada" value="<%=request.getAttribute("dtEntrada")%>"/>
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-				</div>
-				<div class='col-sm-2' id='dtFinall'>
-					<label for="sel1" class="form-label ages">Data Final:<span class="red">*</span></label> 
-					<div class='input-group date' id='dataSaida'>
-						<input type='text' class="form-control" id="dtSaida" name="dtSaida" value="<%=request.getAttribute("dtSaida")%>"/> 
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-				</div>
-				<div class='col-sm-2 rowMargin' id='dtFinall'>
-					<button class="btn btn-primary addUser center-block" onclick="filtrarData();"> Buscar </button>
+				<div class='col-sm-6' id='time'>
+					<label for="sel1" class="form-label ages">Time:<span
+						class="red">*</span></label>
+						<select class="form-control" id="time" name="time" required>
+
+							<%
+								List<TimePontoDTO> listaTimes = (List<TimePontoDTO>) request.getAttribute("listaPontos");
+								String mesString = (String) request.getAttribute("mesString");
+								for (TimePontoDTO time : listaTimes) {	
+							%>
+									<option value="<%=time.toString()%>" id="<%=time.getId()%>"><%=time.toString()%></option>
+
+							<%
+								}
+							%>
+						</select>
 				</div>
 			</div>
 		</form>
 		<div class="table-responsive">
-		
-			<table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed">
+			<%for (TimePontoDTO time : listaTimes) {	 %>
+			<table id="listaalunos<%=time.getId()%>" class="listaalunos<%=time.getId()%> table table-responsive table-striped table-hover table-condensed"
+				style="display: none;">
 				<thead>
 					<tr>
 						<th style="text-align: center;">Nome</th>
 						<th style="text-align: center;">Realizadas até o momento</th>
-						<th style="text-align: center;">Necessárias para aprovacao com 75%</th>
-						<th style="text-align: center;">Necessárias para aprovacao com 100%</th>
+						<th style="text-align: center;">Necessárias para aprovacao
+							com 75%</th>
+						<th style="text-align: center;">Necessárias para aprovacao
+							com 100%</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<%
-						List<ResumoPonto> listaResumoPonto = (List<ResumoPonto>) request.getAttribute("listaPontos");
-						for (ResumoPonto usuario : listaResumoPonto) {
+						for (ResumoPonto usuario : time.getPontos()) {
+							
+							//PRIMEIRAS
 							String horasValidas = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDiaValido());
 							String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - usuario.getHoraTotalDiaValido());
 							String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - usuario.getHoraTotalDiaValido());
+							
+							
+							
 					%>
-
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
-						<td align="center"><%=usuario.getNomeAluno()%></td>
-						<td align="center"><%=horasValidas%></td>
-						<td align="center"><%=horasAprov%></td>
-						<td align="center"><%=horasAprovCem%></td>
+						<td align="center" style="text-align: center;"><%=usuario.getNomeAluno()%></td>
+						<td align="center" style="text-align: center;"><%=horasValidas%></td>
+						<td align="center" style="text-align: center;"><%=horasAprov%></td>
+						<td align="center" style="text-align: center;"><%=horasAprovCem%></td>
 					</tr>
-					
-					
-					<tr class="alunotitulo<%=usuario.getIdAluno()%>" id="alunotitulo<%=usuario.getIdAluno()%>"
-								>
-						<td style="text-align: center;">Tipo de horas</td>
-						<td style="text-align: center; font-style:italic;">Realizadas</td>
-						<td style="text-align: center; font-style:italic;">Previstas até o momento</td>
-						
-						<td style="text-align: center; font-style:italic;">Previstas até o fim do semestre</td>
-						
-					</tr>	
-					
-					<tr class="alunoextra<%=usuario.getIdAluno()%>" id="alunoextra<%=usuario.getIdAluno()%>"
-								>
-						<td style="text-align: center;">Extraclasse</td>
-						<td style="text-align: center; font-style:italic;">Bloco</td>
-						
-						<td style="text-align: center; font-style:italic;">bloco.getNome()</td>
-						<td style="text-align: center;">-</td>
+
+					<tr style="display: none;"
+						class="alunotitulo<%=usuario.getIdAluno()%>"
+						id="alunotitulo<%=usuario.getIdAluno()%>">
+						<td colspan="4" style="">
+							<table style="width: 100%;"
+								class="table-responsive table-condensed">
+								<tr>
+									<td>Tipo de horas</td>
+									<td style="text-align: center;">Realizadas</td>
+									<td style="text-align: center;">Previstas até o momento</td>
+									<td style="text-align: center;">%</td>
+									<td style="text-align: center;">Previstas até o fim do
+										semestre</td>
+									<td style="text-align: center;">%</td>
+								</tr>
+								<tr>
+									<td>Extraclasse</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+								</tr>
+
+								<tr>
+									<td>Em aula</td>
+									<td style="text-align: center;">horasValidas</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+								</tr>
+
+								<tr>
+									<td>Total</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;">-</td>
+								</tr>
+
+							</table>
+						</td>
+						<td style="display: none;"></td>
+						<td style="display: none;"></td>
+						<td style="display: none;"></td>
+						<!-- DatePicker me obrigo a fazer essa gambiarra por que não aceita o cosplan :/ -->
 					</tr>
-					
-					<tr class="alunoaula<%=usuario.getIdAluno()%>" id="alunoaula<%=usuario.getIdAluno()%>"
-								>
-						<td style="text-align: center;">Em aula</td>
-						<td style="text-align: center; font-style:italic;">Bloco</td>
-						
-						<td style="text-align: center; font-style:italic;">bloco.getNome()</td>
-						<td style="text-align: center;">-</td>
-					</tr>
-					
-					<tr class="alunototal<%=usuario.getIdAluno()%>" id="alunototal<%=usuario.getIdAluno()%>"
-								> <!-- style="display: none;" -->
-						<td style="text-align: center;">Total</td>
-						<td style="text-align: center; font-style:italic;">Bloco</td>
-						
-						<td style="text-align: center; font-style:italic;">bloco.getNome()</td>
-						<td style="text-align: center;">-</td>
-					</tr>
-					
-					
 					<%
 						}
+					}
 					%>
 				</tbody>
 
-			</table>	
+			</table>
 
-		</div>	
+		</div>
 
 	</div>
 
@@ -137,8 +152,13 @@
 //	};
 </script>
 <script>
-	
+	var timeSelecionado = 0;
 	$(document).ready(function(){
+		//ATENCAO, DPS TEM QUE OTIMIZAR PRA UMA FUNCAO
+		var id = $(this).find('option:selected').attr('id');
+    	$(".listaalunos" + id).toggle();
+    	timeSelecionado=id;	
+    	//
 	    $('#listaAlunos').dataTable({
 	    	"language": {
 	            "lengthMenu": "Mostrando _MENU_ registros por página",
@@ -157,6 +177,15 @@
 	        "ordering": false
 	    });
 	});
+	
+	$("#time").change(function() {
+		//JUNTAR COM UMA FUNCAO
+		$(".listaalunos" + timeSelecionado).toggle();
+    	var id = $(this).find('option:selected').attr('id');
+    	$(".listaalunos" + id).toggle();
+    	timeSelecionado=id;
+    	//
+    });
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -190,14 +219,13 @@
 				'click',
 				'tr.aluno',
 				function() {
+					var idCapitulo = $(this).attr("id");
+					var hoje = new Date();
+					var primeiraAula = 
 					
-						var idCapitulo = $(this).attr("id");
+					$(".alunotitulo" + idCapitulo).toggle();
 					
-						$(".alunotitulo" + idCapitulo).show();
-						$(".alunoextra" + idCapitulo).show();
-						$(".alunoaula" + idCapitulo).show();
-						$(".alunototal" + idCapitulo).show();
-						
+					
 				});
 		
 	});

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,6 +20,7 @@ import br.ages.crud.model.Presenca;
 import br.ages.crud.model.Turma;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
+import br.ages.crud.util.Util;
 
 public class AulaDAO {
 	private Aula aula;
@@ -28,6 +31,42 @@ public class AulaDAO {
 	
 	public AulaDAO() {	
 	}
+	
+	public LocalDate primeiroDia(int semestre, int ano) throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		java.sql.Date data = null;
+		try {
+			conexao = ConexaoUtil.getConexao();
+			LocalDate dataInicioSemestre = Util.getDataInicialSemestre(semestre, ano).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();;
+
+			java.sql.Date dataInicio = java.sql.Date.valueOf(dataInicioSemestre);
+			
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT min(DATA) date ");
+			sql.append(" FROM tb_aula");
+			sql.append(" WHERE DATA > ?");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setDate(1, dataInicio);
+
+			ResultSet resultset = statement.executeQuery();
+
+			while (resultset.next()) {
+				data = resultset.getDate("date");
+			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return data.toLocalDate();
+
+	}
+
+
 	
 	public boolean cadastrarDiasAulas(List<Aula> aulas) throws SQLException, PersistenciaException {
 

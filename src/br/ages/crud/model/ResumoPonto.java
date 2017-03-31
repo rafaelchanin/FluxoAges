@@ -12,7 +12,7 @@ public class ResumoPonto implements Serializable {
 	private Date dataEtrada;
 	private int minutoTotalDia;
 	private int minutoTotalDiaInvalido;
-	private int minutoTotalDiaValido;	
+	private int minutoTotalDiaValido;
 	
 	public ResumoPonto() {
 	}

@@ -268,8 +268,8 @@ public class ProjetoDAO {
 				projeto.setDataInicio(resultSet.getDate("DATA_INICIO"));
 				projeto.setDataFim(resultSet.getDate("DATA_FIM"));
 				projeto.setDataFimPrevisto(resultSet.getDate("DATA_FIM_PREVISTO"));
-				ArrayList<Usuario> usuarios = buscarUsuariosProjeto(conexao, projeto.getIdProjeto());
-				projeto.setUsuarios(usuarios);
+				//ArrayList<Usuario> usuarios = buscarUsuariosProjeto(conexao, projeto.getIdProjeto());
+				//projeto.setUsuarios(usuarios);
 				ArrayList<Stakeholder> stakeholders = buscarStakeholdersProjeto(conexao, projeto.getIdProjeto());
 				projeto.setStakeholders(stakeholders);
 				//projeto.setStakeholders(new ArrayList<Stakeholder>());

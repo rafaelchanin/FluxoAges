@@ -2,6 +2,7 @@ package br.ages.crud.bo;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 
 import br.ages.crud.dao.AulaDAO;
@@ -67,6 +68,14 @@ public class AulaBO {
 		boolean ok = false;
 		ok = aulaDAO.removerDiasAulas(aulas);
 		if (ok == false)
+			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_DIAS_AULAS_TURMA);
+		return ok;
+	}
+	
+	public LocalDate primeiroDia(int semestre, int ano) throws SQLException, ParseException, NegocioException, PersistenciaException {
+		LocalDate ok = null;
+		ok = aulaDAO.primeiroDia(semestre, ano);
+		if (ok == null)
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_DIAS_AULAS_TURMA);
 		return ok;
 	}
