@@ -40,6 +40,7 @@ public class RelatorioHorasCommand implements Command {
 	public String execute(HttpServletRequest request) throws SQLException, ParseException, PersistenciaException {
 		timePontoDTOBO = new TimePontoDTOBO();
 		usuarioBO = new UsuarioBO();
+		aulaBO = new AulaBO();
 		usuarios = new ArrayList<>();
 		turmaBO = new TurmaBO();
 

@@ -24,6 +24,7 @@
 						<select class="form-control" id="time" name="time" required>
 
 							<%
+								int horaEsperada = (Integer) request.getAttribute("horaEsperada");
 								List<TimePontoDTO> listaTimes = (List<TimePontoDTO>) request.getAttribute("listaPontos");
 								String mesString = (String) request.getAttribute("mesString");
 								for (TimePontoDTO time : listaTimes) {	
@@ -54,14 +55,17 @@
 
 				<tbody>
 					<%
+					
 						for (ResumoPonto usuario : time.getPontos()) {
 							
 							//PRIMEIRAS
+							
 							String horasValidas = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDiaValido());
 							String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - usuario.getHoraTotalDiaValido());
 							String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - usuario.getHoraTotalDiaValido());
-							
-							
+							String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
+							String realizadasPrevistas = TimeConverter.ConvertMinuteToHours(100 * (usuario.getHoraTotalDiaValido() / horaEsperada));
+							String realizadasTotal = TimeConverter.ConvertMinuteToHours(100 * (usuario.getHoraTotalDiaValido() / 60));
 							
 					%>
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
@@ -97,11 +101,11 @@
 
 								<tr>
 									<td>Em aula</td>
-									<td style="text-align: center;">horasValidas</td>
-									<td style="text-align: center;">-</td>
-									<td style="text-align: center;">-</td>
-									<td style="text-align: center;">-</td>
-									<td style="text-align: center;">-</td>
+									<td style="text-align: center;"><%=horasValidas%></td>
+									<td style="text-align: center;"><%=previstas%></td>
+									<td style="text-align: center;"><%=realizadasPrevistas%></td>
+									<td style="text-align: center;">60</td>
+									<td style="text-align: center;"><%=realizadasTotal%></td>
 								</tr>
 
 								<tr>
