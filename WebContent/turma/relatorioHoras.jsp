@@ -58,14 +58,18 @@
 					
 						for (ResumoPonto usuario : time.getPontos()) {
 							
-							//PRIMEIRAS
+							//RESUMIDO
+							int horaTotaldia = usuario.getHoraTotalDiaValido();
+							String horasValidas = TimeConverter.ConvertMinuteToHours(horaTotaldia);
+							String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - horaTotaldia);
+							String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - horaTotaldia);
 							
-							String horasValidas = TimeConverter.ConvertMinuteToHours(usuario.getHoraTotalDiaValido());
-							String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - usuario.getHoraTotalDiaValido());
-							String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - usuario.getHoraTotalDiaValido());
+							//EXTRACLASSE
 							String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
-							String realizadasPrevistas = TimeConverter.ConvertMinuteToHours(100 * (usuario.getHoraTotalDiaValido() / horaEsperada));
-							String realizadasTotal = TimeConverter.ConvertMinuteToHours(100 * (usuario.getHoraTotalDiaValido() / 60));
+							float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
+							String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
+							float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
+							String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
 							
 					%>
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
@@ -95,7 +99,7 @@
 									<td style="text-align: center;"><%=horasValidas%></td>
 									<td style="text-align: center;"><%=previstas%></td>
 									<td style="text-align: center;"><%=realizadasPrevistas%></td>
-									<td style="text-align: center;">60</td>
+									<td style="text-align: center;">60:00</td>
 									<td style="text-align: center;"><%=realizadasTotal%></td>
 								</tr>
 								<tr>
