@@ -70,6 +70,16 @@ public class TimePontoDTODAO {
 					ArrayList<ResumoPonto> temp = pontoBO.listaPontoAlunos(aluno.getIdUsuario(), Util.getDataInicialSemestre(time.getSemestre(), time.getAno()), Util.getDataFinalSemestre(time.getSemestre(), time.getAno()));
 						if (temp.size() > 0)
 							pontos.add(temp.get(0));
+						else { //caso o aluno nao tenha ponto cadastrado :D
+							ResumoPonto ponto = new ResumoPonto();
+							ponto.setIdAluno(aluno.getIdUsuario());
+							ponto.setNomeAluno(aluno.getNome());
+							ponto.setHoraTotalDia(0);
+							ponto.setHoraTotalDiaValido(0);
+							ponto.setHoraTotalDiaInvalido(0);
+							ponto.setIdPonto(0);
+							pontos.add(ponto);
+						}
 				}
 				time.setPontos(pontos);
 								
