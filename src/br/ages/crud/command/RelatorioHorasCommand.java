@@ -70,8 +70,11 @@ public class RelatorioHorasCommand implements Command {
 			else
 				semestre = 2;
 			LocalDate primeiraAula = aulaBO.primeiroDia(semestre, hoje.getYear());
+			
 			int weekNumberPrimeiraAula = primeiraAula.get(weekFields.weekOfWeekBasedYear());
-			int horaEsperada = (weekNumberHoje - weekNumberPrimeiraAula) * 4;
+			
+			int horaEsperada = (weekNumberHoje - weekNumberPrimeiraAula) * 4 * 60;
+			
 			//Sets
 			request.setAttribute("listaPontos", listaPontos);
 			request.setAttribute("horaEsperada", horaEsperada);
