@@ -85,13 +85,12 @@
 						<td colspan="4" style="">
 							<table style="width: 100%;"
 								class="table-responsive table-condensed">
-								<tr>
+								<tr style="border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#EEE;">
 									<td>Tipo de horas</td>
 									<td style="text-align: center;">Realizadas</td>
 									<td style="text-align: center;">Previstas até o momento</td>
 									<td style="text-align: center;">%</td>
-									<td style="text-align: center;">Previstas até o fim do
-										semestre</td>
+									<td style="text-align: center;">Previstas até o fim do semestre</td>
 									<td style="text-align: center;">%</td>
 								</tr>
 								<tr>
@@ -227,8 +226,13 @@
 				function() {
 					var idCapitulo = $(this).attr("id");
 					var hoje = new Date();
-					var primeiraAula = 
 					
+					//deixar a linha em negrito quando for exibida
+					if((this).style.fontWeight !== "bold")
+				        (this).style.fontWeight = "bold";
+					else
+						(this).style.fontWeight = "";
+					//aparecer a tabela individual do aluno
 					$(".alunotitulo" + idCapitulo).toggle();
 					
 					
