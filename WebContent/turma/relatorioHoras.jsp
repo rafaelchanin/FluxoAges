@@ -98,7 +98,6 @@
 									<td style="text-align: center;">60</td>
 									<td style="text-align: center;"><%=realizadasTotal%></td>
 								</tr>
-
 								<tr>
 									<td>Em aula</td>
 									<td style="text-align: center;">-</td>
@@ -107,7 +106,6 @@
 									<td style="text-align: center;">-</td>
 									<td style="text-align: center;">-</td>
 								</tr>
-
 								<tr>
 									<td>Total</td>
 									<td style="text-align: center;">-</td>
