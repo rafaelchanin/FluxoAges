@@ -228,7 +228,7 @@ public class TimeDAO {
 		return listaTimes;
 	}
 
-	private ArrayList<Usuario> buscarAlunosTime(Connection conexao, int idTime) throws PersistenciaException, SQLException {
+	public ArrayList<Usuario> buscarAlunosTime(Connection conexao, int idTime) throws PersistenciaException, SQLException {
 
 		List<Usuario> alunosTime = new ArrayList<Usuario>();
 

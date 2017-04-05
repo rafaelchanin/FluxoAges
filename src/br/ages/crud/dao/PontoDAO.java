@@ -103,7 +103,7 @@ public class PontoDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("select u.nome, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
+			sql.append("select u.nome, u.id_usuario, p.status_ponto, timestampdiff(minute,p.data_entrada,p.data_saida) minutoTotal "); //tirei o sum
 			sql.append("FROM tb_ponto p, tb_usuario u ");
 			sql.append("where p.id_usuario_aluno = u.id_usuario ");
 			sql.append("and p.data_saida is not null ");
@@ -137,6 +137,7 @@ public class PontoDAO {
 
 			while (resultSet.next()) {
 				String nome = resultSet.getString("u.nome");
+				int idAluno = resultSet.getInt("u.id_usuario");
 				ResumoPonto jaExiste = null;
 				int minutoTotal = resultSet.getInt("minutoTotal");
 				String status_ponto = resultSet.getString("p.status_ponto");
@@ -155,6 +156,7 @@ public class PontoDAO {
 					else ponto.setHoraTotalDiaInvalido(minutoTotal);
 						
 					ponto.setNomeAluno(nome);
+					ponto.setIdAluno(idAluno);
 					ponto.setHoraTotalDia(ponto.getHoraTotalDiaInvalido() + ponto.getHoraTotalDiaValido());
 					listaPontos.add(ponto);
 				}
@@ -175,6 +177,50 @@ public class PontoDAO {
 
 		return listaPontos;
 	}
+	
+	public int totalHoraAluno(int idUsuario, Date dataEntrada, Date dataSaida) throws SQLException {
+		int total = 0;
+		Connection conexao = null;
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("select sum(timestampdiff(minute,p.data_entrada,p.data_saida)) minutos");
+			sql.append(" FROM tb_ponto p, tb_usuario u");
+			sql.append(" where p.id_usuario_aluno = u.id_usuario ");
+			sql.append(" and p.status_ponto = 'VALIDO' and p.id_usuario_aluno = ?");
+			sql.append(" and p.data_entrada between ? and ? and p.data_saida between ? and ? "); 
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			
+			statement.setInt(1, idUsuario);
+			
+			java.sql.Timestamp dataEntradaSql = new java.sql.Timestamp(dataEntrada.getTime());
+			statement.setTimestamp(2, dataEntradaSql);
+			
+			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
+			statement.setTimestamp(3, dataSaidaSql);
+			
+			statement.setTimestamp(4, dataEntradaSql);
+
+			statement.setTimestamp(5, dataSaidaSql);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				total = resultSet.getInt("minutos");
+			}
+			return total;
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			conexao.close();
+		}
+
+		return total;
+	}
+	
 	
 	public ArrayList<ResumoPonto> listaPontoInvalidoAlunos(int idUsuario) throws SQLException {
 		ArrayList<ResumoPonto> listaPontos = new ArrayList<>();

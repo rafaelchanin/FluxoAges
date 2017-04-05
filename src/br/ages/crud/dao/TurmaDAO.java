@@ -212,7 +212,7 @@ public class TurmaDAO {
 		return listaTurmas;
 	}
 	
-	private ArrayList<Usuario> buscarAlunosTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
+	public ArrayList<Usuario> buscarAlunosTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
 
 		List<Usuario> alunosTurma = new ArrayList<Usuario>();
 
@@ -248,7 +248,7 @@ public class TurmaDAO {
 
 	}
 	
-	private ArrayList<Aula> buscarAulasTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
+	public ArrayList<Aula> buscarAulasTurma(Connection conexao, int idTurma) throws PersistenciaException, SQLException {
 		AulaDAO aulaDAO = new AulaDAO();
 		ArrayList<Aula> aulasTurma = new ArrayList<Aula>();
 

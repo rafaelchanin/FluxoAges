@@ -146,6 +146,28 @@ public class Util {
 		//System.out.println(semestre);
 		return dSemestre;
 	}
+	
+	public static Date getDataInicialSemestre(int semestre, int ano) throws ParseException{
+		String temp;
+		if (semestre == 1)
+			temp = "01"+"/"+"01"+"/"+ano;
+		else
+			temp = "15"+"/"+"07"+"/"+ano;
+		Date dSemestre = new SimpleDateFormat("dd/MM/yyyy").parse(temp);
+		//System.out.println(semestre);
+		return dSemestre;
+	}
+	
+	public static Date getDataFinalSemestre(int semestre, int ano) throws ParseException{
+		String temp;
+		if (semestre == 1)
+			temp = "15"+"/"+"07"+"/"+ano;
+		else
+			temp = "31"+"/"+"12"+"/"+ano;
+		Date dSemestre = new SimpleDateFormat("dd/MM/yyyy").parse(temp);
+		//System.out.println(semestre);
+		return dSemestre;
+	}
 }
 /*
  * public String getBuild(){ EventContext application =

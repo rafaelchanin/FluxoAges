@@ -118,6 +118,7 @@
 				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
 				            	<li><a href="main?acao=registrarAulas">Calendário</a></li>
 				            	<li><a href="main?acao=registrarChamada">Chamada Virtual</a></li>
+				            	<li><a href="main?acao=relatorioHoras">Relatório de Horas</a></li>
 				          	</ul>
         				</li>
         				
