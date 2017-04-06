@@ -46,8 +46,8 @@
 					<tr>
 						<th style="text-align: center;">Nome</th>
 						<th style="text-align: center;">Realizadas até o momento</th>
-						<th style="text-align: center;">Necessárias para aprovacao com 75%</th>
-						<th style="text-align: center;">Necessárias para aprovacao com 100%</th>
+						<th style="text-align: center;">Faltam para hoje</th>
+						<th style="text-align: center;">Faltam para o semestre</th>
 					</tr>
 				</thead>
 
@@ -80,8 +80,8 @@
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
 						<td align="center" style="text-align: center;"><%=usuario.getNomeAluno()%></td>
 						<td align="center" style="text-align: center;"><%=horasValidas%></td>
-						<td align="center" style="text-align: center;">-</td>
-						<td align="center" style="text-align: center;">-</td>
+						<td align="center" style="text-align: center;"><%=realizadasPrevistas%></td>
+						<td align="center" style="text-align: center;"><%=realizadasTotal%></td>
 					</tr>
 
 					<tr style="display: none;"
