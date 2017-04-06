@@ -1,4 +1,4 @@
---liquibase formatted sql
+--liquibase formatted sll
 --changeset andre:8
 --comment tabela periodo ja com os horarios definidos e adiciona a coluna de periodo na aula
   
