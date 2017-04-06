@@ -46,10 +46,8 @@
 					<tr>
 						<th style="text-align: center;">Nome</th>
 						<th style="text-align: center;">Realizadas até o momento</th>
-						<th style="text-align: center;">Necessárias para aprovacao
-							com 75%</th>
-						<th style="text-align: center;">Necessárias para aprovacao
-							com 100%</th>
+						<th style="text-align: center;">Necessárias para aprovacao com 75%</th>
+						<th style="text-align: center;">Necessárias para aprovacao com 100%</th>
 					</tr>
 				</thead>
 
@@ -66,17 +64,24 @@
 							
 							//EXTRACLASSE
 							String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
-							float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
-							String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
-							float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
-							String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
+							String realizadasPrevistas = "";
+							String realizadasTotal = "";
+							//float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
+							//String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
+							//float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
+							//String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
+							if ((horaEsperada - horaTotaldia) > 0) 
+								realizadasPrevistas = TimeConverter.ConvertMinuteToHours(horaEsperada - horaTotaldia);
+							
+							if ((3600 - horaTotaldia) > 0) 
+								realizadasTotal = TimeConverter.ConvertMinuteToHours(3600 - horaTotaldia);
 							
 					%>
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
 						<td align="center" style="text-align: center;"><%=usuario.getNomeAluno()%></td>
 						<td align="center" style="text-align: center;"><%=horasValidas%></td>
-						<td align="center" style="text-align: center;"><%=horasAprov%></td>
-						<td align="center" style="text-align: center;"><%=horasAprovCem%></td>
+						<td align="center" style="text-align: center;">-</td>
+						<td align="center" style="text-align: center;">-</td>
 					</tr>
 
 					<tr style="display: none;"
@@ -89,9 +94,9 @@
 									<td>Tipo de horas</td>
 									<td style="text-align: center;">Realizadas</td>
 									<td style="text-align: center;">Previstas até o momento</td>
-									<td style="text-align: center;">%</td>
+									<td style="text-align: center;">Faltam</td>
 									<td style="text-align: center;">Previstas até o fim do semestre</td>
-									<td style="text-align: center;">%</td>
+									<td style="text-align: center;">Faltam</td>
 								</tr>
 								<tr>
 									<td>Extraclasse</td>
