@@ -1,7 +1,9 @@
 package br.ages.crud.command;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +40,8 @@ public class CreateScreenPontoCommand implements Command {
 			if (!usuario.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR))
 				throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 
-			responsaveis = usuarioBO.listaUsuariosReponsaveis();
-			request.setAttribute("responsaveis", responsaveis);
-			
+			//responsaveis = usuarioBO.listaUsuariosReponsaveis();
+			//request.setAttribute("responsaveis", responsaveis);
 
 			if (isEdit != null && !"".equals(isEdit)) {
 				int id = Integer.parseInt(request.getParameter("id_ponto"));

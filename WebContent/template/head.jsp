@@ -102,11 +102,11 @@
 				          		<span class="caret"></span>
 			          		</a>
 				          	<ul class="dropdown-menu">
-				          		<li><a href="main?acao=relatorioHoras">Relatório de Horas</a></li>
 				            	<li><a href="main?acao=listaAluno">Lista Ponto</a></li>
 				            	<li><a href="main?acao=registrarPonto">Cadastrar Ponto</a></li>
 				            	<!-- <li><a href="main?acao=skills">Avaliar Aluno</a></li> -->
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
+				            	<li><a href="main?acao=relatorioHoras">Relatório de Horas</a></li>
 				          	</ul>
         				</li>
         				

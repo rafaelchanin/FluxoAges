@@ -31,7 +31,7 @@
 					</div>
 					<div class="form-group">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 							<label class="form-label ages">Entrada:<span class="red">*</span></label> 
 								<div class='input-group date' id='dataEntrada'>
 									<input type='text' class="form-control" id='dtEntradaRegistro' name="dtEntradaRegistro" value="${param.dtEntradaRegistro}"/>
@@ -40,8 +40,8 @@
 									</span>
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<label class="form-label ages">Saída:</label> 
+							<div class="col-sm-4">
+								<label class="form-label ages">Saída:<span class="red">*</span></label> 
 								<div class='input-group date' id='dataSaida'>
 									<input type='text' class="form-control" id="dtSaidaRegistro" name="dtSaidaRegistro" value="${param.dtSaidaRegistro}"/> 
 									<span class="input-group-addon">
@@ -50,33 +50,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class='' id='nomeResponsavel'>
-							<label for="sel2" class="form-label ages">Responsável:</label> 
-							<select class="form-control" id="idResponsavel" name="idResponsavel" >
-						        <option value="0">Selecione...</option>
-						         
-							 	<%
-									List<Usuario> listaResponsaveis = (List<Usuario>) request.getAttribute("responsaveis");
-									for (Usuario u : listaResponsaveis) {
-							  	 %>
-								<option value="<%=u.getIdUsuario()%>" <%=Integer.toString(u.getIdUsuario()).equals(request.getParameter("idResponsavel")) ? "selected" : ""%>><%=u.getNome()%></option>
-								
-								<%
-									}
-								%>
-					        </select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class='' id='senhaResponsavel'>
-							<label class="form-label ages">Senha:</label> 
-							<input type='password' class="form-control" id="senhaResponsavel" name="senhaResponsavel" /> 
-						</div>
-					</div>
-
-					
+					</div>					
 					<hr>
                     
                     <p>Campos que contém <span class="red">*</span> são obrigatórios</p>
@@ -96,21 +70,34 @@
 
 <script type="text/javascript">
 	$(function() {
+		var dateDefault = new Date();
+		if (dateDefault.getDay() >= 2 && dateDefault.getDay() <= 6) {
+			dateDefault.setTime(dateDefault.getTime() - 86400000);
+		} else if (dateDefault.getDay() == 1) {
+			dateDefault.setTime(dateDefault.getTime() - (86400000 * 3));
+		} else if (dateDefault.getDay() == 0) {
+			dateDefault.setTime(dateDefault.getTime() - (86400000 * 2));
+		}
+		dateDefault.setHours(0);
+		dateDefault.setMinutes(0);
 		$('#dataEntrada').datetimepicker({
 			locale : 'pt-br',
 			sideBySide : true,
-			showTodayButton: true
+			showTodayButton: true,
+			defaultDate: dateDefault
 		});
 
 		$('#dataSaida').datetimepicker({
 			useCurrent : false, //Important! See issue #1075
 			locale : 'pt-br',
-			sideBySide : true
+			sideBySide : true,
+			format: 'HH:mm',
 		});
-
+		
+		funcPreencheSaida();
+		
 		$("#dataEntrada").on("dp.change", function(e) {
-			$('#dataSaida').data("DateTimePicker").minDate(e.date);
-			/* alert(document.getElementById('dataSaida').value); */
+			funcPreencheSaida();
 		});
 
 		$("#dataSaida").on("dp.change", function(e) {
@@ -118,5 +105,12 @@
 			/* alert(document.getElementById('dataEntrada').value); */
 		});
 	});
+	
+	function funcPreencheSaida() {
+		var campoEntrada = document.getElementById('dtEntradaRegistro').value;
+		var tempCampoEntrada = campoEntrada.split(" ");
+		$('#dataSaida').data("DateTimePicker").minDate(tempCampoEntrada[1]);
+		document.getElementById('dtSaidaRegistro').value = tempCampoEntrada[1];
+	}
 </script>
 <jsp:include page="/template/foot.jsp"></jsp:include>
