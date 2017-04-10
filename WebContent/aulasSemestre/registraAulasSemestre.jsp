@@ -36,7 +36,7 @@
 				</select>
 			</div>
 		</div>
-
+		
 		<div id="diassemana" class="row">
 			<div class="col-sm-4">
 				<label class="form-label ages">Dia: </label>
@@ -51,30 +51,28 @@
 					
 				</select>
 			</div>
-		
-		
-		
-			<div id="horario" class="col-sm-2">
-				<label class="form-label ages">Horário: </label>
-				<select class="form-control" id="horario" name="horario" required>
+			
+				<div id="horario" class="col-sm-2">
+					<label class="form-label ages">Horário: </label>
+					<select class="form-control" id="horario" name="horario" required>
+						<%
+						List<Periodo> periodos = (List<Periodo>) request.getAttribute("periodos");
 					
-					<%
-					List<Periodo> periodos = (List<Periodo>) request.getAttribute("periodos");
+						for (Periodo periodo : periodos) {
+							%>
 					
-					for (Periodo periodo : periodos) {
-						%>
+						<option value="<%=periodo.getId()%>"><%=periodo.getHorario()%></option>
 					
-					<option value="<%=periodo.getId()%>"><%=periodo.getHorario()%></option>
+						<% } %>
 					
-					<% } %>
-					
-				</select>
-			</div>
+					</select>
+				</div>
 		
 	
-			<div class="col-sm-2" style="top: 25px;">
+				<div class="col-sm-2" style="top: 25px;">
 							
-				<input class="btn btn-primary btnHorario" type="button" onclick="funcGerar()" value="Gerar">
+					<input class="btn btn-primary btnHorario" type="button" onclick="funcGerar()" value="Gerar">
+			
 			
 			</div>
 		</div>
@@ -478,11 +476,12 @@
 		  
 		 form.submit();
 	}
-	
+	var i = 0;
 	function funcGerar() {
+		i++;
 		var diasemana = document.getElementById("dia").value;
 		$("#diassemana").clone().insertAfter("#diassemana");
-		//var teste = $("table tr td:nth-child(" + diasemana + ")").css("background-color","#ffff00");
+		$('#diassemana :input').attr('disabled', true);
 		var cellsWeek = $("table tr td:nth-child(" + diasemana + ")").not( 'td.disabled' );
 		var controleDia = 0;
 		var controleDatePicker = 1;
