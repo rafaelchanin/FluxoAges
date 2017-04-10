@@ -7,7 +7,7 @@
 	
 	<div class="panel panel-primary panel-addPonto">
 
-		<div class="panel-heading text-center">Livro Ponto</div>
+		<div class="panel-heading text-center">Cadastro Ponto</div>
 		<div class="panel-body">
 		
 		<jsp:include page="/template/msg.jsp"></jsp:include>
