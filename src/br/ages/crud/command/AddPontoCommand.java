@@ -13,6 +13,7 @@ import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Ponto;
 import br.ages.crud.model.StatusPonto;
 import br.ages.crud.model.Usuario;
+import br.ages.crud.servlet.MainServlet;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.util.Util;
 
@@ -27,13 +28,13 @@ public class AddPontoCommand implements Command {
 	public String execute(HttpServletRequest request) throws SQLException, NegocioException {
 
 		String pagina = request.getServletPath() + "?" + request.getQueryString();
-
+		Usuario responsavel = (Usuario) request.getSession().getAttribute("usuarioSessao");
 		pontoBO = new PontoBO();
 		String idAluno = request.getParameter("idAluno");
-		String idResponsavel = request.getParameter("idResponsavel");
+		//String idResponsavel = request.getParameter("idResponsavel");
 		String dataEntradaString = request.getParameter("dtEntradaRegistro");
 		String dataSaidaString = request.getParameter("dtSaidaRegistro");
-		String senhaResponsavel = request.getParameter("senhaResponsavel");
+		//String senhaResponsavel = request.getParameter("senhaResponsavel");
 		String isEdit = request.getParameter("isEdit");
 
 		if (isEdit != null && !"".equals(isEdit)) {
@@ -51,16 +52,16 @@ public class AddPontoCommand implements Command {
 			ponto.setAluno(aluno);
 
 			usuarioBO = new UsuarioBO();
-			Usuario responsavel = usuarioBO.buscaUsuarioId(Integer.parseInt(idResponsavel));
+			//Usuario responsavel = usuarioBO.buscaUsuarioId(Integer.parseInt(idResponsavel));
 			ponto.setResponsavel(responsavel);
 
 			Date dataEntrada = Util.stringToDateTime(dataEntradaString);
-			Date dataSaida = dataSaidaString.equals("") ? null : Util.stringToDateTime(dataSaidaString);
+			String dataSaidaTemp[] = dataEntradaString.split(" ");
+			Date dataSaida = Util.stringToDateTime(dataSaidaTemp[0] + " " + dataSaidaString);
 
 			ponto.setDataEntrada(dataEntrada);
 			ponto.setDataSaida(dataSaida);
-
-			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, senhaResponsavel, dataSaidaString);
+			StatusPonto statusPonto = pontoBO.validaStatusPonto(responsavel, dataSaidaString);
 			ponto.setStatus(statusPonto);
 
 			StringBuilder msg = new StringBuilder();
@@ -77,11 +78,7 @@ public class AddPontoCommand implements Command {
 				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_DATA_INVALIDA + "<br>");
 				isValido = false;
 			}
-			// Valida se existe responsável e se a senha bate.
-			if (ponto.getResponsavel().getIdUsuario() != 0	& !usuarioBO.validaUsuarioResponsavel(ponto.getResponsavel().getUsuario(), senhaResponsavel)) {
-				msg.append(MensagemContantes.MSG_ERR_CADASTRO_PONTO_SENHA_RESPONSAVEL_INVALIDA + "<br>");
-				isValido = false;
-			}
+			
 
 			// O ponto do aluno só é valido se tiver Aluno, DataEntrada,
 			// DataSaida e Responsável

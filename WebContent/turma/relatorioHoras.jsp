@@ -78,7 +78,7 @@
 							
 					%>
 					<tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
-						<td align="center" style="text-align: center;"><%=usuario.getNomeAluno()%></td>
+						<td align="center"><%=usuario.getNomeAluno()%></td>
 						<td align="center" style="text-align: center;"><%=horasValidas%></td>
 						<td align="center" style="text-align: center;"><%=realizadasPrevistas%></td>
 						<td align="center" style="text-align: center;"><%=realizadasTotal%></td>

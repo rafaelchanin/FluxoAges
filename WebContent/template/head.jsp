@@ -103,9 +103,10 @@
 			          		</a>
 				          	<ul class="dropdown-menu">
 				            	<li><a href="main?acao=listaAluno">Lista Ponto</a></li>
-				            	<li><a href="main?acao=registrarPonto">Registrar Ponto</a></li>
+				            	<li><a href="main?acao=registrarPonto">Cadastrar Ponto</a></li>
 				            	<!-- <li><a href="main?acao=skills">Avaliar Aluno</a></li> -->
 				            	<li><a href="main?acao=listaPontoHora&id_usuario=0">Lista Total Ponto</a></li>
+				            	<li><a href="main?acao=relatorioHoras">Relatório de Horas</a></li>
 				          	</ul>
         				</li>
         				
@@ -118,7 +119,7 @@
 				            	<li><a href="main?acao=telaTurma">Cadastrar</a></li>
 				            	<li><a href="main?acao=registrarAulas">Calendário</a></li>
 				            	<li><a href="main?acao=registrarChamada">Chamada Virtual</a></li>
-				            	<li><a href="main?acao=relatorioHoras">Relatório de Horas</a></li>
+				            	
 				          	</ul>
         				</li>
         				

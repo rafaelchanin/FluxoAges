@@ -126,6 +126,17 @@ public class Util {
 		}
 		return "";
 	}
+	
+	public static String dateTimeToStringOnlyHours(Date d) throws ParseException {
+		if(d != null) {
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+		String data;
+		data = formatter.format(d);
+		
+		return data;
+		}
+		return "";
+	}
 
 	public static String getVersion() {
 			String version = configDB.getString(Constantes.VERSAO_SISTEMA);

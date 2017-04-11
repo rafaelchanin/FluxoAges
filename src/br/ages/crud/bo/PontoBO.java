@@ -62,10 +62,17 @@ public class PontoBO {
 		}
 	}
 
-	public StatusPonto validaStatusPonto(Usuario responsavel, String senhaResponsavel, String dataSaida) throws PersistenciaException {
+	public StatusPonto validaStatusPonto(Usuario responsavel, String dataSaida) throws PersistenciaException, NegocioException, SQLException {
 		UsuarioBO usuarioBO = new UsuarioBO();
 		StatusPonto statusPonto;
-		if (dataSaida == null || dataSaida.equals("") || !usuarioBO.validaUsuarioResponsavel(responsavel.getUsuario(), senhaResponsavel))
+		boolean responsavelErrado = true;
+		for (Usuario usuario : usuarioBO.listaUsuariosReponsaveis()) {
+			if (usuario.getIdUsuario() == responsavel.getIdUsuario()) {
+				responsavelErrado=false;
+				break;
+			}
+		}
+		if (dataSaida == null || dataSaida.equals("") || responsavelErrado == true)
 			statusPonto = StatusPonto.INVALIDO;
 		else {
 			statusPonto = StatusPonto.VALIDO;
