@@ -37,46 +37,34 @@
 			</div>
 		</div>
 		
-		<div id="diassemana" class="row">
+		<div class="row diassemana1">
 			<div class="col-sm-4">
 				<label class="form-label ages">Dia: </label>
-				<select class="form-control" id="dia" name="dia" required>
-					
+				<select class="form-control" id="dia1" name="dia1" required>
 					<option value="2">Segunda-feira</option>
 					<option value="3">Terca-feira</option>
 					<option value="4">Quarta-feira</option>
 					<option value="5">Quinta-feira</option>
 					<option value="6">Sexta-feira</option>
-					
-					
 				</select>
 			</div>
-			
-				<div id="horario" class="col-sm-2">
+				<div class="col-sm-2">
 					<label class="form-label ages">Horário: </label>
-					<select class="form-control" id="horario" name="horario" required>
+					<select class="form-control" id="horario1" name="horario1" required>
 						<%
 						List<Periodo> periodos = (List<Periodo>) request.getAttribute("periodos");
-					
 						for (Periodo periodo : periodos) {
 							%>
-					
 						<option value="<%=periodo.getId()%>"><%=periodo.getHorario()%></option>
-					
 						<% } %>
-					
 					</select>
 				</div>
-		
-	
 				<div class="col-sm-2" style="top: 25px;">
-							
-					<input class="btn btn-primary btnHorario" type="button" onclick="funcGerar()" value="Gerar">
-			
-			
-			</div>
+					<input class="btn btn-primary btnHorario" id="gerar1" type="button" onclick="funcGerar()" value="Gerar">
+					<input class="btn btn-warning btnHoras" id="excluir1"  type="button" onclick="funcExcluir(this.id)" value="Excluir" name="excluir1" style="display: none;"> 
+				</div>
 		</div>
-	</div>
+		
 		<br>
 		<!-- <form id="form" method="post" action="main?acao=adicionaAulas"> -->
 			<div class="form-group ">
@@ -476,35 +464,71 @@
 		  
 		 form.submit();
 	}
-	var i = 0;
+	
+	//Var globais (a vida da dessas)
+	var date = [];
+	var idHorario = 0;
+	
+	//Quando clica no botão gerar
 	function funcGerar() {
-		i++;
-		var diasemana = document.getElementById("dia").value;
-		$("#diassemana").clone().insertAfter("#diassemana");
-		$('#diassemana :input').attr('disabled', true);
-		var cellsWeek = $("table tr td:nth-child(" + diasemana + ")").not( 'td.disabled' );
-		var controleDia = 0;
-		var controleDatePicker = 1;
+		novoBotao();
+		var diaSemanaSelecionado = document.getElementById("dia" + idHorario).value;
+		var diasSemanaParaMarcar = $("table tr td:nth-child(" + diaSemanaSelecionado + ")").not( 'td.disabled' );
 		var mes = $('#datepicker1').data('datepicker').getStartDate().getMonth() + 2;
 		var ano = $('#datepicker1').data('datepicker').getStartDate().getFullYear();
-		var date = [];
-		for (i=0;i<cellsWeek.length;i++) {
-			var tempDate = '#datepicker' + controleDatePicker;
-			var temp = Number(cellsWeek[i].innerText,10);
-			if (temp > controleDia) {
-				date.push(cellsWeek[i].innerText+'/'+mes+'/'+ano);
-				controleDia=cellsWeek[i].innerText;
+		var controleDia = 0;
+		var controleDatePicker = 1;
+		date = $('#datepicker1').data('datepicker').getDates();
+		for (i=0;i<diasSemanaParaMarcar.length;i++) {
+			var StringDatePicker = '#datepicker' + controleDatePicker;
+			var diaSemanaParaMarcar = Number(diasSemanaParaMarcar[i].innerText,10);
+			if (diaSemanaParaMarcar > controleDia) {
+				date.push(diasSemanaParaMarcar[i].innerText+'/'+mes+'/'+ano);
+				controleDia=diasSemanaParaMarcar[i].innerText;
 			} else {
-				$(tempDate).datepicker('setDates', date);
+				$(StringDatePicker).datepicker('setDates', date);
 				date.length = 0;
 				controleDatePicker += 1;
-				controleDia=cellsWeek[i].innerText;
+				var StringDatePickerPicker = '#datepicker' + controleDatePicker;
+				date = $(StringDatePickerPicker).data('datepicker').getDates();
+				controleDia=diasSemanaParaMarcar[i].innerText;
 				mes +=1;
-				date.push(cellsWeek[i].innerText+'/'+mes+'/'+ano);
+				date.push(diasSemanaParaMarcar[i].innerText+'/'+mes+'/'+ano);
 			}
 		}
-		$(tempDate).datepicker('setDates', date);
-		
+		$(StringDatePicker).datepicker('setDates', date);
+	}
+	
+	//Quando clica no botão de excluir
+	function funcExcluir(id) {
+		var NumeroIdHorario = $(this).attr('name');
+		alert(id);
+	}
+	
+	//Cria um novo botão para adicionar outro horário
+	function novoBotao() {
+		idHorario++;
+		var proximoHorario = $(".diassemana" + idHorario).clone().insertBefore(".diassemana" + idHorario);
+		proximoHorario
+			.removeClass('diassemana' + idHorario)
+        	.addClass('diassemana' + (idHorario + 1));
+		proximoHorario.find('select').eq(0).attr({
+            id: 'dia' + (idHorario+1),
+            name: 'dia' + (idHorario+1)
+        });
+		proximoHorario.find('select').eq(1).attr({
+            id: 'horario' + (idHorario+1),
+            name: 'horario' + (idHorario+1)
+        });
+		proximoHorario.find('input').eq(1).attr({
+            id: 'excluir' + (idHorario+1),
+            name: 'excluir' + (idHorario+1)
+        });
+		$('.diassemana' + idHorario + ' :input').attr('disabled', true);
+		var atualHorario = $(".diassemana" + idHorario);
+		atualHorario.find('input').eq(0).toggle();
+		atualHorario.find('input').eq(1).toggle();
+		atualHorario.find('input').eq(1).attr('disabled', false);
 	}
 	
 	$("html").on("mouseenter",".active.disabled.day", function() {
