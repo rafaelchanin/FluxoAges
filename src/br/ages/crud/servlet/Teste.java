@@ -54,8 +54,10 @@ public class Teste extends HttpServlet {
 
 	public String getProjectsGitLAB() {
 		Client c = Client.create();
+		//WebResource wr = c.resource(
+		//		"http://www.tools.ages.pucrs.br/api/v3/projects/all?&private_token=cT5xMaSvdvxBrwvY4EFK");
 		WebResource wr = c.resource(
-				"http://www.tools.ages.pucrs.br/api/v3/projects/all?&private_token=cT5xMaSvdvxBrwvY4EFK");
+				"http://www.tools.ages.pucrs.br/api/v3/projects/all?&private_token=p9zaUU65h9zxDuuhy1Bs");
 		return wr.get(String.class);
 	}
 

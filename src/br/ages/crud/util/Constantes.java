@@ -22,6 +22,6 @@ public class Constantes {
 
 //variaveis gitlab	
 	public static final String GITLAB_URL = "http://www.tools.ages.pucrs.br";
-	public static final String GITLAB_TOKEN = "cT5xMaSvdvxBrwvY4EFK";
-	
+	//public static final String GITLAB_TOKEN = "cT5xMaSvdvxBrwvY4EFK";
+	public static final String GITLAB_TOKEN = "p9zaUU65h9zxDuuhy1Bs";
 }

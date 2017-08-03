@@ -393,7 +393,7 @@ public class UsuarioBO {
 			
 			if (user != null) {
 				api.createUser(user.getEmail(), user.getMatricula(), user.getUsuarioGitLab(), user.getNome(), null, null,
-						null, null, null, null, null, null, false, false, false);
+						null, null, null, null, null, null, false, false, true);
 
 				return true;
 			}
