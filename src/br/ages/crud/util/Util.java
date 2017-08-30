@@ -163,7 +163,7 @@ public class Util {
 		if (semestre == 1)
 			temp = "01"+"/"+"01"+"/"+ano;
 		else
-			temp = "03"+"/"+"08"+"/"+ano;
+			temp = "15"+"/"+"07"+"/"+ano;
 		Date dSemestre = new SimpleDateFormat("dd/MM/yyyy").parse(temp);
 		//System.out.println(semestre);
 		return dSemestre;
