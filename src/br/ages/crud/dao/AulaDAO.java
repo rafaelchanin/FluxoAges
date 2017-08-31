@@ -35,7 +35,6 @@ public class AulaDAO {
 	public LocalDate primeiroDia(int semestre, int ano, int time) throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		java.sql.Date data = null;
-		if(time > 5) time = 1;
 		try {
 			conexao = ConexaoUtil.getConexao();
 			LocalDate dataInicioSemestre = Util.getDataInicialSemestre(semestre, ano).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();;
