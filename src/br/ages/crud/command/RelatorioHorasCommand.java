@@ -5,10 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,6 +32,7 @@ public class RelatorioHorasCommand implements Command {
 	private TimePontoDTOBO timePontoDTOBO;
 	private TurmaBO turmaBO;
 	private List<TimePontoDTO> listaPontos;
+	private HashMap<Integer,Integer> horasEsperadas;
 
 	@Override
 	public String execute(HttpServletRequest request) throws SQLException, ParseException, PersistenciaException {
@@ -43,6 +41,7 @@ public class RelatorioHorasCommand implements Command {
 		aulaBO = new AulaBO();
 		usuarios = new ArrayList<>();
 		turmaBO = new TurmaBO();
+		horasEsperadas = new HashMap<>();
 
 		proxima = "turma/relatorioHoras.jsp";
 		//proxima = "aulasSemestre/registraAulasSemestre.jsp";
@@ -60,7 +59,13 @@ public class RelatorioHorasCommand implements Command {
 			
 			//Como tava antes	
 			listaPontos = timePontoDTOBO.listarTimes();
-			
+
+			//Pegar Primeiro dia de Aula de Cada Time
+			ArrayList<Integer> timeId = new ArrayList<>();
+			for(TimePontoDTO time: listaPontos){
+				timeId.add(time.getId());
+			}
+
 			LocalDate hoje = LocalDate.now();
 			WeekFields weekFields = WeekFields.of(Locale.getDefault());
 			int weekNumberHoje = hoje.get(weekFields.weekOfWeekBasedYear());
@@ -69,15 +74,20 @@ public class RelatorioHorasCommand implements Command {
 				semestre = 1;
 			else
 				semestre = 2;
-			LocalDate primeiraAula = aulaBO.primeiroDia(semestre, hoje.getYear());
-			
-			int weekNumberPrimeiraAula = primeiraAula.get(weekFields.weekOfWeekBasedYear());
-			
-			int horaEsperada = (weekNumberHoje - weekNumberPrimeiraAula + 1) * 4 * 60;
+
+			for(Integer time: timeId) {
+				LocalDate primeiraAula = aulaBO.primeiroDia(semestre, hoje.getYear(),time);
+
+				int weekNumberPrimeiraAula = primeiraAula.get(weekFields.weekOfWeekBasedYear());
+
+				int horaEsperada = (weekNumberHoje - weekNumberPrimeiraAula + 1) * 4 * 60;
+
+				horasEsperadas.put(time,horaEsperada);
+			}
 			
 			//Sets
 			request.setAttribute("listaPontos", listaPontos);
-			request.setAttribute("horaEsperada", horaEsperada);
+			request.setAttribute("horasEsperadas", horasEsperadas);
 		
 		} catch (NegocioException e) {
 			e.printStackTrace();
