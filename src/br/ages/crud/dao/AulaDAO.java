@@ -46,7 +46,7 @@ public class AulaDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT min(DATA) date ");
 			sql.append(" FROM tb_aula");
-			sql.append(" WHERE DATA > ? AND ID_TURMA == ?");
+			sql.append(" WHERE DATA > ? AND ID_AULA == ?");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setDate(1, dataInicio);
