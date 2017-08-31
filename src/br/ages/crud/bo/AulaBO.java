@@ -72,9 +72,9 @@ public class AulaBO {
 		return ok;
 	}
 	
-	public LocalDate primeiroDia(int semestre, int ano, int time) throws SQLException, ParseException, NegocioException, PersistenciaException {
+	public LocalDate primeiroDia(int semestre, int ano) throws SQLException, ParseException, NegocioException, PersistenciaException {
 		LocalDate ok = null;
-		ok = aulaDAO.primeiroDia(semestre, ano, time);
+		ok = aulaDAO.primeiroDia(semestre, ano);
 		if (ok == null)
 			throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_DIAS_AULAS_TURMA);
 		return ok;

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="FluxoAGES:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="FluxoAGES-0.0.${build.number}-SNAPSHOT.war">
-      <element id="artifact" artifact-name="FluxoAGES:war exploded" />
-    </root>
-  </artifact>
-</component>

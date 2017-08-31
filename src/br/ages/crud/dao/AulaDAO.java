@@ -32,7 +32,7 @@ public class AulaDAO {
 	public AulaDAO() {	
 	}
 	
-	public LocalDate primeiroDia(int semestre, int ano, int time) throws PersistenciaException, SQLException {
+	public LocalDate primeiroDia(int semestre, int ano) throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		java.sql.Date data = null;
 		try {
@@ -45,11 +45,10 @@ public class AulaDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT min(DATA) date ");
 			sql.append(" FROM tb_aula");
-			sql.append(" WHERE DATA > ? AND ID_AULA == ?");
+			sql.append(" WHERE DATA > ?");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			statement.setDate(1, dataInicio);
-			statement.setInt(2, time);
 
 			ResultSet resultset = statement.executeQuery();
 
