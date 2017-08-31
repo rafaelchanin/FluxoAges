@@ -102,6 +102,19 @@
 						</select>
 					</div>
 				</div>
+				<div>
+					<div class="col-sm-6">
+						<label class="form-label ages">Primeiro Dia de Aula: <span
+								class="red">*</span></label>
+						<div class='input-group date' id='primeiroDia'>
+							<input type='text' class="form-control" id="dataPrimeiroDia" name="dataPrimeiroDia"
+								   value="<%=request.getAttribute("data")%>" required /> <span
+								class="input-group-addon"> <span
+								class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>
+				</div>
 
 				<!-- USUARIOS -->
 				<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
@@ -159,6 +172,22 @@
 		//	});
 
 	});
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#dataPrimeiroDia').datetimepicker({
+            locale : 'pt-br',
+            sideBySide : true,
+            format : "DD/MM/YYYY"
+        });
+
+        //	$("#dataEntrada").on("dp.change", function(e) {
+        //		$('#dataSaida').data("DateTimePicker").minDate(e.date);
+        //		/* alert(document.getElementById('dataSaida').value); */
+        //	});
+
+    });
 </script>
 
 <script>

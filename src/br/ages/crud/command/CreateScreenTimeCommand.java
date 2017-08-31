@@ -64,8 +64,10 @@ public class CreateScreenTimeCommand implements Command {
 				List<Usuario> orientadores = usuarioBO.listarUsuarioProfessores();
 				Calendar hoje = Calendar.getInstance();
 				String ano = Integer.toString(hoje.get(hoje.YEAR));
+				String data = hoje.toString();
 				System.out.println(ano);
 				request.setAttribute("ano", ano);
+				request.setAttribute("data", data);
 				request.setAttribute("orientadores", orientadores);
 				request.setAttribute("alunos", alunos);
 			}

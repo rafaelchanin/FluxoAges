@@ -2,6 +2,7 @@ package br.ages.crud.command;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -37,6 +38,8 @@ public class AdicionaTimeCommand implements Command {
 		String orientador = request.getParameter("orientador");
 		String statusTime = request.getParameter("statusTime");
 		String projeto = request.getParameter("projeto");
+		String primeiroDia = request.getParameter("dataPrimeiroDia");
+		SimpleDateFormat textFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 		int numSemestre=0;	
 		if (semestre.equals("primeiro"))
@@ -69,6 +72,8 @@ public class AdicionaTimeCommand implements Command {
 			if (!projeto.equals(""))
 				time.setProjeto(Integer.valueOf(projeto));
 			time.setDtInclusao(new Date());
+			if(!primeiroDia.equals(""))
+				time.setPrimeiroDia(textFormat.parse(primeiroDia));
 
 			//boolean isValido = projetoBO.validarProjeto(projeto);
 			boolean isValido = timeBO.validarTime(time);

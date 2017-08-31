@@ -30,12 +30,13 @@ public class TimeDAO {
 		Connection conexao = null;
 		try {
 			Integer idTime = null;
+			java.sql.Date sqlDate = new java.sql.Date(time.getPrimeiroDia().getTime());
 
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO tb_time (id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao)");
-			sql.append("VALUES (?, ?, ?, ?, ?, ?)");
+			sql.append("INSERT INTO tb_time (id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia)");
+			sql.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 			java.sql.Date dataInclusao = new java.sql.Date(time.getDtInclusao().getTime());
 
@@ -46,6 +47,7 @@ public class TimeDAO {
 			statement.setInt(4, time.getSemestre());
 			statement.setInt(5, time.getAno());
 			statement.setDate(6, dataInclusao);
+			statement.setDate(7, sqlDate);
 
 			statement.executeUpdate();
 

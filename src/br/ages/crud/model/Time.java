@@ -12,6 +12,8 @@ public class Time {
 	private String status;
 	private Date dtInclusao;
 	private ArrayList<Usuario> alunos;
+	private Date primeiroDia;
+
 
 	public Time(int id, int orientador, int projeto, int semestre, int ano, String status, Date dtInclusao) {
 		this.id = id;
@@ -78,6 +80,12 @@ public class Time {
 	}
 	public void setDtInclusao(Date dtInclusao) {
 		this.dtInclusao = dtInclusao;
+	}
+	public void setPrimeiroDia(Date primeiroDia) {
+		this.primeiroDia = primeiroDia;
+	}
+	public Date getPrimeiroDia() {
+		return primeiroDia;
 	}
 	public ArrayList<Usuario> getAlunos() {
 		return alunos;
