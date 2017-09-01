@@ -177,7 +177,9 @@
     $(function() {
         $('#dataPrimeiroDia').datetimepicker({
             locale : 'pt-br',
-			pickTime : false
+            sideBySide : true,
+            format : "DD/MM/YYYY"
+
 
         });
 
