@@ -6,6 +6,7 @@
 <%@page import="br.ages.crud.util.TimeConverter"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
+<%@ page import="java.util.HashMap" %>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 
@@ -24,7 +25,7 @@
 						<select class="form-control" id="time" name="time" required>
 
 							<%
-								int horaEsperada = (Integer) request.getAttribute("horaEsperada");
+								HashMap<Integer,Integer> horasEsperadas = (HashMap<Integer,Integer>) request.getAttribute("horasEsperadas");
 								List<TimePontoDTO> listaTimes = (List<TimePontoDTO>) request.getAttribute("listaPontos");
 								String mesString = (String) request.getAttribute("mesString");
 								for (TimePontoDTO time : listaTimes) {	
@@ -63,15 +64,15 @@
 							String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - horaTotaldia);
 							
 							//EXTRACLASSE
-							String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
+							String previstas = TimeConverter.ConvertMinuteToHours(horasEsperadas.get(time.getId()));
 							String realizadasPrevistas = "";
 							String realizadasTotal = "";
 							//float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
 							//String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
 							//float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
 							//String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
-							if ((horaEsperada - horaTotaldia) > 0) 
-								realizadasPrevistas = TimeConverter.ConvertMinuteToHours(horaEsperada - horaTotaldia);
+							if ((horasEsperadas.get(time.getId()) - horaTotaldia) > 0)
+								realizadasPrevistas = TimeConverter.ConvertMinuteToHours(horasEsperadas.get(time.getId()) - horaTotaldia);
 							
 							if ((3600 - horaTotaldia) > 0) 
 								realizadasTotal = TimeConverter.ConvertMinuteToHours(3600 - horaTotaldia);
