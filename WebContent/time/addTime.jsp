@@ -173,15 +173,12 @@
 	});
 </script>
 
-<script >
-    document.getElementById('dataPrimeiroDia').value = (new Date()).format("dd/mm/yyyy");
-//    $(function() {
-//        $('#dataPrimeiroDia').datetimepicker({
-//            locale : 'pt-br',
-//            sideBySide : true,
-//            format : "DD/MM/YYYY"
-//
-//        });
+<script type="text/javascript">
+    $(function() {
+        $('#dataPrimeiroDia').datetimepicker({
+            locale : 'pt-br'
+
+        });
 
         //	$("#dataEntrada").on("dp.change", function(e) {
         //		$('#dataSaida').data("DateTimePicker").minDate(e.date);
