@@ -19,7 +19,7 @@
 	<div class="panel-body">
 		<form id="formListAluno" method="post">
 			<div class="form-group row">
-				<div class='col-sm-6' id='time'>
+				<div class='col-sm-6' id='time1'>
 					<label for="sel1" class="form-label ages">Time:<span
 						class="red">*</span></label>
 						<select class="form-control" id="time" name="time" required>

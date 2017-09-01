@@ -51,7 +51,7 @@ public class TimePontoDTODAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia");
 			sql.append(" from tb_time ");
-			sql.append(" where  status_time <> 'excluido' ");
+			sql.append(" where  status_time <> 'inativa' ");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 			ResultSet resultSet = statement.executeQuery();
