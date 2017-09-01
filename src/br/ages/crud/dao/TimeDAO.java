@@ -30,7 +30,7 @@ public class TimeDAO {
 		Connection conexao = null;
 		try {
 			Integer idTime = null;
-			java.sql.Date sqlDate = new java.sql.Date(time.getPrimeiroDia().getTime());
+
 
 			conexao = ConexaoUtil.getConexao();
 
@@ -39,6 +39,7 @@ public class TimeDAO {
 			sql.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 			java.sql.Date dataInclusao = new java.sql.Date(time.getDtInclusao().getTime());
+			java.sql.Date sqlDate = new java.sql.Date(time.getPrimeiroDia().getTime());
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, time.getOrientador());

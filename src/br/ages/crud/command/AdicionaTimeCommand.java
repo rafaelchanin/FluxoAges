@@ -39,7 +39,7 @@ public class AdicionaTimeCommand implements Command {
 		String statusTime = request.getParameter("statusTime");
 		String projeto = request.getParameter("projeto");
 		String primeiroDia = request.getParameter("dataPrimeiroDia");
-		SimpleDateFormat textFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		int numSemestre=0;	
 		if (semestre.equals("primeiro"))
