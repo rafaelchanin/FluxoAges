@@ -101,7 +101,7 @@
 								<%="EXCLUIDA".equals(request.getParameter("statusTime")) ? "selected" : ""%>>Excluída</option>
 						</select>
 					</div>
-					
+
 					<div class="col-sm-6">
 						<label class="form-label ages">Primeiro Dia de Aula: <span
 								class="red">*</span></label>
@@ -174,12 +174,14 @@
 </script>
 
 <script type="text/javascript">
-    $(function() {
-        $('#dataPrimeiroDia').datetimepicker({
-            locale : 'pt-br',
-            sideBySide : true,
-            format : "DD/MM/YYYY"
-        });
+    document.getElementById('dataPrimeiroDia').value = (new Date()).format("dd/mm/yyyy");
+//    $(function() {
+//        $('#dataPrimeiroDia').datetimepicker({
+//            locale : 'pt-br',
+//            sideBySide : true,
+//            format : "DD/MM/YYYY"
+//			
+//        });
 
         //	$("#dataEntrada").on("dp.change", function(e) {
         //		$('#dataSaida').data("DateTimePicker").minDate(e.date);
