@@ -64,7 +64,7 @@ public class TimePontoDTODAO {
 				time.setAno(resultSet.getInt("ano"));				
 				time.setOrientador(resultSet.getInt("id_orientador"));
 				int proj = resultSet.getInt("id_projeto");
-				time.setPrimeiraAula(LocalDate.parse(resultSet.getString("primeiro_dia")));
+				time.setPrimeiraAula(resultSet.getDate("primeiro_dia").toLocalDate());
 				time.setProjeto(projetoBO.buscarProjeto(proj));
 				ArrayList<ResumoPonto> pontos = new ArrayList<ResumoPonto>();
 				//time.setPontos(usuarioDAO.li(conexao, resultSet.getInt("id_time")));
