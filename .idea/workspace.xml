@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c108838-296a-4f57-9b84-64285f8d9643" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp" afterPath="$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" afterPath="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" afterPath="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="RelatorioHorasCommand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="60" column="43" lean-forward="false" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
+            <state relative-caret-position="588">
+              <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -81,8 +80,8 @@
       <file leaf-file-name="relatorioHoras.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-762">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="-1359">
+              <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
               <folding>
                 <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -93,8 +92,8 @@
       <file leaf-file-name="TimePontoDTO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/ages/crud/model/TimePontoDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+            <state relative-caret-position="60">
+              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding>
                 <element signature="e#1197#1198#0" expanded="true" />
                 <element signature="e#1236#1237#0" expanded="true" />
@@ -119,12 +118,12 @@
         <option value="$PROJECT_DIR$/src/br/ages/crud/model/Time.java" />
         <option value="$PROJECT_DIR$/WebContent/time/addTime.jsp" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/command/CreateScreenTimeCommand.java" />
-        <option value="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/dao/TimeDAO.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/command/AdicionaTimeCommand.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/model/TimePontoDTO.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" />
         <option value="$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp" />
+        <option value="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" />
       </list>
     </option>
   </component>
@@ -211,6 +210,25 @@
               <item name="ages" type="462c0819:PsiDirectoryNode" />
               <item name="crud" type="462c0819:PsiDirectoryNode" />
               <item name="servlet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FluxoAGES" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fluxoages" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ages" type="462c0819:PsiDirectoryNode" />
+              <item name="crud" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FluxoAGES" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fluxoages" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FluxoAGES" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fluxoages" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FluxoAGES" type="b2602c69:ProjectViewProjectNode" />
@@ -351,12 +369,12 @@
       <option name="presentableId" value="Default" />
       <updated>1504207658332</updated>
       <workItem from="1504207659551" duration="2063000" />
-      <workItem from="1504282338299" duration="6682000" />
+      <workItem from="1504282338299" duration="6950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8745000" />
+    <option name="totallyTimeSpent" value="9013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -503,14 +521,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="60" column="43" lean-forward="false" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/ages/crud/bo/TimePontoDTOBO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -554,17 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/model/TimePontoDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding>
-            <element signature="e#1197#1198#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -573,10 +572,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/br/ages/crud/test/TestaUsuarioBO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/test/TestaProjetoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/model/TimePontoDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#1197#1198#0" expanded="true" />
+            <element signature="e#1236#1237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-762">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="-1359">
+          <caret line="42" column="28" lean-forward="true" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
           <folding>
             <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>

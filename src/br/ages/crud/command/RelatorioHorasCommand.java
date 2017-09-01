@@ -80,7 +80,7 @@ public class RelatorioHorasCommand implements Command {
 			
 			//Sets
 			request.setAttribute("listaPontos", listaPontos);
-			request.setAttribute("horaEsperada", horasEsperadas);
+			request.setAttribute("horasEsperadas", horasEsperadas);
 		
 		} catch (NegocioException e) {
 			e.printStackTrace();
