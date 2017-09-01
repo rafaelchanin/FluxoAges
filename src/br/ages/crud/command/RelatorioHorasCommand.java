@@ -69,7 +69,7 @@ public class RelatorioHorasCommand implements Command {
 			else
 				semestre = 2;
 			for(TimePontoDTO time : listaPontos) {
-				LocalDate primeiraAula = aulaBO.primeiroDia(semestre, hoje.getYear());
+				LocalDate primeiraAula = time.getPrimeiraAula();
 
 				int weekNumberPrimeiraAula = primeiraAula.get(weekFields.weekOfWeekBasedYear());
 

@@ -12,6 +12,7 @@ public class TimePontoDTO{
 	private int ano;
 	private String status;
 	private ArrayList<ResumoPonto> pontos;
+	private LocalDate primeiraAula;
 	
 	public int getId() {
 		return id;
@@ -60,7 +61,15 @@ public class TimePontoDTO{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public LocalDate getPrimeiraAula() {
+		return primeiraAula;
+	}
+
+	public void setPrimeiraAula(LocalDate primeiraAula) {
+		this.primeiraAula = primeiraAula;
+	}
+
 	public ArrayList<ResumoPonto> getPontos() {
 		return pontos;
 	}

@@ -24,6 +24,7 @@ import br.ages.crud.model.TimePontoDTO;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 import br.ages.crud.util.Util;
+import org.mockito.cglib.core.Local;
 
 public class TimePontoDTODAO {
 
@@ -48,7 +49,7 @@ public class TimePontoDTODAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao");
+			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia");
 			sql.append(" from tb_time ");
 			sql.append(" where  status_time <> 'excluido' ");
 
@@ -63,6 +64,7 @@ public class TimePontoDTODAO {
 				time.setAno(resultSet.getInt("ano"));				
 				time.setOrientador(resultSet.getInt("id_orientador"));
 				int proj = resultSet.getInt("id_projeto");
+				time.setPrimeiraAula(LocalDate.parse(resultSet.getString("primeiro_dia")));
 				time.setProjeto(projetoBO.buscarProjeto(proj));
 				ArrayList<ResumoPonto> pontos = new ArrayList<ResumoPonto>();
 				//time.setPontos(usuarioDAO.li(conexao, resultSet.getInt("id_time")));
