@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c108838-296a-4f57-9b84-64285f8d9643" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" afterPath="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/time/addTime.jsp" afterPath="$PROJECT_DIR$/WebContent/time/addTime.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" afterPath="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addTime.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addTime.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebContent/time/addTime.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="180" column="33" lean-forward="true" selection-start-line="180" selection-start-column="33" selection-end-line="180" selection-end-column="33" />
+            <state relative-caret-position="-539">
+              <caret line="137" column="15" lean-forward="true" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -47,8 +48,8 @@
       <file leaf-file-name="TimePontoDTODAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="59" column="55" lean-forward="true" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
+            <state relative-caret-position="288">
+              <caret line="53" column="47" lean-forward="true" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -77,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relatorioHoras.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="relatorioHoras.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1359">
@@ -116,14 +117,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/br/ages/crud/model/Time.java" />
-        <option value="$PROJECT_DIR$/WebContent/time/addTime.jsp" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/command/CreateScreenTimeCommand.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/dao/TimeDAO.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/command/AdicionaTimeCommand.java" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/model/TimePontoDTO.java" />
-        <option value="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" />
         <option value="$PROJECT_DIR$/WebContent/turma/relatorioHoras.jsp" />
         <option value="$PROJECT_DIR$/src/br/ages/crud/command/RelatorioHorasCommand.java" />
+        <option value="$PROJECT_DIR$/WebContent/time/addTime.jsp" />
+        <option value="$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java" />
       </list>
     </option>
   </component>
@@ -369,12 +370,12 @@
       <option name="presentableId" value="Default" />
       <updated>1504207658332</updated>
       <workItem from="1504207659551" duration="2063000" />
-      <workItem from="1504282338299" duration="6950000" />
+      <workItem from="1504282338299" duration="7889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9013000" />
+    <option name="totallyTimeSpent" value="9952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -513,14 +514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebContent/time/addTime.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="180" column="33" lean-forward="true" selection-start-line="180" selection-start-column="33" selection-end-line="180" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/ages/crud/bo/TimePontoDTOBO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -548,26 +541,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="171" column="30" lean-forward="false" selection-start-line="171" selection-start-column="30" selection-end-line="171" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/AulaDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
           <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="59" column="55" lean-forward="true" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -614,6 +591,30 @@
           <folding>
             <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="171" column="30" lean-forward="false" selection-start-line="171" selection-start-column="30" selection-end-line="171" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/ages/crud/dao/TimePontoDTODAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="53" column="47" lean-forward="true" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebContent/time/addTime.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-539">
+          <caret line="137" column="15" lean-forward="true" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>

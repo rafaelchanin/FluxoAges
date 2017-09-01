@@ -27,7 +27,7 @@
 
 
 
-		<form method="post" action="main?acao=adicionaTime">
+		<form name="form1" method="post" action="main?acao=adicionaTime">
 			<!-- enctype="multipart/form-data" > -->
 
 			<div class="form-group">
