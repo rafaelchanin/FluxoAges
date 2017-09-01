@@ -176,7 +176,8 @@
 <script type="text/javascript">
     $(function() {
         $('#dataPrimeiroDia').datetimepicker({
-            locale : 'pt-br'
+            locale : 'pt-br',
+			pickTime : false
 
         });
 
