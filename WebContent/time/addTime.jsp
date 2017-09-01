@@ -102,7 +102,7 @@
 						</select>
 					</div>
 				</div>
-				<div>
+				<div class="row">
 					<div class="col-sm-6">
 						<label class="form-label ages">Primeiro Dia de Aula: <span
 								class="red">*</span></label>
