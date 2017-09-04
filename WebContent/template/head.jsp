@@ -133,6 +133,19 @@
 				          	</ul>
         				</li>
 
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipamentos
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="main?acao=listaEquipamentos">Listar</a></li>
+								<li><a href="main?acao=telaEquipamento">Cadastrar</a></li>
+								<hr>
+								<li><a href="main?acao=listaTiposEquipamentos">Listar Tipos</a></li>
+								<li><a href="main?acao=telaTipoEquipamento">Cadastrar Tipos</a></li>
+							</ul>
+						</li>
+
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

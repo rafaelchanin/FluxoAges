@@ -18,3 +18,4 @@ target/classes/log4j.properties
 .idea
 FluxoAGESMaven.iml
 .idea/sqldialects.xml
+.idea/workspace.xml
