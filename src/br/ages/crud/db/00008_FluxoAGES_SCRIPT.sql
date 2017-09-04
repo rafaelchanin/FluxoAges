@@ -19,3 +19,5 @@ ALTER TABLE tb_aula
 INSERT INTO tb_periodo VALUES (20, "JK", "17:30:00", "19:00:00", 120);
 INSERT INTO tb_periodo VALUES (21, "LM", "19:30:00", "21:00:00", 120);
 INSERT INTO tb_periodo VALUES (22, "NP", "21:15:00", "22:45:00", 120);
+
+ALTER TABLE tb_time ADD COLUMN primeiro_dia DATE NOT NULL;

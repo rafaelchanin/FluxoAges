@@ -15,5 +15,6 @@ target/classes/log4j.properties
 /bower_components/
 /target/classes/ambiente.properties
 /target/classes/log4j.properties
-
+.idea
 FluxoAGESMaven.iml
+.idea/sqldialects.xml
