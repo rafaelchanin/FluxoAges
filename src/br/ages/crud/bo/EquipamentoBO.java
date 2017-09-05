@@ -16,6 +16,7 @@ public class EquipamentoBO {
 
     public boolean cadastrarEquipamento(Equipamento equipamento) throws SQLException, ParseException, NegocioException, PersistenciaException {
         boolean ok = false;
+        equipamentoDAO = new EquipamentoDAO();
         ok = equipamentoDAO.cadastrarEquipamento(equipamento);
         if (ok == false)
             throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_EQUIPAMENTO);

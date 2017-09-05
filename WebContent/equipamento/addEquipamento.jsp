@@ -26,11 +26,11 @@
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label ages">Descrição: <span class="red"></span></label>
-                        <input class="form-control" id="descricao" name="descricao" value="${param.descricao}" type="text" maxlength="8" required>
+                        <input class="form-control" id="descricao" name="descricao" value="${param.descricao}" type="text" maxlength="100">
                     </div>
                 </div>
                 <label class="form-label ages">Tipo de Equipamento: <span class="red">*</span></label>
-                <select class="form-control" id="tipos" name="tipos" required>
+                <select class="form-control" id="tipo" name="tipo" required>
                     <%
                         ArrayList<TipoEquipamento> tipoEquipamentos = (ArrayList<TipoEquipamento>) request.getAttribute("tipos");
                         for (TipoEquipamento tipoEquipamento : tipoEquipamentos) {

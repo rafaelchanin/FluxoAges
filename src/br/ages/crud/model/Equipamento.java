@@ -5,7 +5,7 @@ public class Equipamento {
     private int id;
     private String nome;
     private String descricao;
-    private int codigo;
+    private String codigo;
     private TipoEquipamento tipoEquipamento;
 
     public Equipamento() {
@@ -35,11 +35,11 @@ public class Equipamento {
         this.descricao = descricao;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

@@ -27,7 +27,7 @@ public class EquipamentoDAO {
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, equipamento.getNome());
-            statement.setInt(2, equipamento.getCodigo());
+            statement.setString(2, equipamento.getCodigo());
             statement.setString(3, equipamento.getDescricao());
             statement.setInt(4, equipamento.getTipoEquipamento().getId());
 
@@ -72,7 +72,7 @@ public class EquipamentoDAO {
                 TipoEquipamento tipoEquipamento = new TipoEquipamento();
                 dto.setId(resultset.getInt("e.id_equipamento"));
                 dto.setNome(resultset.getString("e.nome"));
-                dto.setCodigo(resultset.getInt("e.codigo"));
+                dto.setCodigo(resultset.getString("e.codigo"));
                 dto.setDescricao(resultset.getString("e.descricao"));
                 tipoEquipamento.setNome(resultset.getString("t.nome"));
                 dto.setTipoEquipamento(tipoEquipamento);

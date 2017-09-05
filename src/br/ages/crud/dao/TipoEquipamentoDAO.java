@@ -43,4 +43,33 @@ public class TipoEquipamentoDAO {
         }
         return tipoequipamentos;
     }
+
+    public TipoEquipamento buscarEquipamentoPorId(int id) {
+        Connection conexao = null;
+        TipoEquipamento tipoEquipamento = null;
+
+        try {
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT nome");
+            sql.append(" FROM tb_tipo_equipamento");
+            sql.append(" WHERE id_tipo_equipamento = ?");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            statement.setInt(1, id);
+
+            ResultSet resultset = statement.executeQuery();
+            tipoEquipamento = new TipoEquipamento();
+            while (resultset.next()) {
+                tipoEquipamento.setId(id);
+                tipoEquipamento.setNome(resultset.getString("nome"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoEquipamento;
+    }
 }

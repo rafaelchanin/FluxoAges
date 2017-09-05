@@ -28,9 +28,9 @@ public class CadastrarTipoEquipamentoCommand {
 
             String isEdit = request.getParameter("isEdit");
 
-            TipoEquipamentoBO = new TipoEquipamentoBO();
+            TipoEquipamentoBO tipoEquipamentoBO = new TipoEquipamentoBO();
             ArrayList<TipoEquipamento> tipoUsuarios = new ArrayList<TipoEquipamento>();
-            tipoUsuarios = TipoEquipamentoBO.listarTipoEquipamentos();
+            tipoUsuarios = tipoEquipamentoBO.listarTipoEquipamentos();
             request.setAttribute("tipoUsuarios", tipoUsuarios);
 
             if (isEdit != null && !"".equals(isEdit)) {
