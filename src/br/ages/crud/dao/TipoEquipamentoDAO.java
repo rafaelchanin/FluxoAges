@@ -21,7 +21,7 @@ public class TipoEquipamentoDAO {
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
             sql.append("id_tipo_equipamento, ");
-            sql.append("nome, ");
+            sql.append("nome ");
             sql.append("FROM tb_tipo_equipamento");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
