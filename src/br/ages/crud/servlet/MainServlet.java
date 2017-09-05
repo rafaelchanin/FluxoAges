@@ -12,49 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ages.crud.command.*;
 import org.apache.log4j.Logger;
 
-import br.ages.crud.command.AddPontoCommand;
-import br.ages.crud.command.AddSkillCommand;
-import br.ages.crud.command.AddStakeholderCommand;
-import br.ages.crud.command.AddUserCommand;
-import br.ages.crud.command.AdicionaAulasCommand;
-import br.ages.crud.command.AdicionaChamadasCommand;
-import br.ages.crud.command.AdicionaProjetoCommand;
-import br.ages.crud.command.AdicionaTimeCommand;
-import br.ages.crud.command.AdicionaTurmaCommand;
-import br.ages.crud.command.Command;
-import br.ages.crud.command.CreateScreenPontoCommand;
-import br.ages.crud.command.CreateScreenProjectCommand;
-import br.ages.crud.command.CreateScreenSkillCommand;
-import br.ages.crud.command.CreateScreenStakeholderCommand;
-import br.ages.crud.command.CreateScreenTimeCommand;
-import br.ages.crud.command.CreateScreenTurmaCommand;
-import br.ages.crud.command.CreateScreenUserCommand;
-import br.ages.crud.command.EditStakeholderCommand;
-import br.ages.crud.command.EditUserCommand;
-import br.ages.crud.command.EditaProjetoCommand;
-import br.ages.crud.command.EditaTimeCommand;
-import br.ages.crud.command.EditaTurmaCommand;
-import br.ages.crud.command.ListPontoTotalHorasCommand;
-import br.ages.crud.command.ListStakeholdersCommand;
-import br.ages.crud.command.ListUserCommand;
-import br.ages.crud.command.ListaAlunoCommand;
-import br.ages.crud.command.ListaProjetosCommand;
-import br.ages.crud.command.ListaTimesCommand;
-import br.ages.crud.command.ListaTurmasCommand;
-import br.ages.crud.command.LoginCommand;
-import br.ages.crud.command.LogoutCommand;
-import br.ages.crud.command.RegistraAulasTurmaCommand;
-import br.ages.crud.command.RegistraChamadaCommand;
-import br.ages.crud.command.RelatorioHorasCommand;
-import br.ages.crud.command.RemoveProjetoCommand;
-import br.ages.crud.command.RemoveStakeholderCommand;
-import br.ages.crud.command.RemoveTurmaCommand;
-import br.ages.crud.command.RemoveUserCommand;
-import br.ages.crud.command.RemoverPontoAlunoCommand;
-import br.ages.crud.command.SenhaCommand;
-import br.ages.crud.command.UploadProjetoCommand;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Usuario;
@@ -128,6 +88,9 @@ public class MainServlet extends HttpServlet {
 		comandos.put("adicionaSkill", new AddSkillCommand());
 		comandos.put("skills", new CreateScreenSkillCommand());
 		comandos.put("removerPontoAluno", new RemoverPontoAlunoCommand());
+
+		//COMANDOS EQUIPAMENTOS
+		comandos.put("listaEquipamentos", new ListarEquipamentosCommand());
 	}
 
 	@Override
@@ -141,6 +104,7 @@ public class MainServlet extends HttpServlet {
 			proxima = comando.execute(request);
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSessao");
 			if(usuario != null)
+				logger.debug("TESTE");
 				logger.debug("User: " +usuario.getUsuario() + " - comando " + comando.toString() + " acao: " +acao );
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());
