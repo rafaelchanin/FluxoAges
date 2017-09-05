@@ -5,15 +5,47 @@ import br.ages.crud.model.Equipamento;
 import br.ages.crud.model.TipoEquipamento;
 import br.ages.crud.util.ConexaoUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class EquipamentoDAO {
 
     private ArrayList<Equipamento> equipamentos;
+
+    public boolean cadastrarEquipamento(Equipamento equipamento) throws PersistenciaException, SQLException, ParseException {
+        boolean ok = false;
+        Connection conexao = null;
+        try {
+            Integer id = null;
+
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO tb_equipamento (nome, codigo, descricao, id_tipo_equipamento)");
+            sql.append("VALUES (?, ?, ?, ?)");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, equipamento.getNome());
+            statement.setInt(2, equipamento.getCodigo());
+            statement.setString(3, equipamento.getDescricao());
+            statement.setInt(4, equipamento.getTipoEquipamento().getId());
+
+            statement.executeUpdate();
+
+            ResultSet resultset = statement.getGeneratedKeys();
+            if (resultset.first()) {
+                id = resultset.getInt(1);
+                equipamento.setId(id);
+                ok=true;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenciaException(e);
+        } finally {
+            conexao.close();
+        }
+        return ok;
+    }
 
     public ArrayList<Equipamento> listarEquipamentos() throws PersistenciaException, SQLException {
         Connection conexao = null;
