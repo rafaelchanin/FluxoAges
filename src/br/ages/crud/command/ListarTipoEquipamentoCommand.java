@@ -14,7 +14,7 @@ public class ListarTipoEquipamentoCommand implements Command {
 
     public String execute(HttpServletRequest request) throws SQLException {
         this.tipoequipamentoBO = new TipoEquipamentoBO();
-        proxima = "listaequipamento/listaTiposEquipamentos.jsp";
+        proxima = "equipamento/listaTiposEquipamentos.jsp";
 
         try {
             ArrayList<TipoEquipamento> listaTipoEquipamentos = tipoequipamentoBO.listarEquipamentos();
