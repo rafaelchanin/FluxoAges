@@ -15,6 +15,9 @@ public class CreateScreenEquipamentoCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws SQLException, NegocioException, ParseException, PersistenciaException {
-        proxima = "main?acao=list"
+        proxima = "main?acao=listaEquipamentos";
+
+
+        return proxima;
     }
 }
