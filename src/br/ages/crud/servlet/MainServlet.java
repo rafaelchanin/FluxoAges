@@ -91,6 +91,7 @@ public class MainServlet extends HttpServlet {
 
 		//COMANDOS EQUIPAMENTOS
 		comandos.put("listaEquipamentos", new ListarEquipamentosCommand());
+		comandos.put("listaTiposEquipamentos", new ListarTipoEquipamentoCommand());
 	}
 
 	@Override
