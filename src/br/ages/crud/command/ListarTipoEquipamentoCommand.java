@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ListarTipoEquipamentoCommand {
+public class ListarTipoEquipamentoCommand implements Command {
     private String proxima;
     private TipoEquipamentoBO tipoequipamentoBO;
 
