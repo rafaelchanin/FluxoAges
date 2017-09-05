@@ -24,7 +24,7 @@ public class EquipamentoDAO {
             sql.append("id_equipamento, ");
             sql.append("nome, ");
             sql.append("codigo, ");
-            sql.append("descricao, ");
+            sql.append("descricao ");
             sql.append("FROM tb_equipamento");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());

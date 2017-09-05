@@ -21,8 +21,8 @@
                 <tr>
                     <th style="text-align: center;">ID</th>
                     <th style="text-align: center;">Nome</th>
-                    <th style="text-align: center;">CÃ³digo</th>
-                    <th style="text-align: center;">DescriÃ§Ã£o</th>
+                    <th style="text-align: center;">Código</th>
+                    <th style="text-align: center;">Descrição</th>
                     <th style="text-align: center;"></th>
                     <th style="text-align: center;"></th>
                 </tr>
@@ -68,16 +68,16 @@
     $(document).ready(function(){
         $('#listaAlunos').dataTable({
             "language": {
-                "lengthMenu": "Mostrando _MENU_ registros por pÃ¡gina",
+                "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",
-                "info": "Mostrando _PAGE_ de _PAGES_ pÃ¡ginas",
+                "info": "Mostrando _PAGE_ de _PAGES_ páginas",
                 "infoEmpty": "Nenhum registros encontrados!",
                 "infoFiltered": "(Filtrado _MAX_ do total deregistros)",
                 "search":"Busca",
                 "paginate": {
                     "first":      "Primeiro",
-                    "last":       "Ãšltimo",
-                    "next":       "PrÃ³ximo",
+                    "last":       "Último",
+                    "next":       "Próximo",
                     "previous":   "Anterior"
                 },
             }

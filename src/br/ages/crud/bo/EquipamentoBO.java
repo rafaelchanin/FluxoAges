@@ -14,8 +14,8 @@ public class EquipamentoBO {
 
     public ArrayList<Equipamento> listarEquipamentos() throws NegocioException {
 
-        ArrayList<Equipamento> equipamentos = null;
-
+        ArrayList<Equipamento> equipamentos = new ArrayList<>();
+        equipamentoDAO = new EquipamentoDAO();
         try {
             equipamentos = equipamentoDAO.listarEquipamentos();
         } catch (PersistenciaException | SQLException e) {
