@@ -17,7 +17,7 @@ public class ListarTipoEquipamentoCommand implements Command {
         proxima = "equipamento/listaTiposEquipamentos.jsp";
 
         try {
-            ArrayList<TipoEquipamento> listaTipoEquipamentos = tipoequipamentoBO.listarEquipamentos();
+            ArrayList<TipoEquipamento> listaTipoEquipamentos = tipoequipamentoBO.listarTipoEquipamentos();
             request.setAttribute("listaTiposEquipamentos", listaTipoEquipamentos);
         } catch (NegocioException e) {
             e.printStackTrace();
