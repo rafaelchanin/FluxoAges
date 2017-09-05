@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="br.ages.crud.model.Equipamento" %>
 <%@ page import="br.ages.crud.model.Usuario" %>
+<%@ page import="br.ages.crud.model.TipoEquipamento" %>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
@@ -28,23 +29,23 @@
 
                 <tbody>
                 <%
-                    ArrayList<Equipamento> equipamentos = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
-                    for (Equipamento equipamento : equipamentos) {
+                    ArrayList<TipoEquipamento> tipoequipamentos = (ArrayList<TipoEquipamento>) request.getAttribute("listaTiposEquipamentos");
+                    for (TipoEquipamento tipoequipamento : tipoequipamentos) {
                 %>
 
                 <tr>
-                    <td align="center"><%=equipamento.getId()%></td>
-                    <td align="center"><%=equipamento.getNome()%></td>
+                    <td align="center"><%=tipoequipamento.getId()%></td>
+                    <td align="center"><%=tipoequipamento.getNome()%></td>
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-usuario="<%=equipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-usuario="<%=tipoequipamento.getNome()%>"
                                data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
                         </form>
                     </td>
 
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-usuario="<%=equipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-usuario="<%=tipoequipamento.getNome()%>"
                                data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
                         </form>
                     </td>
@@ -64,16 +65,16 @@
     $(document).ready(function(){
         $('#listaAlunos').dataTable({
             "language": {
-                "lengthMenu": "Mostrando _MENU_ registros por pÃ¡gina",
+                "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",
-                "info": "Mostrando _PAGE_ de _PAGES_ pÃ¡ginas",
+                "info": "Mostrando _PAGE_ de _PAGES_ páginas",
                 "infoEmpty": "Nenhum registros encontrados!",
                 "infoFiltered": "(Filtrado _MAX_ do total deregistros)",
                 "search":"Busca",
                 "paginate": {
                     "first":      "Primeiro",
-                    "last":       "Ãšltimo",
-                    "next":       "PrÃ³ximo",
+                    "last":       "Último",
+                    "next":       "Próximo",
                     "previous":   "Anterior"
                 },
             }
