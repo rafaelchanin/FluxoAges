@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class TipoEquipamentoBO {
     private TipoEquipamentoDAO tipoequipamentosDAO;
 
-    public ArrayList<TipoEquipamento> listarEquipamentos() throws NegocioException {
+    public ArrayList<TipoEquipamento> listarTipoEquipamentos() throws NegocioException {
 
         ArrayList<TipoEquipamento> equipamentos = new ArrayList<>();
         tipoequipamentosDAO = new TipoEquipamentoDAO();
