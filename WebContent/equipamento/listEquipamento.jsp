@@ -23,6 +23,7 @@
                     <th style="text-align: center;">Nome</th>
                     <th style="text-align: center;">Código</th>
                     <th style="text-align: center;">Descrição</th>
+                    <th style="text-align: center;">Tipo</th>
                     <th style="text-align: center;"></th>
                     <th style="text-align: center;"></th>
                 </tr>
@@ -39,6 +40,7 @@
                     <td align="center"><%=equipamento.getNome()%></td>
                     <td align="center"><%=equipamento.getCodigo()%></td>
                     <td align="center"><%=equipamento.getDescricao()%></td>
+                    <td align="center"><%=equipamento.getTipoEquipamento().getNome()%></td>
                     <td align="center">
                         <form action="" method="post">
                             <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-usuario="<%=equipamento.getNome()%>"

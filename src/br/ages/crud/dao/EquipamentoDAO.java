@@ -2,6 +2,7 @@ package br.ages.crud.dao;
 
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Equipamento;
+import br.ages.crud.model.TipoEquipamento;
 import br.ages.crud.util.ConexaoUtil;
 
 import java.sql.Connection;
@@ -21,11 +22,14 @@ public class EquipamentoDAO {
 
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
-            sql.append("id_equipamento, ");
-            sql.append("nome, ");
-            sql.append("codigo, ");
-            sql.append("descricao ");
-            sql.append("FROM tb_equipamento");
+            sql.append("e.id_equipamento, ");
+            sql.append("e.nome, ");
+            sql.append("e.codigo, ");
+            sql.append("e.descricao, ");
+            sql.append("t.nome ");
+            sql.append("FROM tb_equipamento e ");
+            sql.append("INNER JOIN tb_tipo_equipamento t ");
+            sql.append("ON t.ID_TIPO_EQUIPAMENTO = e.ID_TIPO_EQUIPAMENTO");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             ResultSet resultset = statement.executeQuery();
@@ -33,10 +37,13 @@ public class EquipamentoDAO {
             equipamentos = new ArrayList<>();
             while (resultset.next()) {
                 Equipamento dto = new Equipamento();
-                dto.setId(resultset.getInt("id_equipamento"));
-                dto.setNome(resultset.getString("nome"));
-                dto.setCodigo(resultset.getInt("codigo"));
-                dto.setDescricao(resultset.getString("descricao"));
+                TipoEquipamento tipoEquipamento = new TipoEquipamento();
+                dto.setId(resultset.getInt("e.id_equipamento"));
+                dto.setNome(resultset.getString("e.nome"));
+                dto.setCodigo(resultset.getInt("e.codigo"));
+                dto.setDescricao(resultset.getString("e.descricao"));
+                tipoEquipamento.setNome(resultset.getString("t.nome"));
+                dto.setTipoEquipamento(tipoEquipamento);
 
                 equipamentos.add(dto);
             }

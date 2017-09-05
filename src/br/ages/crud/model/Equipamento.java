@@ -6,6 +6,7 @@ public class Equipamento {
     private String nome;
     private String descricao;
     private int codigo;
+    private TipoEquipamento tipoEquipamento;
 
     public Equipamento() {
     }
@@ -40,6 +41,14 @@ public class Equipamento {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public TipoEquipamento getTipoEquipamento() {
+        return tipoEquipamento;
+    }
+
+    public void setTipoEquipamento(TipoEquipamento tipoEquipamento) {
+        this.tipoEquipamento = tipoEquipamento;
     }
 
     @Override
