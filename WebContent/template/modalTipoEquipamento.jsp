@@ -6,9 +6,9 @@
             var id = botao.data('id');
 
             $(this).find('.modal-title').text('Excluir tipo equipamento');
-            $(this).find('#modal-descricao').text('VocÃª realmente deseja excluir o tipo do equipamento (' + nome + ')?');
+            $(this).find('#modal-descricao').text('Você realmente deseja excluir o tipo do equipamento (' + nome + ')?');
 
-            $('#formExcluir').attr('action', "main?acao=removerEquipamento&id_equipamento=" + id);
+            $('#formExcluir').attr('action', "main?acao=removerTipoEquipamento&id=" + id);
         });
 
 
@@ -18,7 +18,7 @@
             var id = botao.data('id');
 
             $(this).find('.modal-title').text('Editar tipo equipamento');
-            $(this).find('#modal-descricao').text('VocÃª realmente deseja editar o tipo do equipamento (' + nome + ')?');
+            $(this).find('#modal-descricao').text('Você realmente deseja editar o tipo do equipamento (' + nome + ')?');
 
             $('#formEditar').attr('action', "main?acao=telaTipoEquipamento&id=" + id + "&isEdit=true");
         });

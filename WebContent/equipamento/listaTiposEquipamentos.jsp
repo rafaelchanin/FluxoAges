@@ -5,7 +5,7 @@
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
-<jsp:include page="../template/modal.jsp"></jsp:include>
+<jsp:include page="../template/modalTipoEquipamento.jsp"></jsp:include>
 
 <div class="panel panel-primary">
 
@@ -22,6 +22,7 @@
                 <tr>
                     <th style="text-align: center;">ID</th>
                     <th style="text-align: center;">Nome</th>
+                    <th style="text-align: center;">Status</th>
                     <th style="text-align: center;"></th>
                     <th style="text-align: center;"></th>
                 </tr>
@@ -36,6 +37,7 @@
                 <tr>
                     <td align="center"><%=tipoequipamento.getId()%></td>
                     <td align="center"><%=tipoequipamento.getNome()%></td>
+                    <td align="center"><%=tipoequipamento.getStatus().toString()%></td>
                     <td align="center">
                         <form action="" method="post">
                             <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-nome="<%=tipoequipamento.getNome()%>"

@@ -17,7 +17,7 @@ public class RemoverTipoEquipamentoCommand implements Command{
 
     @Override
     public String execute(HttpServletRequest request) {
-        proximo = "main?acao=listaEquipamentos";
+        proximo = "main?acao=listaTiposEquipamentos";
         tipoEquipamentoBO = new TipoEquipamentoBO();
 
         Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioSessao");
@@ -25,7 +25,7 @@ public class RemoverTipoEquipamentoCommand implements Command{
         try {
             if( !usuario.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
 
-            Integer id = Integer.parseInt(request.getParameter("id_tipo_equipamento"));
+            Integer id = Integer.parseInt(request.getParameter("id"));
             tipoEquipamentoBO.removerTipoEquipamento(id);
 
             request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_REMOVE_EQUIPAMENTO.replace("?", id.toString()).concat("<br/>"));

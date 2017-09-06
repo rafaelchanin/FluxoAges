@@ -98,6 +98,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("removerEquipamento", new RemoverEquipamentoCommand());
 		comandos.put("telaTipoEquipamento", new CreateScreenTipoEquipamentoCommand());
 		comandos.put("addTipoEquipamento", new AddTipoEquipamentoCommand());
+		comandos.put("removerTipoEquipamento", new RemoverTipoEquipamentoCommand());
 
 	}
 
