@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CadastrarTipoEquipamentoCommand {
+public class CreateScreenTipoEquipamentoCommand implements Command {
 
     private String proxima;
 
@@ -33,12 +33,12 @@ public class CadastrarTipoEquipamentoCommand {
             TipoEquipamentoBO tipoEquipamentoBO = new TipoEquipamentoBO();
             ArrayList<TipoEquipamento> tipoUsuarios = new ArrayList<TipoEquipamento>();
             tipoUsuarios = tipoEquipamentoBO.listarTipoEquipamentos();
-            request.setAttribute("tipoUsuarios", tipoUsuarios);
+            request.setAttribute("addTipoEquipamento", tipoUsuarios);
 
             if (isEdit != null && !"".equals(isEdit)) {
 
             } else { // Adiciona um novo usuário
-                proxima = "equipamento/addEquipamento.jsp";
+                proxima = "equipamento/addTipoEquipamento.jsp";
             }
 
         } catch (Exception e) {

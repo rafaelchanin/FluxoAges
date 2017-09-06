@@ -1,14 +1,12 @@
 package br.ages.crud.dao;
+import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Equipamento;
+import br.ages.crud.model.Status;
+import br.ages.crud.model.TipoEquipamento;
+import br.ages.crud.util.ConexaoUtil;
 
-        import br.ages.crud.exception.PersistenciaException;
-        import br.ages.crud.model.TipoEquipamento;
-        import br.ages.crud.util.ConexaoUtil;
-
-        import java.sql.Connection;
-        import java.sql.PreparedStatement;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.util.ArrayList;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class TipoEquipamentoDAO {
     private ArrayList<TipoEquipamento> tipoequipamentos;
@@ -84,10 +82,8 @@ public class TipoEquipamentoDAO {
             sql.append("UPDATE tb_equipamento SET STATUS = ?, data_movimentacao = ? where id_equipamento= ? ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
-            java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
             statement.setString(1, String.valueOf(Status.INATIVO));
-            statement.setDate(2, dateSql);
-            statement.setInt(3, id);
+            statement.setInt(2, id);
 
             removidoOK = statement.execute();
 
@@ -101,5 +97,37 @@ public class TipoEquipamentoDAO {
             }
         }
         return removidoOK;
+    }
+
+    public boolean cadastrarTipoEquipamento(TipoEquipamento tipoEquipamento) throws PersistenciaException, SQLException {
+        boolean ok = false;
+        Connection conexao = null;
+
+        try {
+            Integer id = null;
+
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO tb_tipo_equipamento (nome) ");
+            sql.append("VALUES (?)");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, tipoEquipamento.getNome());
+
+            statement.executeUpdate();
+
+            ResultSet resultset = statement.getGeneratedKeys();
+            if (resultset.first()) {
+                id = resultset.getInt(1);
+                tipoEquipamento.setId(id);
+                ok=true;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenciaException(e);
+        } finally {
+            conexao.close();
+        }
+        return ok;
     }
 }
