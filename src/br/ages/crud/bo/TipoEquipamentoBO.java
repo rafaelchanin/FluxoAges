@@ -33,5 +33,14 @@ public class TipoEquipamentoBO {
             e.printStackTrace();
             throw new NegocioException(e);
         }
+
+    public boolean removerTipoEquipamento(Integer id) throws NegocioException {
+        try{
+            tipoequipamentosDAO = new TipoEquipamentoDAO();
+            return tipoequipamentosDAO.removerTipoEquipamento(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
     }
 }

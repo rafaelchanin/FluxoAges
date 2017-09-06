@@ -1,14 +1,14 @@
 package br.ages.crud.dao;
 
-import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.TipoEquipamento;
-import br.ages.crud.util.ConexaoUtil;
+        import br.ages.crud.exception.PersistenciaException;
+        import br.ages.crud.model.TipoEquipamento;
+        import br.ages.crud.util.ConexaoUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+        import java.sql.Connection;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+        import java.util.ArrayList;
 
 public class TipoEquipamentoDAO {
     private ArrayList<TipoEquipamento> tipoequipamentos;
@@ -71,5 +71,35 @@ public class TipoEquipamentoDAO {
         }
 
         return tipoEquipamento;
+    }
+
+    public boolean removerTipoEquipamento(Integer id) throws PersistenciaException {
+        boolean removidoOK = false;
+        Connection conexao = null;
+        try {
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+
+            sql.append("UPDATE tb_equipamento SET STATUS = ?, data_movimentacao = ? where id_equipamento= ? ");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            statement.setString(1, String.valueOf(Status.INATIVO));
+            statement.setDate(2, dateSql);
+            statement.setInt(3, id);
+
+            removidoOK = statement.execute();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenciaException(e);
+        } finally {
+            try {
+                conexao.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return removidoOK;
     }
 }
