@@ -2,7 +2,8 @@ package br.ages.crud.model;
 
 public class TipoEquipamento {
     private int id;
-   private String nome;
+    private String nome;
+    private Status status;
 
     public TipoEquipamento(int id, String nome) {
         this.id = id;
@@ -26,6 +27,14 @@ public class TipoEquipamento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

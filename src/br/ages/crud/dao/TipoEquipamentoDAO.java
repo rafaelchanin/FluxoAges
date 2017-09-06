@@ -19,7 +19,8 @@ public class TipoEquipamentoDAO {
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT ");
             sql.append("id_tipo_equipamento, ");
-            sql.append("nome ");
+            sql.append("nome, ");
+            sql.append("status ");
             sql.append("FROM tb_tipo_equipamento");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
@@ -30,6 +31,7 @@ public class TipoEquipamentoDAO {
                 TipoEquipamento dto = new TipoEquipamento();
                 dto.setId(resultset.getInt("id_tipo_equipamento"));
                 dto.setNome(resultset.getString("nome"));
+                dto.setStatus(Status.valueOf(resultset.getString("status")));
 
                 tipoequipamentos.add(dto);
             }
@@ -109,11 +111,12 @@ public class TipoEquipamentoDAO {
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("INSERT INTO tb_tipo_equipamento (nome) ");
-            sql.append("VALUES (?)");
+            sql.append("INSERT INTO tb_tipo_equipamento (nome, status) ");
+            sql.append("VALUES (?,?)");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, tipoEquipamento.getNome());
+            statement.setString(2, String.valueOf(Status.ATIVO));
 
             statement.executeUpdate();
 
