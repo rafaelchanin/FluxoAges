@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.model.PerfilAcesso;
-import br.ages.crud.model.StatusUsuario;
+import br.ages.crud.model.Status;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
@@ -38,7 +38,7 @@ public class AddUserCommand implements Command {
 			user.setMatricula(matricula);
 			user.setUsuario(usuario);
 			user.setSenha(senha);
-			user.setStatusUsuario(StatusUsuario.valueOf(statusUsuario));
+			user.setStatus(Status.valueOf(statusUsuario));
 			user.setPerfilAcesso(PerfilAcesso.valueOf(perfilAcesso));
 			user.setUsuarioGitLab(usuarioGitLab);
 			TipoUsuario tUser = new TipoUsuario();

@@ -47,9 +47,9 @@
 						</div>
 	
 						<div class="col-sm-6">
-							<label class="form-label ages">Status: <span class="red">*</span></label> <select class="form-control" id="statusUsuario" name="statusUsuario" required>
-								<option value="ATIVO" <%="ATIVO".equals(request.getParameter("statusUsuario")) ? "selected" : ""%>>Ativo</option>
-								<option value="INATIVO" <%="INATIVO".equals(request.getParameter("statusUsuario")) ? "selected" : ""%>>Inativo</option>
+							<label class="form-label ages">Status: <span class="red">*</span></label> <select class="form-control" id="status" name="status" required>
+								<option value="ATIVO" <%="ATIVO".equals(request.getParameter("status")) ? "selected" : ""%>>Ativo</option>
+								<option value="INATIVO" <%="INATIVO".equals(request.getParameter("status")) ? "selected" : ""%>>Inativo</option>
 							</select>
 						</div>
 					</div>

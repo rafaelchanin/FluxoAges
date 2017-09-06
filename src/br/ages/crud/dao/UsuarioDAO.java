@@ -8,14 +8,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ages.crud.model.*;
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.IdNomeUsuarioDTO;
-import br.ages.crud.model.PerfilAcesso;
-import br.ages.crud.model.StatusUsuario;
-import br.ages.crud.model.TipoUsuario;
-import br.ages.crud.model.Usuario;
+import br.ages.crud.model.Status;
 import br.ages.crud.util.ConexaoUtil;
 import br.ages.crud.util.MensagemContantes;
 
@@ -194,7 +191,7 @@ public class UsuarioDAO {
 				dto.setUsuario(resultset.getString("USUARIO"));
 				dto.setSenha(resultset.getString("SENHA"));
 				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				dto.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				dto.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 				tipoUsuario.setIdTipoUsuario(resultset.getInt("ID_TIPO_USUARIO"));
 				tipoUsuario.setNome(resultset.getString("tnome"));
 				tipoUsuario.setDescricao(resultset.getString("DESCRICAO"));
@@ -232,7 +229,7 @@ public class UsuarioDAO {
 			statement.setString(1, usuario.getUsuario());
 			statement.setString(2, usuario.getSenha());
 			statement.setString(3, String.valueOf(usuario.getPerfilAcesso()));
-			statement.setString(4, String.valueOf(usuario.getStatusUsuario()));
+			statement.setString(4, String.valueOf(usuario.getStatus()));
 			statement.setInt(5, usuario.getTipoUsuario().getIdTipoUsuario());
 			statement.setString(6, usuario.getMatricula());
 			statement.setString(7, usuario.getNome());
@@ -335,7 +332,7 @@ public class UsuarioDAO {
 				usuario.setUsuario(resultset.getString("USUARIO"));
 				usuario.setSenha(resultset.getString("SENHA"));
 				usuario.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				usuario.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				usuario.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 				TipoUsuario tipoUsuario = new TipoUsuario();
 				tipoUsuario.setIdTipoUsuario(resultset.getInt("ID_TIPO_USUARIO"));
 				tipoUsuario.setNome(resultset.getString("tnome"));
@@ -398,7 +395,7 @@ public class UsuarioDAO {
 				usuario.setUsuario(resultset.getString("USUARIO"));
 				usuario.setSenha(resultset.getString("SENHA"));
 				usuario.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				usuario.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				usuario.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 				TipoUsuario tipoUsuario = new TipoUsuario();
 				tipoUsuario.setIdTipoUsuario(resultset.getInt("ID_TIPO_USUARIO"));
 				tipoUsuario.setNome(resultset.getString("tnome"));
@@ -496,7 +493,7 @@ public class UsuarioDAO {
 
 			statement.setString(1, usuario.getSenha());
 			statement.setString(2, usuario.getPerfilAcesso().name());
-			statement.setString(3, usuario.getStatusUsuario().name());
+			statement.setString(3, usuario.getStatus().name());
 			statement.setInt(4, usuario.getTipoUsuario().getIdTipoUsuario());
 			statement.setString(5, usuario.getNome());
 			statement.setString(6, usuario.getEmail());
@@ -611,7 +608,7 @@ public class UsuarioDAO {
 				dto.setUsuario(resultset.getString("USUARIO"));
 				dto.setSenha(resultset.getString("SENHA"));
 				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				dto.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				dto.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 
 				listarUsuarios.add(dto);
 			}
@@ -665,7 +662,7 @@ public class UsuarioDAO {
 				dto.setUsuario(resultset.getString("USUARIO"));
 				dto.setSenha(resultset.getString("SENHA"));
 				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				dto.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				dto.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 
 				listarUsuarios.add(dto);
 			}
@@ -713,7 +710,7 @@ public class UsuarioDAO {
 				dto.setUsuario(resultset.getString("USUARIO"));
 				dto.setSenha(resultset.getString("SENHA"));
 				dto.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				dto.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				dto.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 
 				listarUsuarios.add(dto);
 			}
@@ -761,7 +758,7 @@ public class UsuarioDAO {
 				usuario.setUsuario(resultset.getString("USUARIO"));
 				usuario.setSenha(resultset.getString("SENHA"));
 				usuario.setPerfilAcesso(PerfilAcesso.valueOf(resultset.getString("PERFIL_ACESSO")));
-				usuario.setStatusUsuario(StatusUsuario.valueOf(resultset.getString("STATUS_USUARIO")));
+				usuario.setStatus(Status.valueOf(resultset.getString("STATUS_USUARIO")));
 					
 			}
 		} catch (ClassNotFoundException | SQLException e) {

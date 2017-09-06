@@ -17,7 +17,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 	private String senha;
 	private TipoUsuario tipoUsuario;
 	private PerfilAcesso perfilAcesso;
-	private StatusUsuario statusUsuario;
+	private Status status;
 	private String matricula;
 	private String nome;
 	private String email;
@@ -34,14 +34,14 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 		this.dataInclusao = new Date();
 	}
 
-	public Usuario(String usuario, String senha, String matricula, String nome, String email, StatusUsuario statusUsuario, TipoUsuario tipoUsuario, PerfilAcesso perfilAcesso) {
+	public Usuario(String usuario, String senha, String matricula, String nome, String email, Status status, TipoUsuario tipoUsuario, PerfilAcesso perfilAcesso) {
 		super();
 		this.usuario = usuario;
 		this.senha = senha;
 		this.matricula = matricula;
 		this.nome = nome;
 		this.email = email;
-		this.statusUsuario = statusUsuario;
+		this.status = status;
 		this.perfilAcesso = perfilAcesso;
 		this.tipoUsuario = tipoUsuario;
 		this.dataInclusao = new Date();
@@ -84,12 +84,12 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public StatusUsuario getStatusUsuario() {
-		return statusUsuario;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatusUsuario(StatusUsuario statusUsuario) {
-		this.statusUsuario = statusUsuario;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getMatricula() {
@@ -143,7 +143,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", usuario=" + usuario + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario + ", perfilAcesso=" + perfilAcesso + ", statusUsuario=" + statusUsuario
+		return "Usuario [idUsuario=" + idUsuario + ", usuario=" + usuario + ", senha=" + senha + ", tipoUsuario=" + tipoUsuario + ", perfilAcesso=" + perfilAcesso + ", status=" + status
 				+ ", matricula=" + matricula + ", nome=" + nome + ", email=" + email + ", dataInclusao=" + dataInclusao + "]";
 	}
 

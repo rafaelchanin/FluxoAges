@@ -52,8 +52,12 @@ public class MensagemContantes {
 	public static final String MSG_SUC_CADASTRO_EQUIPAMENTO = "Equipamento ? cadastrado com sucesso!";
 	
 	public static final String MSG_SUC_EDICAO_USUARIO = "Usuário ? editado com sucesso!";
+
+	public static final String MSG_SUC_EDICAO_EQUIPAMENTO = "Equipamento ? editado com sucesso!";
 	
 	public static final String MSG_SUC_REMOVE_USUARIO= "Usuário ? removido com sucesso!";
+
+	public static final String MSG_SUC_REMOVE_EQUIPAMENTO= "Equipamento ? removido com sucesso!";
 	
 	public static final String MSG_SUC_ATUALIZADA_PESSOA = "Atualização de Pessoa efetuada com sucesso!";
 	

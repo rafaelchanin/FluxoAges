@@ -15,7 +15,7 @@ import br.ages.crud.dao.UsuarioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.PerfilAcesso;
-import br.ages.crud.model.StatusUsuario;
+import br.ages.crud.model.Status;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 
@@ -44,7 +44,7 @@ public class TestaUsuarioBO {
 	public void testValidaUsuarioResponsavel() throws PersistenciaException {
 		TipoUsuario tipoUsuario = new TipoUsuario();
 		
-		Usuario usuario = new Usuario("admin", "admin", "0000000", "Cássio Trindade", "cassiot@gmmail.com", StatusUsuario.ATIVO, tipoUsuario, PerfilAcesso.ADMINISTRADOR);
+		Usuario usuario = new Usuario("admin", "admin", "0000000", "Cássio Trindade", "cassiot@gmmail.com", Status.ATIVO, tipoUsuario, PerfilAcesso.ADMINISTRADOR);
 		Mockito.when(usuarioMockDAO.validarUsuario(usuario)).thenReturn(usuario);
 		Assert.assertEquals(true,usuarioBO.validaUsuarioResponsavel("admin", "admin"));
 

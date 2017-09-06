@@ -1,6 +1,6 @@
 package br.ages.crud.model;
 
-public enum StatusUsuario{
+public enum Status {
 	ATIVO,
 	INATIVO;
 }

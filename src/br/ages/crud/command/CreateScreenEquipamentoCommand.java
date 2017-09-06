@@ -4,6 +4,7 @@ import br.ages.crud.bo.EquipamentoBO;
 import br.ages.crud.bo.TipoEquipamentoBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Equipamento;
 import br.ages.crud.model.PerfilAcesso;
 import br.ages.crud.model.TipoEquipamento;
 import br.ages.crud.model.Usuario;
@@ -30,16 +31,22 @@ public class CreateScreenEquipamentoCommand implements Command {
             if( !currentUser.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR) ) throw new NegocioException(MensagemContantes.MSG_INF_DENY);
             String isEdit = request.getParameter("isEdit");
 
+            tipoEquipamentoBO = new TipoEquipamentoBO();
+            ArrayList<TipoEquipamento> tipoEquipamentos = tipoEquipamentoBO.listarTipoEquipamentos();
+            request.setAttribute("tipos", tipoEquipamentos);
+
             if (isEdit != null && !"".equals(isEdit)) {
-                //Criar depois
+
+                equipamentoBO = new EquipamentoBO();
+
+                int id = Integer.parseInt(request.getParameter("id_equipamento"));
+                Equipamento equipamento = equipamentoBO.buscaEquipamentoPorId(id);
+
+                request.setAttribute("equipamento", equipamento);
+                proxima = "equipamento/editEquipamento.jsp";
+
             } else {
                 proxima = "equipamento/addEquipamento.jsp";
-
-                tipoEquipamentoBO = new TipoEquipamentoBO();
-
-                ArrayList<TipoEquipamento> tipoEquipamentos = tipoEquipamentoBO.listarTipoEquipamentos();
-
-                request.setAttribute("tipos", tipoEquipamentos);
             }
         } catch(Exception e){
             request.setAttribute("msgErro", e.getMessage());

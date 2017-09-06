@@ -36,4 +36,36 @@ public class EquipamentoBO {
 
         return equipamentos;
     }
+
+    public Equipamento buscaEquipamentoPorId(int id) throws NegocioException {
+        try {
+            equipamentoDAO = new EquipamentoDAO();
+            Equipamento equipamento = equipamentoDAO.buscaEquipamentoPorId(id);
+
+            return equipamento;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
+
+    public boolean editaEquipamento(Equipamento equipamento) throws NegocioException {
+        try{
+            equipamentoDAO = new EquipamentoDAO();
+            return equipamentoDAO.editaEquipamento(equipamento);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
+
+    public boolean removerEquipamento(Integer id) throws NegocioException {
+        try{
+            equipamentoDAO = new EquipamentoDAO();
+            return equipamentoDAO.removerEquipamento(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
 }
