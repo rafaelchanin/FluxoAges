@@ -38,14 +38,14 @@
                     <td align="center"><%=tipoequipamento.getNome()%></td>
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-usuario="<%=tipoequipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-nome="<%=tipoequipamento.getNome()%>"
                                data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
                         </form>
                     </td>
 
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-usuario="<%=tipoequipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-nome="<%=tipoequipamento.getNome()%>"
                                data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
                         </form>
                     </td>
