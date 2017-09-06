@@ -44,7 +44,7 @@ public class TipoEquipamentoDAO {
         return tipoequipamentos;
     }
 
-    public TipoEquipamento buscarEquipamentoPorId(int id) {
+    public TipoEquipamento buscarTipoEquipamentoPorId(int id) {
         Connection conexao = null;
         TipoEquipamento tipoEquipamento = null;
 
@@ -52,7 +52,7 @@ public class TipoEquipamentoDAO {
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("SELECT nome");
+            sql.append("SELECT nome, status");
             sql.append(" FROM tb_tipo_equipamento");
             sql.append(" WHERE id_tipo_equipamento = ?");
 
@@ -64,7 +64,7 @@ public class TipoEquipamentoDAO {
             while (resultset.next()) {
                 tipoEquipamento.setId(id);
                 tipoEquipamento.setNome(resultset.getString("nome"));
-
+                tipoEquipamento.setStatus(Status.valueOf(resultset.getString("status")));
             }
         } catch (Exception e) {
             e.printStackTrace();

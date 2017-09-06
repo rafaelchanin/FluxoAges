@@ -36,6 +36,15 @@ public class CreateScreenTipoEquipamentoCommand implements Command {
             request.setAttribute("addTipoEquipamento", tipoUsuarios);
 
             if (isEdit != null && !"".equals(isEdit)) {
+                tipoEquipamentoBO = new TipoEquipamentoBO();
+
+                int id = Integer.parseInt(request.getParameter("id"));
+
+                TipoEquipamento tipoEquipamento = tipoEquipamentoBO.buscarTipoEquipamentoPorId(id);
+
+
+                request.setAttribute("tipoEquipamento", tipoEquipamento);
+                proxima = "equipamento/editTipoEquipamento.jsp";
 
             } else { // Adiciona um novo usuário
                 proxima = "equipamento/addTipoEquipamento.jsp";

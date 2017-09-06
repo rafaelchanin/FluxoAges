@@ -38,7 +38,7 @@ public class AddEquipamentoCommand implements Command {
             equipamento.setDescricao(descricao);
 
             TipoEquipamento tipoEquipamento = new TipoEquipamento();
-            tipoEquipamento = tipoEquipamentoBO.buscarEquipamentoPorId(tipo);
+            tipoEquipamento = tipoEquipamentoBO.buscarTipoEquipamentoPorId(tipo);
             equipamento.setTipoEquipamento(tipoEquipamento);
 
             equipamentoBO.cadastrarEquipamento(equipamento);

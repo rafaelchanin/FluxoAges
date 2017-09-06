@@ -2,17 +2,13 @@ package br.ages.crud.command;
 
 import br.ages.crud.bo.EquipamentoBO;
 import br.ages.crud.bo.TipoEquipamentoBO;
-import br.ages.crud.exception.NegocioException;
-import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.Equipamento;
 import br.ages.crud.model.Status;
 import br.ages.crud.model.TipoEquipamento;
-import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.util.MensagemContantes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 public class EditEquipamentoCommand implements Command {
 
@@ -52,7 +48,7 @@ public class EditEquipamentoCommand implements Command {
             equipamento.setStatus(status);
 
             TipoEquipamento tipoEquipamento = new TipoEquipamento();
-            tipoEquipamento = tipoEquipamentoBO.buscarEquipamentoPorId(tipo);
+            tipoEquipamento = tipoEquipamentoBO.buscarTipoEquipamentoPorId(tipo);
 
             equipamento.setTipoEquipamento(tipoEquipamento);
 
