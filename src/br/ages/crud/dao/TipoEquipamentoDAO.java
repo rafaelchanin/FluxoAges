@@ -81,7 +81,7 @@ public class TipoEquipamentoDAO {
 
             StringBuilder sql = new StringBuilder();
 
-            sql.append("UPDATE tb_equipamento SET STATUS = ?, data_movimentacao = ? where id_equipamento= ? ");
+            sql.append("UPDATE tb_tipo_equipamento SET STATUS = ?, where id_tipo_equipamento= ? ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             statement.setString(1, String.valueOf(Status.INATIVO));

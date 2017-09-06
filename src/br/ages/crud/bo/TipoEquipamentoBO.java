@@ -30,12 +30,13 @@ public class TipoEquipamentoBO {
 
     public TipoEquipamento buscarEquipamentoPorId(int id) throws NegocioException {
         tipoequipamentosDAO = new TipoEquipamentoDAO();
-        try{
+        try {
             return tipoequipamentosDAO.buscarEquipamentoPorId(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NegocioException(e);
         }
+    }
 
     public boolean removerTipoEquipamento(Integer id) throws NegocioException {
         try{
