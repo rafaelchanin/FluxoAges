@@ -137,14 +137,13 @@ public class TipoEquipamentoDAO {
 
     public boolean editarTipoEquipamento(TipoEquipamento tipoEquipamento) throws PersistenciaException {
         boolean ok = false;
-        boolean mudou = false;
         Connection conexao = null;
         try {
             conexao = ConexaoUtil.getConexao();
             StringBuilder sql = new StringBuilder();
             int id = tipoEquipamento.getId();
 
-            sql.append("UPDATE tb_equipamento SET");
+            sql.append("UPDATE tb_tipo_equipamento SET");
             sql.append(" nome = ?,");
             sql.append(" status = ?");
             sql.append(" WHERE id_tipo_equipamento = "+id+";");
@@ -153,11 +152,6 @@ public class TipoEquipamentoDAO {
 
             statement.setString(1, tipoEquipamento.getNome());
             statement.setString(2, String.valueOf(tipoEquipamento.getStatus()));
-
-            if (mudou){
-                java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                statement.setDate(6, dateSql);
-            }
 
             ok = statement.execute();
         } catch (ClassNotFoundException | SQLException e) {

@@ -99,7 +99,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("telaTipoEquipamento", new CreateScreenTipoEquipamentoCommand());
 		comandos.put("addTipoEquipamento", new AddTipoEquipamentoCommand());
 		comandos.put("removerTipoEquipamento", new RemoverTipoEquipamentoCommand());
-
+		comandos.put("editTipoEquipamento", new EditTipoEquipamentoCommand());
 	}
 
 	@Override

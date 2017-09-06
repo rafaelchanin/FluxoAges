@@ -42,7 +42,7 @@ public class TipoEquipamento {
         return "TipoEquipamento{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", status=" + status +
                 '}';
     }
-
 }

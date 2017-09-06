@@ -1,10 +1,8 @@
 package br.ages.crud.command;
 
-import br.ages.crud.bo.EquipamentoBO;
 import br.ages.crud.bo.TipoEquipamentoBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.Equipamento;
 import br.ages.crud.model.Status;
 import br.ages.crud.model.TipoEquipamento;
 import br.ages.crud.util.MensagemContantes;
@@ -14,22 +12,24 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 public class EditTipoEquipamentoCommand implements Command {
+
     private String proxima;
-
-
     private TipoEquipamentoBO tipoEquipamentoBO;
 
 
     @Override
     public String execute(HttpServletRequest request) throws SQLException, NegocioException, ParseException, PersistenciaException {
+        tipoEquipamentoBO = new TipoEquipamentoBO();
+
         int id = Integer.valueOf(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String statusRq = request.getParameter("status");
 
+        TipoEquipamento tipoEquipamento;
         try{
             Status status = Status.valueOf(statusRq);
 
-            TipoEquipamento tipoEquipamento = new TipoEquipamento();
+            tipoEquipamento = new TipoEquipamento();
 
             tipoEquipamento.setId(id);
             tipoEquipamento.setNome(nome);
