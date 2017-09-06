@@ -145,6 +145,11 @@ body{
 	background-color: #296395;
 }
 
+.modal-danger{
+	color: #FFF;
+	background-color: #b92c28;
+}
+
 .margin-top {
 	margin-top: 20px;
 }

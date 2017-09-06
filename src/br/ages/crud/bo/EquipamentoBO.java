@@ -16,6 +16,7 @@ public class EquipamentoBO {
 
     public boolean cadastrarEquipamento(Equipamento equipamento) throws SQLException, ParseException, NegocioException, PersistenciaException {
         boolean ok = false;
+        equipamentoDAO = new EquipamentoDAO();
         ok = equipamentoDAO.cadastrarEquipamento(equipamento);
         if (ok == false)
             throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_EQUIPAMENTO);
@@ -34,5 +35,37 @@ public class EquipamentoBO {
         }
 
         return equipamentos;
+    }
+
+    public Equipamento buscaEquipamentoPorId(int id) throws NegocioException {
+        try {
+            equipamentoDAO = new EquipamentoDAO();
+            Equipamento equipamento = equipamentoDAO.buscaEquipamentoPorId(id);
+
+            return equipamento;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
+
+    public boolean editaEquipamento(Equipamento equipamento) throws NegocioException {
+        try{
+            equipamentoDAO = new EquipamentoDAO();
+            return equipamentoDAO.editaEquipamento(equipamento);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
+
+    public boolean removerEquipamento(Integer id) throws NegocioException {
+        try{
+            equipamentoDAO = new EquipamentoDAO();
+            return equipamentoDAO.removerEquipamento(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
     }
 }

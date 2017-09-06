@@ -50,9 +50,9 @@
 			           		<option value="ADMINISTRADOR" <%= "ADMINISTRADOR".equals(usuario.getPerfilAcesso().toString()) ? "selected" : "" %>>Administrador</option>
 		           		</select>
 		               	<label class="form-label ages">Status: <span class="red">*</span></label>
-			           	<select class="form-control" id="statusUsuario" name="statusUsuario" required>
-			           		<option value="ATIVO" <%= "ATIVO".equals(usuario.getStatusUsuario().toString()) ? "selected" : "" %>>Ativo</option>
-                            <option value="INATIVO" <%= "INATIVO".equals(usuario.getStatusUsuario().toString()) ? "selected" : "" %>>Inativo</option>
+			           	<select class="form-control" id="status" name="status" required>
+			           		<option value="ATIVO" <%= "ATIVO".equals(usuario.getStatus().toString()) ? "selected" : "" %>>Ativo</option>
+                            <option value="INATIVO" <%= "INATIVO".equals(usuario.getStatus().toString()) ? "selected" : "" %>>Inativo</option>
 		           		</select>
 		           		<label class="form-label ages">Tipo de Usuário: <span class="red">*</span></label>
 			           	<select class="form-control" id="tipoUsuario" name="tipoUsuario" required>

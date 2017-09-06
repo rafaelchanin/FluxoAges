@@ -5,10 +5,8 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.UsuarioBO;
-import br.ages.crud.dao.UsuarioDAO;
-import br.ages.crud.exception.NegocioException;
 import br.ages.crud.model.PerfilAcesso;
-import br.ages.crud.model.StatusUsuario;
+import br.ages.crud.model.Status;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
@@ -48,7 +46,7 @@ public class EditUserCommand implements Command{
 			
 			PerfilAcesso perfilAcesso = PerfilAcesso.valueOf(perfilAcessoString);
 			
-			StatusUsuario statusUsuario = StatusUsuario.valueOf(statusUsuarioString);
+			Status status = Status.valueOf(statusUsuarioString);
 						
 			usuario = new Usuario();
 			
@@ -60,7 +58,7 @@ public class EditUserCommand implements Command{
 			
 			usuario.setTipoUsuario(tipoUsuario2);
 			usuario.setPerfilAcesso(perfilAcesso);
-			usuario.setStatusUsuario(statusUsuario);
+			usuario.setStatus(status);
 			usuario.setMatricula(matriculaString);
 			usuario.setNome(nomeString);
 			usuario.setEmail(emailString);	

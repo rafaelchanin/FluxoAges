@@ -1,10 +1,11 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="br.ages.crud.model.Equipamento" %>
-<%@ page import="br.ages.crud.model.Usuario" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
-<jsp:include page="../template/modal.jsp"></jsp:include>
+<jsp:include page="../template/modalEquipamento.jsp"></jsp:include>
 
 <div class="panel panel-primary">
 
@@ -23,7 +24,9 @@
                     <th style="text-align: center;">Nome</th>
                     <th style="text-align: center;">Código</th>
                     <th style="text-align: center;">Descrição</th>
+                    <th style="text-align: center;">Data</th>
                     <th style="text-align: center;">Tipo</th>
+                    <th style="text-align: center;">Status</th>
                     <th style="text-align: center;"></th>
                     <th style="text-align: center;"></th>
                 </tr>
@@ -33,6 +36,8 @@
                 <%
                     ArrayList<Equipamento> equipamentos = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
                     for (Equipamento equipamento : equipamentos) {
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        String dataEntradaSaida = "";
                 %>
 
                 <tr>
@@ -40,17 +45,26 @@
                     <td align="center"><%=equipamento.getNome()%></td>
                     <td align="center"><%=equipamento.getCodigo()%></td>
                     <td align="center"><%=equipamento.getDescricao()%></td>
+                    <%
+                        if(equipamento.getStatus().toString().equals("ATIVO")){
+                            dataEntradaSaida = "Entrada";
+                        } else {
+                            dataEntradaSaida = "Saída";
+                        }
+                    %>
+                    <td align="center"><%=dataEntradaSaida+": "+dateFormat.format(equipamento.getDataMovimentacao().getTime())%></td>
                     <td align="center"><%=equipamento.getTipoEquipamento().getNome()%></td>
+                    <td align="center"><%=equipamento.getStatus().toString()%></td>
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-usuario="<%=equipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-nome="<%=equipamento.getNome()%>"
                                data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
                         </form>
                     </td>
 
                     <td align="center">
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-usuario="<%=equipamento.getNome()%>"
+                            <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-nome="<%=equipamento.getNome()%>"
                                data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
                         </form>
                     </td>

@@ -6,13 +6,13 @@ import static org.junit.Assert.assertEquals;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import br.ages.crud.model.Status;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.ages.crud.dao.UsuarioDAO;
 import br.ages.crud.exception.PersistenciaException;
 import br.ages.crud.model.PerfilAcesso;
-import br.ages.crud.model.StatusUsuario;
 import br.ages.crud.model.TipoUsuario;
 import br.ages.crud.model.Usuario;
 
@@ -28,12 +28,12 @@ public class TesteUsuarioDAO {
 	public void init() {
 		TipoUsuario tipo = new TipoUsuario();
 		tipo.setIdTipoUsuario(1);
-		usuario = new Usuario("admin", "admin", "123456789", "Nome Teste", "lelew@lelew.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
-		usuarioErrado = new Usuario("errado", "senhaErrada", "bibibi", "nome de árvore", "lelewEMAIL.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
-		usuarioCadastro = new Usuario("cadastro", "admin", "123456789", "Nome Teste", "lelew@lelew.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
-		usuarioRemove = new Usuario("remove", "admin", "123456789", "Nome Teste", "lelew@lelew.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
-		usuarioDeleta = new Usuario("deleta", "admin", "123456789", "Nome Teste", "lelew@lelew.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
-		usuarioBusca =  new Usuario("busca", "admin", "123456789", "Nome Teste", "lelew@lelew.com", StatusUsuario.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuario = new Usuario("admin", "admin", "123456789", "Nome Teste", "lelew@lelew.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuarioErrado = new Usuario("errado", "senhaErrada", "bibibi", "nome de árvore", "lelewEMAIL.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuarioCadastro = new Usuario("cadastro", "admin", "123456789", "Nome Teste", "lelew@lelew.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuarioRemove = new Usuario("remove", "admin", "123456789", "Nome Teste", "lelew@lelew.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuarioDeleta = new Usuario("deleta", "admin", "123456789", "Nome Teste", "lelew@lelew.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
+		usuarioBusca =  new Usuario("busca", "admin", "123456789", "Nome Teste", "lelew@lelew.com", Status.ATIVO, tipo, PerfilAcesso.ADMINISTRADOR);
 		dao = new UsuarioDAO();
 	}
 

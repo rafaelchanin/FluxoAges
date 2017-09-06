@@ -24,4 +24,14 @@ public class TipoEquipamentoBO {
 
         return equipamentos;
     }
+
+    public TipoEquipamento buscarEquipamentoPorId(int id) throws NegocioException {
+        tipoequipamentosDAO = new TipoEquipamentoDAO();
+        try{
+            return tipoequipamentosDAO.buscarEquipamentoPorId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+    }
 }

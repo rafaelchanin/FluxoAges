@@ -1,11 +1,15 @@
 package br.ages.crud.model;
 
+import java.util.Date;
+
 public class Equipamento {
 
     private int id;
     private String nome;
     private String descricao;
-    private int codigo;
+    private String codigo;
+    private Date dataMovimentacao;
+    private Status status;
     private TipoEquipamento tipoEquipamento;
 
     public Equipamento() {
@@ -35,12 +39,28 @@ public class Equipamento {
         this.descricao = descricao;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public Date getDataMovimentacao() {
+        return dataMovimentacao;
+    }
+
+    public void setDataMovimentacao(Date dataMovimentacao) {
+        this.dataMovimentacao = dataMovimentacao;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public TipoEquipamento getTipoEquipamento() {
@@ -57,7 +77,10 @@ public class Equipamento {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", codigo=" + codigo +
+                ", codigo='" + codigo + '\'' +
+                ", dataMovimentacao=" + dataMovimentacao +
+                ", status=" + status +
+                ", tipoEquipamento=" + tipoEquipamento +
                 '}';
     }
 }
