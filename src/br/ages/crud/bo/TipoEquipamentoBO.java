@@ -3,12 +3,9 @@ package br.ages.crud.bo;
 import br.ages.crud.dao.TipoEquipamentoDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.Equipamento;
 import br.ages.crud.model.TipoEquipamento;
-import br.ages.crud.util.MensagemContantes;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TipoEquipamentoBO {
@@ -28,10 +25,10 @@ public class TipoEquipamentoBO {
         return equipamentos;
     }
 
-    public TipoEquipamento buscarEquipamentoPorId(int id) throws NegocioException {
+    public TipoEquipamento buscarTipoEquipamentoPorId(int id) throws NegocioException {
         tipoequipamentosDAO = new TipoEquipamentoDAO();
         try{
-            return tipoequipamentosDAO.buscarEquipamentoPorId(id);
+            return tipoequipamentosDAO.buscarTipoEquipamentoPorId(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NegocioException(e);
