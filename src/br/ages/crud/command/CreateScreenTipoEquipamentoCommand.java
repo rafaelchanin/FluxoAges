@@ -26,7 +26,7 @@ public class CreateScreenTipoEquipamentoCommand implements Command {
         try {
             if (!currentUser.getPerfilAcesso().equals(PerfilAcesso.ADMINISTRADOR))
                 throw new NegocioException(MensagemContantes.MSG_INF_DENY);
-            // Verifica se abre tela edição de pessoa ou de adição de pessoa.
+            // Verifica se abre tela edi??o de pessoa ou de adi??o de pessoa.
 
             String isEdit = request.getParameter("isEdit");
 
@@ -37,7 +37,7 @@ public class CreateScreenTipoEquipamentoCommand implements Command {
 
             if (isEdit != null && !"".equals(isEdit)) {
 
-            } else { // Adiciona um novo usuário
+            } else { // Adiciona um novo usu?rio
                 proxima = "equipamento/addTipoEquipamento.jsp";
             }
 

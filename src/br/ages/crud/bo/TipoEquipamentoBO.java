@@ -36,6 +36,7 @@ public class TipoEquipamentoBO {
             e.printStackTrace();
             throw new NegocioException(e);
         }
+    }
 
     public boolean removerTipoEquipamento(Integer id) throws NegocioException {
         try{
@@ -52,4 +53,12 @@ public class TipoEquipamentoBO {
         tipoequipamentosDAO = new TipoEquipamentoDAO();
         return tipoequipamentosDAO.cadastrarTipoEquipamento(tipoEquipamento);
     }
+
+    public boolean editarTipoEquipamento(TipoEquipamento tipoEquipamento) {
+        boolean ok = false;
+        tipoequipamentosDAO = new TipoEquipamentoDAO();
+        return tipoequipamentosDAO.editarTipoEquipamento(tipoEquipamento);
+    }
+
 }
+
