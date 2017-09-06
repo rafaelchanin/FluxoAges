@@ -23,6 +23,7 @@ public class AddTipoEquipamentoCommand implements Command {
         try{
             TipoEquipamento tipoEquipamento = new TipoEquipamento();
             tipoEquipamento.setNome(nome);
+            tipoEquipamentoBO.cadastrarTipoEquipamento(tipoEquipamento);
             proxima = "main?acao=listaTiposEquipamentos";
 
             request.setAttribute("msgSucesso", MensagemContantes.MSG_SUC_CADASTRO_EQUIPAMENTO.replace("?", tipoEquipamento.getNome()));
