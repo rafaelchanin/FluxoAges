@@ -51,7 +51,7 @@ public class TipoEquipamentoBO {
         return tipoequipamentosDAO.cadastrarTipoEquipamento(tipoEquipamento);
     }
 
-    public boolean editarTipoEquipamento(TipoEquipamento tipoEquipamento) {
+    public boolean editarTipoEquipamento(TipoEquipamento tipoEquipamento) throws PersistenciaException {
         boolean ok = false;
         tipoequipamentosDAO = new TipoEquipamentoDAO();
         return tipoequipamentosDAO.editarTipoEquipamento(tipoEquipamento);
