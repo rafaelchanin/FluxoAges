@@ -34,8 +34,8 @@
 
                 <tbody>
                 <%
-                    ArrayList<Equipamento> equipamento = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
-                    for (Equipamento equipamento : equipamento) {
+                    ArrayList<Equipamento> equipamentos = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
+                    for (Equipamento equipamento : equipamentos) {
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         String dataEntradaSaida = "";
                 %>
@@ -63,10 +63,16 @@
                     </td>
 
                     <td align="center">
+                        <%
+                            if(equipamento.getStatus().toString().equals("ATIVO")){
+                        %>
                         <form action="" method="post">
                             <a href="" data-toggle="modal" data-id="<%=equipamento.getId() %>" data-nome="<%=equipamento.getNome()%>"
                                data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
                         </form>
+                        <%
+                            }
+                        %>
                     </td>
                 </tr>
                 <%
@@ -83,6 +89,11 @@
 
     $(document).ready(function(){
         $('#listaAlunos').dataTable({
+            "order" : [],
+            "columnDefs" : [ {
+                "targets" : 'no-sort',
+                "orderable" : false,
+            } ],
             "language": {
                 "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",

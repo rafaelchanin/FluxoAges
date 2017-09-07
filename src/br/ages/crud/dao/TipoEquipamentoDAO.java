@@ -22,7 +22,8 @@ public class TipoEquipamentoDAO {
             sql.append("id_tipo_equipamento, ");
             sql.append("nome, ");
             sql.append("status ");
-            sql.append("FROM tb_tipo_equipamento");
+            sql.append("FROM tb_tipo_equipamento ");
+            sql.append("ORDER BY status, id_tipo_equipamento ASC");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             ResultSet resultset = statement.executeQuery();

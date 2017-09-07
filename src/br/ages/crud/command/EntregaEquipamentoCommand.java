@@ -3,7 +3,6 @@ package br.ages.crud.command;
 import br.ages.crud.bo.EquipamentoAlunoBO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.EquipamentoAluno;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;

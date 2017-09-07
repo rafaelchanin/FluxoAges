@@ -70,7 +70,8 @@ public class EquipamentoDAO {
             sql.append("t.nome ");
             sql.append("FROM tb_equipamento e ");
             sql.append("INNER JOIN tb_tipo_equipamento t ");
-            sql.append("ON t.ID_TIPO_EQUIPAMENTO = e.ID_TIPO_EQUIPAMENTO");
+            sql.append("ON t.ID_TIPO_EQUIPAMENTO = e.ID_TIPO_EQUIPAMENTO ");
+            sql.append("ORDER BY e.status, e.id_equipamento ASC");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             ResultSet resultSet = statement.executeQuery();

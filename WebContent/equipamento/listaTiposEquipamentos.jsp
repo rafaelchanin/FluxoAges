@@ -46,10 +46,16 @@
                     </td>
 
                     <td align="center">
+                        <%
+                            if(tipoequipamento.getStatus().toString().equals("ATIVO")){
+                        %>
                         <form action="" method="post">
                             <a href="" data-toggle="modal" data-id="<%=tipoequipamento.getId() %>" data-nome="<%=tipoequipamento.getNome()%>"
                                data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
                         </form>
+                        <%
+                            }
+                        %>
                     </td>
                 </tr>
                 <%
@@ -66,6 +72,11 @@
 
     $(document).ready(function(){
         $('#listaAlunos').dataTable({
+            "order" : [],
+            "columnDefs" : [ {
+                "targets" : 'no-sort',
+                "orderable" : false,
+            } ],
             "language": {
                 "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",
