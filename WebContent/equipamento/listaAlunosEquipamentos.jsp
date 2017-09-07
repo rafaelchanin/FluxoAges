@@ -66,6 +66,13 @@
                 </tbody>
 
             </table>
+            <form action="downloadRelatorioEmprestimo"
+                    method="get" id="formDownload">
+                <a class="btn btn-warning" href="#" title="Exportar Excel"
+                   onclick="document.getElementById('formDownload').submit();">
+                    Exportar Excel
+                </a>
+            </form>
         </div>
     </div>
 </div>
