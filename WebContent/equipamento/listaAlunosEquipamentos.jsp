@@ -74,6 +74,11 @@
 
     $(document).ready(function(){
         $('#listaAlunos').dataTable({
+            "order" : [],
+            "columnDefs" : [ {
+                "targets" : 'no-sort',
+                "orderable" : false,
+            } ],
             "language": {
                 "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",

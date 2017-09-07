@@ -32,7 +32,8 @@ public class EquipamentoAlunoDAO {
             sql.append("INNER JOIN tb_equipamento_aluno ea ");
             sql.append("ON e.ID_EQUIPAMENTO = ea.ID_EQUIPAMENTO ");
             sql.append("INNER JOIN tb_usuario u ");
-            sql.append("ON ea.ID_USUARIO = u.ID_USUARIO;");
+            sql.append("ON ea.ID_USUARIO = u.ID_USUARIO ");
+            sql.append("ORDER BY ea.ID_EQUIP_ALUNO DESC;");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             ResultSet resultSet = statement.executeQuery();
