@@ -45,6 +45,40 @@ public class TipoEquipamentoDAO {
         return tipoequipamentos;
     }
 
+    public ArrayList<TipoEquipamento> listarTipoEquipamentosAtivos() throws PersistenciaException, SQLException {
+        Connection conexao = null;
+        try {
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("SELECT ");
+            sql.append("id_tipo_equipamento, ");
+            sql.append("nome, ");
+            sql.append("status ");
+            sql.append("FROM tb_tipo_equipamento ");
+            sql.append("WHERE status = 'ATIVO';");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            ResultSet resultset = statement.executeQuery();
+
+            tipoequipamentos = new ArrayList<>();
+            while (resultset.next()) {
+                TipoEquipamento dto = new TipoEquipamento();
+                dto.setId(resultset.getInt("id_tipo_equipamento"));
+                dto.setNome(resultset.getString("nome"));
+                dto.setStatus(Status.valueOf(resultset.getString("status")));
+
+                tipoequipamentos.add(dto);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenciaException(e);
+        } finally {
+            conexao.close();
+        }
+        return tipoequipamentos;
+    }
+
     public TipoEquipamento buscarTipoEquipamentoPorId(int id) {
         Connection conexao = null;
         TipoEquipamento tipoEquipamento = null;

@@ -100,6 +100,9 @@ public class MainServlet extends HttpServlet {
 		comandos.put("addTipoEquipamento", new AddTipoEquipamentoCommand());
 		comandos.put("removerTipoEquipamento", new RemoverTipoEquipamentoCommand());
 		comandos.put("editTipoEquipamento", new EditTipoEquipamentoCommand());
+		//LISTAR ALUNOS + NOTEBOOKS
+		comandos.put("listAlunosEquipamentos", new ListAlunosEquipamentosCommand());
+		comandos.put("entregaEquipamento", new EntregaEquipamentoCommand());
 	}
 
 	@Override
@@ -113,7 +116,6 @@ public class MainServlet extends HttpServlet {
 			proxima = comando.execute(request);
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSessao");
 			if(usuario != null)
-				logger.debug("TESTE");
 				logger.debug("User: " +usuario.getUsuario() + " - comando " + comando.toString() + " acao: " +acao );
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());

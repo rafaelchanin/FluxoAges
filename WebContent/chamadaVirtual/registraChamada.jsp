@@ -28,11 +28,11 @@
 						for (Turma turma : turmasAtivas) {
 							if (request.getAttribute("nomeTurma").equals(turma.toString())) {
 						%>	
-					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-alunos="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>" selected><%=turma.toString()%></option>
+					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-aluno="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>" selected><%=turma.toString()%></option>
 						<%
 							} else {
 					%>
-					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-alunos="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>"><%=turma.toString()%></option>
+					<option data-aulasMarcadas="<%=turma.getPresencas()%>" data-aulas="<%=turma.getAulasString()%>" data-aluno="<%=turma.getAlunosString()%>" value="<%=turma.toString()+"|"+turma.getId()%>"><%=turma.toString()%></option>
 					
 					<%
 							}
@@ -139,10 +139,10 @@
 		var mes = document.getElementById("mes").value;
 		var aulasString = $('#turma option:selected').attr("data-aulas");
 		var presen = $('#turma option:selected').attr("data-aulasMarcadas");
-		var alunosString = $('#turma option:selected').attr("data-alunos");
+		var alunosString = $('#turma option:selected').attr("data-aluno");
 		var aulasMes = [];
 		if (alunosString != "") {
-			var alunos = alunosString.split(",");
+			var aluno = alunosString.split(",");
 		$('#chamada').empty()
 		var titulo = "";
 		titulo += '<tr id="titulo"><th style="text-align: center;">' + 'Nome do Aluno' + '</th>';
@@ -164,9 +164,9 @@
 		var linha = "";
 		if (presen != null) {
 			var ArrayAlunoAulas = presen.split(";"); //aluno: aulas
-			for (i=0;i<alunos.length;i++) {
+			for (i=0;i<aluno.length;i++) {
 				linha += '<tr class="coluna-sh">';
-				var ArrayIdAluno = alunos[i].split(":");
+				var ArrayIdAluno = aluno[i].split(":");
 				linha += '<td align="center">' + ArrayIdAluno[1] + '</td>';
 				for (j=0; j<aulasMes.length; j++) {
 					var z=0;
@@ -193,7 +193,7 @@
 		$('#chamada').append(linha);
 	} else {
 		$('#chamada').empty();
-		$('#chamada').append("Essa turma não possui alunos cadastrados!")
+		$('#chamada').append("Essa turma não possui aluno cadastrados!")
 	}
 		
 	}

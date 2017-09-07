@@ -28,7 +28,7 @@ CREATE TABLE `tb_skills_definicao` (
   PRIMARY KEY (`ID_SKILLS_DEFINICAO`)
 );
 
--- table tb_skills para armazenar as avaliações dos alunos
+-- table tb_skills para armazenar as avaliações dos aluno
 CREATE TABLE TB_SKILLS (
   `ID_SKILLS` int(11) NOT NULL AUTO_INCREMENT,
   `ID_DEFINICAO` varchar(45) DEFAULT NULL,

@@ -143,6 +143,8 @@
 								<hr>
 								<li><a href="main?acao=listaTiposEquipamentos">Listar Tipos</a></li>
 								<li><a href="main?acao=telaTipoEquipamento">Cadastrar Tipos</a></li>
+								<hr>
+								<li><a href="main?acao=listAlunosEquipamentos">Lista de Equipamentos e Alunos</a></li>
 							</ul>
 						</li>
 

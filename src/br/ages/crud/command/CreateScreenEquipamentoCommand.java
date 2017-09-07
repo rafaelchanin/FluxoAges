@@ -32,7 +32,7 @@ public class CreateScreenEquipamentoCommand implements Command {
             String isEdit = request.getParameter("isEdit");
 
             tipoEquipamentoBO = new TipoEquipamentoBO();
-            ArrayList<TipoEquipamento> tipoEquipamentos = tipoEquipamentoBO.listarTipoEquipamentos();
+            ArrayList<TipoEquipamento> tipoEquipamentos = tipoEquipamentoBO.listarTipoEquipamentosAtivos();
             request.setAttribute("tipos", tipoEquipamentos);
 
             if (isEdit != null && !"".equals(isEdit)) {

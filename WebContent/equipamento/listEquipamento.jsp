@@ -34,8 +34,8 @@
 
                 <tbody>
                 <%
-                    ArrayList<Equipamento> equipamentos = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
-                    for (Equipamento equipamento : equipamentos) {
+                    ArrayList<Equipamento> equipamento = (ArrayList<Equipamento>) request.getAttribute("listaEquipamentos");
+                    for (Equipamento equipamento : equipamento) {
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         String dataEntradaSaida = "";
                 %>

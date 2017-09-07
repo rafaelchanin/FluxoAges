@@ -47,7 +47,7 @@ public class CreateScreenTurmaCommand implements Command {
 				int idTurma = Integer.parseInt(request.getParameter("id_turma"));
 				Turma turma = turmaBO.buscarTurma(idTurma);
 				
-				//List<Usuario> alunosTurma = turma.getAlunos();
+				//List<Usuario> alunosTurma = turma.getAluno();
 				/*List<Usuario> usuarios = usuarioBO.listarUsuario();
 
 				

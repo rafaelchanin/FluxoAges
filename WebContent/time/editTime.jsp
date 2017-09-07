@@ -126,11 +126,11 @@
 				<!-- http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
 				<div class="row">
 					<div class="col-md-12">
-						<select multiple="multiple" size="10" name="alunos" class="alunos">
+						<select multiple="multiple" size="10" name="aluno" class="aluno">
 							<%
-								List<IdNomeUsuarioDTO> alunos = (List<IdNomeUsuarioDTO>) request.getAttribute("alunos");
+								List<IdNomeUsuarioDTO> aluno = (List<IdNomeUsuarioDTO>) request.getAttribute("aluno");
 								List<IdNomeUsuarioDTO> alunosProjeto = (List<IdNomeUsuarioDTO>) request.getAttribute("alunosProjeto");
-								for (IdNomeUsuarioDTO usuario : alunos) {
+								for (IdNomeUsuarioDTO usuario : aluno) {
 							%>
 							<option value="<%=usuario.getId()%> <%=usuario.getMatricula()%>"><%=usuario.getNome()%></option>
 							<%
@@ -189,14 +189,14 @@
 </script>
 
 <script>
-	var demo2 = $('.alunos').bootstrapDualListbox({
+	var demo2 = $('.aluno').bootstrapDualListbox({
 		nonSelectedListLabel : 'Alunos',
 		selectedListLabel : 'Alunos do Time',
 		preserveSelectionOnMove : 'moved',
 		moveOnSelect : false,
 		nonSelectedFilter : '',
 		filterTextClear : 'Mostrar Todos',
-		infoTextEmpty : 'Sem alunos '
+		infoTextEmpty : 'Sem aluno '
 	});
 </script>
 

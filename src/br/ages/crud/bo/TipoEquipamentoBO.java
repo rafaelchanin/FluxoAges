@@ -25,6 +25,20 @@ public class TipoEquipamentoBO {
         return equipamentos;
     }
 
+    public ArrayList<TipoEquipamento> listarTipoEquipamentosAtivos() throws NegocioException {
+
+        ArrayList<TipoEquipamento> equipamentos = new ArrayList<>();
+        tipoequipamentosDAO = new TipoEquipamentoDAO();
+        try {
+            equipamentos = tipoequipamentosDAO.listarTipoEquipamentosAtivos();
+        } catch (PersistenciaException | SQLException e) {
+            e.printStackTrace();
+            throw new NegocioException(e);
+        }
+
+        return equipamentos;
+    }
+
     public TipoEquipamento buscarTipoEquipamentoPorId(int id) throws NegocioException {
         tipoequipamentosDAO = new TipoEquipamentoDAO();
         try{

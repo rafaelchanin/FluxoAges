@@ -25,4 +25,7 @@ CREATE TABLE tb_equipamento_aluno(
   CONSTRAINT fk_id_equipamento FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES tb_equipamento (ID_EQUIPAMENTO) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT fk_id_usuario FOREIGN KEY (ID_USUARIO) REFERENCES tb_usuario (ID_USUARIO) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-alter table tb_tipo_equipamento add status VARCHAR(15) NOT NULL
+
+alter table tb_tipo_equipamento add status VARCHAR(15) NOT NULL;
+ALTER TABLE tb_equipamento_aluno ADD DATA_RETIRADA DATETIME NULL;
+ALTER TABLE tb_equipamento_aluno ADD DATA_ENTREGA DATETIME NULL;

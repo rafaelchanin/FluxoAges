@@ -77,7 +77,7 @@ public class EditaTurmaCommand implements Command{
 								if (ver==false)
 									usuariosAdicionar.add(usuario);
 							}
-							//turma.setAlunos(alunosTela);
+							//turma.setAluno(alunosTela);
 						}
 						
 						

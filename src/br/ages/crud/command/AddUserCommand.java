@@ -26,7 +26,7 @@ public class AddUserCommand implements Command {
 		String matricula = request.getParameter("matricula");
 		String usuario = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
-		String statusUsuario = request.getParameter("statusUsuario"); 
+		String statusUsuario = request.getParameter("status");
 		String perfilAcesso = request.getParameter("perfilAcesso");
 		String tipoUsuario = request.getParameter("tipoUsuario");
 		String usuarioGitLab = request.getParameter("usuarioGitLab");
