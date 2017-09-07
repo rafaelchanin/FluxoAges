@@ -1,16 +1,18 @@
 package br.ages.crud.dao;
 
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.*;
+import br.ages.crud.model.Equipamento;
+import br.ages.crud.model.EquipamentoAluno;
+import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class EquipamentoAlunoDAO {
 
@@ -63,5 +65,33 @@ public class EquipamentoAlunoDAO {
             conexao.close();
         }
         return equipamentoAlunos;
+    }
+
+    public boolean entregarEquipamento(int id) throws PersistenciaException {
+        boolean ok = false;
+        Connection conexao = null;
+
+        try {
+            conexao = ConexaoUtil.getConexao();
+            StringBuilder sql = new StringBuilder();
+
+            sql.append("UPDATE tb_equipamento_aluno SET");
+            sql.append(" data_entrega = NOW()");
+            sql.append(" WHERE id_equip_aluno = "+id+";");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+
+            ok = statement.execute();
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new PersistenciaException(e);
+        } finally {
+            try {
+                conexao.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return ok;
     }
 }

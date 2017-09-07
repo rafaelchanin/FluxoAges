@@ -30,7 +30,6 @@ public class EditEquipamentoCommand implements Command {
         String nome = request.getParameter("nome");
         String codigo = request.getParameter("codigo");
         String descricao = request.getParameter("descricao");
-        String data = request.getParameter("data");
         Integer tipo = Integer.valueOf(request.getParameter("tipo"));
         String statusRq = request.getParameter("status");
 
@@ -44,7 +43,6 @@ public class EditEquipamentoCommand implements Command {
             equipamento.setNome(nome);
             equipamento.setCodigo(codigo);
             equipamento.setDescricao(descricao);
-//            equipamento.setDataMovimentacao(data); Calma
             equipamento.setStatus(status);
 
             TipoEquipamento tipoEquipamento = new TipoEquipamento();
