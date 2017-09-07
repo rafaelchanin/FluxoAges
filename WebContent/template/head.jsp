@@ -144,7 +144,7 @@
 								<li><a href="main?acao=listaTiposEquipamentos">Listar Tipos</a></li>
 								<li><a href="main?acao=telaTipoEquipamento">Cadastrar Tipos</a></li>
 								<hr>
-								<li><a href="main?acao=listAlunosEquipamentos">Lista de Equipamentos e Alunos</a></li>
+								<li><a href="main?acao=listAlunosEquipamentos">Relatório de equipamentos emprestados</a></li>
 							</ul>
 						</li>
 

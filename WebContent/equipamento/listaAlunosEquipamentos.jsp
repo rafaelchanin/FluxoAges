@@ -1,8 +1,7 @@
-<%@ page import="br.ages.crud.model.Equipamento" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="br.ages.crud.model.EquipamentoAluno" %>
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="br.ages.crud.model.EquipamentoAluno" %>
+<%@ page import="java.util.ArrayList" %>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
@@ -15,9 +14,10 @@
     <div class="panel-body">
 
         <jsp:include page="/template/msg.jsp"></jsp:include>
+
         <div class="table-responsive">
 
-            <table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed table-bordered">
+            <table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed table-bordered table2excel">
 
                 <thead>
                 <tr>
