@@ -33,6 +33,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("login", new LoginCommand());
 		comandos.put("logout", new LogoutCommand());
 		comandos.put("recuperarSenha", new SenhaCommand());
+		comandos.put("horasProfessor", new RelatorioHorasProfessoresCommand());
 		
 		//COMANDOS DE USUARIO
 		

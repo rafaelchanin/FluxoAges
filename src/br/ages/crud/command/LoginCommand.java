@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.ages.crud.bo.UsuarioBO;
 import br.ages.crud.exception.NegocioException;
+import br.ages.crud.model.PerfilAcesso;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.Util;
 
@@ -37,10 +38,17 @@ public class LoginCommand implements Command {
 		usuarioDTO = new Usuario(usuario, senha);
 
 		try {
-			if (getUsuario() != null) {
-				request.getSession().setAttribute("usuarioSessao", getUsuario());
-				request.getSession().setAttribute("versao", util.getVersion());
-				proxima = "main?acao=listaProjetos";
+			Usuario user = getUsuario();
+			if (user != null) {
+				if(user.getPerfilAcesso() == PerfilAcesso.ADMINISTRADOR) {
+					request.getSession().setAttribute("usuarioSessao", getUsuario());
+					request.getSession().setAttribute("versao", util.getVersion());
+					proxima = "main?acao=listaProjetos";
+				}else if(user.getPerfilAcesso() == PerfilAcesso.NAVEGADOR){
+					request.getSession().setAttribute("usuarioSessao", getUsuario());
+					request.getSession().setAttribute("versao", util.getVersion());
+					proxima = "main?acao=horasProfessor";
+				}
 			
 			}
 		} catch (NegocioException e) {
