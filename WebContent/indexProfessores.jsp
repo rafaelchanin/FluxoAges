@@ -40,6 +40,7 @@
             </div>
         </form>
         <div class="table-responsive">
+            <p><%= listaTimes.get(0).getOrientador()%></p>
             <%for (TimePontoDTO time : listaTimes) {	 %>
             <table id="listaalunos<%=time.getId()%>" class="listaalunos<%=time.getId()%> table table-responsive table-striped table-hover table-condensed"
                    style="display: none;">
