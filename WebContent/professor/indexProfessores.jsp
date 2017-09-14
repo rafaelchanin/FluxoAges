@@ -40,14 +40,13 @@
             </div>
         </form>
         <div class="table-responsive">
-            <p><%= listaTimes.get(0).getPrimeiraAula()%></p>
             <%for (TimePontoDTO time : listaTimes) {	 %>
             <table id="listaalunos<%=time.getId()%>" class="listaalunos<%=time.getId()%> table table-responsive table-striped table-hover table-condensed"
                    style="display: none;">
                 <thead>
                 <tr>
                     <th style="text-align: center;">Nome</th>
-                    <th style="text-align: center;">Realizadas até o momento</th>
+                    <th style="text-align: center;">Realizadas ate o momento</th>
                     <th style="text-align: center;">Faltam para hoje</th>
                     <th style="text-align: center;">Faltam para o semestre</th>
                 </tr>
