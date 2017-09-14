@@ -33,7 +33,7 @@
                         <option value="<%=time.toString()%>" id="<%=time.getId()%>"><%=time.toString()%></option>
 
                         <%
-                            }
+                            };
                         %>
                     </select>
                 </div>
@@ -133,8 +133,8 @@
                     <!-- DatePicker me obrigo a fazer essa gambiarra por que não aceita o cosplan :/ -->
                 </tr>
                 <%
-                        }
-                    }
+                        };
+                    };
                 %>
                 </tbody>
 
