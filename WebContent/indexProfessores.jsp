@@ -42,7 +42,6 @@
         <div class="table-responsive">
             <p><%= listaTimes.get(0).getPrimeiraAula()%></p>
             <%for (TimePontoDTO time : listaTimes) {	 %>
-            <p><%=time.getPrimeiraAula() %></p>
             <table id="listaalunos<%=time.getId()%>" class="listaalunos<%=time.getId()%> table table-responsive table-striped table-hover table-condensed"
                    style="display: none;">
                 <thead>
