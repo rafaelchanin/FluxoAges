@@ -35,7 +35,7 @@ public class RelatorioHorasProfessoresCommand implements Command {
         turmaBO = new TurmaBO();
         horasEsperadas = new HashMap<>();
 
-        proxima = "indexProfessores.jsp";
+        proxima = "professor/indexProfessores.jsp";
         //proxima = "aulasSemestre/registraAulasSemestre.jsp";
 
         String dataEntrada, dataSaida;
