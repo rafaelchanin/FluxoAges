@@ -6,6 +6,7 @@ public class Equipamento {
 
     private int id;
     private String nome;
+    private int numero;
     private String descricao;
     private String codigo;
     private Date dataMovimentacao;
@@ -29,6 +30,14 @@ public class Equipamento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public String getDescricao() {
@@ -76,6 +85,7 @@ public class Equipamento {
         return "Equipamento{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", numero='" + numero + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", codigo='" + codigo + '\'' +
                 ", dataMovimentacao=" + dataMovimentacao +
