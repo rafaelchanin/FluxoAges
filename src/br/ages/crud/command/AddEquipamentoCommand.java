@@ -25,6 +25,7 @@ public class AddEquipamentoCommand implements Command {
         proxima = "main?acao=telaEquipamento";
 
         String nome = request.getParameter("nome");
+        int numero = Integer.parseInt(request.getParameter("numero"));
         String codigo = request.getParameter("codigo");
         String descricao = request.getParameter("descricao");
 
@@ -34,6 +35,7 @@ public class AddEquipamentoCommand implements Command {
         try{
             Equipamento equipamento = new Equipamento();
             equipamento.setNome(nome);
+            equipamento.setNumero(numero);
             equipamento.setCodigo(codigo);
             equipamento.setDescricao(descricao);
 

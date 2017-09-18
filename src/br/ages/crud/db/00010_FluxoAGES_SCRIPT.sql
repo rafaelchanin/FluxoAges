@@ -1,0 +1,1 @@
+ALTER TABLE tb_equipamento ADD NUMERO INT NOT NULL;
