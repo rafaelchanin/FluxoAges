@@ -157,7 +157,7 @@ public class TimeDAO {
 			conexao = ConexaoUtil.getConexao();
 
 			StringBuilder sql = new StringBuilder();
-			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao");
+			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia");
 			sql.append(" from tb_time ");
 			sql.append(" where  id_time = ? ");
 
@@ -172,6 +172,7 @@ public class TimeDAO {
 				time.setDtInclusao(resultSet.getDate("dt_inclusao"));
 				time.setOrientador(resultSet.getInt("id_orientador"));
 				time.setProjeto(resultSet.getInt("id_projeto"));
+				time.setPrimeiroDia(resultSet.getDate("primeiro_dia"));
 				time.setAlunos(buscarAlunosTime(conexao, resultSet.getInt("id_time")));
 			}
 			return time;

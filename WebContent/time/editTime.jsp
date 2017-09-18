@@ -31,7 +31,7 @@
 
 	<div class="panel-body">
 
-		<jsp:include page="/template/msg.jsp"></jsp:include>
+		<jsp:include page="../template/msg.jsp"></jsp:include>
 
 
 
@@ -119,6 +119,18 @@
 							<option value="EXCLUIDA"
 								<%="EXCLUIDA".equals(request.getParameter("statusTime")) ? "selected" : ""%>>Excluída</option>
 						</select>
+					</div>
+
+					<div class="col-sm-6">
+						<label class="form-label ages">Primeiro Dia de Aula: <span
+								class="red">*</span></label>
+						<div class='input-group date' id='primeiroDia'>
+							<input type='text' class="form-control" id="dataPrimeiroDia" name="dataPrimeiroDia"
+								   value="<%=time.getPrimeiroDia()%>" required /> <span
+								class="input-group-addon"> <span
+								class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
 					</div>
 				</div>
 
