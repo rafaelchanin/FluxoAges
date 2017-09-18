@@ -121,11 +121,11 @@ public class MainServlet extends HttpServlet {
 		} catch (NegocioException | SQLException | ParseException | PersistenciaException e) {
 			request.setAttribute("msgErro", e.getMessage());
 		}
-	
+
 		LogParametrosSession.logParametros(request);
-		
+
 		request.getRequestDispatcher(proxima).forward(request, reponse);
-		
+
 	}
 
 	private Command verificarComando(String acao) {
