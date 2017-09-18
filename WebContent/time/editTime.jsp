@@ -212,6 +212,24 @@
 	});
 </script>
 
+<script type="text/javascript">
+$(function() {
+$('#dataPrimeiroDia').datetimepicker({
+locale : 'pt-br',
+sideBySide : true,
+format : "DD/MM/YYYY"
+
+
+});
+
+//	$("#dataEntrada").on("dp.change", function(e) {
+//		$('#dataSaida').data("DateTimePicker").minDate(e.date);
+//		/* alert(document.getElementById('dataSaida').value); */
+//	});
+
+});
+</script>
+
 
 <script>
 	//Põe cor laranja nos titulos
