@@ -22,6 +22,7 @@
                 <tr>
                     <th style="text-align: center;">ID</th>
                     <th style="text-align: center;">Nome</th>
+                    <th style="text-align: center;">Número</th>
                     <th style="text-align: center;">Código</th>
                     <th style="text-align: center;">Descrição</th>
                     <th style="text-align: center;">Data</th>
@@ -43,6 +44,7 @@
                 <tr>
                     <td align="center"><%=equipamento.getId()%></td>
                     <td align="center"><%=equipamento.getNome()%></td>
+                    <td align="center"><%=equipamento.getNumero()%></td>
                     <td align="center"><%=equipamento.getCodigo()%></td>
                     <td align="center"><%=equipamento.getDescricao()%></td>
                     <%

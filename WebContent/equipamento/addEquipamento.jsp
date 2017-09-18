@@ -17,9 +17,15 @@
         <form method="post" action="main?acao=addEquipamento">
 
             <div class="form-group">
-                <label class="form-label ages">Nome: <span class="red">*</span></label>
-                <input class="form-control" id="nome" name="nome" value="${param.nome}" type="text" maxlength="120" required>
                 <div class="row">
+                    <div class="col-sm-6">
+                        <label class="form-label ages">Nome: <span class="red">*</span></label>
+                        <input class="form-control" id="nome" name="nome" value="${param.nome}" type="text" maxlength="120" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label ages">Numero: <span class="red">*</span></label>
+                        <input class="form-control" id="numero" name="numero" value="${param.numero}" type="text" maxlength="120" required>
+                    </div>
                     <div class="col-sm-6">
                         <label class="form-label ages">Código: <span class="red">*</span></label>
                         <input class="form-control" id="codigo" name="codigo" value="${param.codigo}" type="text" maxlength="120" required>

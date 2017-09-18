@@ -27,8 +27,8 @@ public class EquipamentoDAO {
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("INSERT INTO tb_equipamento (nome, codigo, descricao, id_tipo_equipamento, data_movimentacao, status)");
-            sql.append("VALUES (?, ?, ?, ?, ?, ?)");
+            sql.append("INSERT INTO tb_equipamento (nome, codigo, descricao, id_tipo_equipamento, data_movimentacao, status, numero)");
+            sql.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, equipamento.getNome());
@@ -37,6 +37,7 @@ public class EquipamentoDAO {
             statement.setInt(4, equipamento.getTipoEquipamento().getId());
             statement.setDate(5, dateSql);
             statement.setString(6, String.valueOf(Status.ATIVO));
+            statement.setInt(7, equipamento.getNumero());
 
             statement.executeUpdate();
 
@@ -63,6 +64,7 @@ public class EquipamentoDAO {
             sql.append("SELECT ");
             sql.append("e.id_equipamento, ");
             sql.append("e.nome, ");
+            sql.append("e.numero, ");
             sql.append("e.codigo, ");
             sql.append("e.descricao, ");
             sql.append("e.data_movimentacao, ");
@@ -82,6 +84,7 @@ public class EquipamentoDAO {
                 TipoEquipamento tipoEquipamento = new TipoEquipamento();
                 equipamento.setId(resultSet.getInt("e.id_equipamento"));
                 equipamento.setNome(resultSet.getString("e.nome"));
+                equipamento.setNumero(resultSet.getInt("e.numero"));
                 equipamento.setCodigo(resultSet.getString("e.codigo"));
                 equipamento.setDescricao(resultSet.getString("e.descricao"));
                 equipamento.setDataMovimentacao(resultSet.getTimestamp("e.data_movimentacao"));
@@ -112,6 +115,7 @@ public class EquipamentoDAO {
             sql.append("SELECT ");
             sql.append("e.id_equipamento, ");
             sql.append("e.nome, ");
+            sql.append("e.numero, ");
             sql.append("e.codigo, ");
             sql.append("e.descricao, ");
             sql.append("e.data_movimentacao, ");
@@ -131,6 +135,7 @@ public class EquipamentoDAO {
                 tipoEquipamento = new TipoEquipamento();
                 equipamento.setId(resultSet.getInt("e.id_equipamento"));
                 equipamento.setNome(resultSet.getString("e.nome"));
+                equipamento.setNumero(resultSet.getInt("e.numero"));
                 equipamento.setCodigo(resultSet.getString("e.codigo"));
                 equipamento.setDescricao(resultSet.getString("e.descricao"));
                 equipamento.setDataMovimentacao(resultSet.getTimestamp("e.data_movimentacao"));
@@ -164,6 +169,7 @@ public class EquipamentoDAO {
 
             sql.append("UPDATE tb_equipamento SET");
             sql.append(" nome = ?,");
+            sql.append(" numero = ?,");
             sql.append(" codigo = ?,");
             sql.append(" descricao = ?,");
             sql.append(" id_tipo_equipamento = ?,");
@@ -182,14 +188,15 @@ public class EquipamentoDAO {
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
 
             statement.setString(1, equipamento.getNome());
-            statement.setString(2, equipamento.getCodigo());
-            statement.setString(3, equipamento.getDescricao());
-            statement.setInt(4, equipamento.getTipoEquipamento().getId());
-            statement.setString(5, String.valueOf(equipamento.getStatus()));
+            statement.setInt(2, equipamento.getNumero());
+            statement.setString(3, equipamento.getCodigo());
+            statement.setString(4, equipamento.getDescricao());
+            statement.setInt(5, equipamento.getTipoEquipamento().getId());
+            statement.setString(6, String.valueOf(equipamento.getStatus()));
 
             if (mudou){
                 java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                statement.setDate(6, dateSql);
+                statement.setDate(7, dateSql);
             }
 
             ok = statement.execute();

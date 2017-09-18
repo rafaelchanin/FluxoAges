@@ -1,9 +1,8 @@
 <%@page import="br.ages.crud.model.Equipamento"%>
 <%@page import="br.ages.crud.model.TipoEquipamento"%>
-<%@page import="br.ages.crud.model.TipoUsuario"%>
-<%@ page import="java.util.ArrayList" %>
+<%@page import="java.text.DateFormat"%>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.ArrayList" %>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%Equipamento equipamento = (Equipamento) request.getAttribute("equipamento"); %>
@@ -28,6 +27,9 @@
                 <div class="form-group">
                     <label class="form-label ages">Nome: <span class="red">*</span></label>
                     <input class="form-control" id="nome" name="nome" value="<%=equipamento.getNome() %>" type="text" maxlength="120" required>
+
+                    <label class="form-label ages">Número: <span class="red">*</span></label>
+                    <input class="form-control" id="numero" name="numero" value="<%=equipamento.getNumero() %>" type="text" maxlength="120" required>
 
                     <label class="form-label ages">Código: <span class="red">*</span></label>
                     <input class="form-control" id="codigo" name="codigo" value="<%=equipamento.getCodigo() %>" type="text" maxlength="120" required>
