@@ -26,11 +26,11 @@ public class EquipamentoAlunoBO {
         return equipamentoAlunos;
     }
 
-    public boolean entregarEquipamento(int id) throws NegocioException {
+    public boolean entregarEquipamento(int id, String observacao) throws NegocioException {
         boolean ok = false;
         equipamentoAlunoDAO = new EquipamentoAlunoDAO();
         try {
-            ok = equipamentoAlunoDAO.entregarEquipamento(id);
+            ok = equipamentoAlunoDAO.entregarEquipamento(id, observacao);
         } catch (Exception e) {
             e.printStackTrace();
             throw new NegocioException(e);

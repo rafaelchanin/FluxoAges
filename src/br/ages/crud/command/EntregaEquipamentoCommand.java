@@ -19,9 +19,10 @@ public class EntregaEquipamentoCommand implements Command {
         equipamentoAlunoBO = new EquipamentoAlunoBO();
 
         int id = Integer.parseInt(request.getParameter("id"));
+        String observacao = request.getParameter("observacao");
 
         try{
-            equipamentoAlunoBO.entregarEquipamento(id);
+            equipamentoAlunoBO.entregarEquipamento(id, observacao);
 
         } catch (NegocioException e) {
             e.printStackTrace();
