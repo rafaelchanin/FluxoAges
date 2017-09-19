@@ -28,6 +28,7 @@
                     <th style="text-align: center;">Matrícula</th>
                     <th style="text-align: center;">Data Retirada</th>
                     <th style="text-align: center;">Data Entrega</th>
+                    <th style="text-align: center;">Observação</th>
                     <th style="text-align: center;"></th>
                 </tr>
                 </thead>
@@ -47,6 +48,7 @@
                     <td align="center"><%=equipamentoAluno.getAluno().getMatricula()%></td>
                     <td align="center"><%=dateFormat.format(equipamentoAluno.getDataRetirada().getTime())%></td>
                     <td align="center"><%=dataVazia.equals("null") ? "" : dateFormat.format(equipamentoAluno.getDataEntrega().getTime())%></td>
+                    <td align="center"><%=equipamentoAluno.getObservacao()%></td>
                     <td align="center">
                         <form action="" method="post">
                             <%
