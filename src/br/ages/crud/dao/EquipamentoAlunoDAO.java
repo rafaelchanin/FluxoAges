@@ -28,7 +28,7 @@ public class EquipamentoAlunoDAO {
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("SELECT ea.ID_EQUIP_ALUNO, e.ID_EQUIPAMENTO, e.NOME, e.CODIGO, u.ID_USUARIO, u.NOME, u.MATRICULA, ea.DATA_RETIRADA, ea.DATA_ENTREGA FROM tb_equipamento e ");
+            sql.append("SELECT ea.ID_EQUIP_ALUNO, e.ID_EQUIPAMENTO, e.NOME, e.CODIGO, u.ID_USUARIO, u.NOME, u.MATRICULA, ea.DATA_RETIRADA, ea.DATA_ENTREGA, ea.OBSERVACAO FROM tb_equipamento e ");
             sql.append("INNER JOIN tb_equipamento_aluno ea ");
             sql.append("ON e.ID_EQUIPAMENTO = ea.ID_EQUIPAMENTO ");
             sql.append("INNER JOIN tb_usuario u ");
@@ -56,6 +56,7 @@ public class EquipamentoAlunoDAO {
                 equipamentoAluno.setId(resultSet.getInt("ea.ID_EQUIP_ALUNO"));
                 equipamentoAluno.setDataRetirada(resultSet.getTimestamp("ea.DATA_RETIRADA"));
                 equipamentoAluno.setDataEntrega(resultSet.getTimestamp("ea.DATA_ENTREGA"));
+                equipamentoAluno.setObservacao(resultSet.getString("ea.OBSERVACAO"));
 
                 equipamentoAlunos.add(equipamentoAluno);
             }

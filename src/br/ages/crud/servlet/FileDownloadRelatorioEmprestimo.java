@@ -43,6 +43,7 @@ public class FileDownloadRelatorioEmprestimo extends HttpServlet{
             rowZero.createCell(4).setCellValue("Matrícula");
             rowZero.createCell(5).setCellValue("Data Retirada");
             rowZero.createCell(6).setCellValue("Data Entrega");
+            rowZero.createCell(7).setCellValue("Observação");
 
             for(EquipamentoAluno equipamentoAluno: equipamentoAlunos){
                 HSSFRow row = sheet.createRow(i);
@@ -65,6 +66,8 @@ public class FileDownloadRelatorioEmprestimo extends HttpServlet{
                     cellDataEntrega.setCellValue("");
                 }
                 cellDataEntrega.setCellStyle(cellStyle);
+
+                row.createCell(7).setCellValue(equipamentoAluno.getObservacao());
 
                 i++;
             }
