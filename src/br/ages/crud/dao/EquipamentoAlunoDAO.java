@@ -69,7 +69,7 @@ public class EquipamentoAlunoDAO {
         return equipamentoAlunos;
     }
 
-    public boolean entregarEquipamento(int id) throws PersistenciaException {
+    public boolean entregarEquipamento(int id, String observacao) throws PersistenciaException {
         boolean ok = false;
         Connection conexao = null;
 
@@ -78,7 +78,8 @@ public class EquipamentoAlunoDAO {
             StringBuilder sql = new StringBuilder();
 
             sql.append("UPDATE tb_equipamento_aluno SET");
-            sql.append(" data_entrega = NOW()");
+            sql.append(" data_entrega = NOW(),");
+            sql.append(" observacao = '"+observacao+"'");
             sql.append(" WHERE id_equip_aluno = "+id+";");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());

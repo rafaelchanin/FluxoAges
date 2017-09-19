@@ -48,7 +48,7 @@
                     <td align="center"><%=equipamentoAluno.getAluno().getMatricula()%></td>
                     <td align="center"><%=dateFormat.format(equipamentoAluno.getDataRetirada().getTime())%></td>
                     <td align="center"><%=dataVazia.equals("null") ? "" : dateFormat.format(equipamentoAluno.getDataEntrega().getTime())%></td>
-                    <td align="center"><%=equipamentoAluno.getObservacao()%></td>
+                    <td align="center"><%=equipamentoAluno.getObservacao() == null ? "" : equipamentoAluno.getObservacao()%></td>
                     <td align="center">
                         <form action="" method="post">
                             <%
