@@ -31,7 +31,7 @@
 			<id>homologacao</id>
 			<properties>
 				<build.number>SNAPSHOT</build.number>
-				<sgbd.url>jdbc:mysql://192.222.0.5:3306/ages_e</sgbd.url>
+				<sgbd.url>jdbc:mysql://192.222.0.5:3309/ages_e</sgbd.url>
 				<sgbd.user>root</sgbd.user>
 				<sgbd.password>@ges123$</sgbd.password>
 				<upload.path>/home/ages/uploadProjetos</upload.path>
