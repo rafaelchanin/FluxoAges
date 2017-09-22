@@ -71,7 +71,6 @@
 					<target>1.8</target>
 
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 
 				</configuration>
 			</plugin>
@@ -108,7 +107,7 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
-							<Implementation-Build>${build.Number}</Implementation-Build>
+							<Implementation-Build>${build.number}</Implementation-Build>
 						</manifestEntries>
 					</archive>
 				</configuration>
