@@ -20,4 +20,13 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>br.ages.crud.servlet.MainServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
 </web-app>
