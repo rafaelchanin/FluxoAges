@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import br.ages.crud.model.*;
 import com.mysql.jdbc.Statement;
@@ -119,7 +118,6 @@ public class UsuarioDAO {
 		try {
 
 			Connection conexao = ConexaoUtil.getConexao();
-			System.out.println(conexao);
 			StringBuilder sql = new StringBuilder();
 			sql.append("select * from tb_usuario ");
 			sql.append("where usuario = ? and senha = ?");
