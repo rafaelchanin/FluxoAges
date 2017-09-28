@@ -35,6 +35,18 @@
             <tbody> 
             	<%
 					List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
+					Usuario usuarios = new Usuario();{
+					    int id = usuarios.getIdUsuario();
+					    String matricula=usuarios.getMatricula();
+					    String nome = usuarios.getNome();
+					    String email=usuarios.getEmail();
+					    String usuario=usuarios.getUsuario();
+					    String gitLab=usuarios.getUsuarioGitLab();
+					    String perfil = usuarios.getPerfilAcesso().toString();
+					    String status = usuarios.getStatus().toString();
+					    String tipo = usuarios.getTipoUsuario().getDescricao();
+
+				}
 					for (Usuario usuario : listaUsuarios) {
 				%>
 				          
