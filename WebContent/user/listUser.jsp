@@ -13,8 +13,8 @@
        
 		<jsp:include page="/template/msg.jsp"></jsp:include>
         <div class="table-responsive">
-        
-        <table id="listaAlunos" class="table table-responsive table-striped table-hover table-condensed table-bordered">
+
+        <table id="listaUsuarios" class="table table-responsive table-striped table-hover table-condensed table-bordered">
 
             <thead>
                 <tr>
@@ -32,24 +32,12 @@
                 </tr>
             </thead>
 
-            <tbody> 
+            <tbody>
             	<%
-					List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
-					Usuario usuarios = new Usuario();{
-					    int id = usuarios.getIdUsuario();
-					    String matricula=usuarios.getMatricula();
-					    String nome = usuarios.getNome();
-					    String email=usuarios.getEmail();
-					    String usuario=usuarios.getUsuario();
-					    String gitLab=usuarios.getUsuarioGitLab();
-					    String perfil = usuarios.getPerfilAcesso().toString();
-					    String status = usuarios.getStatus().toString();
-					    String tipo = usuarios.getTipoUsuario().getDescricao();
-
-				}
+					List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("Usuario ");
 					for (Usuario usuario : listaUsuarios) {
 				%>
-				          
+
             	<tr>
 	            	<td align="center"><%=usuario.getIdUsuario()%></td>
 	            	<td align="center"><%=usuario.getMatricula()%></td>
@@ -57,29 +45,29 @@
 	            	<td align="center"><%=usuario.getEmail()%></td>
 	            	<td align="center"><%=usuario.getUsuario()%></td>
 	            	<td align="center"><%=usuario.getUsuarioGitLab()%></td>
-	            	<td align="center"><%=usuario.getPerfilAcesso()%></td> 
+	            	<td align="center"><%=usuario.getPerfilAcesso()%></td>
 	            	<td align="center"><%=usuario.getStatus()%></td>
 	            	<td align="center"><%=usuario.getTipoUsuario().getNome()%></td>
 	            	<td align="center">
 						<form action="" method="post">
-            				<a href="" data-toggle="modal" data-id="<%=usuario.getIdUsuario() %>" data-usuario="<%=usuario.getNome()%>" 
+            				<a href="" data-toggle="modal" data-id="<%=usuario.getIdUsuario() %>" data-usuario="<%=usuario.getNome()%>"
             				data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
             			</form>
             		</td>
-            		
+
             		<td align="center">
             			<form action="" method="post">
-            				<a href="" data-toggle="modal" data-id="<%=usuario.getIdUsuario() %>" data-usuario="<%=usuario.getNome()%>" 
+            				<a href="" data-toggle="modal" data-id="<%=usuario.getIdUsuario() %>" data-usuario="<%=usuario.getNome()%>"
             				data-target="#modalExcluir" title="Deletar"> <i class="glyphicon glyphicon-trash"></i></a>
             			</form>
             		</td>
             	</tr>
-				<% 
-					} 
+				<%
+					}
 				%>
 			</tbody>
-            
-        </table> 
+
+        </table>
 		</div>
     </div>
 </div>
@@ -103,5 +91,35 @@ $(document).ready(function(){
 	        },
         }
 	});
+	$('#listaUsuarios').dataTable({
+	    "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por página",
+            "zeroRecords": "Sem registros - sorry",
+            "info": "Mostrando _PAGE_ de _PAGES_ páginas",
+            "infoEmpty": "Nenhum registros encontrados!",
+            "infoFiltered": "(Filtrado _MAX_ do total deregistros)",
+            "search":"Busca",
+           	"paginate": {
+                "first":      "Primeiro",
+                "last":       "Último",
+                "next":       "Próximo",
+                "previous":   "Anterior"
+	        },
+        }
+	});
 });;
+   function lerTabela(){
+        var usuario = new Usuario()
+    for (usuario in listaUsuarios) {
+        result += listaUsuarios + "." + usuario + " = " + listaUsuarios[usuario] + "<br>";
+       }
+       result += "<hr>";
+       return result;
+}
+    function pListUsuarios() {
+       $.get()
+
+
+    }
+
 </script>
