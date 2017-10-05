@@ -1,5 +1,8 @@
 package br.ages.crud.util;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,10 +18,18 @@ public class ConexaoUtil {
 	private static ResourceBundle configDB = ResourceBundle.getBundle(Constantes.AMBIENTE_PROPERTIES);
 
 	public static Connection getConexao() throws ClassNotFoundException, SQLException {
-		Class.forName(configDB.getString(Constantes.CONEXAO_BD_DRIVE));
+		InitialContext ctx = null;
+		try {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("jdbc/MySQLAges");
+			Connection conn = ds.getConnection();
+			return conn;
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 
-		return DriverManager.getConnection(configDB.getString(Constantes.CONEXAO_BD_URL), configDB.getString(Constantes.CONEXAO_BD_USER),
-				configDB.getString(Constantes.CONEXAO_BD_PASSWORD));
+
+		return null;
 	}
 
 	public static void main(String[] args) {
