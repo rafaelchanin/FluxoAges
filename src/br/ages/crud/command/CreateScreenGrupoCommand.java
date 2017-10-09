@@ -67,7 +67,7 @@ public class CreateScreenGrupoCommand implements Command {
 
             } else {
                 //TODO implementar StakeholderBO e DAO pra fazer essa parte
-                proxima = "turma/addGrupo.jsp";
+                proxima = "grupo/addGrupo.jsp";
 
                 usuarioBO = new UsuarioBO();
                 List<IdNomeUsuarioDTO> alunos = usuarioBO.alunosElegiveis();
