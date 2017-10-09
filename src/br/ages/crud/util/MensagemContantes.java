@@ -94,6 +94,12 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_EDIT_GRUPO = "Grupo ? editado com sucesso!";
 
+	//msgs de Relatorio
+
+	public static final String MSG_ERR_RELATORIO_DADOS_INVALIDOS = "Dados do relatório invalidos!";
+
+	public static final String MSG_ERR_CADASTRO_RELATORIO = "Ocorreu um erro no cadastro do relatorio!";
+
 
 	//msgs de Turma
 	
