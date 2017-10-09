@@ -152,7 +152,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos
 								<span class="caret"></span>
 							</a>
-							<ul>
+							<ul class="dropdown-menu">
 								<li><a href="main?acao=listaGrupos">Listar</a></li>
 								<li><a href="main?acao=telaGrupo">Cadastrar</a></li>
 							</ul>
