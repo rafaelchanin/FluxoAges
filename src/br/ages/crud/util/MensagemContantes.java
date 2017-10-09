@@ -83,7 +83,18 @@ public class MensagemContantes {
 	public static final String MSG_SUC_EDICAO_TIME = "Time ? editado com sucesso!";
 
 	public static final String MSG_SUC_REMOVE_TIME = "Time ? removido com sucesso!";
-	
+
+	//msgs de Grupo
+
+	public static final String MSG_ERR_GRUPO_DADOS_INVALIDOS = "Dados do grupo inválidos ou inconsistentes!";
+
+	public static final String MSG_ERR_CADASTRO_GRUPO = "Ocorreu um erro no cadastro do grupo.";
+
+	public static final String MSG_SUC_CADASTRO_GRUPO = "Grupo ? cadastrado com sucesso!";
+
+	public static final String MSG_SUC_EDIT_GRUPO = "Grupo ? editado com sucesso!";
+
+
 	//msgs de Turma
 	
 	public static final String MSG_ERR_TURMA_DADOS_INVALIDOS = "Dados da turma inválidos ou inconsistentes!";

@@ -148,6 +148,16 @@
 							</ul>
 						</li>
 
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos
+								<span class="caret"></span>
+							</a>
+							<ul>
+								<li><a href="main?acao=listaGrupos">Listar</a></li>
+								<li><a href="main?acao=telaGrupo">Cadastrar</a></li>
+							</ul>
+						</li>
+
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

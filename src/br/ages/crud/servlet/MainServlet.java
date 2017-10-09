@@ -51,6 +51,12 @@ public class MainServlet extends HttpServlet {
 		comandos.put("editaProjeto", new EditaProjetoCommand());
 		comandos.put("removeProjeto", new RemoveProjetoCommand());
 		comandos.put("uploadArquivoProjeto", new UploadProjetoCommand());
+
+		//COMANDOS DE GRUPO
+		comandos.put("telaGrupo", new CreateScreenGrupoCommand());
+		comandos.put("listaGrupos", new ListaGruposCommand());
+		comandos.put("adicionaGrupo", new AdicionaGrupoCommand());
+		comandos.put("editaGrupo", new EditaGrupoCommand());
 		
 		//COMANDOS DE TURMA
 		
