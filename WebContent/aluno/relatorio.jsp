@@ -22,20 +22,16 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <label class="form-label ages">Semana:<span class="red">*</span></label>
-                        <div class="col-sm-3">
+                            <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
                                 <input type='text' class="form-control" id="dia"  required/>
                                 <span class="input-group-addon">
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                             </div>
-                        </div>
-                        <div class="col-sm-3">
                             <div class='input-group date' id='dataSaida'>
-                                <input type='text' class="form-control" id="fim"  readonly/>
+                                <input class="datepicker form-control" id="fim" data-date-format="mm/dd/yyyy" readonly>
                             </div>
-                        </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
                         <label for="sel1" class="form-label ages">Time:<span
@@ -106,15 +102,16 @@
             daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
             sideBySide : true,
-            format: "DD/MM/YYYY"
+            format: "dd/mm/yyyy"
         });
 
     });
 </script>
 
 <script type="text/javascript">
-    date = new Date(document.getElementById("dia").getAttribute("value"));
-    document.getElementById("fim").setAttribute("value", date+7);
+    $(function(){
+        $('#dataSaida').datepicker('setDate', $('#dataEntrada').datetimepicker('getDate')+6 );
+    });
 </script>
 
 <script>
