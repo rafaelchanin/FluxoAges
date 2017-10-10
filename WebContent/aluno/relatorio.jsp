@@ -1,6 +1,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="br.ages.crud.model.TimePontoDTO" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: gloff
   Date: 09/10/17
@@ -11,7 +12,7 @@
 
 <div class="panel panel-primary">
 
-    <div class="panel-heading text-center">Relat√≥rio Semanal</div>
+    <div class="panel-heading text-center">RelatÛrio Semanal</div>
 
     <jsp:include page="/template/msg.jsp"></jsp:include>
 
@@ -48,28 +49,28 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label class="form-label ages">Atividades Previstas:<span class="red">*</span></label>
                         <textarea class="form-control" id="previstas" name="previstas"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label class="form-label ages">Atividades Concluidas:<span class="red>*"></span></label>
                         <textarea class="form-control" id="concluidas" name="concluidas"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label class="form-label ages">Li√ß√µes Aprendidas e Problemas Encontrados:<span class="red">*</span></label>
+                    <div class="col-sm-12">
+                        <label class="form-label ages">LiÁıes Aprendidas e Problemas Encontrados:<span class="red">*</span></label>
                         <textarea class="form-control" id="problemas" name="problemas"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label class="form-label ages">Proximos Passos:<span class="red">*</span> </label>
                         <textarea class="form-control" id="proximos" name="proximos"></textarea>
                     </div>
@@ -77,7 +78,7 @@
             </div>
             <hr>
             <p>
-                Campos que cont√©m <span class="red">*</span> s√£o obrigat√≥rios
+                Campos que contÈm <span class="red">*</span> s„o obrigatÛrios
             </p>
 
             <div class="text-center">
@@ -104,12 +105,12 @@
 </script>
 
 <script>
-    //P√µe cor laranja nos titulos
+    //Pıe cor laranja nos titulos
     $('div[class*="box"]').find('label').css('color', '#F89406');
 
-    //D√° espa√ßamento no grupo usu√°rios
+    //D· espaÁamento no grupo usu·rios
     $('div[class*="bootstrap-duallistbox-container"]').eq(1).addClass('margin-top');
-    //D√° espa√ßamento no Workspace
+    //D· espaÁamento no Workspace
     $('label:contains("Workspace")').addClass('margin-top');
 
     //Remove aparencia de input de texto do input de arquivo
