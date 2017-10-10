@@ -49,7 +49,12 @@ public class UsuarioBO {
 	 */
 	public boolean validaUsuarioResponsavel(String usuario, String senhaResponsavel) throws PersistenciaException {
 		Usuario usuarioResponsavel = new Usuario(usuario, senhaResponsavel);
-		Usuario u = usuarioDAO.validarUsuario(usuarioResponsavel);
+		Usuario u = null;
+		try {
+			u = usuarioDAO.validarUsuario(usuarioResponsavel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		Boolean ok = u != null ? true : false;
 		return ok;
 	}
@@ -175,7 +180,6 @@ public class UsuarioBO {
 	/**
 	 * Cadastra Usuario em n�vel de neg�cio, chamando o DAO
 	 * 
-	 * @param pessoaDTO
 	 * @throws NegocioException
 	 * @throws SQLException
 	 * @throws ParseException

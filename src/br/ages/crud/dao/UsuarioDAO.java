@@ -33,7 +33,6 @@ public class UsuarioDAO {
 	 * Autentica o usu?rio
 	 * 
 	 * @author cassio trindade
-	 * @param usuarioDTO
 	 * @return
 	 * @throws PersistenciaException
 	 * @throws SQLException 
