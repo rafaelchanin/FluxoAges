@@ -29,9 +29,9 @@
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                             </div>
-                            <div class='input-group date' id='dataSaida'>
-                                <input class="datepicker form-control" id="fim" data-date-format="mm/dd/yyyy" readonly>
-                            </div>
+                        <div class='input-group date' id='dataSaida'>
+                            <input type='text' class="form-control" id="fim"  readonly/>
+                        </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
                         <label for="sel1" class="form-label ages">Time:<span
@@ -109,6 +109,13 @@
 </script>
 
 <script type="text/javascript">
+    $(function() {
+        $('#dataSaida').datetimepicker({
+            locale : 'pt-br',
+            sideBySide : true,
+            format: "dd/mm/yyyy"
+        });
+    });
     $(function(){
         $('#dataSaida').datepicker('setDate', $('#dataEntrada').datetimepicker('getDate')+6 );
     });
