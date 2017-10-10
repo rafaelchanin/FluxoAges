@@ -108,7 +108,7 @@
             daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
             sideBySide : true,
-            format: "DD/MM/YYY"
+            format: "DD/MM/YYYY"
         });
 
     });
@@ -119,11 +119,11 @@
         $('#dataSaida').datetimepicker({
             locale : 'pt-br',
             sideBySide : true,
-            format: "DD/MM/YYY"
+            format: "DD/MM/YYYY"
         });
     });
-    $(function(){
-        $('#dataSaida').datepicker('setDate', $('#dataEntrada').datetimepicker('getDate')+6 );
+    $('#dataEntrada').datepicker().on('changeDate',function () {
+            $('#dataEntrada').datepicker('setDate',$('#dataEntrada').datepicker('getDate')+6);
     });
 </script>
 
