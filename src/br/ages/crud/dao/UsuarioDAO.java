@@ -112,7 +112,7 @@ public class UsuarioDAO {
 		
 	}
 	
-	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException, SQLException {
+	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException {
 		Usuario usuario = new Usuario();
 		try {
 
