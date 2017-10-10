@@ -137,10 +137,9 @@ public class UsuarioDAO {
 				usuario.setSenha(resultset.getString("SENHA"));
 			} else
 				usuario = null;
+			conexao.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
-		}finally {
-			conexao.close();
 		}
 
 		return usuario;
@@ -153,7 +152,7 @@ public class UsuarioDAO {
 	 * @throws PersistenciaException
 	 * @throws SQLException
 	 */
-	public List<Usuario> listarUsuarios() throws PersistenciaException {
+	public List<Usuario> listarUsuarios() throws PersistenciaException, SQLException {
 		Connection conexao = null;
 		try {
 			conexao = ConexaoUtil.getConexao();
@@ -202,10 +201,10 @@ public class UsuarioDAO {
 				listarUsuarios.add(dto);
 			}
 
-			conexao.close();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
 		}
 		return listarUsuarios;
 	}
