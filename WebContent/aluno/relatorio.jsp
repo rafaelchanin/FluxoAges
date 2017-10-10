@@ -24,7 +24,7 @@
                     <div class="col-sm-6">
                         <label class="form-label ages">Semana:<span class="red">*</span></label>
                         <div class='input-group date' id='dataEntrada'>
-                            <input type='text' class="form-control" id="dia" name="dia" value="<%=request.getAttribute("dia")%>" required/>
+                            <input type='text' class="form-control" id="dia"  required/>
                             <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -57,7 +57,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <label class="form-label ages">Atividades Concluidas:<span class="red>*"></span></label>
+                        <label class="form-label ages">Atividades Concluidas:<span class="red>">*</span></label>
                         <textarea class="form-control" id="concluidas" name="concluidas"></textarea>
                     </div>
                 </div>
@@ -96,6 +96,7 @@
 <script type="text/javascript">
     $(function() {
         $('#dataEntrada').datetimepicker({
+            daysOfWeekDisabled: [1,7],
             locale : 'pt-br',
             sideBySide : true,
             format: "DD/MM/YYYY"
