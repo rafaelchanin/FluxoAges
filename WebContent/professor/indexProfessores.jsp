@@ -8,18 +8,9 @@
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.HashMap" %>
 
-<%
-    Usuario currentuser = (Usuario) session.getAttribute("usuarioSessao");
-    if(currentuser.getTipoUsuario().getIdTipoUsuario() == 2){
-%>
-    <jsp:include page="../template/headAlunos.jsp"></jsp:include>
-<%
-    }else {
-%>
-    <jsp:include page="../template/headProfessor.jsp"></jsp:include>
-<%
-    }
-%>
+
+<jsp:include page="../template/headAlunos.jsp"></jsp:include>
+
 
 <div class="panel panel-primary">
 
