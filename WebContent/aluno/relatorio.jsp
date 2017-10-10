@@ -21,7 +21,7 @@
             <div class="form-group">
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                             <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
                                 <input type='text' class="form-control" id="dia"  required/>
@@ -29,6 +29,9 @@
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                             </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="form-label ages"></label>
                         <div class='input-group date' id='dataSaida'>
                             <input type='text' class="form-control" id="fim"  required/>
                             <span class="input-group-addon">
