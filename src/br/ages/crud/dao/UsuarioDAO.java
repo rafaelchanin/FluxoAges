@@ -113,11 +113,12 @@ public class UsuarioDAO {
 		
 	}
 	
-	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException {
+	public Usuario validarUsuario(Usuario usuarioDTO) throws PersistenciaException, SQLException {
 		Usuario usuario = new Usuario();
+		Connection conexao = null;
 		try {
 
-			Connection conexao = ConexaoUtil.getConexao();
+			conexao = ConexaoUtil.getConexao();
 			StringBuilder sql = new StringBuilder();
 			sql.append("select * from tb_usuario ");
 			sql.append("where usuario = ? and senha = ?");
@@ -139,6 +140,8 @@ public class UsuarioDAO {
 				usuario = null;
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
+		}finally {
+			conexao.close();
 		}
 
 		return usuario;

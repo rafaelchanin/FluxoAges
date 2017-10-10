@@ -30,15 +30,6 @@
 					    				</span>
                             </div>
                     </div>
-                    <div class="col-sm-3">
-                        <label class="form-label ages"></label>
-                        <div class='input-group date' id='dataSaida'>
-                            <input type='text' class="form-control" id="fim"  required/>
-                            <span class="input-group-addon">
-					    					<span class="glyphicon glyphicon-calendar"></span>
-					    				</span>
-                        </div>
-                    </div>
                     <div class='col-sm-6' id='time1'>
                         <label for="sel1" class="form-label ages">Time:<span
                                 class="red">*</span></label>
@@ -111,19 +102,6 @@
             format: "DD/MM/YYYY"
         });
 
-    });
-</script>
-
-<script type="text/javascript">
-    $(function() {
-        $('#dataSaida').datetimepicker({
-            locale : 'pt-br',
-            sideBySide : true,
-            format: "DD/MM/YYYY"
-        });
-    });
-    $('#dataEntrada').datepicker().on('changeDate',function () {
-            $('#dataEntrada').datepicker('setDate',$('#dataEntrada').datepicker('getDate')+6);
     });
 </script>
 
