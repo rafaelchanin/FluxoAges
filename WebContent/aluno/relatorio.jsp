@@ -30,7 +30,10 @@
 					    				</span>
                             </div>
                         <div class='input-group date' id='dataSaida'>
-                            <input type='text' class="form-control" id="fim"  readonly/>
+                            <input type='text' class="form-control" id="fim"  required/>
+                            <span class="input-group-addon">
+					    					<span class="glyphicon glyphicon-calendar"></span>
+					    				</span>
                         </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
@@ -102,7 +105,7 @@
             daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
             sideBySide : true,
-            format: "dd/mm/yyyy"
+            format: "DD/MM/YYY"
         });
 
     });
@@ -113,7 +116,7 @@
         $('#dataSaida').datetimepicker({
             locale : 'pt-br',
             sideBySide : true,
-            format: "dd/mm/yyyy"
+            format: "DD/MM/YYY"
         });
     });
     $(function(){
