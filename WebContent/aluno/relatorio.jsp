@@ -96,7 +96,7 @@
 <script type="text/javascript">
     $(function() {
         $('#dataEntrada').datetimepicker({
-            daysOfWeekDisabled: [1,7],
+            daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
             sideBySide : true,
             format: "DD/MM/YYYY"
