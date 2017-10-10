@@ -10,11 +10,11 @@
 
 <%
     Usuario currentuser = (Usuario) session.getAttribute("usuarioSessao");
-    if(currentuser.getTipoUsuario().getNome().equals("Aluno")){
+    if(currentuser.getTipoUsuario().getIdTipoUsuario() == 2){
 %>
     <jsp:include page="../template/headAlunos.jsp"></jsp:include>
 <%
-    }else if(currentuser.getTipoUsuario().getNome().equals("Professor")){
+    }else {
 %>
     <jsp:include page="../template/headProfessor.jsp"></jsp:include>
 <%
