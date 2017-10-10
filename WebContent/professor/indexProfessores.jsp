@@ -9,8 +9,8 @@
 <%@ page import="java.util.HashMap" %>
 
 <%
-    Usuario currentuser = (Usuario) request.getSession().getAttribute("usuarioSessao");
-   if(currentuser.getTipoUsuario().getNome().equals("Aluno")){
+    Usuario currentuser = (Usuario) session.getAttribute("usuarioSessao");
+    if(currentuser.getTipoUsuario().getNome().equals("Aluno")){
 %>
     <jsp:include page="../template/headAlunos.jsp"></jsp:include>
 <%
