@@ -136,7 +136,6 @@ public class UsuarioDAO {
 				usuario.setSenha(resultset.getString("SENHA"));
 			} else
 				usuario = null;
-			conexao.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
 		}
