@@ -21,13 +21,18 @@
             <div class="form-group">
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label class="form-label ages">Semana:<span class="red">*</span></label>
                         <div class='input-group date' id='dataEntrada'>
                             <input type='text' class="form-control" id="dia"  required/>
                             <span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class='input-group date' id='dataSaida'>
+                            <input type='text' class="form-control" id="saida"  readonly/>
                         </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
@@ -103,6 +108,10 @@
         });
 
     });
+</script>
+
+<script type="text/javascript">
+    document.getElementById("saida").setAttribute('value',document.getElementById("dia").value + 7);
 </script>
 
 <script>
