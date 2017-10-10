@@ -7,8 +7,19 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.HashMap" %>
-<jsp:include page="../template/headProfessor.jsp"></jsp:include>
 
+<%
+    Usuario currentuser = (Usuario) request.getSession().getAttribute("usuarioSessao");
+   if(currentuser.getTipoUsuario().getNome().equals("Aluno")){
+%>
+    <jsp:include page="../template/headAlunos.jsp"></jsp:include>
+<%
+    }else if(currentuser.getTipoUsuario().getNome().equals("Professor")){
+%>
+    <jsp:include page="../template/headProfessor.jsp"></jsp:include>
+<%
+    }
+%>
 
 <div class="panel panel-primary">
 

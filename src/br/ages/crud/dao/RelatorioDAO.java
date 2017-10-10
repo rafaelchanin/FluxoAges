@@ -6,9 +6,7 @@ import br.ages.crud.util.ConexaoUtil;
 import com.mysql.jdbc.Statement;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RelatorioDAO {
 
@@ -71,17 +69,18 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
 
-            sql.append("UPDATE tb_relatorio  ATIVIDADES_PREVISTAS = ?, ATIVIDADES_CONCLUIDAS = ?, "
-                    + "LICOESPROBLEMAS = ?, PROXIMO = ? WHERE ID_RELATORIO = ? AND STATUS = REVISAO;");
+            sql.append("UPDATE tb_relatorio  STATUS = ?, ATIVIDADES_PREVISTAS = ?, ATIVIDADES_CONCLUIDAS = ?, "
+                    + "LICOESPROBLEMAS = ?, PROXIMO = ? WHERE ID_RELATORIO = ?;");
 
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
-            statement.setString(1, relatorio.getAtividadesPrevistas());
-            statement.setString(2, relatorio.getAtividadesConcluidas());
-            statement.setString(3, relatorio.getLicoesProblemas());
-            statement.setString(4,relatorio.getProximo());
-            statement.setInt(5, relatorio.getIdRelatorio());
-            statement.setString(6, StatusRelatorio.REVISAO.toString());
+            statement.setString(1, relatorio.getStatus().toString());
+            statement.setString(2, relatorio.getAtividadesPrevistas());
+            statement.setString(3, relatorio.getAtividadesConcluidas());
+            statement.setString(4, relatorio.getLicoesProblemas());
+            statement.setString(5,relatorio.getProximo());
+            statement.setInt(6, relatorio.getIdRelatorio());
+            statement.setString(7, StatusRelatorio.REVISAO.toString());
 
             statement.executeUpdate();
 
