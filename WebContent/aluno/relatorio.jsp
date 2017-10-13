@@ -35,8 +35,6 @@
                         <div class='input-group date' id='dataSaida'>
                             <input type='text' class="form-control" id="fim"
                                    data-date-format="mm/dd/yyyy" readonly/>
-                            <span class="input-group-addon">
-					    				</span>
                         </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
@@ -118,7 +116,7 @@
         $('#dataEntrada').on("dp.change", function(e){
             var date = Date(e.date());
             date = date + 7;
-            $('#dataSaida').datetimepicker("setDate",date);
+            $('#dataSaida').datetimepicker.children('input').val(date.toString());
         });
 
     });
