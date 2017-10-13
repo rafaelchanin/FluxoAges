@@ -24,17 +24,16 @@
                     <div class="col-sm-3">
                             <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
-                                <input type='text' class="form-control" id="dia"  required/>
+                                <input type='text' class="form-control" id="dia" onchange="updateInput(this.value)" required/>
                                 <span class="input-group-addon">
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                             </div>
                     </div>
                     <div class="col-sm-3">
-                        <label class="form-label ages">  </span></label>
-                        <div class='input-group' id='dataSaida'>
-                            <input type='date' class="form-control" id="fim"
-                                   data-date-format="mm/dd/yyyy" readonly/>
+                        <label class="form-label ages"></label>
+                        <div class='input-group date' id='dataSaida'>
+                            <input type='text' class="form-control" id="fim"readonly/>
                         </div>
                     </div>
                     <div class='col-sm-6' id='time1'>
@@ -111,10 +110,11 @@
         });
 
     });
+</script>
 
-    $('#dia').on('input', function() {
-        var date = new Date($(this).val());
-        $('fim').val(date);
+<script>
+    $(function updateInput(ish){
+        document.getElementById("fim").value = ish;
     });
 </script>
 
