@@ -24,7 +24,7 @@
                     <div class="col-sm-3">
                             <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
-                                <input type='text' class="form-control" id="dia" onchange="updateInput(this.value)" required/>
+                                <input type='text' class="form-control" id="dia" onchange="updateInput()" required/>
                                 <span class="input-group-addon">
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
@@ -113,8 +113,9 @@
 </script>
 
 <script>
-    function updateInput(ish){
-        document.getElementById("fim").value = ish;
+    function updateInput(){
+        var dia = document.getElementById("dia").value;
+        document.getElementById("fim").value = dia;
     }
 </script>
 
