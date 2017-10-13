@@ -113,9 +113,9 @@
 </script>
 
 <script>
-    $(function updateInput(ish){
+    function updateInput(ish){
         document.getElementById("fim").value = ish;
-    });
+    }
 </script>
 
 
