@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-sm-3">
                         <label class="form-label ages">  </span></label>
-                        <div class='input-group date' id='dataSaida'>
+                        <div class='input-group' id='dataSaida'>
                             <input type='text' class="form-control" id="fim"
                                    data-date-format="mm/dd/yyyy" readonly/>
                         </div>
@@ -114,7 +114,7 @@
         });
 
         $('#dataEntrada').on("dp.change", function(e){
-            $('#dataSaida').datetimepicker.children('input').val(e.getDay()+7);
+            $('#fim').val(e.getDay()+7);
         });
 
     });
