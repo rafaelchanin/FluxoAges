@@ -31,11 +31,11 @@
                             </div>
                     </div>
                     <div class="col-sm-3">
-                        <label class="form-label ages"> <span class="red">*</span></label>
+                        <label class="form-label ages">  </span></label>
                         <div class='input-group date' id='dataSaida'>
-                            <input type='text' class="form-control" id="fim"  readonly/>
+                            <input type='text' class="form-control" id="fim"
+                                   data-date-format="mm/dd/yyyy" readonly/>
                             <span class="input-group-addon">
-					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                         </div>
                     </div>
@@ -105,10 +105,7 @@
 <script type="text/javascript">
     $(function() {
         $('#dataSaida').datepicker({
-            useCurrent: false,
-            ocale : 'pt-br',
-            sideBySide : true,
-            format: "DD/MM/YYYY"
+            useCurrent: false
         });
 
         $('#dataEntrada').datetimepicker({
@@ -119,7 +116,9 @@
         });
 
         $('#dataEntrada').on("dp.change", function(e){
-            $('#dataSaida').datetimepicker().children('input').val(e.date +7);
+            var date = Date(e.date());
+            date = date + 7;
+            $('#dataSaida').datetimepicker("setDate",date);
         });
 
     });
