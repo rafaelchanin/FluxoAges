@@ -114,9 +114,7 @@
         });
 
         $('#dataEntrada').on("dp.change", function(e){
-            var date = Date(e.date());
-            date = date + 7;
-            $('#dataSaida').datetimepicker.children('input').val(date.toString());
+            $('#dataSaida').datetimepicker.children('input').val(e.getDay()+7);
         });
 
     });
