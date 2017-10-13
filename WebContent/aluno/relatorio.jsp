@@ -30,6 +30,15 @@
 					    				</span>
                             </div>
                     </div>
+                    <div class="col-sm-3">
+                        <label class="form-label ages"> <span class="red">*</span></label>
+                        <div class='input-group date' id='dataSaida'>
+                            <input type='text' class="form-control" id="fim"  readonly/>
+                            <span class="input-group-addon">
+					    					<span class="glyphicon glyphicon-calendar"></span>
+					    				</span>
+                        </div>
+                    </div>
                     <div class='col-sm-6' id='time1'>
                         <label for="sel1" class="form-label ages">Time:<span
                                 class="red">*</span></label>
@@ -57,7 +66,7 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <label class="form-label ages">Atividades Concluidas:<span class="red>">*</span></label>
+                        <label class="form-label ages">Atividades Concluidas:<span class="red">*</span></label>
                         <textarea class="form-control" id="concluidas" name="concluidas"></textarea>
                     </div>
                 </div>
@@ -95,6 +104,13 @@
 
 <script type="text/javascript">
     $(function() {
+        $('#dataSaida').datepicker({
+            useCurrent: false,
+            ocale : 'pt-br',
+            sideBySide : true,
+            format: "DD/MM/YYYY"
+        });
+
         $('#dataEntrada').datetimepicker({
             daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
@@ -102,8 +118,13 @@
             format: "DD/MM/YYYY"
         });
 
+        $('#dataEntrada').on("dp.change", function(e){
+            $('#dataSaida').datetimepicker().children('input').val(e.date +7);
+        });
+
     });
 </script>
+
 
 <script>
     //Põe cor laranja nos titulos
