@@ -33,7 +33,7 @@
                     <div class="col-sm-3">
                         <label class="form-label ages">  </span></label>
                         <div class='input-group' id='dataSaida'>
-                            <input type='text' class="form-control" id="fim"
+                            <input type='date' class="form-control" id="fim"
                                    data-date-format="mm/dd/yyyy" readonly/>
                         </div>
                     </div>
@@ -102,9 +102,6 @@
 
 <script type="text/javascript">
     $(function() {
-        $('#dataSaida').datepicker({
-            useCurrent: false
-        });
 
         $('#dataEntrada').datetimepicker({
             daysOfWeekDisabled: [0,2,3,4,5,6],
@@ -113,10 +110,11 @@
             format: "DD/MM/YYYY"
         });
 
-        $('#dataEntrada').on("dp.change", function(e){
-            $('#fim').val(e.getDay()+7);
-        });
+    });
 
+    $('#dia').on('input', function() {
+        var date = new Date($(this).val());
+        $('fim').val(date);
     });
 </script>
 
