@@ -107,18 +107,12 @@
             locale : 'pt-br',
             sideBySide : true,
             format: "DD/MM/YYYY"
+        }).on('changeDate',function(e){
+            document.getElementById("fim").value = e.value;
         });
 
     });
 </script>
-
-<script>
-    $('#dataEntrada').datepicker()
-        .on('changeDate', function(e) {
-            document.getElementById("fim").value = e.value;
-        });
-</script>
-
 
 <script>
     //Põe cor laranja nos titulos
