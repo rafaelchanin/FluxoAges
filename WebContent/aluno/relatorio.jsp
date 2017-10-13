@@ -113,10 +113,10 @@
 </script>
 
 <script>
-    function updateInput(){
-        var dia = document.getElementById("dia").value;
-        document.getElementById("fim").value = dia;
-    }
+    $('#dataEntrada').datepicker()
+        .on('changeDate', function(e) {
+            document.getElementById("fim").value = e.value;
+        });
 </script>
 
 
