@@ -24,7 +24,7 @@ public class EnviarRelatorioCommand implements Command {
     private LocalDate hoje;
 
     @Override
-    public String execute(HttpServletRequest request){
+    public String execute(HttpServletRequest request) throws NegocioException, ParseException {
         relatorio = new Relatorio();
         relatorioBO = new RelatorioBO();
 
@@ -43,7 +43,7 @@ public class EnviarRelatorioCommand implements Command {
         String time = request.getParameter("time");
 
 
-        try {
+
             relatorio.setDtInclusao(Date.from(hoje.atStartOfDay(ZoneId.systemDefault()).toInstant()));
             relatorio.setStatus(StatusRelatorio.REVISAO);
             relatorio.setTipo(TipoRelatorio.SEMANAL);
@@ -74,9 +74,7 @@ public class EnviarRelatorioCommand implements Command {
                 relatorioBO.cadastrarRelatorio(relatorio);
             }
 
-        }catch (Exception e) {
-            request.setAttribute("msgErro", e.getMessage());
-        }
+
         return proxima;
     }
 }
