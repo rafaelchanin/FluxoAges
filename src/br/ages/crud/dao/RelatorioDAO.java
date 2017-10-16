@@ -39,8 +39,11 @@ public class RelatorioDAO {
                 statement.setInt(2, i);
                 switch (i) {
                     case 1 : statement.setString(3,relatorio.getAtividadesPrevistas());
+                    break;
                     case 2 : statement.setString(3,relatorio.getAtividadesConcluidas());
+                    break;
                     case 3 : statement.setString(3,relatorio.getLicoesProblemas());
+                    break;
                     case 4 : statement.setString(3,relatorio.getProximo());
                 }
                 statement.setDate(4, dataInclusao);
