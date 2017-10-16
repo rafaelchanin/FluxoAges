@@ -5,31 +5,27 @@ import java.util.Date;
 
 public class Relatorio {
 
-    private int idAluno;
     private int idRelatorio;
-    private int idTime;
+    private int idTimeAluno;
     private String atividadesPrevistas;
     private String atividadesConcluidas;
     private String licoesProblemas;
     private String proximo;
     private Date inicioSemana;
-    private Date fimSemana;
     private Date dtInclusao;
     private StatusRelatorio status;
+    private TipoRelatorio tipo;
 
-    public Relatorio(int idAluno, String atividadesPrevistas, String atividadesConcluidas,String proximo, String licoesProblemas, Date inicioSemana, Date fimSemana, StatusRelatorio status) {
-        this.idAluno = idAluno;
+    public Relatorio( String atividadesPrevistas, String atividadesConcluidas,String proximo, String licoesProblemas, Date inicioSemana, StatusRelatorio status) {
         this.atividadesPrevistas = atividadesPrevistas;
         this.atividadesConcluidas = atividadesConcluidas;
         this.licoesProblemas = licoesProblemas;
         this.proximo = proximo;
         this.inicioSemana = inicioSemana;
-        this.fimSemana = fimSemana;
         this.status = status;
     }
 
-    public Relatorio(int idAluno, String atividadesPrevistas, String atividadesConcluidas, String licoesProblemas, StatusRelatorio status) {
-        this.idAluno = idAluno;
+    public Relatorio(String atividadesPrevistas, String atividadesConcluidas, String licoesProblemas, StatusRelatorio status) {
         this.atividadesPrevistas = atividadesPrevistas;
         this.atividadesConcluidas = atividadesConcluidas;
         this.licoesProblemas = licoesProblemas;
@@ -39,28 +35,33 @@ public class Relatorio {
     public Relatorio() {
     }
 
-    public int getIdAluno() {
-        return idAluno;
-    }
 
     public String getAtividadesPrevistas() {
         return atividadesPrevistas;
     }
 
-    public int getIdTime() {
-        return idTime;
+    public int getIdTimeAluno() {
+        return idTimeAluno;
     }
 
     public Date getDtInclusao() {
         return dtInclusao;
     }
 
+    public TipoRelatorio getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoRelatorio tipo) {
+        this.tipo = tipo;
+    }
+
     public void setDtInclusao(Date dtInclusao) {
         this.dtInclusao = dtInclusao;
     }
 
-    public void setIdTime(int idTime) {
-        this.idTime = idTime;
+    public void setIdTimeAluno(int idTimeAluno) {
+        this.idTimeAluno = idTimeAluno;
     }
 
     public int getIdRelatorio() {
@@ -81,14 +82,6 @@ public class Relatorio {
 
     public Date getInicioSemana() {
         return inicioSemana;
-    }
-
-    public Date getFimSemana() {
-        return fimSemana;
-    }
-
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
     }
 
     public String getProximo() {
@@ -123,7 +116,4 @@ public class Relatorio {
         this.inicioSemana = inicioSemana;
     }
 
-    public void setFimSemana(Date fimSemana) {
-        this.fimSemana = fimSemana;
-    }
 }

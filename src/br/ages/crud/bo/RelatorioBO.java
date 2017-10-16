@@ -3,6 +3,7 @@ package br.ages.crud.bo;
 import br.ages.crud.dao.RelatorioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.model.Relatorio;
+import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.DataValidator;
 import com.sun.org.apache.regexp.internal.RE;
@@ -88,6 +89,17 @@ public class RelatorioBO {
         }
 
         return listRelatorio;
+    }
+
+    public int validaAluno(Usuario aluno, int idTime) throws NegocioException {
+        int idTimeAluno = 0;
+        if(aluno != null && idTime > 0){
+            idTimeAluno = relatorioDAO.validaAluno(aluno,idTime);
+        }
+        if(idTimeAluno == 0){
+            throw new NegocioException(MensagemContantes.MSG_ERR_RELATORIO_ALUNO_INVALIDO);
+        }
+        return idTimeAluno;
     }
 
     public List<Relatorio> listarRelatorios() {

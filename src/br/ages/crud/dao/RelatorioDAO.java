@@ -2,6 +2,7 @@ package br.ages.crud.dao;
 
 import br.ages.crud.model.Relatorio;
 import br.ages.crud.model.StatusRelatorio;
+import br.ages.crud.model.Usuario;
 import br.ages.crud.util.ConexaoUtil;
 import com.mysql.jdbc.Statement;
 
@@ -21,34 +22,39 @@ public class RelatorioDAO {
 
             conexao = ConexaoUtil.getConexao();
 
-            StringBuilder sql = new StringBuilder();
 
-            sql.append("INSERT INTO tb_relatorio (ID_ALUNO,ID_TIME, ATIVIDADES_PREVISTAS, ATIVIDADES_CONCLUIDAS, LICOESPROBLEMAS,PROXIMO, INICIO_SEMANA,FIM_SEMANA, STATUS, DT_INCLUSAO)");
-            sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            for(int i = 1; i<=4; i++) {
+                StringBuilder sql = new StringBuilder();
+                ok = false;
 
-            java.sql.Date dataInclusao = new java.sql.Date(relatorio.getDtInclusao().getTime());
+                sql.append("INSERT INTO tb_relatorio (ID_TIME_ALUNO, ID_QUESTAO, RESPOSTA, DATA_RESPOSTA, DATA_ABERTURA, STATUS, TIPO_RELATORIO) ");
+                sql.append("VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+                java.sql.Date dataInclusao = new java.sql.Date(relatorio.getDtInclusao().getTime());
+                java.sql.Date dataAbertura = new java.sql.Date(relatorio.getInicioSemana().getTime());
 
-            statement.setInt(1,relatorio.getIdAluno());
-            statement.setInt(2,relatorio.getIdTime());
-            statement.setString(3,relatorio.getAtividadesPrevistas());
-            statement.setString(4,relatorio.getAtividadesConcluidas());
-            statement.setString(5,relatorio.getLicoesProblemas());
-            statement.setString(6,relatorio.getProximo());
-            statement.setDate(7, Date.valueOf(relatorio.getInicioSemana().toString()));
-            statement.setDate(8,Date.valueOf(relatorio.getFimSemana().toString()));
-            statement.setString(9,relatorio.getStatus().toString());
-            statement.setDate(10, dataInclusao);
+                PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
-            statement.executeUpdate();
+                statement.setInt(1, relatorio.getIdTimeAluno());
+                statement.setInt(2, i);
+                switch (i) {
+                    case 1 : statement.setString(3,relatorio.getAtividadesPrevistas());
+                    case 2 : statement.setString(3,relatorio.getAtividadesConcluidas());
+                    case 3 : statement.setString(3,relatorio.getLicoesProblemas());
+                    case 4 : statement.setString(3,relatorio.getProximo());
+                }
+                statement.setDate(4, dataInclusao);
+                statement.setDate(5, dataAbertura);
+                statement.setString(6, relatorio.getStatus().toString());
+                statement.setString(7, relatorio.getTipo().toString());
 
-            ResultSet resultset = statement.getGeneratedKeys();
+                statement.executeUpdate();
 
-            if (resultset.first()) {
-                idRelatorio = resultset.getInt(1);
-                relatorio.setIdRelatorio(idRelatorio.intValue());
-                ok=true;
+                ResultSet resultset = statement.getGeneratedKeys();
+
+                if (resultset.first()){
+                    ok = true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,7 +129,6 @@ public class RelatorioDAO {
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
                 relatorio.setProximo(resultSet.getString("PROXIMO"));
                 relatorio.setInicioSemana(resultSet.getDate("INICIO_SEMANA"));
-                relatorio.setFimSemana(resultSet.getDate("FIM_SEMANA"));
                 relatorio.setStatus(StatusRelatorio.valueOf(resultSet.getString("STATUS")));
                 relatorio.setDtInclusao(resultSet.getDate("DT_INCLUSAO"));
 
@@ -169,7 +174,6 @@ public class RelatorioDAO {
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
                 relatorio.setProximo(resultSet.getString("PROXIMO"));
                 relatorio.setInicioSemana(resultSet.getDate("INICIO_SEMANA"));
-                relatorio.setFimSemana(resultSet.getDate("FIM_SEMANA"));
                 relatorio.setStatus(StatusRelatorio.valueOf(resultSet.getString("STATUS")));
                 relatorio.setDtInclusao(resultSet.getDate("DT_INCLUSAO"));
 
@@ -211,7 +215,6 @@ public class RelatorioDAO {
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
                 relatorio.setProximo(resultSet.getString("PROXIMO"));
                 relatorio.setInicioSemana(resultSet.getDate("INICIO_SEMANA"));
-                relatorio.setFimSemana(resultSet.getDate("FIM_SEMANA"));
                 relatorio.setStatus(StatusRelatorio.valueOf(resultSet.getString("STATUS")));
                 relatorio.setDtInclusao(resultSet.getDate("DT_INCLUSAO"));
 
@@ -226,5 +229,38 @@ public class RelatorioDAO {
         }
 
         return listaRelatorios;
+    }
+
+    public int validaAluno(Usuario aluno, int idTime){
+        Connection conexao = null;
+        int idTimeAluno = 0;
+
+        try{
+            conexao = ConexaoUtil.getConexao();
+            StringBuilder sql = new StringBuilder();
+            sql.append(" SELECT ID_TIME_ALUNO");
+            sql.append(" FROM TB_TIME_ALUNO");
+            sql.append(" WHERE ID_TIME = ? AND ID_ALUNO = ? ");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            statement.setInt(1,idTime);
+            statement.setInt(2, aluno.getIdUsuario());
+
+            ResultSet resultset = statement.executeQuery();
+
+            if(resultset.next()){
+                idTimeAluno = resultset.getInt("ID_TIME_ALUNO");
+            }else{
+                idTimeAluno = 0;
+            }
+
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return idTimeAluno;
     }
 }

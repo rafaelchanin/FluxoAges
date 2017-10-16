@@ -24,18 +24,18 @@
                     <div class="col-sm-3">
                             <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
-                                <input type='text' class="form-control" id="dia" onchange="updateInput()" required/>
+                                <input type='text' class="form-control" id="dia" required/>
                                 <span class="input-group-addon">
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
                             </div>
                     </div>
-                    <div class="col-sm-3">
+                    <%--<div class="col-sm-3">
                         <label class="form-label ages"></label>
                         <div class='input-group date' id='dataSaida'>
                             <input type='text' class="form-control" id="fim"readonly/>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class='col-sm-6' id='time1'>
                         <label for="sel1" class="form-label ages">Time:<span
                                 class="red">*</span></label>
@@ -107,9 +107,9 @@
             locale : 'pt-br',
             sideBySide : true,
             format: "DD/MM/YYYY"
-        }).on('changeDate',function(e){
-            document.getElementById("fim").value = e.value;
-        });
+        });//.on('changeDate',function(e){
+            //document.getElementById("fim").value = e.value;
+        //});
 
     });
 </script>
