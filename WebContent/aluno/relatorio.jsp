@@ -24,7 +24,7 @@
                     <div class="col-sm-3">
                             <label class="form-label ages">Semana:<span class="red">*</span></label>
                             <div class='input-group date' id='dataEntrada'>
-                                <input type='text' class="form-control" id="dia" required/>
+                                <input type='text' class="form-control" id="dia" name="dia" required/>
                                 <span class="input-group-addon">
 					    					<span class="glyphicon glyphicon-calendar"></span>
 					    				</span>
