@@ -28,7 +28,7 @@ public class EnviarRelatorioCommand implements Command {
         relatorio = new Relatorio();
         relatorioBO = new RelatorioBO();
 
-        proxima = "main?acao=relatorioSemanal";
+        proxima = "main?acao=horasProfessor";
 
         hoje = LocalDate.now();
 
