@@ -66,6 +66,8 @@ public class EnviarRelatorioCommand implements Command {
                 int idTimeAluno = relatorioBO.validaAluno(aluno,Integer.parseInt(time));
                 if(idTimeAluno > 0){
                     relatorio.setIdTimeAluno(idTimeAluno);
+                }else {
+                    return "main?acao=horasProfessor";
                 }
             }
 
