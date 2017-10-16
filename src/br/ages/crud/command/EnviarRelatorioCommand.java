@@ -42,13 +42,12 @@ public class EnviarRelatorioCommand implements Command {
         Usuario aluno = (Usuario) request.getSession().getAttribute("usuarioSessao");
         String time = request.getParameter("time");
 
-
-
             relatorio.setDtInclusao(Date.from(hoje.atStartOfDay(ZoneId.systemDefault()).toInstant()));
             relatorio.setStatus(StatusRelatorio.REVISAO);
             relatorio.setTipo(TipoRelatorio.SEMANAL);
 
             if(!semana.equals("")) {
+                System.out.println("Entrou Aqui!!!!!!!!");
                 relatorio.setInicioSemana(textFormat.parse(semana));
             }
             if(!atividadesPrevistas.equals("")){
