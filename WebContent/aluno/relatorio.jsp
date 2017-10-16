@@ -45,7 +45,7 @@
                                 List<TimePontoDTO> listaTimes = (List<TimePontoDTO>) request.getAttribute("listaTimes");
                                 for (TimePontoDTO time : listaTimes) {
                             %>
-                            <option value="<%=time.toString()%>" id="<%=time.getId()%>"><%=time.toString()%></option>
+                            <option value="<%=time.getId()%>" id="<%=time.getId()%>"><%=time.toString()%></option>
 
                             <%
                                 }
