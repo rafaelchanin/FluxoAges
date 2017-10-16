@@ -122,8 +122,6 @@ public class RelatorioDAO {
                 Relatorio relatorio = new Relatorio();
 
                 relatorio.setIdRelatorio(resultSet.getInt("ID_RELATORIO"));
-                relatorio.setIdAluno(resultSet.getInt("ID_ALUNO"));
-                relatorio.setIdTime(resultSet.getInt("ID_TIME"));
                 relatorio.setAtividadesPrevistas(resultSet.getString("ATIVIDADES_PREVISTAS"));
                 relatorio.setAtividadesConcluidas(resultSet.getString("ATIVIDADES_CONCLUIDAS"));
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
@@ -167,8 +165,6 @@ public class RelatorioDAO {
                 Relatorio relatorio = new Relatorio();
 
                 relatorio.setIdRelatorio(resultSet.getInt("ID_RELATORIO"));
-                relatorio.setIdAluno(resultSet.getInt("ID_ALUNO"));
-                relatorio.setIdTime(resultSet.getInt("ID_TIME"));
                 relatorio.setAtividadesPrevistas(resultSet.getString("ATIVIDADES_PREVISTAS"));
                 relatorio.setAtividadesConcluidas(resultSet.getString("ATIVIDADES_CONCLUIDAS"));
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
@@ -208,8 +204,6 @@ public class RelatorioDAO {
                 Relatorio relatorio = new Relatorio();
 
                 relatorio.setIdRelatorio(resultSet.getInt("ID_RELATORIO"));
-                relatorio.setIdAluno(resultSet.getInt("ID_ALUNO"));
-                relatorio.setIdTime(resultSet.getInt("ID_TIME"));
                 relatorio.setAtividadesPrevistas(resultSet.getString("ATIVIDADES_PREVISTAS"));
                 relatorio.setAtividadesConcluidas(resultSet.getString("ATIVIDADES_CONCLUIDAS"));
                 relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
