@@ -98,6 +98,7 @@ public class MainServlet extends HttpServlet {
 
 		//COMANDOS RELATORIO SEMANAL
 		comandos.put("relatorioSemanal", new CreateScreenRelatorioSemanalCommand());
+		comandos.put("adicionaRelatorio", new EnviarRelatorioCommand());
 
 		//COMANDOS EQUIPAMENTOS
 		comandos.put("listaEquipamentos", new ListarEquipamentosCommand());
