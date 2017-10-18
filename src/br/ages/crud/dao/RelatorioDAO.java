@@ -76,24 +76,35 @@ public class RelatorioDAO {
         try {
             conexao = ConexaoUtil.getConexao();
 
-            StringBuilder sql = new StringBuilder();
+            for(int i = 1; i<=4; i++) {
+                StringBuilder sql = new StringBuilder();
 
-            sql.append("UPDATE tb_relatorio  STATUS = ?, ATIVIDADES_PREVISTAS = ?, ATIVIDADES_CONCLUIDAS = ?, "
-                    + "LICOESPROBLEMAS = ?, PROXIMO = ? WHERE ID_RELATORIO = ?;");
+                sql.append("UPDATE tb_relatorio SET ID_QUESTAO = ? , RESPOSTA = ? , DATA_RESPOSTA = ? ");
+                sql.append("WHERE ID_RELATORIO = ? ");
 
+                java.sql.Date dataInclusao = new java.sql.Date(relatorio.getDtInclusao().getTime());
 
-            PreparedStatement statement = conexao.prepareStatement(sql.toString());
-            statement.setString(1, relatorio.getStatus().toString());
-            statement.setString(2, relatorio.getAtividadesPrevistas());
-            statement.setString(3, relatorio.getAtividadesConcluidas());
-            statement.setString(4, relatorio.getLicoesProblemas());
-            statement.setString(5,relatorio.getProximo());
-            statement.setInt(6, relatorio.getIdRelatorio());
-            statement.setString(7, StatusRelatorio.REVISAO.toString());
+                PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
-            statement.executeUpdate();
+                statement.setInt(1, i);
+                switch (i) {
+                    case 1:
+                        statement.setString(2, relatorio.getAtividadesPrevistas());
+                        break;
+                    case 2:
+                        statement.setString(2, relatorio.getAtividadesConcluidas());
+                        break;
+                    case 3:
+                        statement.setString(2, relatorio.getLicoesProblemas());
+                        break;
+                    case 4:
+                        statement.setString(2, relatorio.getProximo());
+                }
+                statement.setDate(3, dataInclusao);
+                statement.setInt(4, (relatorio.getIdRelatorio()-1)+i);
 
-
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -103,7 +114,7 @@ public class RelatorioDAO {
         }
     }
 
-    public ArrayList<Relatorio> listarRelatorios(int idAluno) throws SQLException {
+    public ArrayList<Relatorio> listarRelatorios(int idAlunoTime) throws SQLException {
         Connection conexao = null;
         ArrayList<Relatorio> listaRelatorios = new ArrayList<Relatorio>();
 
