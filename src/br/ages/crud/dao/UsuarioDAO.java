@@ -487,7 +487,7 @@ public class UsuarioDAO {
 			StringBuilder sql = new StringBuilder();
 			int id = usuario.getIdUsuario();
 
-			sql.append("update ages_e.tb_usuario set senha = ?, perfil_acesso = ?," + "status_usuario = ?, id_tipo_usuario = ?, nome = ?, email = ?, matricula = ?" + "  where id_usuario = " + id + ";");
+			sql.append("update ages_e.tb_usuario set senha = ?, perfil_acesso = ?, status_usuario = ?, id_tipo_usuario = ?, nome = ?, email = ? where id_usuario = ? ");
 
 			PreparedStatement statement = conexao.prepareStatement(sql.toString());
 
@@ -497,7 +497,7 @@ public class UsuarioDAO {
 			statement.setInt(4, usuario.getTipoUsuario().getIdTipoUsuario());
 			statement.setString(5, usuario.getNome());
 			statement.setString(6, usuario.getEmail());
-			statement.setString(7, usuario.getMatricula());
+			statement.setInt(7,id);
 			okei = statement.execute();
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
