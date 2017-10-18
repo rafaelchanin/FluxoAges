@@ -72,7 +72,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="main?acao=relatorioSemanal">Realizar</a></li>
-                        <li><a href="#">Listar</a></li>
+                        <li><a href="main?acao=listaRelatorios">Listar</a></li>
                     </ul>
                 </li>
             </ul>

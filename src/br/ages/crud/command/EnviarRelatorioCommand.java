@@ -24,57 +24,55 @@ public class EnviarRelatorioCommand implements Command {
     private LocalDate hoje;
 
     @Override
-    public String execute(HttpServletRequest request) throws NegocioException, ParseException {
+    public String execute(HttpServletRequest request) throws ParseException {
         relatorio = new Relatorio();
         relatorioBO = new RelatorioBO();
 
-        proxima = "main?acao=horasProfessor";
+        proxima = "main?acao=relatorioSemanal";
 
-        hoje = LocalDate.now();
+        try {
+            hoje = LocalDate.now();
 
 
-        String atividadesPrevistas = request.getParameter("previstas");
-        String atividadesConcluidas = request.getParameter("concluidas");
-        String licoesProblemas = request.getParameter("problemas");
-        String proximo = request.getParameter("proximos");
-        SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String semana = request.getParameter("dia");
-        Usuario aluno = (Usuario) request.getSession().getAttribute("usuarioSessao");
-        String time = request.getParameter("time");
+            String atividadesPrevistas = request.getParameter("previstas");
+            String atividadesConcluidas = request.getParameter("concluidas");
+            String licoesProblemas = request.getParameter("problemas");
+            String proximo = request.getParameter("proximos");
+            SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String semana = request.getParameter("dia");
+            Usuario aluno = (Usuario) request.getSession().getAttribute("usuarioSessao");
+            String time = request.getParameter("time");
 
             relatorio.setDtInclusao(Date.from(hoje.atStartOfDay(ZoneId.systemDefault()).toInstant()));
             relatorio.setStatus(StatusRelatorio.REVISAO);
             relatorio.setTipo(TipoRelatorio.SEMANAL);
 
-            if(!semana.equals("")) {
+            if (!semana.equals("")) {
                 System.out.println("Entrou Aqui!!!!!!!!");
                 relatorio.setInicioSemana(textFormat.parse(semana));
             }
-            if(!atividadesPrevistas.equals("")){
+            if (!atividadesPrevistas.equals("")) {
                 relatorio.setAtividadesPrevistas(atividadesPrevistas);
             }
-            if(!atividadesConcluidas.equals("")){
+            if (!atividadesConcluidas.equals("")) {
                 relatorio.setAtividadesConcluidas(atividadesConcluidas);
             }
-            if(!licoesProblemas.equals("")){
+            if (!licoesProblemas.equals("")) {
                 relatorio.setLicoesProblemas(licoesProblemas);
             }
-            if(!proximo.equals("")){
+            if (!proximo.equals("")) {
                 relatorio.setProximo(proximo);
             }
-            if(aluno != null && !time.equals("")){
-                int idTimeAluno = relatorioBO.validaAluno(aluno,Integer.parseInt(time));
-                if(idTimeAluno > 0){
+            if (aluno != null && !time.equals("")) {
+                int idTimeAluno = relatorioBO.validaAluno(aluno, Integer.parseInt(time));
+                if (idTimeAluno > 0) {
                     relatorio.setIdTimeAluno(idTimeAluno);
-                }else {
-                    return "main?acao=horasProfessor";
+                    relatorioBO.cadastrarRelatorio(relatorio);
                 }
             }
-
-            if(relatorioBO.validarRelatorio(relatorio)){
-                relatorioBO.cadastrarRelatorio(relatorio);
-            }
-
+        }catch (Exception e){
+            request.setAttribute("msgErro", e.getMessage());
+        }
 
         return proxima;
     }

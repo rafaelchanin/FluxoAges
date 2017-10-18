@@ -102,6 +102,8 @@ public class MensagemContantes {
 
 	public static final String MSG_ERR_RELATORIO_ALUNO_INVALIDO = "O aluno não está cadastrado neste time";
 
+	public static final String MSG_ERR_LISTAR_RELATORIOS = "O Aluno não está cadastrado em nenhum time";
+
 
 	//msgs de Turma
 	

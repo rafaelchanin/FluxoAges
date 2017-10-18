@@ -18,18 +18,10 @@ public class ConexaoUtil {
 	private static ResourceBundle configDB = ResourceBundle.getBundle(Constantes.AMBIENTE_PROPERTIES);
 
 	public static Connection getConexao() throws ClassNotFoundException, SQLException {
-		InitialContext ctx = null;
-		try {
-			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("jdbc/MySQLAges");
-			Connection conn = ds.getConnection();
-			return conn;
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		Class.forName(configDB.getString(Constantes.CONEXAO_BD_DRIVE));
 
-
-		return null;
+		return DriverManager.getConnection(configDB.getString(Constantes.CONEXAO_BD_URL), configDB.getString(Constantes.CONEXAO_BD_USER),
+				configDB.getString(Constantes.CONEXAO_BD_PASSWORD));
 	}
 
 	public static void main(String[] args) {
@@ -41,3 +33,5 @@ public class ConexaoUtil {
 		}
 	}
 }
+
+

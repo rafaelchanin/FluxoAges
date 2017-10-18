@@ -67,11 +67,14 @@ public class RelatorioBO {
 
     }
 
-    public List<Relatorio> listarRelatorios(int idAluno) {
+    public List<Relatorio> listarRelatorios(int idAluno) throws NegocioException {
         List<Relatorio> listRelatorio = null;
 
         try {
-            listRelatorio = relatorioDAO.listarRelatorios(idAluno);
+            int idTimeAluno = relatorioDAO.time(idAluno);
+            if(idTimeAluno > 0) {
+                listRelatorio = relatorioDAO.listarRelatorios(idTimeAluno);
+            } else throw new NegocioException(MensagemContantes.MSG_ERR_LISTAR_RELATORIOS);
         } catch (SQLException e) {
             e.printStackTrace();
         }
