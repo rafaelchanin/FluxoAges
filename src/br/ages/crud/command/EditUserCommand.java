@@ -32,7 +32,7 @@ public class EditUserCommand implements Command{
 		String senhaString = request.getParameter("senha");
 		String idTipoUsuario = request.getParameter("tipoUsuario");
 		String perfilAcessoString = request.getParameter("perfilAcesso");
-		String statusUsuarioString = request.getParameter("statusUsuario");
+		String statusUsuarioString = request.getParameter("status");
 		String matriculaString = request.getParameter("matricula");
 		String nomeString = request.getParameter("nome");
 		String emailString = request.getParameter("email");
