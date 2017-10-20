@@ -1,5 +1,6 @@
 <%@ page import="br.ages.crud.model.Relatorio" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="br.ages.crud.model.StatusRelatorio" %><%--
   Created by IntelliJ IDEA.
   User: gloff
   Date: 18/10/17
@@ -8,7 +9,7 @@
 --%>
 <jsp:include page="../template/headAlunos.jsp"></jsp:include>
 
-<jsp:include page="../template/modal.jsp"></jsp:include>
+<jsp:include page="../template/modalRelatorio.jsp"></jsp:include>
 
 <div class="panel panel-primary">
 
@@ -38,14 +39,16 @@
                 %>
 
                 <tr>
-                    <td align="center"><%=relatorio.getInicioSemana()%></td>
-                    <td align="center"><%=relatorio.getStatus().toString()%></td>
-                    <td align="center"><%=relatorio.getDtInclusao()%></td>
+                    <td align="center"><%=relatorio.dataAbertura()%></td>
+                    <td align="center"><%=relatorio.getStatus().toStringFormal()%></td>
+                    <td align="center"><%=relatorio.dataEntrega()%></td>
                     <td align="center">
+                        <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
                         <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>"
+                            <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.getInicioSemana()%>"
                                data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
                         </form>
+                        <% } %>
                     </td>
                 </tr>
                 <%
@@ -69,16 +72,16 @@
     $(document).ready(function(){
         $('#listaRelatorios').dataTable({
             "language": {
-                "lengthMenu": "Mostrando _MENU_ registros por pÃ¡gina",
+                "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",
-                "info": "Mostrando _PAGE_ de _PAGES_ pÃ¡ginas",
+                "info": "Mostrando _PAGE_ de _PAGES_ páginas",
                 "infoEmpty": "Nenhum registros encontrados!",
                 "infoFiltered": "(Filtrado _MAX_ do total deregistros)",
                 "search":"Busca",
                 "paginate": {
                     "first":      "Primeiro",
-                    "last":       "Ãšltimo",
-                    "next":       "PrÃ³ximo",
+                    "last":       "Último",
+                    "next":       "Próximo",
                     "previous":   "Anterior"
                 },
             }

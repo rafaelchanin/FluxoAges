@@ -144,6 +144,93 @@ public class RelatorioDAO {
 
     }
 
+    public Relatorio buscaRelatorioId(int id){
+        Connection conexao = null;
+
+        Relatorio relatorio = new Relatorio();
+
+        try {
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+
+            sql.append("SELECT ID_TIME_ALUNO, DATA_ABERTURA ");
+            sql.append("FROM tb_relatorio ");
+            sql.append("WHERE ID_RELATORIO = ? ");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, id);
+
+            ResultSet resultset = statement.executeQuery();
+
+            System.out.println(resultset);
+
+            if(resultset.next()) {
+                relatorio.setIdTimeAluno(resultset.getInt("ID_TIME_ALUNO"));
+                relatorio.setInicioSemana(resultset.getDate("DATA_ABERTURA"));
+            }
+
+
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return relatorio;
+
+    }
+
+    public Relatorio buscaRespostas(int id, Relatorio relatorio){
+        Connection conexao = null;
+
+        try{
+            conexao = ConexaoUtil.getConexao();
+
+            for(int i = 1; i <= 4; i++) {
+                StringBuilder sql = new StringBuilder();
+
+                sql.append("SELECT RESPOSTA ");
+                sql.append("FROM tb_resposta ");
+                sql.append("WHERE ID_RELATORIO = ? AND ID_QUESTAO = ? ");
+
+                PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+                statement.setInt(1,id);
+                statement.setInt(2,i);
+
+                ResultSet resultset = statement.executeQuery();
+
+                if(resultset.next()) {
+                    switch (i) {
+                        case 1:
+                            relatorio.setAtividadesPrevistas(resultset.getString("RESPOSTA"));
+                            break;
+                        case 2:
+                            relatorio.setAtividadesConcluidas(resultset.getString("RESPOSTA"));
+                            break;
+                        case 3:
+                            relatorio.setLicoesProblemas(resultset.getString("RESPOSTA"));
+                            break;
+                        case 4:
+                            relatorio.setProximo(resultset.getString("RESPOSTA"));
+                    }
+                }
+
+            }
+
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return relatorio;
+    }
+
     public void editarRelatorio(Relatorio relatorio) throws SQLException {
         Connection conexao = null;
 
@@ -153,29 +240,26 @@ public class RelatorioDAO {
             for(int i = 1; i<=4; i++) {
                 StringBuilder sql = new StringBuilder();
 
-                sql.append("UPDATE tb_relatorio SET ID_QUESTAO = ? , RESPOSTA = ? , DATA_RESPOSTA = ? ");
-                sql.append("WHERE ID_RELATORIO = ? ");
-
-                java.sql.Date dataInclusao = new java.sql.Date(relatorio.getDtInclusao().getTime());
+                sql.append("UPDATE tb_resposta SET  RESPOSTA = ? ");
+                sql.append("WHERE ID_RELATORIO = ? && ID_QUESTAO = ? ");
 
                 PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
-                statement.setInt(1, i);
                 switch (i) {
                     case 1:
-                        statement.setString(2, relatorio.getAtividadesPrevistas());
+                        statement.setString(1, relatorio.getAtividadesPrevistas());
                         break;
                     case 2:
-                        statement.setString(2, relatorio.getAtividadesConcluidas());
+                        statement.setString(1, relatorio.getAtividadesConcluidas());
                         break;
                     case 3:
-                        statement.setString(2, relatorio.getLicoesProblemas());
+                        statement.setString(1, relatorio.getLicoesProblemas());
                         break;
                     case 4:
-                        statement.setString(2, relatorio.getProximo());
+                        statement.setString(1, relatorio.getProximo());
                 }
-                statement.setDate(3, dataInclusao);
-                statement.setInt(4, (relatorio.getIdRelatorio()-1)+i);
+                statement.setInt(2, relatorio.getIdRelatorio());
+                statement.setInt(3, i);
 
                 statement.executeUpdate();
             }

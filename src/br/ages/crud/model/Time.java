@@ -13,7 +13,7 @@ public class Time {
 	private Date dtInclusao;
 	private ArrayList<Usuario> alunos;
 	private Date primeiroDia;
-
+	private Projeto projetoNome;
 
 	public Time(int id, int orientador, int projeto, int semestre, int ano, String status, Date dtInclusao) {
 		this.id = id;
@@ -92,6 +92,16 @@ public class Time {
 	}
 	public void setAlunos(ArrayList<Usuario> alunos) {
 		this.alunos = alunos;
+	}
+	public Projeto getProjetoNome() {
+		return projetoNome;
+	}
+	public void setProjetoNome(Projeto projetoNome) {
+		this.projetoNome = projetoNome;
+	}
+
+	public String toString() {
+		return ""+projetoNome.getNomeProjeto()+" / "+ano+"/"+semestre;
 	}
 
 }

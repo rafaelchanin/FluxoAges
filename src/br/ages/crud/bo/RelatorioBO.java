@@ -37,6 +37,10 @@ public class RelatorioBO {
             valido = false;
             msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Lições Aprendidas e Problemas Encontrados").concat("<br/>"));
         }
+        if(relatorio.getProximo() == null || relatorio.getProximo().equals("")){
+            valido = false;
+            msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Proximos Passos").concat("<br/>"));
+        }
         if(!valido){
             throw new NegocioException(msg.toString());
         }
@@ -55,6 +59,17 @@ public class RelatorioBO {
             throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_RELATORIO);
         }
         return ok;
+    }
+
+    public Relatorio buscaRelatorioId(int id){
+        Relatorio relatorio;
+
+        relatorio = relatorioDAO.buscaRelatorioId(id);
+        relatorio.setIdRelatorio(id);
+
+        relatorio = relatorioDAO.buscaRespostas(id, relatorio);
+
+        return relatorio;
     }
 
     public void editarRelatorio(Relatorio relatorio){

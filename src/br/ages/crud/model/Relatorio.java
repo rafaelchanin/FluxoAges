@@ -1,5 +1,6 @@
 package br.ages.crud.model;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -16,21 +17,7 @@ public class Relatorio {
     private StatusRelatorio status;
     private TipoRelatorio tipo;
 
-    public Relatorio( String atividadesPrevistas, String atividadesConcluidas,String proximo, String licoesProblemas, Date inicioSemana, StatusRelatorio status) {
-        this.atividadesPrevistas = atividadesPrevistas;
-        this.atividadesConcluidas = atividadesConcluidas;
-        this.licoesProblemas = licoesProblemas;
-        this.proximo = proximo;
-        this.inicioSemana = inicioSemana;
-        this.status = status;
-    }
 
-    public Relatorio(String atividadesPrevistas, String atividadesConcluidas, String licoesProblemas, StatusRelatorio status) {
-        this.atividadesPrevistas = atividadesPrevistas;
-        this.atividadesConcluidas = atividadesConcluidas;
-        this.licoesProblemas = licoesProblemas;
-        this.status = status;
-    }
 
     public Relatorio() {
     }
@@ -114,6 +101,18 @@ public class Relatorio {
 
     public void setInicioSemana(Date inicioSemana) {
         this.inicioSemana = inicioSemana;
+    }
+
+    public String dataAbertura(){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        String dataTexto = data.format(this.getInicioSemana());
+        return dataTexto;
+    }
+
+    public String dataEntrega(){
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        String dataTexto = data.format(this.getDtInclusao());
+        return dataTexto;
     }
 
 }
