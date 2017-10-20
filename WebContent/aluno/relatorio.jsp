@@ -62,28 +62,28 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="form-label ages">Atividades Previstas:<span class="red">*</span></label>
-                        <textarea class="form-control" id="previstas" name="previstas"></textarea>
+                        <textarea class="form-control" id="previstas" name="previstas" required></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="form-label ages">Atividades Concluidas:<span class="red">*</span></label>
-                        <textarea class="form-control" id="concluidas" name="concluidas"></textarea>
+                        <textarea class="form-control" id="concluidas" name="concluidas" required></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="form-label ages">Lições Aprendidas e Problemas Encontrados:<span class="red">*</span></label>
-                        <textarea class="form-control" id="problemas" name="problemas"></textarea>
+                        <textarea class="form-control" id="problemas" name="problemas" required></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="form-label ages">Proximos Passos:<span class="red">*</span> </label>
-                        <textarea class="form-control" id="proximos" name="proximos"></textarea>
+                        <textarea class="form-control" id="proximos" name="proximos" required></textarea>
                     </div>
                 </div>
             </div>

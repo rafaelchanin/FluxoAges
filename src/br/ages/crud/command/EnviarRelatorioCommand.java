@@ -68,6 +68,7 @@ public class EnviarRelatorioCommand implements Command {
                 if (idTimeAluno > 0) {
                     relatorio.setIdTimeAluno(idTimeAluno);
                     relatorioBO.cadastrarRelatorio(relatorio);
+                    proxima = "main?acao=listaRelatorios";
                 }
             }
         }catch (Exception e){
