@@ -84,6 +84,16 @@ public class TimeBO {
 		}
 		
 	}
-	
-	
+
+
+	public Time buscarTimeIdTimeAluno(int idTimeAluno) {
+		Time time;
+
+		int idTime = timeDAO.buscaTimeIdTimeAluno(idTimeAluno);
+
+		time = timeDAO.buscaTime(idTime);
+
+
+		return time;
+	}
 }

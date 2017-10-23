@@ -266,4 +266,37 @@ public class TimeDAO {
 	}
 
 
+    public int buscaTimeIdTimeAluno(int idTimeAluno) {
+		Connection conexao = null;
+		int idTime = -1;
+
+
+		try{
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT ID_TIME ");
+			sql.append("FROM tb_time_aluno ");
+			sql.append("WHERE ID_TIME_ALUNO = ? ");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+
+			statement.setInt(1, idTimeAluno);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			if(resultSet.next()) {
+				idTime = resultSet.getInt("ID_TIME");
+			}
+
+			conexao.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return idTime;
+	}
 }

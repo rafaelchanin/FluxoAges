@@ -51,6 +51,12 @@ public class MainServlet extends HttpServlet {
 		comandos.put("editaProjeto", new EditaProjetoCommand());
 		comandos.put("removeProjeto", new RemoveProjetoCommand());
 		comandos.put("uploadArquivoProjeto", new UploadProjetoCommand());
+
+		//COMANDOS DE GRUPO
+		comandos.put("telaGrupo", new CreateScreenGrupoCommand());
+		comandos.put("listaGrupos", new ListaGruposCommand());
+		comandos.put("adicionaGrupo", new AdicionaGrupoCommand());
+		comandos.put("editaGrupo", new EditaGrupoCommand());
 		
 		//COMANDOS DE TURMA
 		
@@ -89,6 +95,12 @@ public class MainServlet extends HttpServlet {
 		comandos.put("adicionaSkill", new AddSkillCommand());
 		comandos.put("skills", new CreateScreenSkillCommand());
 		comandos.put("removerPontoAluno", new RemoverPontoAlunoCommand());
+
+		//COMANDOS RELATORIO SEMANAL
+		comandos.put("relatorioSemanal", new CreateScreenRelatorioSemanalCommand());
+		comandos.put("adicionaRelatorio", new EnviarRelatorioCommand());
+		comandos.put("listaRelatorios", new ListarRelatorioSemanalCommand());
+		comandos.put("editaRelatorio", new EditaRelatorioCommand());
 
 		//COMANDOS EQUIPAMENTOS
 		comandos.put("listaEquipamentos", new ListarEquipamentosCommand());

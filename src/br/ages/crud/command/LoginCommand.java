@@ -27,7 +27,7 @@ public class LoginCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		// seta a mesma pagina, para o caso de erro/exceção
+		// seta a mesma pagina, para o caso de erro/exceï¿½ï¿½o
 		proxima = "login.jsp";
 		usuarioBO = new UsuarioBO();
 		util = new Util();
@@ -44,7 +44,7 @@ public class LoginCommand implements Command {
 					request.getSession().setAttribute("usuarioSessao", getUsuario());
 					request.getSession().setAttribute("versao", util.getVersion());
 					proxima = "main?acao=listaProjetos";
-				}else if(user.getPerfilAcesso() == PerfilAcesso.NAVEGADOR){
+				}else{
 					request.getSession().setAttribute("usuarioSessao", getUsuario());
 					request.getSession().setAttribute("versao", util.getVersion());
 					proxima = "main?acao=horasProfessor";

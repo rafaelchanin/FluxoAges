@@ -33,7 +33,6 @@ public class UsuarioDAO {
 	 * Autentica o usu?rio
 	 * 
 	 * @author cassio trindade
-	 * @param usuarioDTO
 	 * @return
 	 * @throws PersistenciaException
 	 * @throws SQLException 
@@ -137,6 +136,8 @@ public class UsuarioDAO {
 				usuario.setSenha(resultset.getString("SENHA"));
 			} else
 				usuario = null;
+
+			conexao.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new PersistenciaException(e);
 		}

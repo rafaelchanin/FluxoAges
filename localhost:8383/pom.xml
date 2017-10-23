@@ -31,9 +31,9 @@
 			<id>homologacao</id>
 			<properties>
 				<build.number>SNAPSHOT</build.number>
-				<sgbd.url>jdbc:mysql://192.222.0.5:3309/ages_e</sgbd.url>
-				<sgbd.user>root</sgbd.user>
-				<sgbd.password>@ges123$</sgbd.password>
+				<sgbd.url>jdbc:mysql://10.32.223.3:3306/ages_e</sgbd.url>
+				<sgbd.user>ages</sgbd.user>
+				<sgbd.password>ages123_e#BD</sgbd.password>
 				<upload.path>/home/ages/uploadProjetos</upload.path>
 				<log.path>/home/ages/</log.path>
 			</properties>
@@ -42,9 +42,9 @@
 		<profile>
 			<id>producao</id>
 			<properties>
-				<sgbd.url>jdbc:mysql://192.222.0.2:3306/ages_e</sgbd.url>
-				<sgbd.user>root</sgbd.user>
-				<sgbd.password>@ges</sgbd.password>
+				<sgbd.url>jdbc:mysql://localhost:3306/ages_e</sgbd.url>
+				<sgbd.user>ages_e</sgbd.user>
+				<sgbd.password>oissac1906#ages_e</sgbd.password>
 				<upload.path>/home/ages/uploadProjetos</upload.path>
 				<log.path>/home/ages/</log.path>
 			</properties>
@@ -71,6 +71,7 @@
 					<target>1.8</target>
 
 					<encoding>${project.build.sourceEncoding}</encoding>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 
 				</configuration>
 			</plugin>
@@ -92,9 +93,26 @@
 				</configuration>
 			</plugin>
 
-
-
-
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>TomcatServer</server>
+					<path>/FluxoAGES</path>
+					<username>admin</username>
+					<password>admin</password>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${build.Number}</Implementation-Build>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
         		<groupId>org.liquibase</groupId>
        	     	<artifactId>liquibase-maven-plugin</artifactId>
@@ -112,12 +130,6 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.glassfish.maven.plugin/maven-glassfish-plugin -->
-		<dependency>
-			<groupId>org.glassfish.maven.plugin</groupId>
-			<artifactId>maven-glassfish-plugin</artifactId>
-			<version>2.1</version>
-		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -131,7 +143,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.44</version>
+			<version>5.1.35</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>

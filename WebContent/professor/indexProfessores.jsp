@@ -7,7 +7,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.util.HashMap" %>
-<jsp:include page="../template/headProfessor.jsp"></jsp:include>
+
+
+<jsp:include page="../template/headAlunos.jsp"></jsp:include>
 
 
 <div class="panel panel-primary">
