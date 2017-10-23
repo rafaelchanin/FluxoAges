@@ -73,8 +73,8 @@ public class RelatorioDAO {
             StringBuilder sql = new StringBuilder();
 
             sql.append("SELECT ID_TIME_ALUNO FROM (( ages_e.tb_time_aluno");
-            sql.append(" INNER JOIN ages_e.TB_USUARIO ON ages_e.TB_TIME_ALUNO.ID_ALUNO = ages_e.TB_USUARIO.ID_USUARIO)");
-            sql.append(" INNER JOIN ages_e.TB_TIME ON ages_e.TB_TIME.ID_TIME = ages_e.TB_TIME_ALUNO.ID_TIME) WHERE ages_e.TB_TIME.STATUS_TIME = ? AND ages_e.TB_USUARIO.ID_USUARIO = ? ");
+            sql.append(" INNER JOIN ages_e.tb_usuario ON ages_e.tb_time_aluno.ID_ALUNO = ages_e.tb_usuario.ID_USUARIO)");
+            sql.append(" INNER JOIN ages_e.tb_time ON ages_e.tb_time.ID_TIME = ages_e.tb_time_aluno.ID_TIME) WHERE ages_e.tb_time.STATUS_TIME = ? AND ages_e.tb_usuario.ID_USUARIO = ? ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
@@ -281,7 +281,7 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
             sql.append(" SELECT ID_RELATORIO, DATA_ABERTURA, STATUS, DATA_RESPOSTA");
-            sql.append(" FROM TB_RELATORIO ");
+            sql.append(" FROM tb_relatorio ");
             sql.append(" WHERE ID_TIME_ALUNO = ?");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
@@ -320,7 +320,7 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
             sql.append(" SELECT ID_RELATORIO, ID_ALUNO, ID_TIME, ATIVIDADES_PREVISTAS, ATIVIDADES_CONCLUIDAS, LICOESPROBLEMAS, PROXIMO, INICIO_SEMANA, FIM_SEMANA, STATUS, DT_INCLUSAO");
-            sql.append(" FROM TB_RELATORIO ");
+            sql.append(" FROM tb_relatorio ");
             sql.append(" WHERE ID_TIME = ?");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
@@ -363,7 +363,7 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
             sql.append(" SELECT ID_RELATORIO, ID_ALUNO, ID_TIME, ATIVIDADES_PREVISTAS, ATIVIDADES_CONCLUIDAS, LICOESPROBLEMAS, PROXIMO, INICIO_SEMANA, FIM_SEMANA, STATUS, DT_INCLUSAO");
-            sql.append(" FROM TB_RELATORIO ");
+            sql.append(" FROM tb_relatorio ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
             ResultSet resultSet = statement.executeQuery();
@@ -401,7 +401,7 @@ public class RelatorioDAO {
             conexao = ConexaoUtil.getConexao();
             StringBuilder sql = new StringBuilder();
             sql.append(" SELECT ID_TIME_ALUNO");
-            sql.append(" FROM TB_TIME_ALUNO");
+            sql.append(" FROM tb_time_aluno");
             sql.append(" WHERE ID_TIME = ? AND ID_ALUNO = ? ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
