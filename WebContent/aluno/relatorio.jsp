@@ -110,7 +110,9 @@
         $('#dataEntrada').datetimepicker({
             daysOfWeekDisabled: [0,2,3,4,5,6],
             locale : 'pt-br',
-            sideBySide : true,
+            //sideBySide : true,
+            useCurrent : true,
+            //maxDate: new Date(),
             format: "DD/MM/YYYY"
         });//.on('changeDate',function(e){
             //document.getElementById("fim").value = e.value;

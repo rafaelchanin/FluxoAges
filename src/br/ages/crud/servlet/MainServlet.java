@@ -86,6 +86,12 @@ public class MainServlet extends HttpServlet {
 		comandos.put("editaStakeholder", new EditStakeholderCommand());
 		comandos.put("removeStakeholder", new RemoveStakeholderCommand());
 
+		//COMANDOS PROFESSOR
+		comandos.put("listaRelatoriosSemanaisProfessor", new ListarRelatorioSemanalProfessor());
+		comandos.put("aceitarRelatorio", new AceitarRelatorioCommand());
+		comandos.put("rejeitarRelatorio", new RecusarRelatorioCommand());
+		comandos.put("visualizarRelatorio", new VisualizarRelatorioCommand());
+
 		//COMANDOS ALUNO
 		comandos.put("registrarPonto", new CreateScreenPontoCommand());
 		comandos.put("adicionaPonto", new AddPontoCommand());
