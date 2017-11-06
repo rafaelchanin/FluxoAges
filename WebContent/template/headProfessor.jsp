@@ -9,40 +9,40 @@
     <link rel="icon" href="img/favicon.ico">
 
     <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
 
     <!-- Include the plugin's CSS and JS: Cassio DataTable -->
-    <link rel="stylesheet" href="/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="./css/dataTables.bootstrap.css">
 
     <!-- STYLE -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 
     <!-- JQUERY -->
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-    <script src="/js/index.js"></script>
+    <script src="./js/index.js"></script>
 
     <!-- BOOTSTRAP -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
 
 
     <!-- Include the plugin's CSS and JS: Cassio DataTable -->
-    <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="./js/dataTables.bootstrap.min.js"></script>
 
 
     <!-- Include the plugin's CSS and JS: Cassio Dual ListBox -->
-    <script src="/js/jquery.bootstrap-duallistbox.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-duallistbox.min.css">
+    <script src="./js/jquery.bootstrap-duallistbox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-duallistbox.min.css">
 
     <!-- Include the plugin's CSS and JS: Cassio DateTime Picker -->
-    <script type="text/javascript" src="/js/moment.js"></script>
-    <script type="text/javascript" src="/js/pt-br.js"></script>
-    <script type="text/javascript" src="/js/transition.js"></script>
-    <script type="text/javascript" src="/js/collapse.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="./js/moment.js"></script>
+    <script type="text/javascript" src="./js/pt-br.js"></script>
+    <script type="text/javascript" src="./js/transition.js"></script>
+    <script type="text/javascript" src="./js/collapse.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-datetimepicker.min.css">
 
 
 </head>
