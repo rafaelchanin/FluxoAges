@@ -3,6 +3,7 @@ package br.ages.crud.bo;
 import br.ages.crud.dao.RelatorioDAO;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.model.Relatorio;
+import br.ages.crud.model.StatusRelatorio;
 import br.ages.crud.model.Usuario;
 import br.ages.crud.util.MensagemContantes;
 import br.ages.crud.validator.DataValidator;
@@ -11,6 +12,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import java.sql.SQLException;
 import java.util.List;
 
+@SuppressWarnings("LossyEncoding")
 public class RelatorioBO {
 
     private RelatorioDAO relatorioDAO;
@@ -35,7 +37,7 @@ public class RelatorioBO {
         }
         if(relatorio.getLicoesProblemas() == null || relatorio.getLicoesProblemas().equals("")){
             valido = false;
-            msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Lições Aprendidas e Problemas Encontrados").concat("<br/>"));
+            msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Liï¿½ï¿½es Aprendidas e Problemas Encontrados").concat("<br/>"));
         }
         if(relatorio.getProximo() == null || relatorio.getProximo().equals("")){
             valido = false;
@@ -97,11 +99,14 @@ public class RelatorioBO {
         return listRelatorio;
     }
 
-    public List<Relatorio> listarRelatoriosCoord(int idTime) {
+    public List<Relatorio> listarRelatoriosCoord(int idAluno, String nomeAluno) throws NegocioException {
         List<Relatorio> listRelatorio = null;
 
         try {
-            listRelatorio = relatorioDAO.listarRelatoriosCoord(idTime);
+            int idTimeAluno = relatorioDAO.time(idAluno);
+            if(idTimeAluno > 0) {
+                listRelatorio = relatorioDAO.listarRelatoriosCoord(idTimeAluno,idAluno, nomeAluno);
+            } else throw new NegocioException(MensagemContantes.MSG_ERR_LISTAR_RELATORIOS);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,4 +138,20 @@ public class RelatorioBO {
     }
 
 
+    public void aceitar(int idRelatorio) throws SQLException {
+        Relatorio relatorio = new Relatorio();
+        relatorio.setStatus(StatusRelatorio.VALIDO);
+        relatorio.setIdRelatorio(idRelatorio);
+        relatorioDAO.validar(relatorio);
+    }
+
+    public void recusar(int idRelatorio) throws SQLException {
+        Relatorio relatorio = new Relatorio();
+
+        relatorio.setIdRelatorio(idRelatorio);
+        relatorio.setStatus(StatusRelatorio.INVALIDO);
+
+        relatorioDAO.validar(relatorio);
+
+    }
 }

@@ -8,6 +8,8 @@ public class Relatorio {
 
     private int idRelatorio;
     private int idTimeAluno;
+    private int idAluno;
+    private String aluno;
     private String atividadesPrevistas;
     private String atividadesConcluidas;
     private String licoesProblemas;
@@ -37,6 +39,22 @@ public class Relatorio {
 
     public TipoRelatorio getTipo() {
         return tipo;
+    }
+
+    public int getIdAluno() {
+        return idAluno;
+    }
+
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
+
+    public String getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(String aluno) {
+        this.aluno = aluno;
     }
 
     public void setTipo(TipoRelatorio tipo) {

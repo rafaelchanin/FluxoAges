@@ -298,6 +298,7 @@ public class RelatorioDAO {
                 relatorio.setStatus(StatusRelatorio.valueOf(resultSet.getString("STATUS")));
                 relatorio.setDtInclusao(resultSet.getDate("DATA_RESPOSTA"));
 
+
                 listaRelatorios.add(relatorio);
             }
         } catch (SQLException e) {
@@ -311,7 +312,7 @@ public class RelatorioDAO {
         return listaRelatorios;
     }
 
-    public ArrayList<Relatorio> listarRelatoriosCoord(int idTime) throws SQLException {
+    public ArrayList<Relatorio> listarRelatoriosCoord(int idAlunoTime, int idAluno, String aluno) throws SQLException {
         Connection conexao = null;
         ArrayList<Relatorio> listaRelatorios = new ArrayList<Relatorio>();
 
@@ -319,13 +320,13 @@ public class RelatorioDAO {
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append(" SELECT ID_RELATORIO, ID_ALUNO, ID_TIME, ATIVIDADES_PREVISTAS, ATIVIDADES_CONCLUIDAS, LICOESPROBLEMAS, PROXIMO, INICIO_SEMANA, FIM_SEMANA, STATUS, DT_INCLUSAO");
+            sql.append(" SELECT ID_RELATORIO, DATA_ABERTURA, STATUS, DATA_RESPOSTA");
             sql.append(" FROM TB_RELATORIO ");
-            sql.append(" WHERE ID_TIME = ?");
+            sql.append(" WHERE ID_TIME_ALUNO = ?");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
 
-            statement.setInt(1, idTime);
+            statement.setInt(1, idAlunoTime);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -333,13 +334,11 @@ public class RelatorioDAO {
                 Relatorio relatorio = new Relatorio();
 
                 relatorio.setIdRelatorio(resultSet.getInt("ID_RELATORIO"));
-                relatorio.setAtividadesPrevistas(resultSet.getString("ATIVIDADES_PREVISTAS"));
-                relatorio.setAtividadesConcluidas(resultSet.getString("ATIVIDADES_CONCLUIDAS"));
-                relatorio.setLicoesProblemas(resultSet.getString("LICOESPROBLEMAS"));
-                relatorio.setProximo(resultSet.getString("PROXIMO"));
-                relatorio.setInicioSemana(resultSet.getDate("INICIO_SEMANA"));
+                relatorio.setInicioSemana(resultSet.getDate("DATA_ABERTURA"));
                 relatorio.setStatus(StatusRelatorio.valueOf(resultSet.getString("STATUS")));
-                relatorio.setDtInclusao(resultSet.getDate("DT_INCLUSAO"));
+                relatorio.setDtInclusao(resultSet.getDate("DATA_RESPOSTA"));
+                relatorio.setIdAluno(idAluno);
+                relatorio.setAluno(aluno);
 
                 listaRelatorios.add(relatorio);
             }
@@ -425,4 +424,30 @@ public class RelatorioDAO {
 
         return idTimeAluno;
     }
+
+    public void validar(Relatorio relatorio) throws SQLException {
+        Connection conexao = null;
+
+        try{
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append(" UPDATE tb_relatorio SET status = ?");
+            sql.append(" WHERE id_relatorio = ?");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            statement.setString(1,relatorio.getStatus().toString());
+            statement.setInt(2, relatorio.getIdRelatorio());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            conexao.close();
+        }
+    }
+
 }
