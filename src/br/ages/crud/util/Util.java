@@ -150,9 +150,9 @@ public class Util {
 		int mes = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
 		int ano = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
 		if (mes >= 7)
-			semestre = "01"+"-"+"07"+"-"+ano;
+			semestre = "01"+"-"+"08"+"-"+ano;
 		else
-			semestre = "01"+"-"+"01"+"-"+ano;
+			semestre = "01"+"-"+"03"+"-"+ano;
 		dSemestre = new SimpleDateFormat("dd-MM-yyyy").parse(semestre);
 		//System.out.println(semestre);
 		return dSemestre;
