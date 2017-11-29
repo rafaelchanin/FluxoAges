@@ -66,7 +66,7 @@ public class RelatorioHorasProfessoresCommand implements Command {
                 int weekNumberPrimeiraAula = primeiraAula.get(weekFields.weekOfWeekBasedYear());
 
                 int horaEsperada = (weekNumberHoje - weekNumberPrimeiraAula + 1) * 4 * 60;
-                if (horaEsperada > 60) horaEsperada = 3600 ;
+                if (horaEsperada > 3600) horaEsperada = 3600 ;
 
                 horasEsperadas.put(time.getId(),horaEsperada);
             }

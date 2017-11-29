@@ -434,7 +434,7 @@ public class PontoDAO {
 			java.sql.Timestamp dataSaidaSql = new java.sql.Timestamp(dataSaida.getTime());
 			statement.setTimestamp(2, dataSaidaSql);
 
-			statement.setInt(3,500);
+			statement.setInt(3,100);
 			
 		//	statement.setTimestamp(3, dataEntradaSql);
 			
