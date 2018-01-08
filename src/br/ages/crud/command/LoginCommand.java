@@ -47,7 +47,11 @@ public class LoginCommand implements Command {
 				}else{
 					request.getSession().setAttribute("usuarioSessao", getUsuario());
 					request.getSession().setAttribute("versao", util.getVersion());
-					proxima = "main?acao=horasProfessor";
+					if(user.getTipoUsuario().getIdTipoUsuario() == 2){
+						proxima = "main?acao=horasAluno";
+					}else {
+						proxima = "main?acao=horasProfessor";
+					}
 				}
 			
 			}

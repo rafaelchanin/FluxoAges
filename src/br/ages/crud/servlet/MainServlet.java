@@ -102,6 +102,8 @@ public class MainServlet extends HttpServlet {
 		comandos.put("skills", new CreateScreenSkillCommand());
 		comandos.put("removerPontoAluno", new RemoverPontoAlunoCommand());
 
+		comandos.put("horasAluno", new HorasAlunoCommand());
+
 		//COMANDOS RELATORIO SEMANAL
 		comandos.put("relatorioSemanal", new CreateScreenRelatorioSemanalCommand());
 		comandos.put("adicionaRelatorio", new EnviarRelatorioCommand());
