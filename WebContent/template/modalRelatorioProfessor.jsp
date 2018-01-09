@@ -14,7 +14,7 @@
             var id = botao.data('id');
 
             $(this).find('.modal-title').text('Aceitar Relatorio');
-            $(this).find('.modal-descricao').text('Você realmente deseja aceitar o relatorio (' + relatorio + ')?');
+            $(this).find('.modal-descricao').text('Você realmente deseja aceitar o relatorio?');
 
             $('#formAceitar').attr('action', "main?acao=aceitarRelatorio&id_relatorio=" + id);
         });
@@ -24,7 +24,7 @@
             var id = botao.data('id');
 
             $(this).find('.modal-title').text('Recusar Relatorio');
-            $(this).find('.modal-descricao').text('Você realmente deseja recusar o relatorio (' + relatorio + ')?');
+            $(this).find('.modal-descricao').text('Você realmente deseja recusar o relatorio?');
 
             $('#formRejeitar').attr('action', "main?acao=rejeitarRelatorio&id_relatorio=" + id);
         });

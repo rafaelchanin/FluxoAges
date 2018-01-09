@@ -55,8 +55,6 @@
                     <th style="text-align: center;">Data de Abertura</th>
                     <th style="text-align: center;">Data de Entrega</th>
                     <th style="text-align: center"></th>
-                    <th style="text-align: center"></th>
-                    <th style="text-align: center"></th>
                 </tr>
                 </thead>
 
@@ -71,22 +69,6 @@
                     <td align="center"><%=relatorio.getStatus().toStringFormal()%></td>
                     <td align="center"><%=relatorio.dataAbertura()%></td>
                     <td align="center"><%=relatorio.dataEntrega()%></td>
-                    <td align="center">
-                        <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                        <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%> "
-                               data-target="#modalAceitar" title="Aceitar"> <i class="glyphicon glyphicon-check"></i></a>
-                        </form>
-                        <% }; %>
-                    </td>
-                    <td align="center">
-                        <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                        <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"
-                               data-target="#modalRecusar" title="Recusar"> <i class="glyphicon glyphicon-remove"></i></a>
-                        </form>
-                        <% } %>
-                    </td>
                     <td align="center">
                         <form action="" method="post">
                             <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"

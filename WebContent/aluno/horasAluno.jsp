@@ -95,9 +95,9 @@
                             <tr style="border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#EEE;">
                                 <td>Tipo de horas</td>
                                 <td style="text-align: center;">Realizadas</td>
-                                <td style="text-align: center;">Previstas atÃ© o momento</td>
+                                <td style="text-align: center;">Previstas até o momento</td>
                                 <td style="text-align: center;">Faltam</td>
-                                <td style="text-align: center;">Previstas atÃ© o fim do semestre</td>
+                                <td style="text-align: center;">Previstas até o fim do semestre</td>
                                 <td style="text-align: center;">Faltam</td>
                             </tr>
                             <tr>
@@ -130,7 +130,7 @@
                     <td style="display: none;"></td>
                     <td style="display: none;"></td>
                     <td style="display: none;"></td>
-                    <!-- DatePicker me obrigo a fazer essa gambiarra por que nÃ£o aceita o cosplan :/ -->
+                    <!-- DatePicker me obrigo a fazer essa gambiarra por que não aceita o cosplan :/ -->
                 </tr>
                 <%
                         };
@@ -173,16 +173,16 @@
         //
         $('#listaAlunos').dataTable({
             "language": {
-                "lengthMenu": "Mostrando _MENU_ registros por pÃ¡gina",
+                "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Sem registros - sorry",
-                "info": "Mostrando _PAGE_ de _PAGES_ pÃ¡ginas",
+                "info": "Mostrando _PAGE_ de _PAGES_ páginas",
                 "infoEmpty": "Nenhum registros encontrados!",
                 "infoFiltered": "(Filtrado _MAX_ do total deregistros)",
                 "search": "Pesquisar",
                 "paginate": {
                     "first":      "Primeiro",
-                    "last":       "Ãšltimo",
-                    "next":       "PrÃ³ximo",
+                    "last":       "Último",
+                    "next":       "Próximo",
                     "previous":   "Anterior"
                 },
             },

@@ -154,7 +154,7 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
 
-            sql.append("SELECT ID_TIME_ALUNO, DATA_ABERTURA ");
+            sql.append("SELECT ID_TIME_ALUNO, DATA_ABERTURA, STATUS ");
             sql.append("FROM tb_relatorio ");
             sql.append("WHERE ID_RELATORIO = ? ");
 
@@ -169,6 +169,7 @@ public class RelatorioDAO {
             if(resultset.next()) {
                 relatorio.setIdTimeAluno(resultset.getInt("ID_TIME_ALUNO"));
                 relatorio.setInicioSemana(resultset.getDate("DATA_ABERTURA"));
+                relatorio.setStatus(StatusRelatorio.valueOf(resultset.getString("STATUS")));
             }
 
 
@@ -321,9 +322,9 @@ public class RelatorioDAO {
 
             StringBuilder sql = new StringBuilder();
 
-            sql.append(" SELECT ID_RELATORIO, ID_ALUNO, ID_TIME, ATIVIDADES_PREVISTAS, ATIVIDADES_CONCLUIDAS, LICOESPROBLEMAS, PROXIMO, INICIO_SEMANA, FIM_SEMANA, STATUS, DT_INCLUSAO");
+            sql.append(" SELECT ID_RELATORIO, DATA_ABERTURA, STATUS, DATA_RESPOSTA");
             sql.append(" FROM tb_relatorio ");
-            sql.append(" WHERE ID_TIME = ?");
+            sql.append(" WHERE ID_TIME_ALUNO = ?");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
 
