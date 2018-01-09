@@ -12,6 +12,10 @@ public class AlunoPonto {
     private ArrayList<ResumoPonto> pontos;
     private LocalDate primeiraAula;
 
+    public AlunoPonto(){
+
+    }
+
     public int getId() {
         return id;
     }
@@ -67,4 +71,5 @@ public class AlunoPonto {
     public void setPrimeiraAula(LocalDate primeiraAula) {
         this.primeiraAula = primeiraAula;
     }
+
 }

@@ -32,11 +32,12 @@ public class AlunoPontoDAO {
         projetoBO = new ProjetoBO();
         timeDAO = new TimeDAO();
         pontoBO = new PontoBO();
+        usuarioDAO = new UsuarioDAO();
         try{
             conexao = ConexaoUtil.getConexao();
 
             StringBuilder sql = new StringBuilder();
-            sql.append(" select tb1.id_time, tb1.id_orientador, tb1.status_time, tb1.semestre, tb1.ano, tb1.dt_inclusao, tb1.primeiro_dia");
+            sql.append(" select tb1.id_time, tb1.id_projeto, tb1.id_orientador, tb1.status_time, tb1.semestre, tb1.ano, tb1.dt_inclusao, tb1.primeiro_dia");
             sql.append(" from (tb_time tb1 inner join tb_time_aluno tb2 on tb1.ID_TIME = tb2.ID_TIME) ");
             sql.append(" where tb2.ID_ALUNO = ? and tb1.status_time = 'ativa' ");
 
@@ -46,6 +47,7 @@ public class AlunoPontoDAO {
 
             while (resultSet.next()) {
                 AlunoPonto aluno = new AlunoPonto();
+                aluno.setProjeto(projetoBO.buscarProjeto(resultSet.getInt("tb1.id_projeto")));
                 ArrayList<ResumoPonto> pontos = new ArrayList<ResumoPonto>();
                 ArrayList<ResumoPonto> temp = pontoBO.listaPontoAlunos(idAluno, Util.getDataInicialSemestre(resultSet.getInt("tb1.semestre"), resultSet.getInt("tb1.ano")), Util.getDataFinalSemestre(resultSet.getInt("tb1.semestre"), resultSet.getInt("tb1.ano")));
                 if (temp.size() > 0)
@@ -64,7 +66,9 @@ public class AlunoPontoDAO {
                     }
                 aluno.setPontos(pontos);
                 aluno.setPrimeiraAula(resultSet.getDate("tb1.primeiro_dia").toLocalDate());
-                aluno.setId(idAluno);
+                aluno.setId(0);
+                aluno.setAno(resultSet.getInt("tb1.ano"));
+                aluno.setSemestre(resultSet.getInt("tb1.semestre"));
                 pontoAluno.add(aluno);
             }
         }catch (Exception e) {

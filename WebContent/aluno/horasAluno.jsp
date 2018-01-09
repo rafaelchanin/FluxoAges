@@ -12,6 +12,7 @@
 <%
     Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao");
 %>
+
 <jsp:include page="../template/headAlunos.jsp"></jsp:include>
 <div class="panel panel-primary">
 
@@ -20,106 +21,126 @@
     <jsp:include page="/template/msg.jsp"></jsp:include>
 
     <div class="panel-body">
-        <%
-            Integer horaEsperada = (Integer) request.getAttribute("horaEsperada");
-            List<AlunoPonto> listaTimes = (List<AlunoPonto>) request.getAttribute("listaPonto");
-            String mesString = (String) request.getAttribute("mesString");
-            AlunoPonto alunoPonto = listaTimes.get(0);
-        %>
-        <table id="listaalunos<%=alunoPonto.getId()%>" class="listaalunos<%=alunoPonto.getId()%> table table-responsive table-striped table-hover table-condensed"
-               style="display: none;">
-            <thead>
-            <tr>
-                <th style="text-align: center;">Nome</th>
-                <th style="text-align: center;">Realizadas ate o momento</th>
-                <th style="text-align: center;">Faltam para hoje</th>
-                <th style="text-align: center;">Faltam para o semestre</th>
-            </tr>
-            </thead>
+        <form id="formListAluno" method="post">
+            <div class="form-group row">
+                <div class='col-sm-6' id='time1'>
+                    <label for="sel1" class="form-label ages">Time:<span
+                            class="red">*</span></label>
+                    <select class="form-control" id="time" name="time" required>
 
-            <tbody>
-            <%
-                for (ResumoPonto usuario : alunoPonto.getPontos()) {
-                    //RESUMIDO
-                    int horaTotaldia = usuario.getHoraTotalDiaValido();
-                    String horasValidas = TimeConverter.ConvertMinuteToHours(horaTotaldia);
-                    String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - horaTotaldia);
-                    String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - horaTotaldia);
+                        <%
+                            Integer horaEsperada = (Integer) request.getAttribute("horaEsperada");
+                            List<AlunoPonto> listaTimes = (List<AlunoPonto>) request.getAttribute("listaPonto");
+                            String mesString = (String) request.getAttribute("mesString");
+                            AlunoPonto alunoPonto = listaTimes.get(0);
+                        %>
+                        <option value="<%=alunoPonto.getProjeto().getNomeProjeto()%>" id="<%=alunoPonto.getId()%>" readonly><%=alunoPonto.getProjeto().getNomeProjeto()%></option>
 
-                    //EXTRACLASSE
-                    String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
-                    String realizadasPrevistas = "";
-                    String realizadasTotal = "";
-                    //float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
-                    //String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
-                    //float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
-                    //String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
-                    if ((horaEsperada - horaTotaldia) > 0)
-                        realizadasPrevistas = TimeConverter.ConvertMinuteToHours(horaEsperada - horaTotaldia);
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <%for (AlunoPonto aluno : listaTimes) {	 %>
+            <table id="listaalunos<%=aluno.getId()%>" class="listaalunos<%=aluno.getId()%> table table-responsive table-striped table-hover table-condensed"
+                   style="display: none;">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">Nome</th>
+                    <th style="text-align: center;">Realizadas ate o momento</th>
+                    <th style="text-align: center;">Faltam para hoje</th>
+                    <th style="text-align: center;">Faltam para o semestre</th>
+                </tr>
+                </thead>
 
-                    if ((3600 - horaTotaldia) > 0)
-                        realizadasTotal = TimeConverter.ConvertMinuteToHours(3600 - horaTotaldia);
+                <tbody>
+                <%
 
-            %>
-            <tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
-                <td align="center"><%=usuario.getNomeAluno()%></td>
-                <td align="center" style="text-align: center;"><%=horasValidas%></td>
-                <td align="center" style="text-align: center;"><%=realizadasPrevistas%></td>
-                <td align="center" style="text-align: center;"><%=realizadasTotal%></td>
-            </tr>
+                    for (ResumoPonto usuario : aluno.getPontos()) {
 
-            <tr style="display: none;"
-                class="alunotitulo<%=usuario.getIdAluno()%>"
-                id="alunotitulo<%=usuario.getIdAluno()%>">
-                <td colspan="4" style="">
-                    <table style="width: 100%;"
-                           class="table-responsive table-condensed">
-                        <tr style="border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#EEE;">
-                            <td>Tipo de horas</td>
-                            <td style="text-align: center;">Realizadas</td>
-                            <td style="text-align: center;">Previstas até o momento</td>
-                            <td style="text-align: center;">Faltam</td>
-                            <td style="text-align: center;">Previstas até o fim do semestre</td>
-                            <td style="text-align: center;">Faltam</td>
-                        </tr>
-                        <tr>
-                            <td>Extraclasse</td>
-                            <td style="text-align: center;"><%=horasValidas%></td>
-                            <td style="text-align: center;"><%=previstas%></td>
-                            <td style="text-align: center;"><%=realizadasPrevistas%></td>
-                            <td style="text-align: center;">60:00</td>
-                            <td style="text-align: center;"><%=realizadasTotal%></td>
-                        </tr>
-                        <tr>
-                            <td>Em aula</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                            <td style="text-align: center;">-</td>
-                        </tr>
+                        //RESUMIDO
+                        int horaTotaldia = usuario.getHoraTotalDiaValido();
+                        String horasValidas = TimeConverter.ConvertMinuteToHours(horaTotaldia);
+                        String horasAprov = TimeConverter.ConvertMinuteToHours(5400 - horaTotaldia);
+                        String horasAprovCem = TimeConverter.ConvertMinuteToHours(7200 - horaTotaldia);
 
-                    </table>
-                </td>
-                <td style="display: none;"></td>
-                <td style="display: none;"></td>
-                <td style="display: none;"></td>
-                <!-- DatePicker me obrigo a fazer essa gambiarra por que não aceita o cosplan :/ -->
-            </tr>
-            <%
-                };
-            %>
-            </tbody>
+                        //EXTRACLASSE
+                        String previstas = TimeConverter.ConvertMinuteToHours(horaEsperada);
+                        String realizadasPrevistas = "";
+                        String realizadasTotal = "";
+                        //float realizadasPrevistasTemp = 100 * (Float.valueOf(horaTotaldia) / Float.valueOf(horaEsperada));
+                        //String realizadasPrevistas = TimeConverter.ConvertPorcentagemToString(realizadasPrevistasTemp);
+                        //float realizadasTotalTemp = 100 * (Float.valueOf(horaTotaldia) / 3600);
+                        //String realizadasTotal = TimeConverter.ConvertPorcentagemToString(realizadasTotalTemp);
+                        if ((horaEsperada - horaTotaldia) > 0)
+                            realizadasPrevistas = TimeConverter.ConvertMinuteToHours(horaEsperada - horaTotaldia);
 
-        </table>
+                        if ((3600 - horaTotaldia) > 0)
+                            realizadasTotal = TimeConverter.ConvertMinuteToHours(3600 - horaTotaldia);
+
+                %>
+                <tr class="coluna-sh aluno" id="<%=usuario.getIdAluno()%>">
+                    <td align="center"><%=usuario.getNomeAluno()%></td>
+                    <td align="center" style="text-align: center;"><%=horasValidas%></td>
+                    <td align="center" style="text-align: center;"><%=realizadasPrevistas%></td>
+                    <td align="center" style="text-align: center;"><%=realizadasTotal%></td>
+                </tr>
+
+                <tr style="display: none;"
+                    class="alunotitulo<%=usuario.getIdAluno()%>"
+                    id="alunotitulo<%=usuario.getIdAluno()%>">
+                    <td colspan="4" style="">
+                        <table style="width: 100%;"
+                               class="table-responsive table-condensed">
+                            <tr style="border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#EEE;">
+                                <td>Tipo de horas</td>
+                                <td style="text-align: center;">Realizadas</td>
+                                <td style="text-align: center;">Previstas até o momento</td>
+                                <td style="text-align: center;">Faltam</td>
+                                <td style="text-align: center;">Previstas até o fim do semestre</td>
+                                <td style="text-align: center;">Faltam</td>
+                            </tr>
+                            <tr>
+                                <td>Extraclasse</td>
+                                <td style="text-align: center;"><%=horasValidas%></td>
+                                <td style="text-align: center;"><%=previstas%></td>
+                                <td style="text-align: center;"><%=realizadasPrevistas%></td>
+                                <td style="text-align: center;">60:00</td>
+                                <td style="text-align: center;"><%=realizadasTotal%></td>
+                            </tr>
+                            <tr>
+                                <td>Em aula</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td style="display: none;"></td>
+                    <td style="display: none;"></td>
+                    <td style="display: none;"></td>
+                    <!-- DatePicker me obrigo a fazer essa gambiarra por que não aceita o cosplan :/ -->
+                </tr>
+                <%
+                        };
+                    };
+                %>
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
@@ -143,7 +164,13 @@
     //	};
 </script>
 <script>
+    var timeSelecionado = 0;
     $(document).ready(function(){
+        //ATENCAO, DPS TEM QUE OTIMIZAR PRA UMA FUNCAO
+        var id = $(this).find('option:selected').attr('id');
+        $(".listaalunos" + id).toggle();
+        timeSelecionado=id;
+        //
         $('#listaAlunos').dataTable({
             "language": {
                 "lengthMenu": "Mostrando _MENU_ registros por página",
@@ -161,6 +188,15 @@
             },
             "ordering": false
         });
+    });
+
+    $("#time").change(function() {
+        //JUNTAR COM UMA FUNCAO
+        $(".listaalunos" + timeSelecionado).toggle();
+        var id = $(this).find('option:selected').attr('id');
+        $(".listaalunos" + id).toggle();
+        timeSelecionado=id;
+        //
     });
 </script>
 <script type="text/javascript">
