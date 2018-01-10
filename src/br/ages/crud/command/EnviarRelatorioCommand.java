@@ -7,6 +7,7 @@ import br.ages.crud.model.Relatorio;
 import br.ages.crud.model.StatusRelatorio;
 import br.ages.crud.model.TipoRelatorio;
 import br.ages.crud.model.Usuario;
+import br.ages.crud.util.MensagemContantes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 
 public class EnviarRelatorioCommand implements Command {
 
@@ -48,7 +50,6 @@ public class EnviarRelatorioCommand implements Command {
             relatorio.setTipo(TipoRelatorio.SEMANAL);
 
             if (!semana.equals("")) {
-                System.out.println("Entrou Aqui!!!!!!!!");
                 relatorio.setInicioSemana(textFormat.parse(semana));
             }
             if (!atividadesPrevistas.equals("")) {
@@ -65,12 +66,14 @@ public class EnviarRelatorioCommand implements Command {
             }
             if (aluno != null && !time.equals("")) {
                 int idTimeAluno = relatorioBO.validaAluno(aluno, Integer.parseInt(time));
-                if (idTimeAluno > 0) {
+                boolean ok = relatorioBO.validarRelatorio(relatorio);
+                if (idTimeAluno > 0 && ok) {
                     relatorio.setIdTimeAluno(idTimeAluno);
                     relatorioBO.cadastrarRelatorio(relatorio);
                     proxima = "main?acao=listaRelatorios";
                 }
             }
+
         }catch (Exception e){
             request.setAttribute("msgErro", e.getMessage());
         }

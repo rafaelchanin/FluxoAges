@@ -37,6 +37,10 @@
             $(this).find('.modal-descricao').text('Você realmente deseja visualizar o relatorio (' + relatorio + ')?');
 
             $('#formVisualizar').attr('action', "main?acao=visualizarRelatorio&id_relatorio=" + id);
+            $('#visualizar').click(function() {
+                $('#modalVisualizar').modal('hide');
+            });
+
         });
     });
 </script>
@@ -103,7 +107,7 @@
             <div class="modal-footer">
                 <form action="" method="post" id="formVisualizar">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary">Visualizar</button>
+                    <button id="visualizar" type="submit" class="btn btn-primary" >Visualizar</button>
                 </form>
             </div>
 

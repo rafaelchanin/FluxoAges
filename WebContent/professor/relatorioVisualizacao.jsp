@@ -36,28 +36,10 @@
                            <input type='text' class="form-control" id="fim"readonly/>
                        </div>
                    </div>--%>
-                <div class='col-sm-3' id='time1'>
+                <div class='col-sm-6' id='time1'>
                     <label for="sel1" class="form-label ages">Time:<span
                             class="red">*</span></label>
                     <input type="text" class="form-control" id="time" name="time" value="<%=time%>" readonly/>
-                </div>
-                <div class="col-sm-1" style="align-self: flex-end">
-                    <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                    <br>
-                    <form action="" method="post">
-                        <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%> "
-                           data-target="#modalAceitar" title="Aceitar"> <i class="glyphicon glyphicon-check"></i></a>
-                    </form>
-                    <% }; %>
-                </div>
-                <div class="col-sm-1" style="align-self: flex-end">
-                    <br>
-                    <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                    <form action="" method="post">
-                        <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"
-                           data-target="#modalRecusar" title="Recusar"> <i class="glyphicon glyphicon-remove"></i></a>
-                    </form>
-                    <% } %>
                 </div>
             </div>
             <div class="row">
@@ -84,12 +66,35 @@
                     <textarea class="form-control" id="proximos" name="proximos" readonly><%=relatorio.getProximo()%></textarea>
                 </div>
             </div>
+            <hr>
+
+            <div class="text-center">
+                <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
+                <form action="" method="post">
+                    <a href="" class="btn btn-danger limparUser pull-left" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"
+                       data-target="#modalRecusar" title="Recusar">Recusar</a>
+                </form>
+                <% } %>
+                <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
+                <form action="" method="post">
+                    <a href="" class="btn btn-primary addUser pull-right" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%> "
+                       data-target="#modalAceitar" title="Aceitar">Aceitar</a>
+                </form>
+                <% }; %>
+                <%if(relatorio.getStatus() != StatusRelatorio.REVISAO){%>
+                <button class="btn btn-primary addUser" onclick="goBack()">Voltar</button>
+                <%}%>
+            </div>
     </div>
+
 
 </div>
 <jsp:include page="/template/foot.jsp"></jsp:include>
-
-
+    <script>
+        function goBack() {
+            window.history.go(-1);
+        }
+    </script>
 <script>
     //Põe cor laranja nos titulos
     $('div[class*="box"]').find('label').css('color', '#F89406');
@@ -102,3 +107,4 @@
     //Remove aparencia de input de texto do input de arquivo
     $('label:contains("Arquivo")').siblings('input').removeClass('form-control');
 </script>
+

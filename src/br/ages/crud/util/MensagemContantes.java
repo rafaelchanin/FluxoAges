@@ -106,6 +106,8 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_EDICAO_RELATORIO = "Relatório editado com sucesso";
 
+	public static final String MSG_ERR_DATA = "Data Invalida";
+
 
 	//msgs de Turma
 	

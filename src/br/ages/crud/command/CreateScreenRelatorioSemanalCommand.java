@@ -1,14 +1,9 @@
 package br.ages.crud.command;
 
-import br.ages.crud.bo.ProjetoBO;
-import br.ages.crud.bo.RelatorioBO;
-import br.ages.crud.bo.TimeBO;
-import br.ages.crud.bo.TimePontoDTOBO;
+import br.ages.crud.bo.*;
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
-import br.ages.crud.model.Relatorio;
-import br.ages.crud.model.Time;
-import br.ages.crud.model.TimePontoDTO;
+import br.ages.crud.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -22,8 +17,8 @@ import java.util.List;
 
 public class CreateScreenRelatorioSemanalCommand implements Command {
     private String proxima;
-    private TimePontoDTOBO timePontoDTOBO;
-    private List<TimePontoDTO> listaTimes;
+    private AlunoPontoBO alunoPontoBO;
+    private List<AlunoPonto> listaTimes;
     private LocalDate dia;
     private RelatorioBO relatorioBO;
     private TimeBO timeBO;
@@ -32,7 +27,7 @@ public class CreateScreenRelatorioSemanalCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws SQLException {
-        timePontoDTOBO = new TimePontoDTOBO();
+        alunoPontoBO = new AlunoPontoBO();
 
         proxima = "aluno/relatorio.jsp";
 
@@ -60,7 +55,8 @@ public class CreateScreenRelatorioSemanalCommand implements Command {
             proxima = "aluno/editRelatorio.jsp";
         }else {
             try {
-                listaTimes = timePontoDTOBO.listarTimes();
+                Usuario aluno = (Usuario) request.getSession().getAttribute("usuarioSessao");
+                listaTimes = alunoPontoBO.listarPonto(aluno.getIdUsuario());
 
                 dia = LocalDate.now();
 

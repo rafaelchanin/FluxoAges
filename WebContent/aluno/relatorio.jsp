@@ -2,6 +2,7 @@
 <%@ page import="br.ages.crud.model.TimePontoDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="br.ages.crud.model.AlunoPonto" %>
 <%--
   Created by IntelliJ IDEA.
   User: gloff
@@ -47,10 +48,10 @@
                         <select class="form-control" id="time" name="time" required>
 
                             <%
-                                List<TimePontoDTO> listaTimes = (List<TimePontoDTO>) request.getAttribute("listaTimes");
-                                for (TimePontoDTO time : listaTimes) {
+                                List<AlunoPonto> listaTimes = (List<AlunoPonto>) request.getAttribute("listaTimes");
+                                for (AlunoPonto aluno : listaTimes) {
                             %>
-                            <option value="<%=time.getId()%>" id="<%=time.getId()%>"><%=time.toString()%></option>
+                            <option value="<%=aluno.getId()%>" id="<%=aluno.getId()%>"><%=aluno.getProjeto().getNomeProjeto()%></option>
 
                             <%
                                 }
@@ -113,7 +114,7 @@
             //sideBySide : true,
             useCurrent : true,
             //maxDate: new Date(),
-            format: "DD/MM/YYYY"
+            format: "DD/MM/YYYY",
         });//.on('changeDate',function(e){
             //document.getElementById("fim").value = e.value;
         //});

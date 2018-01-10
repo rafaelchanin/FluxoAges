@@ -10,6 +10,9 @@ import br.ages.crud.validator.DataValidator;
 import com.sun.org.apache.regexp.internal.RE;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @SuppressWarnings("LossyEncoding")
@@ -19,8 +22,10 @@ public class RelatorioBO {
 
     public RelatorioBO() { relatorioDAO = new RelatorioDAO(); }
 
-    public boolean validarRelatorio(Relatorio relatorio) throws NegocioException {
+    public boolean validarRelatorio(Relatorio relatorio) throws NegocioException, ParseException {
         boolean valido = true;
+        SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
+
 
         StringBuilder msg = new StringBuilder();
         msg.append(MensagemContantes.MSG_ERR_RELATORIO_DADOS_INVALIDOS.concat("<br/>"));
@@ -37,11 +42,18 @@ public class RelatorioBO {
         }
         if(relatorio.getLicoesProblemas() == null || relatorio.getLicoesProblemas().equals("")){
             valido = false;
-            msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Li��es Aprendidas e Problemas Encontrados").concat("<br/>"));
+            msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Lições Aprendidas e Problemas Encontrados").concat("<br/>"));
         }
         if(relatorio.getProximo() == null || relatorio.getProximo().equals("")){
             valido = false;
             msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Proximos Passos").concat("<br/>"));
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(textFormat.parse(relatorio.dataEntrega()));
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        if(dayOfWeek != 2){
+            valido = false;
+            msg.append(MensagemContantes.MSG_ERR_DATA.concat("<br/>"));
         }
         if(!valido){
             throw new NegocioException(msg.toString());

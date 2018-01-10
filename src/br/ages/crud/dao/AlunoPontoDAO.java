@@ -66,7 +66,7 @@ public class AlunoPontoDAO {
                     }
                 aluno.setPontos(pontos);
                 aluno.setPrimeiraAula(resultSet.getDate("tb1.primeiro_dia").toLocalDate());
-                aluno.setId(0);
+                aluno.setId(resultSet.getInt("tb1.id_time"));
                 aluno.setAno(resultSet.getInt("tb1.ano"));
                 aluno.setSemestre(resultSet.getInt("tb1.semestre"));
                 pontoAluno.add(aluno);

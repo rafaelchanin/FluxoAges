@@ -117,7 +117,7 @@
                 },
             },
             "destroy": true,
-            "ordering": false
+            "ordering": true
         });
     });
 
@@ -146,7 +146,7 @@
                 },
             },
             "destroy": true,
-            "ordering": false
+            "ordering": true
         });
         //
     });
