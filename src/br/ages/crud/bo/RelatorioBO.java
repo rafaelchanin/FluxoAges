@@ -49,7 +49,7 @@ public class RelatorioBO {
             msg.append(MensagemContantes.MSG_ERR_CAMPO_OBRIGATORIO.replace("?","Proximos Passos").concat("<br/>"));
         }
         Calendar c = Calendar.getInstance();
-        c.setTime(textFormat.parse(relatorio.dataEntrega()));
+        c.setTime(textFormat.parse(relatorio.dataAbertura()));
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         if(dayOfWeek != 2){
             valido = false;
