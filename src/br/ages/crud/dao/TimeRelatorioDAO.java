@@ -75,4 +75,49 @@ public class TimeRelatorioDAO {
 
         return listaTimes;
     }
+
+    public List<TimeRelatorio> listarTimesProfessor(int idProfessor) throws SQLException {
+        Connection conexao = null;
+        ArrayList<TimeRelatorio> listaTimes = new ArrayList<TimeRelatorio>();
+        projetoBO = new ProjetoBO();
+        timeDAO = new TimeDAO();
+        relatorioBO = new RelatorioBO();
+
+        try {
+            conexao = ConexaoUtil.getConexao();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia");
+            sql.append(" from tb_time ");
+            sql.append(" where status_time = 'ativa' and id_orientador = ? ");
+
+            PreparedStatement statement = conexao.prepareStatement(sql.toString());
+            statement.setInt(1,idProfessor);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                TimeRelatorio time = new TimeRelatorio();
+                time.setId(resultSet.getInt("id_time"));
+                time.setStatus(resultSet.getString("status_time"));
+                time.setSemestre(resultSet.getInt("semestre"));
+                time.setAno(resultSet.getInt("ano"));
+                time.setOrientador(resultSet.getInt("id_orientador"));
+                int proj = resultSet.getInt("id_projeto");
+                time.setProjeto(projetoBO.buscarProjeto(proj));
+                ArrayList<Relatorio> relatorios = new ArrayList<Relatorio>();
+                for (Usuario aluno : timeDAO.buscarAlunosTime(conexao, time.getId())) {
+                    List<Relatorio> temp = relatorioBO.listarRelatoriosCoord(aluno.getIdUsuario(),aluno.getNome());
+                    if (temp.size() > 0)
+                        relatorios.addAll(temp);
+                }
+
+                time.setRelatorio(relatorios);
+                listaTimes.add(time);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listaTimes;
+    }
 }

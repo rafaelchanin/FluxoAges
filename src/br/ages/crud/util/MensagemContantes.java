@@ -100,6 +100,8 @@ public class MensagemContantes {
 
 	public static final String MSG_ERR_CADASTRO_RELATORIO = "Ocorreu um erro no cadastro do relatorio!";
 
+	public static final String MSG_ERR_RELATORIO_EXISTENTE = "Relatorio desta semana ja realizado";
+
 	public static final String MSG_ERR_RELATORIO_ALUNO_INVALIDO = "O aluno não está cadastrado neste time";
 
 	public static final String MSG_ERR_LISTAR_RELATORIOS = "O Aluno não está cadastrado em nenhum time";

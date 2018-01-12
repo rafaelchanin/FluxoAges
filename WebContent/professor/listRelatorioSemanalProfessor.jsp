@@ -70,9 +70,8 @@
                     <td align="center"><%=relatorio.dataAbertura()%></td>
                     <td align="center"><%=relatorio.dataEntrega()%></td>
                     <td align="center">
-                        <form action="" method="post">
-                            <a href="" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"
-                               data-target="#modalVisualizar" title="Visualizar"> <i class="glyphicon glyphicon-eye-open"></i></a>
+                        <form action="main?acao=visualizarRelatorio&id_relatorio=<%=relatorio.getIdRelatorio()%>" method="post" id="formVisualizar">
+                            <button type="submit" class="btn-link"><i class="glyphicon glyphicon-eye-open"></i></button>
                         </form>
                     </td>
                 </tr>

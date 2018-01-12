@@ -29,6 +29,7 @@
                     <th style="text-align: center;">Status</th>
                     <th style="text-align: center;">Data de Entrega</th>
                     <th style="text-align: center;"></th>
+                    <th style="text-align: center;"></th>
                 </tr>
                 </thead>
 
@@ -49,6 +50,12 @@
                                data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
                         </form>
                         <% } %>
+                    </td>
+                    <td align="center">
+                        <form action="downloadRelatorioSemanal" method="get" id="formDownlaod">
+                            <input class="form-control" type="hidden" id="idRelatorio" name="idRelatorio" value="<%=relatorio.getIdRelatorio()%>" >
+                            <button type="submit" class="btn-link"><i class="glyphicon glyphicon-arrow-down"></i></button>
+                        </form>
                     </td>
                 </tr>
                 <%

@@ -69,21 +69,12 @@
             <hr>
 
             <div class="text-center">
+                <button class="btn btn-primary limparUser pull-left" onclick="goBack()">Voltar</button>
                 <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                <form action="" method="post">
-                    <a href="" class="btn btn-danger limparUser pull-left" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%>"
-                       data-target="#modalRecusar" title="Recusar">Recusar</a>
-                </form>
-                <% } %>
-                <%if(relatorio.getStatus() == StatusRelatorio.REVISAO){%>
-                <form action="" method="post">
-                    <a href="" class="btn btn-primary addUser pull-right" data-toggle="modal" data-id="<%=relatorio.getIdRelatorio()%>" data-relatorio="<%=relatorio.dataAbertura() + '-' + relatorio.getAluno()%> "
-                       data-target="#modalAceitar" title="Aceitar">Aceitar</a>
+                <form action="main?acao=aceitarRelatorio&id_relatorio=<%=relatorio.getIdRelatorio()%>" method="post">
+                    <button class="btn btn-primary addUser pull-right" title="Aceitar">Aceitar</button>
                 </form>
                 <% }; %>
-                <%if(relatorio.getStatus() != StatusRelatorio.REVISAO){%>
-                <button class="btn btn-primary addUser" onclick="goBack()">Voltar</button>
-                <%}%>
             </div>
     </div>
 

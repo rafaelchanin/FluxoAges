@@ -109,7 +109,7 @@
     $(function() {
 
         $('#dataEntrada').datetimepicker({
-            daysOfWeekDisabled: [0,2,3,4,5,6],
+            daysOfWeekDisabled: [0,1,2,3,4,5],
             locale : 'pt-br',
             //sideBySide : true,
             useCurrent : true,

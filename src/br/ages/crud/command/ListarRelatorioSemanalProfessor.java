@@ -19,9 +19,9 @@ public class ListarRelatorioSemanalProfessor implements Command {
     public String execute(HttpServletRequest request) throws SQLException {
         timeRelatorioBO = new TimeRelatorioBO();
         proxima = "professor/listRelatorioSemanalProfessor.jsp";
-
+        Usuario professor = (Usuario) request.getSession().getAttribute("usuarioSessao");
         try{
-            listaRelatorio = timeRelatorioBO.listarTimes();
+            listaRelatorio = timeRelatorioBO.listarTimesProfessor(professor.getIdUsuario());
         }catch (Exception e){
             request.setAttribute("msgErro", e.getMessage());
         }

@@ -25,4 +25,14 @@ public class TimeRelatorioBO {
         }
         return listTime;
     }
+
+    public List<TimeRelatorio> listarTimesProfessor(int idProfessor) throws NegocioException{
+        List<TimeRelatorio> listTime = null;
+        try{
+            listTime = timeRelatorioDAO.listarTimesProfessor(idProfessor);
+        } catch (SQLException e){
+            throw  new NegocioException(e);
+        }
+        return listTime;
+    }
 }

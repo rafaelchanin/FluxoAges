@@ -51,7 +51,7 @@ public class RelatorioBO {
         Calendar c = Calendar.getInstance();
         c.setTime(textFormat.parse(relatorio.dataAbertura()));
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        if(dayOfWeek != 2){
+        if(dayOfWeek != 7){
             valido = false;
             msg.append(MensagemContantes.MSG_ERR_DATA.concat("<br/>"));
         }
@@ -63,14 +63,16 @@ public class RelatorioBO {
 
     public boolean cadastrarRelatorio(Relatorio relatorio) throws NegocioException {
         boolean ok = false;
-
+        StringBuilder msg = new StringBuilder();
+        msg.append(MensagemContantes.MSG_ERR_CADASTRO_RELATORIO.concat("<br/>"));
         try {
             ok = relatorioDAO.cadastrarRelatorio(relatorio);
         } catch (SQLException e) {
             e.printStackTrace();
+            msg.append(MensagemContantes.MSG_ERR_RELATORIO_EXISTENTE);
         }
         if(!ok){
-            throw new NegocioException(MensagemContantes.MSG_ERR_CADASTRO_RELATORIO);
+            throw new NegocioException(msg.toString());
         }
         return ok;
     }

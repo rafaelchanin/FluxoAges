@@ -49,8 +49,6 @@ public class RelatorioDAO {
                     this.cadastrarResposta(idRelatorio, relatorio);
                     ok = true;
                 }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
