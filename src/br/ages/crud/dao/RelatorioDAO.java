@@ -281,7 +281,7 @@ public class RelatorioDAO {
             StringBuilder sql = new StringBuilder();
             sql.append(" SELECT ID_RELATORIO, DATA_ABERTURA, STATUS, DATA_RESPOSTA");
             sql.append(" FROM tb_relatorio ");
-            sql.append(" WHERE ID_TIME_ALUNO = ?");
+            sql.append(" WHERE ID_TIME_ALUNO = ? ORDER BY DATA_ABERTURA ");
 
             PreparedStatement statement = conexao.prepareStatement(sql.toString());
 

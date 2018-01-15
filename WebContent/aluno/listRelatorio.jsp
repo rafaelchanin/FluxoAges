@@ -1,6 +1,7 @@
 <%@ page import="br.ages.crud.model.Relatorio" %>
 <%@ page import="java.util.List" %>
-<%@ page import="br.ages.crud.model.StatusRelatorio" %><%--
+<%@ page import="br.ages.crud.model.StatusRelatorio" %>
+<%@ page import="br.ages.crud.model.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: gloff
   Date: 18/10/17
@@ -10,6 +11,10 @@
 <jsp:include page="../template/headAlunos.jsp"></jsp:include>
 
 <jsp:include page="../template/modalRelatorio.jsp"></jsp:include>
+
+<%
+    Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao");
+%>
 
 <div class="panel panel-primary">
 
@@ -54,6 +59,7 @@
                     <td align="center">
                         <form action="downloadRelatorioSemanal" method="get" id="formDownlaod">
                             <input class="form-control" type="hidden" id="idRelatorio" name="idRelatorio" value="<%=relatorio.getIdRelatorio()%>" >
+                            <input class="form-control" type="hidden" id="idUser" name="idUser" value="<%=usuarioSessao.getIdUsuario()%>">
                             <button type="submit" class="btn-link"><i class="glyphicon glyphicon-arrow-down"></i></button>
                         </form>
                     </td>
@@ -66,6 +72,11 @@
 
             </table>
 
+            <form action="downloadRelatorioSemanal" method="get" id="formDownlaodGeral">
+                <input class="form-control" type="hidden" id="idUser2" name="idUser" value="<%=usuarioSessao.getIdUsuario()%>">
+                <input class="form-control" type="hidden" id="idGeral" name="idGeral" value="1">
+                <button type="submit" class="btn btn-warning">Exportar Relatórios</button>
+            </form>
         </div>
     </div>
 </div>
