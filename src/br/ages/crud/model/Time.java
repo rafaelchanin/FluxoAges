@@ -100,8 +100,13 @@ public class Time {
 		this.projetoNome = projetoNome;
 	}
 
+	@Override
 	public String toString() {
-		return ""+projetoNome.getNomeProjeto()+" / "+ano+"/"+semestre;
+		if(projetoNome != null) {
+			return "" + projetoNome.getNomeProjeto() + " / " + ano + "/" + semestre;
+		}else{
+			return "";
+		}
 	}
 
 }

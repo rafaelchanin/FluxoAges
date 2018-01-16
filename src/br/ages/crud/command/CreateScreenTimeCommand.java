@@ -2,6 +2,7 @@ package br.ages.crud.command;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,6 +39,7 @@ public class CreateScreenTimeCommand implements Command {
 				usuarioBO = new UsuarioBO();
 				int idTime = Integer.parseInt(request.getParameter("id_time"));
 				Time time = timeBO.buscarTime(idTime);
+				SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 				List<IdNomeUsuarioDTO> alunosProjeto = new ArrayList<>();
 				for (Usuario aluno : time.getAlunos()) {
@@ -53,6 +55,7 @@ public class CreateScreenTimeCommand implements Command {
 				request.setAttribute("alunosProjeto", alunosProjeto);
 				request.setAttribute("alunos", alunosDisponiveis);
 				request.setAttribute("orientadores", orientadores);
+				request.setAttribute("primeiroDia", textFormat.format(time.getPrimeiroDia()));
 
 
 			} else {//cadastro

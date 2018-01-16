@@ -16,6 +16,7 @@
 
 <%
 	Time time = (Time) request.getAttribute("time");
+	String date = (String) request.getAttribute("primeiroDia");
 %>
 
 <%
@@ -126,7 +127,7 @@
 								class="red">*</span></label>
 						<div class='input-group date' id='primeiroDia'>
 							<input type='text' class="form-control" id="dataPrimeiroDia" name="dataPrimeiroDia"
-								   value="<%=time.getPrimeiroDia()%>" required /> <span
+								   value="<%=date%>" required /> <span
 								class="input-group-addon"> <span
 								class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -217,8 +218,8 @@ $(function() {
 $('#dataPrimeiroDia').datetimepicker({
 locale : 'pt-br',
 sideBySide : true,
-format : "DD/MM/YYYY"
-
+format : "DD/MM/YYYY",
+useCurrent: false
 
 });
 

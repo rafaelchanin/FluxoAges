@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="br.ages.crud.bo.ProjetoBO"%>
 <%@page import="br.ages.crud.bo.UsuarioBO"%>
+<%@ page import="br.ages.crud.model.Status" %>
 <jsp:include page="../template/head.jsp"></jsp:include>
 
 <!-- MODAL / POPUP -->
@@ -28,6 +29,7 @@
 						<th style="text-align: center;">Orientador</th>
 						<th style="text-align: center;">Status</th>
 						<th style="text-align: center;">Alunos</th>
+						<th style="text-align: center;"></th>
 						<th style="text-align: center;"></th>
 					</tr>
 				</thead>
@@ -70,11 +72,21 @@
 							</div>
 						</td>
 						<td align="center" class="col-sm-1">
-							<form action="" method="post">
-								<a href="" data-toggle="modal" data-id="<%=time.getId() %>"
-									data-usuario="<%=time.getAno()+" / "+ time.getSemestre()+" - AGES "%>"
-									data-target="#modalEditar" title="Editar"> <i
-									class="glyphicon glyphicon-pencil"></i></a>
+							<form action="main?acao=telaTime" method="post">
+								<input class="form-control" type="hidden" id="isEdit" name="isEdit" value="true">
+								<input class="form-control" type="hidden" id="id_time" name="id_time" value="<%=time.getId()%>">
+								<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> </button>
+							</form>
+						</td>
+						<td align="center" class="col-sm-1">
+							<form action="main?acao=validarTime" method="post" id="formInvalido">
+								<input class="form-control" type="hidden" id="idTime" name="idTime" value="<%=time.getId()%>">
+								<input class="form-control" type="hidden" id="status" name="status" value="<%=time.getStatus()%>">
+								<%if (time.getStatus().equals("ATIVA")){%>
+								<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-thumbs-down"></i> </button>
+								<%}else{%>
+								<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+								<%}%>
 							</form>
 						</td>
 
@@ -105,8 +117,8 @@ $(document).ready(function(){
                 "last":       "Último",
                 "next":       "Próximo",
                 "previous":   "Anterior"
-	        },
+	        }
         }
 	});
-});;
+});
 </script>

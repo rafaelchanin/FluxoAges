@@ -50,7 +50,8 @@ public class RelatorioHorasProfessoresCommand implements Command {
 
 
             //Como tava antes
-            listaPontos = timePontoDTOBO.listarTimes();
+            Usuario professor = (Usuario) request.getSession().getAttribute("usuarioSessao");
+            listaPontos = timePontoDTOBO.listarTimerProfessor(professor.getIdUsuario());
 
             LocalDate hoje = LocalDate.now();
             WeekFields weekFields = WeekFields.of(Locale.getDefault());

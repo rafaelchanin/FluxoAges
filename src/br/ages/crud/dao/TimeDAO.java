@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.ages.crud.model.Status;
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.exception.PersistenciaException;
@@ -299,4 +300,29 @@ public class TimeDAO {
 
 		return idTime;
 	}
+
+    public void editarStatus(int id, String status) throws SQLException, PersistenciaException {
+		Connection conexao = null;
+		try {
+
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE tb_time SET STATUS_TIME = ? "
+					+ "WHERE ID_TIME = ?;");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setString(1,status);
+			statement.setInt(2,id);
+
+			statement.executeUpdate();
+
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
+		}
+
+    }
 }

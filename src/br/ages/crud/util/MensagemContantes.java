@@ -84,6 +84,8 @@ public class MensagemContantes {
 
 	public static final String MSG_SUC_REMOVE_TIME = "Time ? removido com sucesso!";
 
+	public static final String MSG_SUC_STATUS_TIME = "Status do time alterado com sucesso";
+
 	//msgs de Grupo
 
 	public static final String MSG_ERR_GRUPO_DADOS_INVALIDOS = "Dados do grupo inválidos ou inconsistentes!";

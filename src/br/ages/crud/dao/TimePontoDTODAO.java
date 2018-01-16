@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.ages.crud.exception.NegocioException;
 import com.mysql.jdbc.Statement;
 
 import br.ages.crud.bo.PontoBO;
@@ -95,4 +96,64 @@ public class TimePontoDTODAO {
 
 		return listaTimes;
 	}
+
+    public List<TimePontoDTO> listarTimesProfessor(int idProfessor) throws PersistenciaException, ParseException, NegocioException {
+		Connection conexao = null;
+		ArrayList<TimePontoDTO> listaTimes = new ArrayList<TimePontoDTO>();
+		projetoBO = new ProjetoBO();
+		timeDAO = new TimeDAO();
+		pontoBO = new PontoBO();
+		try {
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select id_time, id_orientador, status_time, id_projeto, semestre, ano, dt_inclusao, primeiro_dia");
+			sql.append(" from tb_time ");
+			sql.append(" where  status_time = 'ativa' and id_orientador = ? ");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+
+			statement.setInt(1,idProfessor);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				TimePontoDTO time = new TimePontoDTO();
+				time.setId(resultSet.getInt("id_time"));
+				time.setStatus(resultSet.getString("status_time"));
+				time.setSemestre(resultSet.getInt("semestre"));
+				time.setAno(resultSet.getInt("ano"));
+				time.setOrientador(resultSet.getInt("id_orientador"));
+				int proj = resultSet.getInt("id_projeto");
+				time.setPrimeiraAula(resultSet.getDate("primeiro_dia").toLocalDate());
+				time.setProjeto(projetoBO.buscarProjeto(proj));
+				ArrayList<ResumoPonto> pontos = new ArrayList<ResumoPonto>();
+				//time.setPontos(usuarioDAO.li(conexao, resultSet.getInt("id_time")));
+				for (Usuario aluno : timeDAO.buscarAlunosTime(conexao, time.getId())) {
+					ArrayList<ResumoPonto> temp = pontoBO.listaPontoAlunos(aluno.getIdUsuario(), Util.getDataInicialSemestre(time.getSemestre(), time.getAno()), Util.getDataFinalSemestre(time.getSemestre(), time.getAno()));
+					if (temp.size() > 0)
+						pontos.add(temp.get(0));
+					else { //caso o aluno nao tenha ponto cadastrado :D
+						ResumoPonto ponto = new ResumoPonto();
+						ponto.setIdAluno(aluno.getIdUsuario());
+						ponto.setNomeAluno(aluno.getNome());
+						ponto.setHoraTotalDia(0);
+						ponto.setHoraTotalDiaValido(0);
+						ponto.setHoraTotalDiaInvalido(0);
+						ponto.setIdPonto(0);
+						pontos.add(ponto);
+					}
+				}
+				time.setPontos(pontos);
+
+				listaTimes.add(time);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+		return listaTimes;
+    }
 }

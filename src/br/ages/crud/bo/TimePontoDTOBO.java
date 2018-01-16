@@ -1,6 +1,7 @@
 package br.ages.crud.bo;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import br.ages.crud.dao.TimeDAO;
@@ -28,5 +29,17 @@ public class TimePontoDTOBO {
 			throw new NegocioException(e);
 		}
 		return listTime;
+	}
+
+	public List<TimePontoDTO> listarTimerProfessor(int idProfessor) throws NegocioException {
+		List<TimePontoDTO> timePontoDTOList = null;
+		try{
+			timePontoDTOList = timePontoDTODAO.listarTimesProfessor(idProfessor);
+		} catch (PersistenciaException e){
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return  timePontoDTOList;
 	}
 }

@@ -2,6 +2,7 @@ package br.ages.crud.bo;
 
 import br.ages.crud.exception.NegocioException;
 import br.ages.crud.exception.PersistenciaException;
+import br.ages.crud.model.Status;
 import br.ages.crud.util.MensagemContantes;
 
 import java.util.List;
@@ -95,5 +96,19 @@ public class TimeBO {
 
 
 		return time;
+	}
+
+    public void editarStatus(int id, String status) {
+		try{
+			if (status.equals("INATIVA")) {
+				timeDAO.editarStatus(id, "ATIVA");
+			}else{
+				timeDAO.editarStatus(id,"INATIVA");
+			}
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

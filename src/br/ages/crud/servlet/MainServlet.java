@@ -77,6 +77,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("listaTimes", new ListaTimesCommand());
 		comandos.put("adicionaTime", new AdicionaTimeCommand());
 		comandos.put("editaTime", new EditaTimeCommand());
+		comandos.put("validarTime", new StatusTimeCommand());
 		
 		//COMANDOS DE STAKEHOLDER
 		

@@ -1,6 +1,7 @@
 package br.ages.crud.command;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,6 +31,10 @@ public class EditaTimeCommand implements Command{
 		String orientador = request.getParameter("orientador");
 		String statusTime = request.getParameter("statusTime");
 		String projeto = request.getParameter("projeto");
+		String primeiroDia = request.getParameter("dataPrimeiroDia");
+		SimpleDateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
 
 		int id = Integer.parseInt(idTime);
 
@@ -66,6 +71,8 @@ public class EditaTimeCommand implements Command{
 			if (!projeto.equals(""))
 				time.setProjeto(Integer.valueOf(projeto));
 			time.setDtInclusao(new Date());
+			if(!primeiroDia.equals(""))
+				time.setPrimeiroDia(textFormat.parse(primeiroDia));
 
 			boolean isValido = timeBO.validarTime(time);
 
