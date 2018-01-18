@@ -402,4 +402,28 @@ public class TurmaDAO {
 
 		return turma;
 	}
+
+    public void editarStatus(int id, String status) throws PersistenciaException, SQLException {
+		Connection conexao = null;
+		try {
+
+			conexao = ConexaoUtil.getConexao();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE tb_turma SET STATUS_TURMA = ? "
+					+ "WHERE ID_TURMA = ?;");
+
+			PreparedStatement statement = conexao.prepareStatement(sql.toString());
+			statement.setString(1,status);
+			statement.setInt(2,id);
+
+			statement.executeUpdate();
+
+
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new PersistenciaException(e);
+		} finally {
+			conexao.close();
+		}
+    }
 }

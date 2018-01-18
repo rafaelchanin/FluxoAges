@@ -142,6 +142,8 @@ public class MensagemContantes {
 	public static final String MSG_ERR_CADASTRO_DIAS_AULAS_TURMA = "Ocorreu um erro na hora de cadastrar os dias de aula da turma ?";
 	
 	public static final String MSG_ERR_CADASTRO_PRESENCAS_AULA = "Ocorreu um erro na hora de cadastrar as presenças da aula ?";
+
+	public static final String MSG_SUC_STATUS_TURMA = "Status da turma alterado com sucesso";
 	
 	//msgs de projeto
 

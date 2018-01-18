@@ -70,6 +70,7 @@ public class MainServlet extends HttpServlet {
 		comandos.put("registrarChamada", new RegistraChamadaCommand());
 		comandos.put("adicionaChamada", new AdicionaChamadasCommand());
 		comandos.put("relatorioHoras", new RelatorioHorasCommand());
+		comandos.put("validarTurma", new StatusTurmaCommand());
 	
 		
 		//COMANDOS DE TIME

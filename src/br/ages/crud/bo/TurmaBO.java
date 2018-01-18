@@ -193,4 +193,17 @@ public class TurmaBO {
 		this.turmaDAO = turmaDAO;
 	}
 
+    public void editarStatus(int id, String status) {
+		try{
+			if (status.equals("INATIVA")) {
+				turmaDAO.editarStatus(id, "ATIVA");
+			}else{
+				turmaDAO.editarStatus(id,"INATIVA");
+			}
+		} catch (PersistenciaException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
 }

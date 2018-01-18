@@ -23,6 +23,7 @@
                     <th style="text-align: center;">Status</th>
 					<th style="text-align: center;">Alunos</th>
 					<th style="text-align: center;"></th>
+					<th style="text-align: center;"></th>
                 </tr>
             </thead>
 
@@ -51,11 +52,23 @@
 							</div>
 					</td>
 	            	<td align="center" class="col-sm-1">
-						<form action="" method="post">
-            				<a href="" data-toggle="modal" data-id="<%=turma.getId() %>" data-usuario="<%=turma.getAno()+" / "+ turma.getSemestre()+" - AGES "+ turma.getAges()+" - "+ turma.getNumero()%>" 
-            				data-target="#modalEditar" title="Editar"> <i class="glyphicon glyphicon-pencil"></i></a>
-            			</form>
+						<form action="main?acao=telaTurma" method="post">
+							<input class="form-control" type="hidden" id="isEdit" name="isEdit" value="true">
+							<input class="form-control" type="hidden" id="id_turma" name="id_turma" value="<%=turma.getId()%>">
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> </button>
+						</form>
             		</td>
+					<td align="center" class="col-sm-1">
+						<form action="main?acao=validarTurma" method="post" id="formInvalido">
+							<input class="form-control" type="hidden" id="idTurma" name="idTurma" value="<%=turma.getId()%>">
+							<input class="form-control" type="hidden" id="status" name="status" value="<%=turma.getStatus()%>">
+							<%if (turma.getStatus().equals("ATIVA")){%>
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-thumbs-down"></i> </button>
+							<%}else{%>
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+							<%}%>
+						</form>
+					</td>
             		
             	</tr>
 				<% 
